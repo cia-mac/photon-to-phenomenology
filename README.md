@@ -23,6 +23,22 @@ Two surfaces, both static, both deployed by this repo's own Vercel project:
 
 ## Built so far in this repo
 
+All four were built fresh from the brief (the original bundle never arrived; see
+provenance note). The `inverse-problem` piece is a fresh reconstruction of the
+reference figure the brief names as the model for the others.
+
+- `public/photon/book/inverse-problem.html` — **The inverse problem** (ch.1).
+  A wireframe cube that is really eight edges hanging at unrelated depths; from
+  the head-on viewpoint they align into a solid, turn it and the cube comes apart
+  into "just wires in space," release and it eases home. One flat image, endless
+  3D arrangements, one perceived solid.
+- `public/photon/book/checker-shadow.html` — **The checker-shadow** (ch.3). Drag
+  the shadow off square B; while shadowed it sends the eye the same light as A
+  (pixel-identical by construction) yet looks lighter. Drag the shadow away and
+  its true value is revealed.
+- `public/photon/book/apparent-motion.html` — **Apparent motion** (ch.10). Two
+  lamps flash in alternation; scrub the rhythm and move the dots to find your own
+  threshold where two blinking lights fuse into one moving thing.
 - `public/photon/book/aperture-problem.html` — **The aperture problem** (ch.10,
   Perceiving Motion and Events). Drag the bar field to set its true motion; grab
   the rim and pull to open the aperture. Through the closed aperture only the
