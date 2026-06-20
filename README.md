@@ -21,10 +21,22 @@ Two surfaces, both static, both deployed by this repo's own Vercel project:
 - The thesis in every piece: **vision is not recording, it is construction.**
 - The differentiator: the viewer measures their *own* visual system.
 
-## Built so far in this repo
+## What's in the repo
 
-All four were built fresh from the brief (the original bundle never arrived; see
-provenance note). The `inverse-problem` piece is a fresh reconstruction of the
+Sixteen single-file instruments, all built fresh from the brief (the original
+bundle never arrived; see provenance note), plus two index pages.
+
+**Gallery** (`public/photon/`, impact order): illusory contours (Kanizsa),
+the motion aftereffect (spiral), the negative afterimage, the scintillating
+grid, the Ebbinghaus circles, the Cornsweet edge, the café wall, the Ponzo
+illusion, the Müller-Lyer lines. Landing page: `public/photon/index.html`.
+
+**Reading companion** (`public/photon/book/`, by chapter): the inverse problem
+(ch.1), the checker-shadow (ch.3), the aperture problem + apparent motion
+(ch.10), Troxler fading + motion-induced blindness + change blindness (ch.11).
+Landing page: `public/photon/book/index.html`.
+
+Highlights below. The `inverse-problem` piece is a fresh reconstruction of the
 reference figure the brief names as the model for the others.
 
 - `public/photon/book/inverse-problem.html` — **The inverse problem** (ch.1).
