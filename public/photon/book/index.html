@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photon to Phenomenology — a reading companion</title>
+<style>
+  :root{ --ink:#0c0b09; --cream:#e8e0d0; --dim:rgba(232,224,208,0.42); --faint:rgba(232,224,208,0.14); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:var(--ink);color:var(--cream);min-height:100%}
+  body{
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+    padding:clamp(36px,7vw,96px) clamp(28px,7vw,96px) 120px;
+    max-width:760px;
+  }
+  header{margin-bottom:clamp(40px,7vw,72px)}
+  .kicker{font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--dim);margin-bottom:18px}
+  h1{font-size:clamp(26px,4.5vw,38px);font-weight:400;letter-spacing:0.01em;line-height:1.15}
+  h1 .after{display:block;color:var(--dim);font-size:0.62em;margin-top:.5em;letter-spacing:0.02em}
+  .lede{margin-top:28px;color:var(--dim);max-width:54ch;font-size:15px}
+  .lede em{color:var(--cream);font-style:normal}
+
+  ol.toc{list-style:none;counter-reset:ch;border-top:1px solid var(--faint)}
+  ol.toc > li{
+    counter-increment:ch;
+    border-bottom:1px solid var(--faint);
+    padding:22px 0 22px 56px;
+    position:relative;
+  }
+  ol.toc > li::before{
+    content:counter(ch,decimal-leading-zero);
+    position:absolute;left:0;top:24px;
+    font-family:"SF Mono",ui-monospace,Menlo,monospace;
+    font-size:12px;color:var(--faint);letter-spacing:0.06em;
+  }
+  .chtitle{font-size:16px;letter-spacing:0.01em}
+  .pieces{margin-top:12px;display:flex;flex-direction:column;gap:2px}
+  a.piece{
+    display:inline-flex;align-items:baseline;gap:.7em;
+    color:var(--cream);text-decoration:none;
+    font-size:14.5px;padding:5px 0;width:fit-content;
+    transition:opacity .25s ease;
+  }
+  a.piece::before{content:"→";color:var(--dim);transition:transform .25s ease}
+  a.piece:hover{opacity:1}
+  a.piece:hover::before{transform:translateX(3px)}
+  .soon{color:var(--faint);font-size:13.5px;padding:5px 0;letter-spacing:0.02em}
+  .soon .tag{
+    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:10px;
+    text-transform:uppercase;letter-spacing:0.12em;margin-left:.7em;opacity:.7;
+  }
+  footer{margin-top:64px;color:var(--faint);font-size:12px;letter-spacing:0.02em;line-height:1.7}
+  footer a{color:var(--dim);text-decoration:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">A reading companion</div>
+  <h1>Photon to Phenomenology
+    <span class="after">interactive figures after Stephen Palmer's <i>Vision Science</i></span>
+  </h1>
+  <p class="lede">Thirteen chapters, from the light striking the retina to the experience of seeing. Each figure lets you touch the phenomenon and measure your own visual system. The lesson under all of them is the same: <em>vision is not recording, it is construction.</em></p>
+</header>
+
+<ol class="toc">
+  <li><span class="chtitle">An Introduction to Vision Science</span>
+    <div class="pieces"><span class="soon">The inverse problem<span class="tag">in the bundle</span></span></div>
+  </li>
+  <li><span class="chtitle">Theoretical Approaches to Vision</span></li>
+  <li><span class="chtitle">Color Vision: A Microcosm of Vision Science</span>
+    <div class="pieces"><span class="soon">Adelson checker-shadow (lightness)<span class="tag">next</span></span></div>
+  </li>
+  <li><span class="chtitle">Processing Image Structure</span></li>
+  <li><span class="chtitle">Perceiving Surfaces Oriented in Depth</span></li>
+  <li><span class="chtitle">Organizing Objects and Scenes</span></li>
+  <li><span class="chtitle">Perceiving Object Properties and Parts</span></li>
+  <li><span class="chtitle">Representing Shape and Structure</span></li>
+  <li><span class="chtitle">Perceiving Function and Category</span></li>
+  <li><span class="chtitle">Perceiving Motion and Events</span>
+    <div class="pieces">
+      <a class="piece" href="aperture-problem.html">The aperture problem</a>
+      <span class="soon">Apparent motion / phi<span class="tag">queued</span></span>
+    </div>
+  </li>
+  <li><span class="chtitle">Visual Selection: Eye Movements and Attention</span>
+    <div class="pieces">
+      <span class="soon">Troxler fading<span class="tag">in the bundle</span></span>
+      <span class="soon">Motion-induced blindness<span class="tag">in the bundle</span></span>
+      <span class="soon">Change blindness<span class="tag">in the bundle</span></span>
+    </div>
+  </li>
+  <li><span class="chtitle">Visual Memory and Imagery</span></li>
+  <li><span class="chtitle">Visual Awareness</span></li>
+</ol>
+
+<footer>
+  Single-file figures, no dependencies. After Stephen E. Palmer, <i>Vision Science: Photons to Phenomenology</i> (MIT Press, 1999).<br>
+  More work: <a href="https://ciamac.com">ciamac.com</a>
+</footer>
+</body>
+</html>
