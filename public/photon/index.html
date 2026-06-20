@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photon to Phenomenology — a gallery of seeing</title>
+<style>
+  :root{ --ink:#0c0b09; --cream:#e8e0d0; --dim:rgba(232,224,208,0.44); --faint:rgba(232,224,208,0.14); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:var(--ink);color:var(--cream);min-height:100%}
+  body{
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;
+    line-height:1.5;padding:clamp(36px,7vw,96px) clamp(28px,7vw,96px) 120px;max-width:780px;
+  }
+  header{margin-bottom:clamp(40px,7vw,72px)}
+  .kicker{font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--dim);margin-bottom:18px}
+  h1{font-size:clamp(26px,4.6vw,40px);font-weight:400;letter-spacing:0.01em;line-height:1.12}
+  h1 .after{display:block;color:var(--dim);font-size:0.6em;margin-top:.5em;letter-spacing:0.02em}
+  .lede{margin-top:28px;color:var(--dim);max-width:56ch;font-size:15px}
+  .lede em{color:var(--cream);font-style:normal}
+
+  ol.phenom{list-style:none;counter-reset:p;border-top:1px solid var(--faint);margin-top:8px}
+  ol.phenom > li{counter-increment:p;border-bottom:1px solid var(--faint)}
+  a.row{
+    display:block;text-decoration:none;color:var(--cream);
+    padding:22px 0 22px 56px;position:relative;transition:padding-left .25s ease;
+  }
+  a.row::before{
+    content:counter(p,decimal-leading-zero);position:absolute;left:0;top:24px;
+    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:12px;color:var(--faint);letter-spacing:0.06em;
+  }
+  a.row:hover{padding-left:66px}
+  .name{font-size:17px;letter-spacing:0.01em}
+  .hook{display:block;color:var(--dim);font-size:13.5px;margin-top:5px;max-width:54ch}
+  a.row .go{position:absolute;right:4px;top:24px;color:var(--faint);transition:transform .25s ease,color .25s ease}
+  a.row:hover .go{transform:translateX(4px);color:var(--dim)}
+
+  .companion{
+    margin-top:54px;padding:24px 26px;border:1px solid var(--faint);border-radius:2px;
+    display:flex;justify-content:space-between;align-items:center;gap:20px;text-decoration:none;color:var(--cream);
+    transition:border-color .25s ease;
+  }
+  .companion:hover{border-color:var(--dim)}
+  .companion .c-k{font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+  .companion .c-t{font-size:15.5px}
+  .companion .c-go{color:var(--dim);font-size:20px}
+  footer{margin-top:56px;color:var(--faint);font-size:12px;letter-spacing:0.02em;line-height:1.7}
+  footer a{color:var(--dim);text-decoration:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">A gallery of seeing</div>
+  <h1>Photon to Phenomenology
+    <span class="after">interactive phenomena after Stephen Palmer's <i>Vision Science</i></span>
+  </h1>
+  <p class="lede">Each piece is a small instrument. You touch the figure and measure your own visual system, and every one lands on the same fact: <em>vision is not recording, it is construction.</em></p>
+</header>
+
+<ol class="phenom">
+  <li><a class="row" href="kanizsa.html">
+    <span class="name">Illusory contours</span>
+    <span class="hook">Three notched discs, and a bright triangle that exists only in you.</span>
+    <span class="go">→</span></a></li>
+  <li><a class="row" href="scintillating-grid.html">
+    <span class="name">The scintillating grid</span>
+    <span class="hook">Count the black dots. There are none. Your retina makes them at the crossings.</span>
+    <span class="go">→</span></a></li>
+  <li><a class="row" href="cafe-wall.html">
+    <span class="name">The café wall</span>
+    <span class="hook">Every row is dead level. Offset tiles and grey mortar tilt them anyway.</span>
+    <span class="go">→</span></a></li>
+</ol>
+
+<a class="companion" href="book/">
+  <div>
+    <div class="c-k">The reading companion</div>
+    <div class="c-t">Follow the book, chapter by chapter — the inverse problem, lightness, motion, attention.</div>
+  </div>
+  <div class="c-go">→</div>
+</a>
+
+<footer>
+  Single-file figures, no dependencies. After Stephen E. Palmer, <i>Vision Science: Photons to Phenomenology</i> (MIT Press, 1999).<br>
+  More work: <a href="https://ciamac.com">ciamac.com</a>
+</footer>
+</body>
+</html>
