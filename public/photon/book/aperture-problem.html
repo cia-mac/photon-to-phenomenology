@@ -57,8 +57,8 @@
   #thesis .lead{color:var(--dim);font-size:12.5px;display:block;margin-bottom:.5em}
   @media (max-width:680px){
     #readout,#title #sub{display:none}
-    #thesis{left:30px;text-align:left;max-width:none}
-    #hint{bottom:64px}
+    #thesis{left:30px;text-align:left;max-width:none;bottom:66px}
+    #guide{max-width:none}
   }
 </style>
 </head>
@@ -72,7 +72,13 @@
   <div><b>what you see</b> <span id="rSeen">—</span></div>
   <div><b>aperture</b> <span id="rAp">—</span></div>
 </div>
-<div class="chrome" id="hint">drag the bars to move them &nbsp;·&nbsp; grab the rim and pull to open the aperture</div>
+<div class="chrome" id="guide">
+  <div class="gk">what this is</div>
+  <div class="gw">Through a small opening a moving edge shows only motion <b>across</b> itself, so countless true directions look the same. Only the line ends can reveal which way it really moves.</div>
+  <div class="gk">what to do</div>
+  <div class="gd">Drag the bars to set their true motion, then grab the rim and pull to open the aperture.</div>
+</div>
+<div class="chrome" id="about">&#9432; about</div>
 <div class="chrome" id="thesis">
   <span class="lead">Through the slot, every direction looked the same.</span>
   Your visual system never measured the true motion. It inferred one, and only the ends of the lines could settle the question. Vision is not recording, it is construction.
@@ -83,7 +89,7 @@
   "use strict";
   const cv = document.getElementById('c');
   const ctx = cv.getContext('2d');
-  const hint = document.getElementById('hint');
+  const guide=document.getElementById('guide'), about=document.getElementById('about');
   const thesis = document.getElementById('thesis');
   const rTrue = document.getElementById('rTrue');
   const rSeen = document.getElementById('rSeen');
@@ -281,7 +287,7 @@
   }
 
   function firstTouch(){
-    if(!interacted){ interacted=true; hint.style.opacity='0'; }
+    guide.style.opacity='0'; about.style.opacity='1';
     if(!thesisShown){
       thesisShown=true;
       setTimeout(()=>{ thesis.style.opacity='1'; }, 2600);
