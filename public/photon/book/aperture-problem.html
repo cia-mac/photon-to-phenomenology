@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>The aperture problem — Photon to Phenomenology</title>
+<title>The aperture problem · Photon to Phenomenology</title>
 <style>
   :root{
     --ink:#0c0b09;
@@ -35,12 +35,13 @@
     font-size:15px;letter-spacing:0.04em;color:var(--cream);
     font-weight:400;
   }
-  #hint{
-    bottom:30px;left:30px;
-    font-size:12.5px;letter-spacing:0.03em;color:var(--dim);
-    transition:opacity 1.1s ease;
-    line-height:1.5;
-  }
+  #guide{bottom:30px;left:30px;max-width:min(38ch,76vw);transition:opacity .7s ease}
+  #guide .gk{font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+  #guide .gw{font-size:13px;line-height:1.5;color:var(--dim);margin-bottom:14px}
+  #guide .gw b{color:var(--cream);font-weight:400}
+  #guide .gd{font-size:13.5px;line-height:1.5;color:var(--cream)}
+  #about{bottom:30px;left:30px;font-size:11px;letter-spacing:0.06em;color:var(--dim);pointer-events:none;cursor:pointer;opacity:0;transition:opacity .6s ease}
+  #about:hover{color:var(--cream)}
   #readout{
     top:26px;right:30px;text-align:right;
     font-family:"SF Mono",ui-monospace,Menlo,monospace;
@@ -65,12 +66,12 @@
 <body>
 <div id="stage"><canvas id="c"></canvas></div>
 
-<div class="chrome" id="chapter">Ch. 10 · Motion · the aperture problem</div>
-<div class="chrome" id="title">What is it really moving?</div>
+<div class="chrome" id="chapter">Ch. 10 · The aperture problem</div>
+<div class="chrome" id="title">Which way is it really moving?</div>
 <div class="chrome" id="readout">
-  <div><b>true motion</b> <span id="rTrue">—</span></div>
-  <div><b>what you see</b> <span id="rSeen">—</span></div>
-  <div><b>aperture</b> <span id="rAp">—</span></div>
+  <div><b>true motion</b> <span id="rTrue">·</span></div>
+  <div><b>what you see</b> <span id="rSeen">·</span></div>
+  <div><b>aperture</b> <span id="rAp">·</span></div>
 </div>
 <div class="chrome" id="guide">
   <div class="gk">what this is</div>
@@ -287,7 +288,7 @@
   }
 
   function firstTouch(){
-    guide.style.opacity='0'; about.style.opacity='1';
+    guide.style.opacity='0'; about.style.opacity='1'; about.style.pointerEvents='auto';
     if(!thesisShown){
       thesisShown=true;
       setTimeout(()=>{ thesis.style.opacity='1'; }, 2600);
@@ -302,6 +303,7 @@
   window.addEventListener('touchend', onUp);
 
   window.addEventListener('resize', resize);
+  about.addEventListener('click',()=>{guide.style.opacity='1';about.style.opacity='0';about.style.pointerEvents='none';});
   resize();
   requestAnimationFrame(draw);
 })();

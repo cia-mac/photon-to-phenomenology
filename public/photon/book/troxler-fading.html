@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Troxler fading — Photon to Phenomenology</title>
+<title>Troxler fading · Photon to Phenomenology</title>
 <style>
   :root{ --ink:#0c0b09; --cream:#e8e0d0; --dim:rgba(232,224,208,0.40); --faint:rgba(232,224,208,0.15); }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -21,7 +21,7 @@
   #guide .gw{font-size:13px;line-height:1.5;color:var(--dim);margin-bottom:14px}
   #guide .gw b{color:var(--cream);font-weight:400}
   #guide .gd{font-size:13.5px;line-height:1.5;color:var(--cream)}
-  #about{bottom:30px;left:30px;font-size:11px;letter-spacing:0.06em;color:var(--dim);pointer-events:auto;cursor:pointer;opacity:0;transition:opacity .6s ease}
+  #about{bottom:30px;left:30px;font-size:11px;letter-spacing:0.06em;color:var(--dim);pointer-events:none;cursor:pointer;opacity:0;transition:opacity .6s ease}
   #about:hover{color:var(--cream)}
   #readout{
     top:24px;right:30px;text-align:right;
@@ -40,10 +40,10 @@
 <body>
 <canvas id="c"></canvas>
 
-<div class="chrome" id="chapter">Ch. 11 · Attention · Troxler fading</div>
+<div class="chrome" id="chapter">Ch. 11 · Troxler fading</div>
 <div class="chrome" id="title">Hold still and the ring leaves</div>
 <div class="chrome" id="readout">
-  <div><span class="lab">eccentricity</span><span id="rEcc">—</span></div>
+  <div><span class="lab">eccentricity</span><span id="rEcc">·</span></div>
   <div><span class="lab">held still</span><span id="rTime">0.0 s</span></div>
   <div id="hold">fixate the centre</div>
 </div>
@@ -135,7 +135,7 @@
     ecc.tgt=Math.max(Math.min(W,H)*0.12, Math.min(Math.min(W,H)*0.46, d));
   }
   function first(){
-    guide.style.opacity='0'; about.style.opacity='1';
+    guide.style.opacity='0'; about.style.opacity='1'; about.style.pointerEvents='auto';
     if(!thesisShown){ thesisShown=true; setTimeout(()=>thesis.style.opacity='1',3200); }
   }
 
@@ -146,7 +146,7 @@
   window.addEventListener('touchmove',onMove,{passive:false});
   window.addEventListener('touchend',onUp);
   window.addEventListener('resize',resize);
-  about.addEventListener('click',()=>{guide.style.opacity='1';about.style.opacity='0';});
+  about.addEventListener('click',()=>{guide.style.opacity='1';about.style.opacity='0';about.style.pointerEvents='none';});
 
   resize();
   requestAnimationFrame(draw);

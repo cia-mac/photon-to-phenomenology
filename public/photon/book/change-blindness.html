@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Change blindness — Photon to Phenomenology</title>
+<title>Change blindness · Photon to Phenomenology</title>
 <style>
   :root{ --ink:#0c0b09; --cream:#e8e0d0; --dim:rgba(232,224,208,0.40); --faint:rgba(232,224,208,0.15); }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -21,7 +21,7 @@
   #guide .gw{font-size:13px;line-height:1.5;color:var(--dim);margin-bottom:14px}
   #guide .gw b{color:var(--cream);font-weight:400}
   #guide .gd{font-size:13.5px;line-height:1.5;color:var(--cream)}
-  #about{bottom:30px;left:30px;font-size:11px;letter-spacing:0.06em;color:var(--dim);pointer-events:auto;cursor:pointer;opacity:0;transition:opacity .6s ease}
+  #about{bottom:30px;left:30px;font-size:11px;letter-spacing:0.06em;color:var(--dim);pointer-events:none;cursor:pointer;opacity:0;transition:opacity .6s ease}
   #about:hover{color:var(--cream)}
   #readout{
     top:24px;right:30px;text-align:right;
@@ -40,15 +40,15 @@
 <body>
 <canvas id="c"></canvas>
 
-<div class="chrome" id="chapter">Ch. 11 · Attention · change blindness</div>
+<div class="chrome" id="chapter">Ch. 11 · Change blindness</div>
 <div class="chrome" id="title">A whole tile, changing in plain sight</div>
 <div class="chrome" id="readout">
-  <div><span class="lab">blank</span><span id="rBlank">—</span></div>
+  <div><span class="lab">blank</span><span id="rBlank">·</span></div>
   <div id="status">one tile is changing</div>
 </div>
 <div class="chrome" id="guide">
   <div class="gk">what this is</div>
-  <div class="gw">A large, repeating change is <b>easy to miss</b> when a blank flash hides the instant it happens — without a transient to grab attention, you never stored the scene to compare.</div>
+  <div class="gw">A large, repeating change is <b>easy to miss</b> when a blank flash hides the instant it happens. Without a transient to grab attention, you never stored the scene to compare.</div>
   <div class="gk">what to do</div>
   <div class="gd">Find the tile that keeps changing. Drag to shrink the blank (at zero it pops out), then click your guess.</div>
 </div>
@@ -73,7 +73,7 @@
   let W=0,H=0,DPR=1, gx=0,gy=0,T=80,gap=10;
   let blank={cur:150,tgt:150};                 // blank duration ms
   const TON=620;                               // each state shown for this long
-  let phaseT=0, lastT=performance.now(), state=0; // state 0=A,1=B; phase within cycle
+  let phaseT=0, lastT=performance.now(), state=0, cycleCount=0; // state 0=A,1=B; phase within cycle
   let found=false, guess=-1, interacted=false, thesisShown=false;
 
   function resize(){
@@ -97,11 +97,12 @@
     const dt=now-lastT; lastT=now;
     blank.cur=lerp(blank.cur,blank.tgt,0.15);
     phaseT+=dt;
-    // cycle: A (TON) -> blank -> B (TON) -> blank -> ...
+    // cycle: A (TON) -> blank -> B (TON) -> blank -> ... advanced incrementally so
+    // easing the blank duration never makes the phase jump (no spurious flips).
     const cycle=TON+blank.cur;
-    const inBlank = (phaseT%cycle) > TON;
-    const half=(phaseT/cycle)|0;
-    state=half%2;                               // alternate A/B each visible window
+    while(phaseT>=cycle){ phaseT-=cycle; cycleCount++; }
+    const inBlank = phaseT > TON;
+    state = cycleCount%2;                        // alternate A/B each visible window
 
     ctx.fillStyle='#0c0b09'; ctx.fillRect(0,0,W,H);
 
@@ -147,7 +148,7 @@
     }
   }
   function first(){
-    guide.style.opacity='0'; about.style.opacity='1';
+    guide.style.opacity='0'; about.style.opacity='1'; about.style.pointerEvents='auto';
     if(!thesisShown){ thesisShown=true; setTimeout(()=>thesis.style.opacity='1',3000); }
   }
 
@@ -158,7 +159,7 @@
   window.addEventListener('touchmove',onMove,{passive:false});
   window.addEventListener('touchend',onUp);
   window.addEventListener('resize',resize);
-  about.addEventListener('click',()=>{guide.style.opacity='1';about.style.opacity='0';});
+  about.addEventListener('click',()=>{guide.style.opacity='1';about.style.opacity='0';about.style.pointerEvents='none';});
 
   resize();
   requestAnimationFrame(draw);

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>The scintillating grid — Photon to Phenomenology</title>
+<title>The scintillating grid · Photon to Phenomenology</title>
 <style>
   :root{ --ink:#0c0b09; --cream:#e8e0d0; --dim:rgba(232,224,208,0.40); --faint:rgba(232,224,208,0.15); }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -21,7 +21,7 @@
   #guide .gw{font-size:13px;line-height:1.5;color:var(--dim);margin-bottom:14px}
   #guide .gw b{color:var(--cream);font-weight:400}
   #guide .gd{font-size:13.5px;line-height:1.5;color:var(--cream)}
-  #about{bottom:30px;left:30px;font-size:11px;letter-spacing:0.06em;color:var(--dim);pointer-events:auto;cursor:pointer;opacity:0;transition:opacity .6s ease}
+  #about{bottom:30px;left:30px;font-size:11px;letter-spacing:0.06em;color:var(--dim);pointer-events:none;cursor:pointer;opacity:0;transition:opacity .6s ease}
   #about:hover{color:var(--cream)}
   #readout{
     top:24px;right:30px;text-align:right;
@@ -43,8 +43,8 @@
 <div class="chrome" id="chapter">Gallery · the scintillating grid</div>
 <div class="chrome" id="title">Count the black dots</div>
 <div class="chrome" id="readout">
-  <div><span class="lab">spacing</span><span id="rSp">—</span></div>
-  <div id="count">they flicker where you don't look</div>
+  <div><span class="lab">spacing</span><span id="rSp">·</span></div>
+  <div id="count">they flicker where you don’t look</div>
 </div>
 <div class="chrome" id="guide">
   <div class="gk">what this is</div>
@@ -75,7 +75,9 @@
     W=innerWidth;H=innerHeight;
     cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
     ctx.setTransform(DPR,0,0,DPR,0,0);
-    const s=Math.min(W,H)*0.11; sp.tgt= sp.tgt||s; if(sp.cur===0) sp.cur=s;
+    const lo=Math.min(W,H)*0.045, hi=Math.min(W,H)*0.20, s=Math.min(W,H)*0.11;
+    if(sp.cur===0){ sp.cur=s; sp.tgt=s; }                 // first load
+    else { sp.tgt=Math.max(lo,Math.min(hi,sp.tgt)); sp.cur=Math.max(lo,Math.min(hi,sp.cur)); } // keep valid on resize
   }
   function lerp(a,b,t){return a+(b-a)*t;}
 
@@ -109,7 +111,7 @@
     const x=cX(e); sp.tgt=Math.max(Math.min(W,H)*0.045, Math.min(Math.min(W,H)*0.20, sp.tgt+(x-lastX)*0.25)); lastX=x; }
   function onUp(){ dragging=false; }
   function first(){
-    guide.style.opacity='0'; about.style.opacity='1';
+    guide.style.opacity='0'; about.style.opacity='1'; about.style.pointerEvents='auto';
     if(!thesisShown){ thesisShown=true; setTimeout(()=>thesis.style.opacity='1',3000); }
   }
 
@@ -120,7 +122,7 @@
   window.addEventListener('touchmove',onMove,{passive:false});
   window.addEventListener('touchend',onUp);
   window.addEventListener('resize',resize);
-  about.addEventListener('click',()=>{guide.style.opacity='1';about.style.opacity='0';});
+  about.addEventListener('click',()=>{guide.style.opacity='1';about.style.opacity='0';about.style.pointerEvents='none';});
 
   resize();
   requestAnimationFrame(draw);

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>The negative afterimage — Photon to Phenomenology</title>
+<title>The negative afterimage · Photon to Phenomenology</title>
 <style>
   :root{ --field:#8d8579; --ink:#0c0b09; --cream:#0c0b09; --dim:rgba(12,11,9,0.52); --faint:rgba(12,11,9,0.30); }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -21,7 +21,7 @@
   #guide .gw{font-size:13px;line-height:1.5;color:var(--dim);margin-bottom:14px}
   #guide .gw b{color:var(--cream);font-weight:400}
   #guide .gd{font-size:13.5px;line-height:1.5;color:var(--cream)}
-  #about{bottom:30px;left:30px;font-size:11px;letter-spacing:0.06em;color:var(--dim);pointer-events:auto;cursor:pointer;opacity:0;transition:opacity .6s ease}
+  #about{bottom:30px;left:30px;font-size:11px;letter-spacing:0.06em;color:var(--dim);pointer-events:none;cursor:pointer;opacity:0;transition:opacity .6s ease}
   #about:hover{color:var(--cream)}
   #readout{
     top:24px;right:30px;text-align:right;
@@ -48,7 +48,7 @@
 </div>
 <div class="chrome" id="guide">
   <div class="gk">what this is</div>
-  <div class="gw">Stare at a strong colour and the cones that absorb it fatigue. On a neutral field the balance tips toward its opposite — a <b>negative afterimage</b> made of fatigue, not light.</div>
+  <div class="gw">Stare at a strong colour and the cones that absorb it fatigue. On a neutral field the balance tips toward its opposite. A <b>negative afterimage</b>, made of fatigue, not light.</div>
   <div class="gk">what to do</div>
   <div class="gd">Fixate the dot on the teal disc for ~15s, then click and keep your eyes on the dot.</div>
 </div>
@@ -96,7 +96,7 @@
     ctx.beginPath(); ctx.arc(cx,cy,4,0,Math.PI*2); ctx.fillStyle='#0c0b09'; ctx.fill();
 
     rAd.textContent=(adaptMs/1000).toFixed(1)+' s';
-    if(mode==='adapt') stateEl.textContent = adaptMs>15000 ? 'well adapted — now click' : 'fixate the dot on the teal disc';
+    if(mode==='adapt') stateEl.textContent = adaptMs>15000 ? 'well adapted, now click' : 'fixate the dot on the teal disc';
     else stateEl.textContent = 'keep your eyes on the dot';
     requestAnimationFrame(draw);
   }
@@ -108,14 +108,14 @@
     first();
   }
   function first(){
-    guide.style.opacity='0'; about.style.opacity='1';
+    guide.style.opacity='0'; about.style.opacity='1'; about.style.pointerEvents='auto';
     if(!thesisShown){ thesisShown=true; setTimeout(()=>thesis.style.opacity='1',1600); }
   }
 
   cv.addEventListener('mousedown',toggle);
   cv.addEventListener('touchstart',toggle,{passive:false});
   window.addEventListener('resize',resize);
-  about.addEventListener('click',()=>{guide.style.opacity='1';about.style.opacity='0';});
+  about.addEventListener('click',()=>{guide.style.opacity='1';about.style.opacity='0';about.style.pointerEvents='none';});
 
   resize();
   requestAnimationFrame(draw);

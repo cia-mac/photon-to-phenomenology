@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>The inverse problem — Photon to Phenomenology</title>
+<title>The inverse problem · Photon to Phenomenology</title>
 <style>
   :root{ --ink:#0c0b09; --cream:#e8e0d0; --dim:rgba(232,224,208,0.40); --faint:rgba(232,224,208,0.15); }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -22,7 +22,7 @@
   #guide .gw{font-size:13px;line-height:1.5;color:var(--dim);margin-bottom:14px}
   #guide .gw b{color:var(--cream);font-weight:400}
   #guide .gd{font-size:13.5px;line-height:1.5;color:var(--cream)}
-  #about{bottom:30px;left:30px;font-size:11px;letter-spacing:0.06em;color:var(--dim);pointer-events:auto;cursor:pointer;opacity:0;transition:opacity .6s ease}
+  #about{bottom:30px;left:30px;font-size:11px;letter-spacing:0.06em;color:var(--dim);pointer-events:none;cursor:pointer;opacity:0;transition:opacity .6s ease}
   #about:hover{color:var(--cream)}
   #readout{
     top:24px;right:30px;text-align:right;
@@ -44,12 +44,12 @@
 <div class="chrome" id="chapter">Ch. 1 · The inverse problem</div>
 <div class="chrome" id="title">From here, a cube</div>
 <div class="chrome" id="readout">
-  <div><span class="lab">viewpoint</span><span id="rView">—</span></div>
+  <div><span class="lab">viewpoint</span><span id="rView">·</span></div>
   <div id="verdict">reads as a cube</div>
 </div>
 <div class="chrome" id="guide">
   <div class="gk">what this is</div>
-  <div class="gw">One flat retinal image fits countless 3-D scenes. This 'cube' is really <b>eight edges at unrelated depths</b> that align only from one viewpoint; your visual system picks the simplest cause — a cube.</div>
+  <div class="gw">One flat retinal image fits countless 3-D scenes. This 'cube' is really <b>eight edges at unrelated depths</b> that align only from one viewpoint; your visual system picks the simplest cause: a cube.</div>
   <div class="gk">what to do</div>
   <div class="gd">Drag to turn the wireframe. Let go and it eases home, snapping back into a cube.</div>
 </div>
@@ -154,7 +154,7 @@
   }
   function onUp(){ dragging=false; document.body.classList.remove('grab'); }
   function first(){
-    guide.style.opacity='0'; about.style.opacity='1';
+    guide.style.opacity='0'; about.style.opacity='1'; about.style.pointerEvents='auto';
     if(!thesisShown){ thesisShown=true; setTimeout(()=>thesis.style.opacity='1',2600); }
   }
 
@@ -165,7 +165,7 @@
   window.addEventListener('touchmove',onMove,{passive:false});
   window.addEventListener('touchend',onUp);
   window.addEventListener('resize',resize);
-  about.addEventListener('click',()=>{guide.style.opacity='1';about.style.opacity='0';});
+  about.addEventListener('click',()=>{guide.style.opacity='1';about.style.opacity='0';about.style.pointerEvents='none';});
 
   resize();
   requestAnimationFrame(draw);

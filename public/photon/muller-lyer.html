@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>The Müller-Lyer lines — Photon to Phenomenology</title>
+<title>The Müller-Lyer lines · Photon to Phenomenology</title>
 <style>
   :root{ --ink:#0c0b09; --cream:#e8e0d0; --dim:rgba(232,224,208,0.40); --faint:rgba(232,224,208,0.15); }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -21,7 +21,7 @@
   #guide .gw{font-size:13px;line-height:1.5;color:var(--dim);margin-bottom:14px}
   #guide .gw b{color:var(--cream);font-weight:400}
   #guide .gd{font-size:13.5px;line-height:1.5;color:var(--cream)}
-  #about{bottom:30px;left:30px;font-size:11px;letter-spacing:0.06em;color:var(--dim);pointer-events:auto;cursor:pointer;opacity:0;transition:opacity .6s ease}
+  #about{bottom:30px;left:30px;font-size:11px;letter-spacing:0.06em;color:var(--dim);pointer-events:none;cursor:pointer;opacity:0;transition:opacity .6s ease}
   #about:hover{color:var(--cream)}
   #readout{
     top:24px;right:30px;text-align:right;
@@ -43,13 +43,13 @@
 <div class="chrome" id="chapter">Gallery · the Müller-Lyer lines</div>
 <div class="chrome" id="title">Two shafts, the same length</div>
 <div class="chrome" id="readout">
-  <div><span class="lab">top shaft</span><span id="rT">—</span></div>
-  <div><span class="lab">bottom shaft</span><span id="rB">—</span></div>
+  <div><span class="lab">top shaft</span><span id="rT">·</span></div>
+  <div><span class="lab">bottom shaft</span><span id="rB">·</span></div>
   <div id="verdict">the top shaft looks longer</div>
 </div>
 <div class="chrome" id="guide">
   <div class="gk">what this is</div>
-  <div class="gw">The two shafts are the <b>same length</b>. Fins splayed outward make one look longer; fins folded inward make the other look shorter — read as near and far corners.</div>
+  <div class="gw">The two shafts are the <b>same length</b>. Fins splayed outward make one look longer; fins folded inward make the other look shorter, read as near and far corners.</div>
   <div class="gk">what to do</div>
   <div class="gd">Drag to fold the fins in and out. Flatten them and the shafts line up.</div>
 </div>
@@ -115,7 +115,7 @@
     const x=cX(e); fin.tgt=Math.max(0, Math.min(1, fin.tgt+(x-lastX)*0.004)); lastX=x; }
   function onUp(){ dragging=false; }
   function first(){
-    guide.style.opacity='0'; about.style.opacity='1';
+    guide.style.opacity='0'; about.style.opacity='1'; about.style.pointerEvents='auto';
     if(!thesisShown){ thesisShown=true; setTimeout(()=>thesis.style.opacity='1',2800); }
   }
 
@@ -126,7 +126,7 @@
   window.addEventListener('touchmove',onMove,{passive:false});
   window.addEventListener('touchend',onUp);
   window.addEventListener('resize',resize);
-  about.addEventListener('click',()=>{guide.style.opacity='1';about.style.opacity='0';});
+  about.addEventListener('click',()=>{guide.style.opacity='1';about.style.opacity='0';about.style.pointerEvents='none';});
 
   resize();
   requestAnimationFrame(draw);
