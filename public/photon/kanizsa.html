@@ -68,7 +68,7 @@
 
   let W=0,H=0,DPR=1,cx=0,cy=0,Rt=180,discR=58;
   let turn={cur:0,tgt:0};                      // global rotation of the wedges (rad)
-  let interacted=false, thesisShown=false;
+  let thesisShown=false;
 
   function resize(){
     DPR=Math.min(window.devicePixelRatio||1,2);
@@ -88,7 +88,6 @@
   }
 
   function draw(){
-    if(!dragging) turn.tgt=turn.tgt;           // (held value; eases below)
     turn.cur=lerp(turn.cur,turn.tgt,0.10);
 
     ctx.fillStyle='#0c0b09'; ctx.fillRect(0,0,W,H);

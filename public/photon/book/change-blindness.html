@@ -74,7 +74,7 @@
   let blank={cur:150,tgt:150};                 // blank duration ms
   const TON=620;                               // each state shown for this long
   let phaseT=0, lastT=performance.now(), state=0, cycleCount=0; // state 0=A,1=B; phase within cycle
-  let found=false, guess=-1, interacted=false, thesisShown=false;
+  let found=false, guess=-1, thesisShown=false;
 
   function resize(){
     DPR=Math.min(window.devicePixelRatio||1,2);
