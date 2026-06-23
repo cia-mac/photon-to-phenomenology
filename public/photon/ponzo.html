@@ -104,6 +104,8 @@
   #walk .wnext{padding:11px 23px;border-radius:999px;border:1px solid rgba(232,224,208,0.26);background:rgba(232,224,208,0.1);
     color:#f0ebde;cursor:pointer;text-transform:uppercase;letter-spacing:0.09em;transition:.2s;white-space:nowrap}
   #walk .wnext:hover{background:rgba(232,224,208,0.2)}
+  #walk .wclose{position:absolute;top:13px;right:16px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:13px;line-height:1;color:rgba(232,224,208,0.4);cursor:pointer;padding:6px;transition:color .2s}
+  #walk .wclose:hover{color:#e8e0d0}
   /* replay pill, shown once the intro ends */
   #replay{position:fixed;left:50%;bottom:34px;transform:translateX(-50%);z-index:30;
     display:none;align-items:center;gap:9px;padding:12px 22px;border-radius:999px;
@@ -150,6 +152,7 @@
   </div>
 </div>
 <div id="walk">
+  <span class="wclose" id="wclose" aria-label="close guide" title="close">&#10005;</span>
   <div class="wk">guided walk-through</div>
   <div class="wt" id="wt"></div>
   <div class="wb"><span class="wskip" id="wskip">explore freely</span><div class="dots" id="wdots"></div><span class="wnext" id="wnext">next &#8594;</span></div>
@@ -295,9 +298,8 @@
   function clearAuto(){ if(autoT){ clearTimeout(autoT); autoT=null; } }
   function scheduleAuto(){
     clearAuto();
-    autoT = (wstep < WALK.length-1)
-      ? setTimeout(()=>{ showStep(wstep+1); scheduleAuto(); }, 5400)
-      : setTimeout(endIntro, 6200);
+    if(wstep < WALK.length-1) autoT=setTimeout(()=>{ showStep(wstep+1); scheduleAuto(); }, 5400);
+    // on the final step the guide stays put until the viewer closes it
   }
   function startIntro(){ replay.classList.remove('on'); walk.classList.add('on'); showStep(0); scheduleAuto(); }
   function endIntro(){
@@ -306,12 +308,13 @@
   }
   wnext.addEventListener('click',()=>{ clearAuto(); if(wstep>=WALK.length-1) endIntro(); else showStep(wstep+1); });
   document.getElementById('wskip').addEventListener('click',endIntro);
+  document.getElementById('wclose').addEventListener('click',endIntro);
   replay.addEventListener('click',startIntro);
-  // a deliberate drag hands control to the user mid-intro
+  // interacting stops the auto-advance but leaves the guide on screen
   const _canvas=document.querySelector('canvas');
   if(_canvas){
-    _canvas.addEventListener('mousedown',()=>{ if(walk.classList.contains('on')) endIntro(); });
-    _canvas.addEventListener('touchstart',()=>{ if(walk.classList.contains('on')) endIntro(); },{passive:true});
+    _canvas.addEventListener('mousedown',()=>{ if(walk.classList.contains('on')) clearAuto(); });
+    _canvas.addEventListener('touchstart',()=>{ if(walk.classList.contains('on')) clearAuto(); },{passive:true});
   }
   setTimeout(startIntro, 1100);   // the explainer plays itself shortly after load
 
