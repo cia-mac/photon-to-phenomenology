@@ -1,63 +1,9 @@
 # SESSION_STATE — Photon to Phenomenology
 
-Last Updated: 2026-06-23 (nav + walk-card type pass; NOT deployed)
+Last Updated: 2026-06-22 (v1, first snapshot for this lane)
 
 Interactive vision-science series after Stephen Palmer, *Vision Science: Photons
 to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`.
-
----
-
-## 2026-06-23 EXIT — clearer nav + refined walk-card type across all 16 (LOCAL ONLY, awaiting review)
-
-Snapshot before this block: `SESSION_STATE_v_2026-06-23_pre_nav_type.md`.
-Trigger: user found the prev/next phenomenon arrows too faint to notice and the
-click-drag interaction unclear; liked the glass walk-card and asked to refine its
-text. One local commit `6933839`. **Not deployed** — user wants to review in
-preview first.
-
-### Done (all 16 instruments, verified in preview, console-clean)
-- **Navigation arrows made obvious.** Faint `.arrow` circles → brighter frosted
-  buttons (opacity 0.95, border 0.45, 60px, font 26px), hover scale, and a
-  one-time `@keyframes navhint` attention pulse (3 cycles) on load. Each arrow now
-  carries an always-on frosted **label naming the prev/next phenomenon**
-  (`.alabel`, leading "The " stripped), populated in `buildNav()`. Arrows
-  restructured into `.nav.prev`/`.nav.next` wrappers (was bare `<a>`). Labels
-  hidden under 680px.
-- **Walk-card typography refined** (`#walk`): body `.wt` → light **font-weight 300**,
-  21px, line-height 1.62, slight negative tracking, brighter `#f4efe4`; added
-  `.wt b{font-weight:700;color:#fff}` and switched `wt.textContent` → `wt.innerHTML`
-  so emphasis renders; finer kicker `.wk`. Each WALK step now has **exactly one
-  bold key phrase** (the conceptual punchline), added across all 16. Verified
-  balanced tags, one per step, no wording changed (emphasis wraps existing words).
-- **Scintillating Grid** additionally got an explicit `⇆ drag to change spacing`
-  hint under the readout (fades on first drag) — its specific click-drag affordance.
-- Frosted-glass aesthetic preserved throughout (explicit user ask).
-- Rollout done via an idempotent string-replace script (shared blocks were
-  byte-identical across files) + a subagent for the per-instrument bold emphasis.
-
-### Pending
-- **NOT DEPLOYED.** User reviewing in local preview (server `photon`, was on
-  :4317). Say "publish" → `vercel deploy --prod --yes` from repo root.
-- **Bold-phrase choices are editorial** (my picks, one per step). Open to per-page
-  re-picks if any read wrong.
-- **Interaction/affordance hint is explicit only on scintillating-grid.** The other
-  15 interact differently (stare, hold gaze, watch a gap). Offered to add a
-  tailored one-line hint per instrument — not yet done, awaiting user go.
-- Carried from 2026-06-22: dead-code cleanup chip `task_dee0357f` (strip unused
-  `interacted` var); unbuilt book chapters (6 of 13); optional Vercel gate.
-
-### Operational notes (this session)
-- Same deploy/preview facts as the 2026-06-22 block below still hold.
-- zsh heredocs mangle `!` (`!=` → `\!=`) — write Python scripts via the Write tool,
-  not `python3 - <<EOF`, or avoid `!` (use `a-b` truthiness).
-- The shared nav/walk CSS+markup blocks are identical across all 16 files, so a
-  single string-replace script edits them uniformly. Per-instrument content (WALK
-  copy) must be edited individually.
-
-### Why we stopped
-User realised they had mixed up sessions and invoked the exit ritual. The nav +
-type work is complete, committed locally, and verified in preview; nothing is
-deployed, so the live site is unchanged and the work is safe to resume or publish.
 
 ---
 
