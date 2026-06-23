@@ -46,15 +46,23 @@
     font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#e8e0d0;
     pointer-events:auto;cursor:pointer;transition:background .25s;user-select:none}
   #menubtn:hover{background:rgba(42,38,31,0.72)}
-  .arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:30;
-    width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-    background:rgba(18,16,13,0.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-    border:1px solid rgba(232,224,208,0.18);box-shadow:0 8px 30px rgba(0,0,0,0.45);
-    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:24px;line-height:1;color:#e8e0d0;
-    opacity:0.7;pointer-events:auto;cursor:pointer;user-select:none;text-decoration:none;transition:opacity .25s,background .25s}
-  .arrow:hover{opacity:1;background:rgba(42,38,31,0.68)}
-  .arrow.prev{left:24px}
-  .arrow.next{right:24px}
+  .nav{position:fixed;top:50%;transform:translateY(-50%);z-index:30;
+    display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none}
+  .nav.prev{left:24px}
+  .nav.next{right:24px}
+  .arrow{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:rgba(18,16,13,0.62);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border:1px solid rgba(232,224,208,0.45);box-shadow:0 8px 30px rgba(0,0,0,0.5);
+    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:26px;line-height:1;color:#f0ebde;
+    opacity:0.95;pointer-events:auto;cursor:pointer;user-select:none;text-decoration:none;
+    transition:opacity .25s,background .25s,transform .25s;animation:navhint 2.6s ease-in-out 3}
+  .arrow:hover{opacity:1;background:rgba(56,50,40,0.8);transform:scale(1.07)}
+  .alabel{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:0.13em;
+    text-transform:uppercase;color:rgba(232,224,208,0.66);max-width:190px;text-align:center;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis;background:rgba(18,16,13,0.5);backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);border:1px solid rgba(232,224,208,0.14);border-radius:999px;padding:4px 12px}
+  @keyframes navhint{0%,100%{box-shadow:0 8px 30px rgba(0,0,0,0.5)}
+    50%{box-shadow:0 8px 30px rgba(0,0,0,0.5),0 0 0 7px rgba(232,224,208,0.12)}}
   #overlay{position:fixed;inset:0;z-index:50;
     background:rgba(10,9,7,0.74);backdrop-filter:blur(30px) saturate(1.3);-webkit-backdrop-filter:blur(30px) saturate(1.3);
     display:none;flex-direction:column;align-items:center;justify-content:center;gap:40px;padding:40px;
@@ -84,8 +92,9 @@
     border:1px solid rgba(232,224,208,0.18);border-radius:24px;box-shadow:0 16px 60px rgba(0,0,0,0.6);
     padding:30px 38px 24px;text-align:left;opacity:0;pointer-events:none;transition:opacity .45s ease,transform .45s ease}
   #walk.on{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
-  #walk .wk{font-size:10.5px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(232,224,208,0.42);margin-bottom:12px}
-  #walk .wt{font-size:19px;line-height:1.6;color:#f0ebde;min-height:2.9em;font-weight:400}
+  #walk .wk{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(232,224,208,0.38);margin-bottom:14px;font-weight:500}
+  #walk .wt{font-size:21px;line-height:1.62;color:#f4efe4;min-height:2.9em;font-weight:300;letter-spacing:-0.003em}
+  #walk .wt b{font-weight:700;color:#fff;letter-spacing:0}
   #walk .wb{margin-top:22px;display:flex;align-items:center;gap:18px;
     font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:0.06em}
   #walk .dots{display:flex;gap:9px;flex:1}
@@ -105,7 +114,7 @@
     pointer-events:auto;cursor:pointer;transition:.25s;user-select:none}
   #replay.on{display:inline-flex}
   #replay:hover{color:#e8e0d0;background:rgba(42,38,31,0.72)}
-  @media (max-width:680px){ #menubtn{top:14px;font-size:11px} .arrow{width:46px;height:46px;font-size:19px} .arrow.prev{left:12px} .arrow.next{right:12px} #walk{bottom:18px;width:94vw;padding:24px 24px 20px} #walk .wt{font-size:17px} #replay{bottom:18px} }
+  @media (max-width:680px){ #menubtn{top:14px;font-size:11px} .arrow{width:46px;height:46px;font-size:19px} .nav.prev{left:12px} .nav.next{right:12px} .alabel{display:none} #walk{bottom:18px;width:94vw;padding:24px 24px 20px} #walk .wt{font-size:17px} #replay{bottom:18px} }
 </style>
 </head>
 <body>
@@ -130,8 +139,8 @@
 </div>
 
 <div id="menubtn">&#9638; all phenomena</div>
-<a class="arrow prev" id="navprev">&#8249;</a>
-<a class="arrow next" id="navnext">&#8250;</a>
+<div class="nav prev"><a class="arrow" id="navprev" aria-label="previous phenomenon">&#8249;</a><span class="alabel" id="navprevlbl"></span></div>
+<div class="nav next"><a class="arrow" id="navnext" aria-label="next phenomenon">&#8250;</a><span class="alabel" id="navnextlbl"></span></div>
 <div id="overlay">
   <div class="oclose" id="oclose">close &#10005;</div>
   <div class="ohead">Photon to Phenomenology</div>
@@ -256,6 +265,9 @@
     const prev=NAV[(idx-1+NAV.length)%NAV.length], next=NAV[(idx+1)%NAV.length];
     const pe=document.getElementById('navprev'), ne=document.getElementById('navnext');
     pe.href=prev.h; pe.title=prev.n; ne.href=next.h; ne.title=next.n;
+    const strip=s=>s.replace(/^the\s+/i,'');
+    document.getElementById('navprevlbl').textContent=strip(prev.n);
+    document.getElementById('navnextlbl').textContent=strip(next.n);
   })();
   const overlay=document.getElementById('overlay');
   document.getElementById('menubtn').addEventListener('click',()=>overlay.classList.add('open'));
@@ -274,17 +286,17 @@
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
-    {t:"Three pale discs, each with a wedge bitten out of its rim. Right now the bites face outward, so you see three separate shapes and nothing in the space between them.", act(){turn.tgt=Math.PI*0.85;}},
-    {t:"Watch the empty middle as the wedges swing around to face the centre.", act(){turn.tgt=Math.PI*0.42;}},
-    {t:"Aligned. A triangle snaps into view, a touch brighter than the page, with three crisp straight edges. Lean in: that edge is not painted on the screen.", act(){turn.tgt=0;}},
-    {t:"No triangle was ever drawn. Only three notched discs exist. The surface, the brightness, the edges, you supplied them all. Vision is construction, not a recording.", act(){turn.tgt=0;}},
+    {t:"Three pale discs, each with a wedge bitten out of its rim. Right now the bites face outward, so you see three separate shapes and <b>nothing in the space between them</b>.", act(){turn.tgt=Math.PI*0.85;}},
+    {t:"<b>Watch the empty middle</b> as the wedges swing around to face the centre.", act(){turn.tgt=Math.PI*0.42;}},
+    {t:"Aligned. A triangle <b>snaps into view</b>, a touch brighter than the page, with three crisp straight edges. Lean in: that edge is not painted on the screen.", act(){turn.tgt=0;}},
+    {t:"No triangle was ever drawn. Only three notched discs exist. The surface, the brightness, the edges, you supplied them all. <b>Vision is construction, not a recording.</b>", act(){turn.tgt=0;}},
   ];
   const walk=document.getElementById('walk'), wt=document.getElementById('wt'), wdots=document.getElementById('wdots'),
         wnext=document.getElementById('wnext'), replay=document.getElementById('replay');
   let wstep=-1, autoT=null, introDone=false;
   WALK.forEach(()=>{ const d=document.createElement('span'); d.className='dot'; wdots.appendChild(d); });
   function showStep(i){
-    wstep=i; wt.textContent=WALK[i].t;
+    wstep=i; wt.innerHTML=WALK[i].t;
     if(typeof WALK[i].act==='function') WALK[i].act();
     [...wdots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
     wnext.textContent = i===WALK.length-1 ? 'done' : 'next →';
