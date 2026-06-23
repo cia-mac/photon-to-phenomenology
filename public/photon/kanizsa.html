@@ -48,7 +48,7 @@
   .arrow:hover{color:var(--cream)}
   .arrow.prev{left:18px}
   .arrow.next{right:18px}
-  #overlay{position:fixed;inset:0;z-index:50;background:rgba(12,11,9,0.975);
+  #overlay{position:fixed;inset:0;z-index:50;background:rgba(12,11,9,0.975);--cream:#e8e0d0;--dim:rgba(232,224,208,0.40);--faint:rgba(232,224,208,0.15);
     display:none;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:40px;
     opacity:0;transition:opacity .3s ease}
   #overlay.open{display:flex;opacity:1}
@@ -241,16 +241,17 @@
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
-    {t:"Three pale discs, each with a wedge bitten out of its rim. Right now the bites face outward, so you see three separate shapes and nothing in the space between them.", go:Math.PI*0.85},
-    {t:"Watch the empty middle as the wedges swing around to face the centre.", go:Math.PI*0.42},
-    {t:"Aligned. A triangle snaps into view, a touch brighter than the page, with three crisp straight edges. Lean in: that edge is not painted on the screen.", go:0},
-    {t:"No triangle was ever drawn. Only three notched discs exist. The surface, the brightness, the edges, you supplied them all. Vision is construction, not a recording.", go:0},
+    {t:"Three pale discs, each with a wedge bitten out of its rim. Right now the bites face outward, so you see three separate shapes and nothing in the space between them.", act(){turn.tgt=Math.PI*0.85;}},
+    {t:"Watch the empty middle as the wedges swing around to face the centre.", act(){turn.tgt=Math.PI*0.42;}},
+    {t:"Aligned. A triangle snaps into view, a touch brighter than the page, with three crisp straight edges. Lean in: that edge is not painted on the screen.", act(){turn.tgt=0;}},
+    {t:"No triangle was ever drawn. Only three notched discs exist. The surface, the brightness, the edges, you supplied them all. Vision is construction, not a recording.", act(){turn.tgt=0;}},
   ];
   const walk=document.getElementById('walk'), wt=document.getElementById('wt'), wdots=document.getElementById('wdots'), wnext=document.getElementById('wnext');
   let wstep=-1;
   WALK.forEach(()=>{ const d=document.createElement('span'); d.className='dot'; wdots.appendChild(d); });
   function showStep(i){
-    wstep=i; wt.textContent=WALK[i].t; turn.tgt=WALK[i].go;
+    wstep=i; wt.textContent=WALK[i].t;
+    if(typeof WALK[i].act==='function') WALK[i].act();
     [...wdots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
     wnext.textContent = i===WALK.length-1 ? 'done' : 'next →';
   }

@@ -35,6 +35,50 @@
   }
   #thesis .lead{color:var(--dim);font-size:12.5px;display:block;margin-bottom:.5em}
   @media (max-width:680px){ #thesis{left:30px;text-align:left;max-width:none;bottom:66px} #guide{max-width:none} }
+
+  /* ---- navigation + guided walkthrough (redesign v1) ---- */
+  #menubtn{position:fixed;top:24px;left:50%;transform:translateX(-50%);z-index:20;
+    font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--dim);
+    pointer-events:auto;cursor:pointer;transition:color .3s;user-select:none}
+  #menubtn:hover{color:var(--cream)}
+  .arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:20;
+    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:28px;line-height:1;
+    color:var(--faint);pointer-events:auto;cursor:pointer;user-select:none;text-decoration:none;transition:color .3s}
+  .arrow:hover{color:var(--cream)}
+  .arrow.prev{left:18px}
+  .arrow.next{right:18px}
+  #overlay{position:fixed;inset:0;z-index:50;background:rgba(12,11,9,0.975);--cream:#e8e0d0;--dim:rgba(232,224,208,0.40);--faint:rgba(232,224,208,0.15);
+    display:none;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:40px;
+    opacity:0;transition:opacity .3s ease}
+  #overlay.open{display:flex;opacity:1}
+  #overlay .ohead{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--dim)}
+  #overlay .cols{display:flex;gap:72px;flex-wrap:wrap;justify-content:center}
+  #overlay .col{min-width:236px}
+  #overlay .gh{font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--faint);margin-bottom:14px}
+  #overlay a.mi{display:block;color:var(--dim);text-decoration:none;font-size:14px;line-height:1.5;
+    padding:4px 0;letter-spacing:0.02em;transition:color .2s}
+  #overlay a.mi .n{display:inline-block;width:2.4em;color:var(--faint);
+    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:11px}
+  #overlay a.mi:hover{color:var(--cream)}
+  #overlay a.mi:hover .n{color:var(--dim)}
+  #overlay a.mi.here{color:var(--cream)}
+  #overlay a.mi.here .n{color:var(--cream)}
+  #overlay .oclose{position:fixed;top:24px;right:30px;font-size:11px;letter-spacing:0.06em;
+    color:var(--dim);cursor:pointer;transition:color .3s}
+  #overlay .oclose:hover{color:var(--cream)}
+  #walkstart{pointer-events:auto;cursor:pointer;color:var(--cream);border-bottom:1px solid var(--faint);white-space:nowrap}
+  #walk{position:fixed;left:50%;bottom:38px;transform:translateX(-50%);max-width:min(56ch,88vw);
+    text-align:center;z-index:40;display:none}
+  #walk.on{display:block}
+  #walk .wt{font-size:15px;line-height:1.6;color:var(--cream);min-height:3.2em}
+  #walk .wb{margin-top:18px;display:flex;align-items:center;justify-content:center;gap:20px;
+    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:0.08em}
+  #walk .dots{display:flex;gap:7px}
+  #walk .dot{width:6px;height:6px;border-radius:50%;background:var(--faint);transition:background .3s}
+  #walk .dot.on{background:var(--cream)}
+  #walk .wnext,#walk .wskip{color:var(--dim);cursor:pointer;text-transform:uppercase;letter-spacing:0.1em;transition:color .2s}
+  #walk .wnext:hover,#walk .wskip:hover{color:var(--cream)}
+  @media (max-width:680px){ #menubtn{top:auto;bottom:14px} .arrow{font-size:22px} #walk{bottom:74px} }
 </style>
 </head>
 <body>
@@ -51,12 +95,28 @@
   <div class="gk">what this is</div>
   <div class="gw">The two centre discs are <b>exactly the same size</b>, but the one ringed by giants looks smaller than the one ringed by dwarves. Size is judged against the neighbours, not measured.</div>
   <div class="gk">what to do</div>
-  <div class="gd">Drag to grow and shrink the surrounding rings. The centre discs never change.</div>
+  <div class="gd">Drag to grow and shrink the surrounding rings. The centre discs never change. Or <span id="walkstart">&#9654; walk me through it</span>.</div>
 </div>
 <div class="chrome" id="about">&#9432; about</div>
 <div class="chrome" id="thesis">
   <span class="lead">The two centre discs are exactly the same size. Drag the rings together and you can finally see it.</span>
   Size is judged against the neighbours, not measured. The same disc shrinks beside giants and swells beside dwarves. Vision is not recording, it is construction.
+</div>
+
+<div id="menubtn">&#9638; all illusions</div>
+<a class="arrow prev" id="navprev">&#8249;</a>
+<a class="arrow next" id="navnext">&#8250;</a>
+<div id="overlay">
+  <div class="oclose" id="oclose">close &#10005;</div>
+  <div class="ohead">Photon to Phenomenology</div>
+  <div class="cols">
+    <div class="col"><div class="gh">Gallery</div><div id="colGallery"></div></div>
+    <div class="col"><div class="gh">The Book</div><div id="colBook"></div></div>
+  </div>
+</div>
+<div id="walk">
+  <div class="wt" id="wt"></div>
+  <div class="wb"><span class="wskip" id="wskip">skip</span><div class="dots" id="wdots"></div><span class="wnext" id="wnext">next &#8594;</span></div>
 </div>
 
 <script>
@@ -125,6 +185,81 @@
   window.addEventListener('touchend',onUp);
   window.addEventListener('resize',resize);
   about.addEventListener('click',()=>{guide.style.opacity='1';about.style.opacity='0';about.style.pointerEvents='none';});
+
+  // ---- navigation registry (shared across all 16 instruments) ----
+  const NAV=[
+    {g:'Gallery',n:'Illusory contours',h:'/photon/kanizsa.html',slug:'kanizsa'},
+    {g:'Gallery',n:'The motion aftereffect',h:'/photon/motion-aftereffect.html',slug:'motion-aftereffect'},
+    {g:'Gallery',n:'The negative afterimage',h:'/photon/afterimage.html',slug:'afterimage'},
+    {g:'Gallery',n:'The scintillating grid',h:'/photon/scintillating-grid.html',slug:'scintillating-grid'},
+    {g:'Gallery',n:'The Ebbinghaus circles',h:'/photon/ebbinghaus.html',slug:'ebbinghaus'},
+    {g:'Gallery',n:'The Cornsweet edge',h:'/photon/cornsweet.html',slug:'cornsweet'},
+    {g:'Gallery',n:'The café wall',h:'/photon/cafe-wall.html',slug:'cafe-wall'},
+    {g:'Gallery',n:'The Ponzo illusion',h:'/photon/ponzo.html',slug:'ponzo'},
+    {g:'Gallery',n:'The Müller-Lyer lines',h:'/photon/muller-lyer.html',slug:'muller-lyer'},
+    {g:'Book',n:'The inverse problem',h:'/photon/book/inverse-problem.html',slug:'inverse-problem'},
+    {g:'Book',n:'The checker-shadow',h:'/photon/book/checker-shadow.html',slug:'checker-shadow'},
+    {g:'Book',n:'The aperture problem',h:'/photon/book/aperture-problem.html',slug:'aperture-problem'},
+    {g:'Book',n:'Apparent motion',h:'/photon/book/apparent-motion.html',slug:'apparent-motion'},
+    {g:'Book',n:'Troxler fading',h:'/photon/book/troxler-fading.html',slug:'troxler-fading'},
+    {g:'Book',n:'Motion-induced blindness',h:'/photon/book/motion-induced-blindness.html',slug:'motion-induced-blindness'},
+    {g:'Book',n:'Change blindness',h:'/photon/book/change-blindness.html',slug:'change-blindness'},
+  ];
+  const HERE='ebbinghaus';
+  (function buildNav(){
+    const cg=document.getElementById('colGallery'), cb=document.getElementById('colBook');
+    let gi=0, bi=0;
+    NAV.forEach(it=>{
+      const a=document.createElement('a'); a.href=it.h; a.className='mi'+(it.slug===HERE?' here':'');
+      const num=(it.g==='Gallery')?(++gi):(++bi);
+      a.innerHTML='<span class="n">'+String(num).padStart(2,'0')+'</span>'+it.n;
+      (it.g==='Gallery'?cg:cb).appendChild(a);
+    });
+    const idx=NAV.findIndex(x=>x.slug===HERE);
+    const prev=NAV[(idx-1+NAV.length)%NAV.length], next=NAV[(idx+1)%NAV.length];
+    const pe=document.getElementById('navprev'), ne=document.getElementById('navnext');
+    pe.href=prev.h; pe.title=prev.n; ne.href=next.h; ne.title=next.n;
+  })();
+  const overlay=document.getElementById('overlay');
+  document.getElementById('menubtn').addEventListener('click',()=>overlay.classList.add('open'));
+  document.getElementById('oclose').addEventListener('click',()=>overlay.classList.remove('open'));
+  overlay.addEventListener('click',e=>{ if(e.target===overlay) overlay.classList.remove('open'); });
+  window.addEventListener('keydown',e=>{
+    if(e.key==='Escape') overlay.classList.remove('open');
+    else if(e.key==='ArrowLeft') location.href=document.getElementById('navprev').href;
+    else if(e.key==='ArrowRight') location.href=document.getElementById('navnext').href;
+  });
+
+  // ---- guided walkthrough (per-instrument script) ----
+  const WALK=[
+    {t:"Two pale discs, one on the left, one on the right. The left looks distinctly smaller. Trust your eyes for a moment: they are clearly different sizes.", act(){s.tgt=1;}},
+    {t:"Now look at their neighbours. The left disc sits inside a ring of giants; the right one inside a ring of dwarves. Your eye sized each centre against its company.", act(){s.tgt=1;}},
+    {t:"Watch the centres as the surrounding rings even out. Nothing about the two discs is changing. Only their context is.", act(){s.tgt=0.5;}},
+    {t:"Rings matched. The two centres are plainly, undeniably the same size. They always were. The readout said so the whole time.", act(){s.tgt=0;}},
+    {t:"Size is judged against the neighbours, not measured. The same disc shrinks beside giants and swells beside dwarves. Vision is construction, not a recording.", act(){s.tgt=0;}},
+  ];
+  const walk=document.getElementById('walk'), wt=document.getElementById('wt'), wdots=document.getElementById('wdots'), wnext=document.getElementById('wnext');
+  let wstep=-1;
+  WALK.forEach(()=>{ const d=document.createElement('span'); d.className='dot'; wdots.appendChild(d); });
+  function showStep(i){
+    wstep=i; wt.textContent=WALK[i].t;
+    if(typeof WALK[i].act==='function') WALK[i].act();
+    [...wdots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
+    wnext.textContent = i===WALK.length-1 ? 'done' : 'next →';
+  }
+  function startWalk(){
+    overlay.classList.remove('open');
+    guide.style.opacity='0'; about.style.opacity='0'; about.style.pointerEvents='none';
+    walk.classList.add('on'); showStep(0);
+  }
+  function endWalk(){
+    walk.classList.remove('on');
+    about.style.opacity='1'; about.style.pointerEvents='auto';
+    if(!thesisShown){ thesisShown=true; setTimeout(()=>thesis.style.opacity='1',400); }
+  }
+  document.getElementById('walkstart').addEventListener('click',startWalk);
+  wnext.addEventListener('click',()=>{ if(wstep>=WALK.length-1) endWalk(); else showStep(wstep+1); });
+  document.getElementById('wskip').addEventListener('click',endWalk);
 
   resize();
   requestAnimationFrame(draw);
