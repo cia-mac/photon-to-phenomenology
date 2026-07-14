@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>The café wall · Photon to Phenomenology</title>
+<link rel="stylesheet" href="/photon/chrome.css">
 <style>
   :root{ --ink:#0c0b09; --cream:#e8e0d0; --dim:rgba(232,224,208,0.40); --faint:rgba(232,224,208,0.15); }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -16,13 +17,6 @@
   .chrome{position:fixed;pointer-events:none;user-select:none}
   #chapter{top:26px;left:30px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--dim)}
   #title{top:44px;left:30px;font-size:15px;letter-spacing:0.04em;color:var(--cream);font-weight:400}
-  #guide{bottom:30px;left:30px;max-width:min(38ch,76vw);transition:opacity .7s ease}
-  #guide .gk{font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
-  #guide .gw{font-size:13px;line-height:1.5;color:var(--dim);margin-bottom:14px}
-  #guide .gw b{color:var(--cream);font-weight:400}
-  #guide .gd{font-size:13.5px;line-height:1.5;color:var(--cream)}
-  #about{bottom:30px;left:30px;font-size:11px;letter-spacing:0.06em;color:var(--dim);pointer-events:none;cursor:pointer;opacity:0;transition:opacity .6s ease}
-  #about:hover{color:var(--cream)}
   #readout{
     top:24px;right:30px;text-align:right;
     font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:11px;color:var(--dim);line-height:1.7;
@@ -34,89 +28,7 @@
     font-size:14px;line-height:1.55;color:var(--cream);opacity:0;transition:opacity 1.6s ease;
   }
   #thesis .lead{color:var(--dim);font-size:12.5px;display:block;margin-bottom:.5em}
-  @media (max-width:680px){ #thesis{left:30px;text-align:left;max-width:none;bottom:66px} #guide{max-width:none} }
-
-  /* ---- navigation + auto-running intro (redesign v2: glass) ---- */
-  #guide,#about{display:none}   /* the explainer is now delivered by the auto-running intro */
-  #menubtn{position:fixed;top:22px;left:50%;transform:translateX(-50%);z-index:30;
-    display:inline-flex;align-items:center;gap:9px;padding:12px 22px;border-radius:999px;
-    background:rgba(18,16,13,0.62);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);
-    border:1px solid rgba(232,224,208,0.18);box-shadow:0 8px 30px rgba(0,0,0,0.45);
-    font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#e8e0d0;
-    pointer-events:auto;cursor:pointer;transition:background .25s;user-select:none}
-  #menubtn:hover{background:rgba(42,38,31,0.72)}
-  .nav{position:fixed;top:50%;transform:translateY(-50%);z-index:30;
-    display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none}
-  .nav.prev{left:24px}
-  .nav.next{right:24px}
-  .arrow{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-    background:rgba(18,16,13,0.62);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-    border:1px solid rgba(232,224,208,0.45);box-shadow:0 8px 30px rgba(0,0,0,0.5);
-    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:26px;line-height:1;color:#f0ebde;
-    opacity:0.95;pointer-events:auto;cursor:pointer;user-select:none;text-decoration:none;
-    transition:opacity .25s,background .25s,transform .25s;animation:navhint 2.6s ease-in-out 3}
-  .arrow:hover{opacity:1;background:rgba(56,50,40,0.8);transform:scale(1.07)}
-  .alabel{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:0.13em;
-    text-transform:uppercase;color:rgba(232,224,208,0.66);max-width:190px;text-align:center;white-space:nowrap;
-    overflow:hidden;text-overflow:ellipsis;background:rgba(18,16,13,0.5);backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);border:1px solid rgba(232,224,208,0.14);border-radius:999px;padding:4px 12px}
-  @keyframes navhint{0%,100%{box-shadow:0 8px 30px rgba(0,0,0,0.5)}
-    50%{box-shadow:0 8px 30px rgba(0,0,0,0.5),0 0 0 7px rgba(232,224,208,0.12)}}
-  #overlay{position:fixed;inset:0;z-index:50;
-    background:rgba(10,9,7,0.74);backdrop-filter:blur(30px) saturate(1.3);-webkit-backdrop-filter:blur(30px) saturate(1.3);
-    display:none;flex-direction:column;align-items:center;justify-content:center;gap:40px;padding:40px;
-    opacity:0;transition:opacity .35s ease}
-  #overlay.open{display:flex;opacity:1}
-  #overlay .ohead{font-size:12px;letter-spacing:0.26em;text-transform:uppercase;color:rgba(232,224,208,0.55)}
-  #overlay .cols{display:flex;gap:84px;flex-wrap:wrap;justify-content:center}
-  #overlay .col{min-width:266px}
-  #overlay .gh{font-size:10.5px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(232,224,208,0.32);margin-bottom:18px}
-  #overlay a.mi{display:flex;align-items:baseline;color:rgba(232,224,208,0.64);text-decoration:none;font-size:17px;line-height:1.5;
-    padding:7px 0;letter-spacing:0.01em;transition:color .2s,transform .2s}
-  #overlay a.mi .n{display:inline-block;width:2.7em;color:rgba(232,224,208,0.32);
-    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:12px}
-  #overlay a.mi:hover{color:#e8e0d0;transform:translateX(4px)}
-  #overlay a.mi:hover .n{color:rgba(232,224,208,0.55)}
-  #overlay a.mi.here{color:#e8e0d0}
-  #overlay a.mi.here .n{color:#e8e0d0}
-  #overlay .oclose{position:fixed;top:22px;right:28px;display:inline-flex;align-items:center;gap:6px;
-    padding:11px 20px;border-radius:999px;background:rgba(18,16,13,0.6);border:1px solid rgba(232,224,208,0.18);
-    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-    font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(232,224,208,0.6);cursor:pointer;transition:.25s}
-  #overlay .oclose:hover{color:#e8e0d0;background:rgba(42,38,31,0.72)}
-  /* floating glass explainer card, the primary guidance surface */
-  #walk{position:fixed;left:50%;bottom:34px;z-index:40;width:min(760px,94vw);
-    transform:translateX(-50%) translateY(16px);
-    background:rgba(18,16,13,0.66);backdrop-filter:blur(26px) saturate(1.4);-webkit-backdrop-filter:blur(26px) saturate(1.4);
-    border:1px solid rgba(232,224,208,0.18);border-radius:24px;box-shadow:0 16px 60px rgba(0,0,0,0.6);
-    padding:30px 38px 24px;text-align:left;opacity:0;pointer-events:none;transition:opacity .45s ease,transform .45s ease}
-  #walk.on{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
-  #walk .wk{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(232,224,208,0.38);margin-bottom:14px;font-weight:500}
-  #walk .wt{font-size:21px;line-height:1.62;color:#f4efe4;min-height:2.9em;font-weight:300;letter-spacing:-0.003em}
-  #walk .wt b{font-weight:700;color:#fff;letter-spacing:0}
-  #walk .wb{margin-top:22px;display:flex;align-items:center;gap:18px;
-    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:0.06em}
-  #walk .dots{display:flex;gap:9px;flex:1}
-  #walk .dot{width:8px;height:8px;border-radius:50%;background:rgba(232,224,208,0.26);transition:.3s}
-  #walk .dot.on{background:#e8e0d0;transform:scale(1.3)}
-  #walk .wskip{color:rgba(232,224,208,0.46);cursor:pointer;text-transform:uppercase;letter-spacing:0.09em;transition:.2s;white-space:nowrap}
-  #walk .wskip:hover{color:#e8e0d0}
-  #walk .wnext{padding:11px 23px;border-radius:999px;border:1px solid rgba(232,224,208,0.26);background:rgba(232,224,208,0.1);
-    color:#f0ebde;cursor:pointer;text-transform:uppercase;letter-spacing:0.09em;transition:.2s;white-space:nowrap}
-  #walk .wnext:hover{background:rgba(232,224,208,0.2)}
-  #walk .wclose{position:absolute;top:13px;right:16px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:13px;line-height:1;color:rgba(232,224,208,0.4);cursor:pointer;padding:6px;transition:color .2s}
-  #walk .wclose:hover{color:#e8e0d0}
-  /* replay pill, shown once the intro ends */
-  #replay{position:fixed;left:50%;bottom:34px;transform:translateX(-50%);z-index:30;
-    display:none;align-items:center;gap:9px;padding:12px 22px;border-radius:999px;
-    background:rgba(18,16,13,0.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-    border:1px solid rgba(232,224,208,0.18);box-shadow:0 8px 30px rgba(0,0,0,0.45);
-    font-size:12px;letter-spacing:0.13em;text-transform:uppercase;color:rgba(232,224,208,0.62);
-    pointer-events:auto;cursor:pointer;transition:.25s;user-select:none}
-  #replay.on{display:inline-flex}
-  #replay:hover{color:#e8e0d0;background:rgba(42,38,31,0.72)}
-  @media (max-width:680px){ #menubtn{top:14px;font-size:11px} .arrow{width:46px;height:46px;font-size:19px} .nav.prev{left:12px} .nav.next{right:12px} .alabel{display:none} #walk{bottom:18px;width:94vw;padding:24px 24px 20px} #walk .wt{font-size:17px} #replay{bottom:18px} }
-  body.guiding #thesis{opacity:0 !important}
+  @media (max-width:680px){ #thesis{left:30px;text-align:left;max-width:none;bottom:66px} }
 </style>
 </head>
 <body>
@@ -128,47 +40,20 @@
   <div><span class="lab">shift</span><span id="rOff">·</span></div>
   <div id="verdict">the rows look wedged</div>
 </div>
-<div class="chrome" id="guide">
-  <div class="gk">what this is</div>
-  <div class="gw">Offset rows of light and dark tiles with thin grey mortar make the <b>perfectly level lines</b> look sloped and wedged. The contrast at each tile edge tugs the perceived line.</div>
-  <div class="gk">what to do</div>
-  <div class="gd">Drag sideways to change the row offset. Slide it to zero and every row snaps level.</div>
-</div>
-<div class="chrome" id="about">&#9432; about</div>
 <div class="chrome" id="thesis">
   <span class="lead">Every horizontal line is exactly level and parallel. Slide the shift to zero and you can see it.</span>
   Offset tiles and thin grey mortar make your visual system tilt the edges. The slope is added by you. Vision is not recording, it is construction.
 </div>
 
-<div id="menubtn">&#9638; all phenomena</div>
-<div class="nav prev"><a class="arrow" id="navprev" aria-label="previous phenomenon">&#8249;</a><span class="alabel" id="navprevlbl"></span></div>
-<div class="nav next"><a class="arrow" id="navnext" aria-label="next phenomenon">&#8250;</a><span class="alabel" id="navnextlbl"></span></div>
-<div id="overlay">
-  <div class="oclose" id="oclose">close &#10005;</div>
-  <div class="ohead">Photon to Phenomenology</div>
-  <div class="cols">
-    <div class="col"><div class="gh">Gallery</div><div id="colGallery"></div></div>
-    <div class="col"><div class="gh">The Book</div><div id="colBook"></div></div>
-  </div>
-</div>
-<div id="walk">
-  <span class="wclose" id="wclose" aria-label="close guide" title="close">&#10005;</span>
-  <div class="wk">guided walk-through</div>
-  <div class="wt" id="wt"></div>
-  <div class="wb"><span class="wskip" id="wskip">explore freely</span><div class="dots" id="wdots"></div><span class="wnext" id="wnext">next &#8594;</span></div>
-</div>
-<div id="replay">&#8635; guide me again</div>
-
+<script src="/photon/chrome.js"></script>
 <script>
 (() => {
   "use strict";
   const cv=document.getElementById('c'); const ctx=cv.getContext('2d');
-  const guide=document.getElementById('guide'), about=document.getElementById('about'), thesis=document.getElementById('thesis');
   const rOff=document.getElementById('rOff'), verdict=document.getElementById('verdict');
 
   let W=0,H=0,DPR=1,T=56,mortar=4;
   let off={cur:0.30,tgt:0.30};                 // row shift as fraction of a tile
-  let thesisShown=false;
 
   function resize(){
     DPR=Math.min(window.devicePixelRatio||1,2);
@@ -207,14 +92,10 @@
 
   function cX(e){return (e.touches?e.touches[0]:e).clientX;}
   let dragging=false,lastX=0;
-  function onDown(e){ e.preventDefault(); dragging=true; lastX=cX(e); first(); }
+  function onDown(e){ e.preventDefault(); dragging=true; lastX=cX(e); }
   function onMove(e){ if(!dragging)return; e.preventDefault();
     const x=cX(e); off.tgt=Math.max(0, Math.min(0.5, off.tgt+(x-lastX)*0.0016)); lastX=x; }
   function onUp(){ dragging=false; }
-  function first(){
-    guide.style.opacity='0'; about.style.opacity='1'; about.style.pointerEvents='auto';
-    if(!thesisShown){ thesisShown=true; setTimeout(()=>thesis.style.opacity='1',2800); }
-  }
 
   cv.addEventListener('mousedown',onDown);
   window.addEventListener('mousemove',onMove);
@@ -223,59 +104,6 @@
   window.addEventListener('touchmove',onMove,{passive:false});
   window.addEventListener('touchend',onUp);
   window.addEventListener('resize',resize);
-  about.addEventListener('click',()=>{guide.style.opacity='1';about.style.opacity='0';about.style.pointerEvents='none';});
-
-  // ---- navigation registry (shared across all 16 instruments) ----
-  const NAV=[
-    {g:'Gallery',n:'Illusory contours',h:'/photon/kanizsa.html',slug:'kanizsa'},
-    {g:'Gallery',n:'The motion aftereffect',h:'/photon/motion-aftereffect.html',slug:'motion-aftereffect'},
-    {g:'Gallery',n:'The negative afterimage',h:'/photon/afterimage.html',slug:'afterimage'},
-    {g:'Gallery',n:'The scintillating grid',h:'/photon/scintillating-grid.html',slug:'scintillating-grid'},
-    {g:'Gallery',n:'The Ebbinghaus circles',h:'/photon/ebbinghaus.html',slug:'ebbinghaus'},
-    {g:'Gallery',n:'The Cornsweet edge',h:'/photon/cornsweet.html',slug:'cornsweet'},
-    {g:'Gallery',n:'The café wall',h:'/photon/cafe-wall.html',slug:'cafe-wall'},
-    {g:'Gallery',n:'The Ponzo illusion',h:'/photon/ponzo.html',slug:'ponzo'},
-    {g:'Gallery',n:'The Müller-Lyer lines',h:'/photon/muller-lyer.html',slug:'muller-lyer'},
-    {g:'Book',n:'The inverse problem',h:'/photon/book/inverse-problem.html',slug:'inverse-problem'},
-    {g:'Book',n:'The checker-shadow',h:'/photon/book/checker-shadow.html',slug:'checker-shadow'},
-    {g:'Book',n:'The aperture problem',h:'/photon/book/aperture-problem.html',slug:'aperture-problem'},
-    {g:'Book',n:'Apparent motion',h:'/photon/book/apparent-motion.html',slug:'apparent-motion'},
-    {g:'Book',n:'Troxler fading',h:'/photon/book/troxler-fading.html',slug:'troxler-fading'},
-    {g:'Book',n:'Motion-induced blindness',h:'/photon/book/motion-induced-blindness.html',slug:'motion-induced-blindness'},
-    {g:'Book',n:'Change blindness',h:'/photon/book/change-blindness.html',slug:'change-blindness'},
-  ];
-  const HERE='cafe-wall';
-  (function buildNav(){
-    const cg=document.getElementById('colGallery'), cb=document.getElementById('colBook');
-    let gi=0, bi=0;
-    NAV.forEach(it=>{
-      const a=document.createElement('a'); a.href=it.h; a.className='mi'+(it.slug===HERE?' here':'');
-      const num=(it.g==='Gallery')?(++gi):(++bi);
-      a.innerHTML='<span class="n">'+String(num).padStart(2,'0')+'</span>'+it.n;
-      (it.g==='Gallery'?cg:cb).appendChild(a);
-    });
-    const idx=NAV.findIndex(x=>x.slug===HERE);
-    const prev=NAV[(idx-1+NAV.length)%NAV.length], next=NAV[(idx+1)%NAV.length];
-    const pe=document.getElementById('navprev'), ne=document.getElementById('navnext');
-    pe.href=prev.h; pe.title=prev.n; ne.href=next.h; ne.title=next.n;
-    const strip=s=>s.replace(/^the\s+/i,'');
-    document.getElementById('navprevlbl').textContent=strip(prev.n);
-    document.getElementById('navnextlbl').textContent=strip(next.n);
-  })();
-  const overlay=document.getElementById('overlay');
-  document.getElementById('menubtn').addEventListener('click',()=>overlay.classList.add('open'));
-  document.getElementById('oclose').addEventListener('click',()=>overlay.classList.remove('open'));
-  overlay.addEventListener('click',e=>{ if(e.target===overlay) overlay.classList.remove('open'); });
-  window.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){ overlay.classList.remove('open'); return; }
-    if(walk.classList.contains('on')){
-      if(e.key==='ArrowRight'){ clearAuto(); if(wstep>=WALK.length-1) endIntro(); else showStep(wstep+1); }
-      else if(e.key==='ArrowLeft'){ clearAuto(); showStep(Math.max(0,wstep-1)); }
-      return;
-    }
-    if(e.key==='ArrowLeft') location.href=document.getElementById('navprev').href;
-    else if(e.key==='ArrowRight') location.href=document.getElementById('navnext').href;
-  });
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
@@ -285,38 +113,7 @@
     {t:"Zero shift. Every row snaps flat. The lines were <b>dead level and parallel</b> the whole time.", act(){off.tgt=0;}},
     {t:"Nothing tilted but your read of it. Offset tiles and grey mortar made you bend straight lines. The slope was added by you. <b>Vision is construction, not a recording.</b>", act(){off.tgt=0;}},
   ];
-  const walk=document.getElementById('walk'), wt=document.getElementById('wt'), wdots=document.getElementById('wdots'),
-        wnext=document.getElementById('wnext'), replay=document.getElementById('replay');
-  let wstep=-1, autoT=null, introDone=false;
-  WALK.forEach(()=>{ const d=document.createElement('span'); d.className='dot'; wdots.appendChild(d); });
-  function showStep(i){
-    wstep=i; wt.innerHTML=WALK[i].t;
-    if(typeof WALK[i].act==='function') WALK[i].act();
-    [...wdots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
-    wnext.textContent = i===WALK.length-1 ? 'done' : 'next →';
-  }
-  function clearAuto(){ if(autoT){ clearTimeout(autoT); autoT=null; } }
-  function scheduleAuto(){
-    clearAuto();
-    if(wstep < WALK.length-1) autoT=setTimeout(()=>{ showStep(wstep+1); scheduleAuto(); }, 5400);
-    // on the final step the guide stays put until the viewer closes it
-  }
-  function startIntro(){ document.body.classList.add('guiding'); replay.classList.remove('on'); walk.classList.add('on'); showStep(0); scheduleAuto(); }
-  function endIntro(){
-    clearAuto(); document.body.classList.remove('guiding'); walk.classList.remove('on'); replay.classList.add('on');
-    if(!introDone){ introDone=true; if(!thesisShown){ thesisShown=true; setTimeout(()=>thesis.style.opacity='1',500); } }
-  }
-  wnext.addEventListener('click',()=>{ clearAuto(); if(wstep>=WALK.length-1) endIntro(); else showStep(wstep+1); });
-  document.getElementById('wskip').addEventListener('click',endIntro);
-  document.getElementById('wclose').addEventListener('click',endIntro);
-  replay.addEventListener('click',startIntro);
-  // interacting stops the auto-advance but leaves the guide on screen
-  const _canvas=document.querySelector('canvas');
-  if(_canvas){
-    _canvas.addEventListener('mousedown',()=>{ if(walk.classList.contains('on')) clearAuto(); });
-    _canvas.addEventListener('touchstart',()=>{ if(walk.classList.contains('on')) clearAuto(); },{passive:true});
-  }
-  setTimeout(startIntro, 1100);   // the explainer plays itself shortly after load
+  PhotonChrome.init({here:'cafe-wall', walk:WALK});
 
   resize();
   requestAnimationFrame(draw);
