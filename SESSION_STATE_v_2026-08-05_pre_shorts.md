@@ -1,51 +1,9 @@
 # SESSION_STATE — Photon to Phenomenology
 
-Last Updated: 2026-08-05 (shorts batch 1 staged; release-gated)
+Last Updated: 2026-06-23 (nav + walk-card type pass; NOT deployed)
 
 Interactive vision-science series after Stephen Palmer, *Vision Science: Photons
 to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`.
-
----
-
-## 2026-08-05 EXIT — three 9:16 shorts built, verified, staged (NOTHING POSTED)
-
-Snapshot before this block: `SESSION_STATE_v_2026-08-05_pre_shorts.md`.
-Trigger: Cia's go on the series test (three shorts from already-built pieces,
-YT Shorts + X, felt-effect audit run by strangers instead of the click-through).
-
-### Done (evidence)
-- **Series consolidation read agreed:** the ITDs (archive/idt-blog-itds, 9 generic)
-  and Photon are one series, two tracks (the instrument / the eye). Shorts test
-  the eye track first.
-- **`shorts/` pipeline in this repo** (commit `efdcf24`): deterministic 1080x1920
-  stimulus pages (window.seek(frame)) + playwright-core frame capture (needs
-  sandbox OFF: Chrome singleton socket bind) + ffmpeg H.264 yuv420p. Frames/out
-  gitignored; source committed.
-- **Three finals rendered + frame-verified from the ENCODED files:**
-  afterimage 24s (13s adapt, teal disc, in-field close), scintillating grid 15s
-  (top gradient band for text), motion aftereffect 30s (analytic rotation, dead
-  stop at 17s). Photon palette (cream/ink, afterimage neutral field), Helvetica
-  Neue 300 + mono labels, every frame carries PHOTON TO PHENOMENOLOGY.
-- **Staged YT:** ~/Movies/ciamac-youtube/to-be-released/
-  "Photon to Phenomenology - The {Negative Afterimage,Scintillating Grid,Motion
-  Aftereffect} - master v1.0.mp4" (workbench will pick them up as drafts).
-- **Staged X per X_LANE_v1 schema:** ~/Movies/ciamac-x/to-post/
-  Photon_-_{Afterimage,Scintillating_Grid,Motion_Aftereffect}_-_20260805_v1/
-  each with media + POSTING_METADATA.json, visibility "staged", copy drafted
-  (140-280 chars, More work: https://ciamac.com).
-
-### Pending (all Cia gates)
-- **NOTHING UPLOADED, NOTHING POSTED.** YT release via workbench "Release now";
-  X needs BOTH the lane activation decision (X still parked in canon) AND
-  per-piece go. Copy drafts sit in POSTING_METADATA.json title fields.
-- Prior pending stands: 2026-06-23 nav/type pass still NOT deployed; D-0071 port
-  of the 4 sandbox graphs still open; AUDIT.html felt-effect pass (the shorts
-  are the field test of exactly this).
-
-### Fragile
-- capture.mjs pins the chromium-1228 executable path in ~/Library/Caches/ms-playwright.
-- Root CLAUDE.md still says YT staging is to-upload/; real convention on disk is
-  to-be-released/ (README.txt there confirms).
 
 ---
 
