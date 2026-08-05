@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scintillating grid · short</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:#0c0b09}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  canvas{position:fixed;inset:0}
+  .t{position:fixed;left:0;width:1080px;text-align:center;pointer-events:none}
+  #chapter{top:110px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:24px;
+    letter-spacing:0.30em;text-transform:uppercase;color:rgba(232,224,208,0.55)}
+  #piece{top:152px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:20px;
+    letter-spacing:0.18em;text-transform:uppercase;color:rgba(232,224,208,0.40)}
+  #plate{position:fixed;left:0;top:0;width:1080px;height:580px;
+    background:linear-gradient(rgba(12,11,9,0.97) 58%, rgba(12,11,9,0) 100%)}
+  #line{top:300px;font-size:68px;font-weight:300;color:#e8e0d0;padding:0 70px;line-height:1.28}
+  #sub{top:412px;font-size:34px;font-weight:300;color:rgba(232,224,208,0.55)}
+  #veil{position:fixed;inset:0;background:#0c0b09}
+  #close1{top:820px;font-size:52px;font-weight:300;color:#e8e0d0;padding:0 90px;line-height:1.35}
+  #close2{top:1050px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:24px;
+    letter-spacing:0.26em;text-transform:uppercase;color:rgba(232,224,208,0.45)}
+  #close3{top:1110px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:28px;
+    letter-spacing:0.10em;color:#e8e0d0}
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div id="plate"></div>
+<div class="t" id="chapter">Photon to Phenomenology</div>
+<div class="t" id="piece">the scintillating grid</div>
+<div class="t" id="line"></div>
+<div class="t" id="sub"></div>
+<div id="veil"></div>
+<div class="t" id="close1">Vision is not recording,<br>it is construction.</div>
+<div class="t" id="close2">Photon to Phenomenology</div>
+<div class="t" id="close3">ciamac.com</div>
+<script>
+"use strict";
+const FPS=30, DUR=15;
+window.SHORT={fps:FPS, frames:DUR*FPS};
+
+const ctx=document.getElementById('c').getContext('2d');
+const el=id=>document.getElementById(id);
+
+function fadeIn(t,a,d){return Math.max(0,Math.min(1,(t-a)/d));}
+function lerp(a,b,t){return a+(b-a)*t;}
+function setText(id,txt,op){const e=el(id); e.textContent=txt; e.style.opacity=op;}
+
+window.seek=function(f){
+  const t=f/FPS;
+
+  // spacing drifts slowly tighter through the hold (more shimmer)
+  const k=Math.max(0,Math.min(1,(t-2)/7));
+  const S=lerp(134,106,k), bw=S*0.16, dr=bw*0.62;
+
+  ctx.fillStyle='#0c0b09'; ctx.fillRect(0,0,1080,1920);
+  // grey channels
+  ctx.fillStyle='#5f5848';
+  for(let x=S; x<1080+S; x+=S){ ctx.fillRect(x-bw/2,0,bw,1920); }
+  for(let y=S; y<1920+S; y+=S){ ctx.fillRect(0,y-bw/2,1080,bw); }
+  // identical pale discs at every crossing (no black anywhere)
+  ctx.fillStyle='#e8e0d0';
+  for(let x=S; x<1080+S; x+=S){
+    for(let y=S; y<1920+S; y+=S){
+      ctx.beginPath(); ctx.arc(x,y,dr,0,Math.PI*2); ctx.fill();
+    }
+  }
+
+  // text plate + lines
+  let plateOp=0;
+  if(t<9){
+    setText('line','Count the black dots.',fadeIn(t,0.3,0.6));
+    setText('sub','',0);
+    plateOp=fadeIn(t,0.3,0.6)*0.9;
+  } else {
+    setText('line','There are none.',fadeIn(t,9,0.5));
+    setText('sub','Every disc is the same grey.',fadeIn(t,9.8,0.6));
+    plateOp=0.9;
+  }
+  el('plate').style.opacity=plateOp;
+
+  // end card: veil rises over the grid, closing lines on top
+  const c=fadeIn(t,12.5,1.0);
+  el('veil').style.opacity=c*0.92;
+  el('close1').style.opacity=c;
+  el('close2').style.opacity=c;
+  el('close3').style.opacity=c;
+  if(c>0){ el('plate').style.opacity=plateOp*(1-c); el('line').style.opacity=1-c; el('sub').style.opacity=1-c; }
+};
+window.seek(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Afterimage · short</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:#8d8579}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  canvas{position:fixed;inset:0}
+  .t{position:fixed;left:0;width:1080px;text-align:center;pointer-events:none}
+  #chapter{top:110px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:24px;
+    letter-spacing:0.30em;text-transform:uppercase;color:rgba(12,11,9,0.42)}
+  #piece{top:152px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:20px;
+    letter-spacing:0.18em;text-transform:uppercase;color:rgba(12,11,9,0.30)}
+  #line{top:300px;font-size:68px;font-weight:300;letter-spacing:0.01em;color:#0c0b09;padding:0 70px;line-height:1.28}
+  #sub{top:410px;font-size:34px;font-weight:300;color:rgba(12,11,9,0.52)}
+  #count{top:486px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:30px;color:rgba(12,11,9,0.52)}
+  #close1{top:1330px;font-size:52px;font-weight:300;color:#0c0b09;padding:0 90px;line-height:1.35}
+  #close2{top:1560px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:24px;
+    letter-spacing:0.26em;text-transform:uppercase;color:rgba(12,11,9,0.45)}
+  #close3{top:1620px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:28px;
+    letter-spacing:0.10em;color:#0c0b09}
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div class="t" id="chapter">Photon to Phenomenology</div>
+<div class="t" id="piece">the negative afterimage</div>
+<div class="t" id="line"></div>
+<div class="t" id="sub"></div>
+<div class="t" id="count"></div>
+<div class="t" id="close1">Vision is not recording,<br>it is construction.</div>
+<div class="t" id="close2">Photon to Phenomenology</div>
+<div class="t" id="close3">ciamac.com</div>
+<script>
+"use strict";
+const FPS=30, DUR=24, ADAPT=13;
+window.SHORT={fps:FPS, frames:DUR*FPS};
+
+const ctx=document.getElementById('c').getContext('2d');
+const el=id=>document.getElementById(id);
+const cx=540, cy=890, R=330;
+
+// deterministic fades
+function fadeIn(t,a,d){return Math.max(0,Math.min(1,(t-a)/d));}
+function fadeOut(t,a,d){return 1-fadeIn(t,a,d);}
+
+function setText(id,txt,op){const e=el(id); e.textContent=txt; e.style.opacity=op;}
+
+window.seek=function(f){
+  const t=f/FPS;
+  // field
+  ctx.fillStyle='#8d8579'; ctx.fillRect(0,0,1080,1920);
+
+  if(t<ADAPT){
+    // adapting teal disc + progress ring
+    ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fillStyle='#1ba29a';
+    ctx.globalAlpha=fadeIn(t,0,0.5); ctx.fill(); ctx.globalAlpha=1;
+    const p=t/ADAPT;
+    ctx.beginPath(); ctx.arc(cx,cy,R+22,-Math.PI/2,-Math.PI/2+p*2*Math.PI);
+    ctx.lineWidth=4; ctx.strokeStyle='rgba(12,11,9,0.35)'; ctx.stroke();
+  }
+  // fixation dot, both phases
+  ctx.beginPath(); ctx.arc(cx,cy,7,0,Math.PI*2); ctx.fillStyle='#0c0b09'; ctx.fill();
+
+  // text timeline
+  if(t<ADAPT){
+    setText('line','Stare at the dot.',fadeIn(t,0.2,0.6));
+    setText('sub','Do not look away.',fadeIn(t,0.8,0.6));
+    setText('count',String(Math.ceil(ADAPT-t)),fadeIn(t,1.2,0.5));
+  } else if(t<15.5){
+    setText('line','Keep staring.',fadeIn(t,ADAPT,0.4));
+    setText('sub','',0); setText('count','',0);
+  } else {
+    setText('line','The rose disc is not on the screen.',fadeIn(t,15.5,0.8));
+    setText('sub','',0); setText('count','',0);
+  }
+  const c=fadeIn(t,19.5,1.2);
+  el('close1').style.opacity=c;
+  el('close2').style.opacity=c;
+  el('close3').style.opacity=c;
+};
+window.seek(0);
+</script>
+</body>
+</html>

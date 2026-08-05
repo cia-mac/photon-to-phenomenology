@@ -2,3 +2,8 @@
 .vercel
 node_modules/
 *.log
+shorts/node_modules/
+shorts/frames/
+shorts/out/
+shorts/verify_*.png
+shorts/package-lock.json
