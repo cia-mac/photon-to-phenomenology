@@ -7,6 +7,39 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-08-05 EXIT (3 of 3) — ten more pieces, series at 19 (NOTHING POSTED)
+
+Commit `8986825`. Trigger: Cia, "make 10 more if you can".
+
+### Done
+- **19 shorts.** New: simultaneous-contrast, whites-illusion, mach-bands,
+  contrast-sensitivity, troxler, peripheral-drift, shepard-tables, necker-cube,
+  rubin-vase, barber-pole. Picked to widen TOC coverage (parts I, II, IV, V, VI,
+  VIII) and to favour what a phone is better apparatus for: fixation, periphery,
+  bistability. Each is a draw function plus a config entry; no page authored.
+- **All 19 PASS verify_layout** with the engine untouched. That is the return on
+  the extraction.
+- **Four defects caught by eye before rendering:** contrast-sensitivity was not a
+  chirp (aliased past Nyquist; phase is now the integral of frequency, closed
+  form, capped at 120 cycles/1080px); simultaneous-contrast clipped both panels;
+  the Rubin profile read only as a vase until it was rebuilt as an actual face;
+  Shepard's legs rendered as detached stubs, removed.
+- **Rendered + staged:** 19 x 1080x1920 yuv420p, 12.6 MB. YT
+  `to-be-released/Photon to Phenomenology - <Piece> - master v3.0.mp4`; X
+  `to-post/Photon_-_<Piece>_-_20260805_v3/` + POSTING_METADATA.json, all copy
+  under 280 chars. Photos album **"Photon Shorts"** holds all 19.
+
+### Notes that matter later
+- troxler and peripheral-drift have NO sweep by design: the frame genuinely does
+  not change, which is the claim.
+- peripheral-drift is an ORIGINAL staging. Kitaoka owns the famous drifting
+  images; the phenomenon is public record, his pictures are not. Same rule as
+  Adelson's checker shadow (TOC rule 1).
+- 19 of the TOC's 40 now exist as shorts. The remaining build list is mostly one
+  draw function each.
+
+---
+
 ## 2026-08-05 EXIT (2 of 2) — shorts engine extracted, series at 9 (NOTHING POSTED)
 
 Snapshot: `SESSION_STATE_v_2026-08-05_pre_engine.md`. Commit `f8c2c42`.
