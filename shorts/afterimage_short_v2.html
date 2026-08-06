@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Afterimage · short v2</title>
+<style>
+  /* v2 layout law, shared across the three shorts:
+       HEADER    0..470     chapter, piece, line, sub
+       STIMULUS  470..1450  the canvas figure, centred on cy=960
+       FOOT      1450..1920 countdown, then the end card
+     v1 drifted between the three pieces (this one centred at 890, put the
+     countdown at 486 and the end card at 1330 while the others used 820).
+     v2 holds one grid so the set reads as one series. */
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:#8d8579}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  canvas{position:fixed;inset:0}
+  .t{position:fixed;left:0;width:1080px;text-align:center;pointer-events:none}
+  #chapter{top:100px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:24px;
+    letter-spacing:0.30em;text-transform:uppercase;color:rgba(12,11,9,0.42)}
+  #piece{top:142px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:20px;
+    letter-spacing:0.18em;text-transform:uppercase;color:rgba(12,11,9,0.30)}
+  #line{top:236px;font-size:62px;font-weight:300;letter-spacing:0.01em;color:#0c0b09;padding:0 80px;line-height:1.24}
+  #sub{top:402px;font-size:32px;font-weight:300;color:rgba(12,11,9,0.52)}
+  #count{top:1548px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:30px;
+    letter-spacing:0.10em;color:rgba(12,11,9,0.52)}
+  /* The veil is the FIELD colour, not ink. A dark end card would wipe the
+     afterimage the viewer is still holding; the illusion needs the neutral
+     field to persist under the closing type. */
+  #veil{position:fixed;inset:0;background:#8d8579}
+  #close1{top:800px;font-size:52px;font-weight:300;color:#0c0b09;padding:0 90px;line-height:1.35}
+  #close2{top:1030px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:24px;
+    letter-spacing:0.26em;text-transform:uppercase;color:rgba(12,11,9,0.45)}
+  #close3{top:1090px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:28px;
+    letter-spacing:0.10em;color:#0c0b09}
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div class="t" id="chapter">Photon to Phenomenology</div>
+<div class="t" id="piece">the negative afterimage</div>
+<div class="t" id="line"></div>
+<div class="t" id="sub"></div>
+<div class="t" id="count"></div>
+<div id="veil"></div>
+<div class="t" id="close1">Vision is not recording,<br>it is construction.</div>
+<div class="t" id="close2">Photon to Phenomenology</div>
+<div class="t" id="close3">ciamac.com</div>
+<script>
+"use strict";
+/* v2 is 20s, down from 24s, with adaptation cut 13s -> 10s. Ten seconds is the
+   floor: the negative afterimage is a photopigment effect and a shorter stare
+   produces one too faint to notice on a phone, which reads as a broken piece
+   rather than a subtle one. The reveal window stays 4s, longer than the
+   afterimage takes to appear. */
+const FPS=30, DUR=20, ADAPT=10;
+const T_REVEAL=12, T_END=16;
+window.SHORT={fps:FPS, frames:DUR*FPS};
+
+const ctx=document.getElementById('c').getContext('2d');
+const el=id=>document.getElementById(id);
+const cx=540, cy=960, R=330;
+
+function fadeIn(t,a,d){return Math.max(0,Math.min(1,(t-a)/d));}
+function setText(id,txt,op){const e=el(id); e.textContent=txt; e.style.opacity=op;}
+
+window.seek=function(f){
+  const t=f/FPS;
+  // field
+  ctx.fillStyle='#8d8579'; ctx.fillRect(0,0,1080,1920);
+
+  if(t<ADAPT){
+    // adapting teal disc + progress ring; ring at R+22 = 352, top edge 608, clear of 470
+    ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fillStyle='#1ba29a';
+    ctx.globalAlpha=fadeIn(t,0,0.5); ctx.fill(); ctx.globalAlpha=1;
+    const p=t/ADAPT;
+    ctx.beginPath(); ctx.arc(cx,cy,R+22,-Math.PI/2,-Math.PI/2+p*2*Math.PI);
+    ctx.lineWidth=4; ctx.strokeStyle='rgba(12,11,9,0.35)'; ctx.stroke();
+  }
+  // fixation dot, both phases
+  ctx.beginPath(); ctx.arc(cx,cy,7,0,Math.PI*2); ctx.fillStyle='#0c0b09'; ctx.fill();
+
+  /* Every line sets on ONE line at 62px inside the 920px measure. v1's
+     "The rose disc is not on the screen." wrapped to two. */
+  if(t<ADAPT){
+    setText('line','Stare at the dot.',fadeIn(t,0.2,0.6));
+    setText('sub','Do not look away.',fadeIn(t,0.8,0.6));
+    setText('count',String(Math.ceil(ADAPT-t)),fadeIn(t,1.2,0.5));
+  } else if(t<T_REVEAL){
+    setText('line','Keep staring.',fadeIn(t,ADAPT,0.4));
+    setText('sub','',0); setText('count','',0);
+  } else {
+    setText('line','The rose disc is not there.',fadeIn(t,T_REVEAL,0.7));
+    setText('sub','',0); setText('count','',0);
+  }
+
+  const c=fadeIn(t,T_END,1.2);
+  el('veil').style.opacity=c*0.92;
+  el('close1').style.opacity=c;
+  el('close2').style.opacity=c;
+  el('close3').style.opacity=c;
+  if(c>0){ el('line').style.opacity=1-c; }
+};
+window.seek(0);
+</script>
+</body>
+</html>
