@@ -296,6 +296,303 @@
         }
       ],
       "end": 9.5
+    },
+    {
+      "slug": "simultaneous-contrast",
+      "piece": "simultaneous contrast",
+      "mode": "dark",
+      "dur": 12,
+      "plate": false,
+      "sweep": {
+        "at": 6.5,
+        "dur": 1.8,
+        "from": 1,
+        "to": 0
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Which grey is lighter?"
+        },
+        {
+          "t": 6.5,
+          "line": "Neither. They are one grey.",
+          "fade": 0.5
+        },
+        {
+          "t": 7.3,
+          "sub": "Only the surrounds differ."
+        }
+      ],
+      "end": 9.5
+    },
+    {
+      "slug": "whites-illusion",
+      "piece": "white's illusion",
+      "mode": "dark",
+      "dur": 12,
+      "plate": false,
+      "sweep": {
+        "at": 6.5,
+        "dur": 1.8,
+        "from": 1,
+        "to": 0
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Which grey bar is lighter?"
+        },
+        {
+          "t": 6.5,
+          "line": "They are the same grey.",
+          "fade": 0.5
+        },
+        {
+          "t": 7.3,
+          "sub": "This one breaks the rule."
+        }
+      ],
+      "end": 9.5,
+      "note": "The grey on the dark stripe reads LIGHTER, the opposite of simultaneous contrast. That contradiction is the piece."
+    },
+    {
+      "slug": "mach-bands",
+      "piece": "mach bands",
+      "mode": "dark",
+      "dur": 12,
+      "plate": false,
+      "sweep": {
+        "at": 6.5,
+        "dur": 1.8,
+        "from": 1,
+        "to": 0
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Look at the edges."
+        },
+        {
+          "t": 1.1,
+          "sub": "Each step is one flat tone."
+        },
+        {
+          "t": 6.5,
+          "line": "The scallops are yours.",
+          "sub": "",
+          "fade": 0.5
+        },
+        {
+          "t": 7.4,
+          "sub": "Separated, they vanish."
+        }
+      ],
+      "end": 9.5
+    },
+    {
+      "slug": "contrast-sensitivity",
+      "piece": "contrast sensitivity",
+      "mode": "dark",
+      "dur": 12,
+      "plate": false,
+      "sweep": {
+        "at": 6.5,
+        "dur": 1.2,
+        "from": 0,
+        "to": 1
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Where do the bars vanish?"
+        },
+        {
+          "t": 6.5,
+          "line": "You see an arc.",
+          "fade": 0.5
+        },
+        {
+          "t": 7.3,
+          "sub": "The line is one contrast."
+        }
+      ],
+      "end": 9.5,
+      "note": "Sweep runs 0 -> 1: a constant-contrast rule fades IN at the reveal. The bars die at different heights along it, so the arc is the viewer's envelope, not the chart's."
+    },
+    {
+      "slug": "troxler",
+      "piece": "troxler fading",
+      "mode": "dark",
+      "field": "#3d3b36",
+      "dur": 16,
+      "plate": false,
+      "countdown": {
+        "until": 9,
+        "from": 1.2
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Hold the cross."
+        },
+        {
+          "t": 1.0,
+          "sub": "Do not move your eyes."
+        },
+        {
+          "t": 9,
+          "line": "The colours faded.",
+          "sub": "",
+          "fade": 0.5
+        },
+        {
+          "t": 9.9,
+          "sub": "Nothing on screen changed."
+        }
+      ],
+      "end": 12.5,
+      "note": "No sweep by design. The frame is genuinely unchanging; the fading is entirely in the viewer."
+    },
+    {
+      "slug": "peripheral-drift",
+      "piece": "peripheral drift",
+      "mode": "dark",
+      "dur": 13,
+      "plate": false,
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Let your eyes wander."
+        },
+        {
+          "t": 7.5,
+          "line": "The rings seem to turn.",
+          "fade": 0.5
+        },
+        {
+          "t": 8.3,
+          "sub": "Nothing here is moving."
+        }
+      ],
+      "end": 10.5,
+      "note": "Original staging. The famous drifting images are Kitaoka's artwork; the phenomenon is public record, his pictures are not."
+    },
+    {
+      "slug": "shepard-tables",
+      "piece": "shepard's tables",
+      "mode": "dark",
+      "dur": 13,
+      "plate": false,
+      "sweep": {
+        "at": 6.5,
+        "dur": 2.2,
+        "from": 1,
+        "to": 0
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Are these two the same?"
+        },
+        {
+          "t": 6.5,
+          "line": "They are congruent.",
+          "fade": 0.5
+        },
+        {
+          "t": 7.6,
+          "sub": "Nobody believes the overlay."
+        }
+      ],
+      "end": 10.5
+    },
+    {
+      "slug": "necker-cube",
+      "piece": "the necker cube",
+      "mode": "dark",
+      "dur": 12,
+      "plate": false,
+      "sweep": {
+        "at": 6.5,
+        "dur": 1.8,
+        "from": 1,
+        "to": 0
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Which face is nearer?"
+        },
+        {
+          "t": 6.5,
+          "line": "The drawing never said.",
+          "fade": 0.5
+        },
+        {
+          "t": 7.3,
+          "sub": "You picked. Then repicked."
+        }
+      ],
+      "end": 9.5
+    },
+    {
+      "slug": "rubin-vase",
+      "piece": "the rubin vase",
+      "mode": "dark",
+      "dur": 12,
+      "plate": false,
+      "sweep": {
+        "at": 6.5,
+        "dur": 1.8,
+        "from": 1,
+        "to": 0
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "A vase, or two faces?"
+        },
+        {
+          "t": 6.5,
+          "line": "One contour. Two objects.",
+          "fade": 0.5
+        },
+        {
+          "t": 7.3,
+          "sub": "You cannot see both at once."
+        }
+      ],
+      "end": 9.5
+    },
+    {
+      "slug": "barber-pole",
+      "piece": "the barber pole",
+      "mode": "dark",
+      "dur": 13,
+      "plate": false,
+      "sweep": {
+        "at": 7,
+        "dur": 1.6,
+        "from": 1,
+        "to": 0
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Which way is it moving?"
+        },
+        {
+          "t": 7,
+          "line": "The stripes never changed.",
+          "fade": 0.5
+        },
+        {
+          "t": 7.9,
+          "sub": "Only the aperture did."
+        }
+      ],
+      "end": 10.5
     }
   ]
 }
