@@ -1,0 +1,301 @@
+{
+  "_": [
+    "One entry per short. The engine (engine/short.mjs) supplies the layout, the",
+    "beat runner, the countdown and the end card; draws/<slug>.js supplies the",
+    "figure. Adding a short is a draw function plus an entry here.",
+    "",
+    "RULE: every 'line' must set on ONE line at 62px inside the 920px measure,",
+    "which is about 28 characters. verify_layout.mjs fails the build otherwise.",
+    "",
+    "sweep is the reveal: the scalar the draw reads as C.p. For the pieces lifted",
+    "from the interactive pages it is the same parameter the viewer dragged."
+  ],
+  "pieces": [
+    {
+      "slug": "afterimage",
+      "piece": "the negative afterimage",
+      "mode": "light",
+      "field": "#8d8579",
+      "dur": 20,
+      "plate": false,
+      "sweep": {
+        "at": 10,
+        "dur": 0.01,
+        "from": 1,
+        "to": 0
+      },
+      "countdown": {
+        "until": 10,
+        "from": 1.2
+      },
+      "beats": [
+        {
+          "t": 0.2,
+          "line": "Stare at the dot."
+        },
+        {
+          "t": 0.8,
+          "sub": "Do not look away."
+        },
+        {
+          "t": 10,
+          "line": "Keep staring.",
+          "sub": "",
+          "fade": 0.4
+        },
+        {
+          "t": 12,
+          "line": "The rose disc is not there.",
+          "fade": 0.7
+        }
+      ],
+      "end": 16,
+      "note": "10s adaptation is the floor. Shorter produces an afterimage too faint to notice on a phone, which reads as a broken piece rather than a subtle one."
+    },
+    {
+      "slug": "scintillating-grid",
+      "piece": "the scintillating grid",
+      "mode": "dark",
+      "dur": 13,
+      "plate": true,
+      "sweep": {
+        "at": 1.5,
+        "dur": 5.5,
+        "from": 1,
+        "to": 0
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Count the black dots."
+        },
+        {
+          "t": 7.5,
+          "line": "There are none.",
+          "fade": 0.5
+        },
+        {
+          "t": 8.2,
+          "sub": "Every disc is the same grey."
+        }
+      ],
+      "end": 10.5,
+      "note": "No adaptation floor; scintillation is immediate. 7.5s is enough to actually try counting before the answer lands."
+    },
+    {
+      "slug": "motion-aftereffect",
+      "piece": "the motion aftereffect",
+      "mode": "dark",
+      "dur": 22,
+      "plate": false,
+      "params": {
+        "stop": 13,
+        "omega": 2.6,
+        "ramp0": 1.2,
+        "ramp1": 2.2
+      },
+      "countdown": {
+        "until": 13,
+        "from": 2.6
+      },
+      "beats": [
+        {
+          "t": 0.2,
+          "line": "Eyes on the centre dot."
+        },
+        {
+          "t": 2.2,
+          "line": "Hold. Do not look away.",
+          "fade": 0.3
+        },
+        {
+          "t": 13,
+          "line": "Now. Nothing moves.",
+          "fade": 0.4
+        },
+        {
+          "t": 15.5,
+          "line": "The drift is you."
+        }
+      ],
+      "end": 19,
+      "note": "11.8s of rotation is the shortest that still lands. Below ~10s a viewer may see nothing and conclude the piece is broken."
+    },
+    {
+      "slug": "cafe-wall",
+      "piece": "the cafe wall",
+      "mode": "dark",
+      "dur": 13,
+      "plate": false,
+      "sweep": {
+        "at": 7.5,
+        "dur": 1.8,
+        "from": 0.5,
+        "to": 0
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Are these rows sloping?"
+        },
+        {
+          "t": 7.5,
+          "line": "Every line is level.",
+          "fade": 0.5
+        },
+        {
+          "t": 8.3,
+          "sub": "The tiles are just offset."
+        }
+      ],
+      "end": 10.5
+    },
+    {
+      "slug": "cornsweet",
+      "piece": "the cornsweet edge",
+      "mode": "dark",
+      "dur": 13,
+      "plate": false,
+      "sweep": {
+        "at": 7,
+        "dur": 1.6,
+        "from": 0,
+        "to": 1
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Which half is lighter?"
+        },
+        {
+          "t": 7,
+          "line": "Neither. They match.",
+          "fade": 0.5
+        },
+        {
+          "t": 7.8,
+          "sub": "Only the seam differs."
+        }
+      ],
+      "end": 10.5,
+      "note": "Sweep runs 0 -> 1: the occluder grows over the seam, hiding the cusp, and the two halves snap to one grey."
+    },
+    {
+      "slug": "ebbinghaus",
+      "piece": "the ebbinghaus circles",
+      "mode": "dark",
+      "dur": 12,
+      "plate": false,
+      "sweep": {
+        "at": 6.5,
+        "dur": 1.8,
+        "from": 1,
+        "to": 0
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Which centre is bigger?"
+        },
+        {
+          "t": 6.5,
+          "line": "They are identical.",
+          "fade": 0.5
+        },
+        {
+          "t": 7.3,
+          "sub": "Only the neighbours changed."
+        }
+      ],
+      "end": 9.5
+    },
+    {
+      "slug": "kanizsa",
+      "piece": "the kanizsa triangle",
+      "mode": "dark",
+      "dur": 12,
+      "plate": false,
+      "sweep": {
+        "at": 6.5,
+        "dur": 2,
+        "from": 1,
+        "to": 0
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Do you see a triangle?"
+        },
+        {
+          "t": 6.5,
+          "line": "Nothing was ever drawn.",
+          "sub": "",
+          "fade": 0.5
+        },
+        {
+          "t": 7.4,
+          "sub": "You supplied the edges."
+        }
+      ],
+      "end": 9.5
+    },
+    {
+      "slug": "muller-lyer",
+      "piece": "the muller-lyer arrows",
+      "mode": "dark",
+      "dur": 12,
+      "plate": false,
+      "sweep": {
+        "at": 6.5,
+        "dur": 1.8,
+        "from": 1,
+        "to": 0
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Which shaft is longer?"
+        },
+        {
+          "t": 6.5,
+          "line": "They are the same.",
+          "fade": 0.5
+        },
+        {
+          "t": 7.3,
+          "sub": "Only the fins changed."
+        }
+      ],
+      "end": 9.5
+    },
+    {
+      "slug": "ponzo",
+      "piece": "the ponzo rails",
+      "mode": "dark",
+      "dur": 12,
+      "plate": false,
+      "sweep": {
+        "at": 6.5,
+        "dur": 1.8,
+        "from": 1,
+        "to": 0
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Which bar is longer?"
+        },
+        {
+          "t": 6.5,
+          "line": "They are the same.",
+          "fade": 0.5
+        },
+        {
+          "t": 7.3,
+          "sub": "The rails did the work."
+        }
+      ],
+      "end": 9.5
+    }
+  ]
+}

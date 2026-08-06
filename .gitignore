@@ -7,3 +7,5 @@ shorts/frames/
 shorts/out/
 shorts/verify_*.png
 shorts/package-lock.json
+shorts/build/
+shorts/stills/
