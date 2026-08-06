@@ -1,59 +1,9 @@
 # SESSION_STATE — Photon to Phenomenology
 
-Last Updated: 2026-08-05 (shorts engine + 9 pieces staged; release-gated)
+Last Updated: 2026-08-05 (shorts batch 1 staged; release-gated)
 
 Interactive vision-science series after Stephen Palmer, *Vision Science: Photons
 to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`.
-
----
-
-## 2026-08-05 EXIT (2 of 2) — shorts engine extracted, series at 9 (NOTHING POSTED)
-
-Snapshot: `SESSION_STATE_v_2026-08-05_pre_engine.md`. Commit `f8c2c42`.
-Trigger: Cia, "re render / we need many more".
-
-### Two sessions in this repo today
-The **Release pipeline lane** (ciamac-gallery-stage worktree) built v2 (`10430b7`)
-and caught a real v1 defect: the MAE countdown sat on the rotating spiral arms.
-This session then took the engine extraction that lane had proposed, and told it
-so via send_message, to avoid both lanes writing shorts/ at once. That lane keeps
-the release side (staging conventions, X gating, copy, YT workbench).
-
-### Done (evidence)
-- **`shorts/engine/short.mjs` + `shorts.config.json` + `draws/<slug>.js`.** Engine
-  owns layout law, beat runner, countdown, end card, veil. A piece is a draw
-  function plus a config entry. v2's band law and field-coloured veil carried over
-  unchanged; `verify_layout.mjs` is the pre-render gate.
-- **9 pieces, up from 3.** New: cafe-wall, cornsweet, ebbinghaus, kanizsa,
-  muller-lyer, ponzo, lifted from the live pages so stimulus params are the tuned
-  ones. The engine's sweep scalar IS the parameter the viewer drags there.
-- **3 defects caught by eye before rendering** (all new pieces): cafe wall had no
-  wedge (square tiles + 0.6-tile shift), cafe wall's clipped top row floated,
-  Ebbinghaus ran off the left edge at 1080. All fixed and re-verified.
-- **All 9 PASS `verify_layout.mjs`**; all 9 rendered 1080x1920 yuv420p, 9.2 MB
-  total; reveal frames spot-checked from the ENCODED files.
-- **Staged both lanes as master v3.0**, v2 archived not deleted:
-  `~/Movies/ciamac-youtube/to-be-released/Photon to Phenomenology - <Piece> - master v3.0.mp4`
-  (v2 -> `_superseded_photon_v2/`), and
-  `~/Movies/ciamac-x/to-post/Photon_-_<Piece>_-_20260805_v3/` with
-  POSTING_METADATA.json, copy drafted, all under 280 chars (v2 -> `_superseded_v2/`).
-- **Photos album "Photon Shorts v3"** holds all 9 for phone review. Earlier albums
-  from today hold superseded cuts; the v3 album is the one to watch.
-
-### Pending (all Cia gates)
-- **NOTHING UPLOADED, NOTHING POSTED.** YT release via the workbench; X needs BOTH
-  lane activation (X is still parked in canon) AND per-piece go.
-- Cia's felt-effect verdict on the 9. That verdict is the input to which pieces
-  ship and in what order.
-- Standing: D-0071 port of the 4 sandbox graphs; the 2026-06-23 nav/type pass is
-  still NOT deployed; AUDIT.html pass.
-- BOOK_OF_ILLUSIONS_TOC_v1 designs 40 pieces; 9 shorts exist against it.
-
-### Fragile
-- capture.mjs and verify_layout.mjs pin the chromium-1228 path under
-  ~/Library/Caches/ms-playwright. Chrome needs the sandbox OFF (singleton socket).
-- `shorts/build/` and `shorts/stills/` are generated and gitignored. The v2 HTML
-  pages remain on disk untouched; the engine does not read them.
 
 ---
 
