@@ -7,6 +7,53 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-08-05 EXIT (4 of 4) - sound, voice, end card; series at 19 with audio
+
+Commit `5e06c08`. Trigger: Cia, "lets work on the presentation / music so the
+viewer knows it has started / a voice that says what to do / at the end we want
+people to go to the page".
+
+### Done
+- **photon.ciamac.com is LIVE** and is the destination on every end card.
+  `ciamac.com/photon/` was 404, so an end card pointing there would have been a
+  dead link on 19 videos. Domain added to the Vercel project and verified 200
+  BEFORE anything rendered against it.
+- **Procedural music bed** (`engine/music.py`): open bell at t=0 (the
+  it-has-started signal), quiet breathing fifth, reveal bell, close lift.
+  Synthesised, so zero Content ID exposure and it regenerates at any length.
+  Nothing rhythmic by design: a pulse would pull the eye off the figure.
+- **Voice = Cia's local clone** (`engine/vo.py`, Qwen3-TTS + ref/voice_cia.wav,
+  `.venv-mlx`, sandbox OFF). NOT ElevenLabs (being cancelled). Verified as his
+  voice by F0: 135 Hz ref vs 124 Hz generated. 42 lines. The `Voice: af_heart`
+  log line is cosmetic, not a fallback.
+- **Timing inverted, and this caught a real defect.** Authoring end/dur by hand
+  put 12 of 19 reveal lines PAST their own end card. Now the build derives end
+  and dur from the measured VO. The 3 constants are duplicated in short.mjs and
+  music.py and are compared BY PARSING BOTH FILES (an earlier check re-typed the
+  numbers and only proved its own arithmetic, while music.py was still at 1.3).
+- **Progress hairline** at the bottom edge: music cannot be the only start
+  signal when most short-form is watched muted.
+- All 19 re-rendered as **v4, h264/aac 1080x1920 48k stereo, 5.7 min, 20.3 MB**,
+  every track matching picture to within 20ms. Staged both lanes as master v4.0
+  (v3 archived). Photos album **"Photon Shorts v4 sound"**. Contact sheet now
+  plays with sound and reports true durations.
+
+### Judgement calls Cia may want to reverse
+- **The close VO does not speak the URL.** The type carries it for ~6s and a
+  spoken domain risks mispronouncing his name; whisper could not resolve the
+  three takes. Alternates in `audio/vo/_alt/`.
+- **Pieces got longer** (12s to ~17s typical) because the voice needs the room.
+  That is a retention cost on Shorts. Shortening the close line only bought 0.5s,
+  so the padding was trimmed instead.
+
+### Pending (all Cia gates)
+- NOTHING UPLOADED, NOTHING POSTED. X still needs lane activation AND a per-piece go.
+- Cia's felt-effect verdict, now including whether the voice and bed are right.
+- Part VII of the spine (attention) is the only gap: change blindness,
+  inattentional blindness, pop-out.
+
+---
+
 ## 2026-08-05 EXIT (3 of 3) — ten more pieces, series at 19 (NOTHING POSTED)
 
 Commit `8986825`. Trigger: Cia, "make 10 more if you can".
