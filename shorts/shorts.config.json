@@ -50,7 +50,24 @@
         }
       ],
       "end": 16,
-      "note": "10s adaptation is the floor. Shorter produces an afterimage too faint to notice on a phone, which reads as a broken piece rather than a subtle one."
+      "note": "10s adaptation is the floor. Shorter produces an afterimage too faint to notice on a phone, which reads as a broken piece rather than a subtle one.",
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Stare at the dot. Don't look away."
+        },
+        {
+          "t": 10.4,
+          "say": "Keep going."
+        },
+        {
+          "t": 12.4,
+          "say": "That rose disc is not on the screen. Your eyes made it."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "scintillating-grid",
@@ -80,7 +97,20 @@
         }
       ],
       "end": 10.5,
-      "note": "No adaptation floor; scintillation is immediate. 7.5s is enough to actually try counting before the answer lands."
+      "note": "No adaptation floor; scintillation is immediate. 7.5s is enough to actually try counting before the answer lands.",
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Count the black dots."
+        },
+        {
+          "t": 7.7,
+          "say": "There are none. Every disc is the same grey."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "motion-aftereffect",
@@ -119,7 +149,28 @@
         }
       ],
       "end": 19,
-      "note": "11.8s of rotation is the shortest that still lands. Below ~10s a viewer may see nothing and conclude the piece is broken."
+      "note": "11.8s of rotation is the shortest that still lands. Below ~10s a viewer may see nothing and conclude the piece is broken.",
+      "vo": [
+        {
+          "t": 0.5,
+          "say": "Keep your eyes on the centre dot."
+        },
+        {
+          "t": 2.6,
+          "say": "Hold it."
+        },
+        {
+          "t": 13.2,
+          "say": "Now. Nothing on screen is moving."
+        },
+        {
+          "t": 15.7,
+          "say": "The drift is yours."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "cafe-wall",
@@ -148,7 +199,20 @@
           "sub": "The tiles are just offset."
         }
       ],
-      "end": 10.5
+      "end": 10.5,
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Do these rows slope?"
+        },
+        {
+          "t": 7.7,
+          "say": "Every line is level. The tiles are only offset."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "cornsweet",
@@ -178,7 +242,20 @@
         }
       ],
       "end": 10.5,
-      "note": "Sweep runs 0 -> 1: the occluder grows over the seam, hiding the cusp, and the two halves snap to one grey."
+      "note": "Sweep runs 0 -> 1: the occluder grows over the seam, hiding the cusp, and the two halves snap to one grey.",
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Which half is lighter?"
+        },
+        {
+          "t": 7.2,
+          "say": "Neither. Cover the seam and they match."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "ebbinghaus",
@@ -207,7 +284,20 @@
           "sub": "Only the neighbours changed."
         }
       ],
-      "end": 9.5
+      "end": 9.5,
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Which centre circle is bigger?"
+        },
+        {
+          "t": 6.7,
+          "say": "They're identical. Only the neighbours changed."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "kanizsa",
@@ -237,7 +327,20 @@
           "sub": "You supplied the edges."
         }
       ],
-      "end": 9.5
+      "end": 9.5,
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Do you see a triangle?"
+        },
+        {
+          "t": 6.7,
+          "say": "Nothing was ever drawn there. You supplied the edges."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "muller-lyer",
@@ -266,7 +369,20 @@
           "sub": "Only the fins changed."
         }
       ],
-      "end": 9.5
+      "end": 9.5,
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Which shaft is longer?"
+        },
+        {
+          "t": 6.7,
+          "say": "The same. Only the fins changed."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "ponzo",
@@ -295,7 +411,20 @@
           "sub": "The rails did the work."
         }
       ],
-      "end": 9.5
+      "end": 9.5,
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Which bar is longer?"
+        },
+        {
+          "t": 6.7,
+          "say": "The same. The rails did all the work."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "simultaneous-contrast",
@@ -324,7 +453,20 @@
           "sub": "Only the surrounds differ."
         }
       ],
-      "end": 9.5
+      "end": 9.5,
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Which grey square is lighter?"
+        },
+        {
+          "t": 6.7,
+          "say": "Neither. They are one grey."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "whites-illusion",
@@ -354,7 +496,20 @@
         }
       ],
       "end": 9.5,
-      "note": "The grey on the dark stripe reads LIGHTER, the opposite of simultaneous contrast. That contradiction is the piece."
+      "note": "The grey on the dark stripe reads LIGHTER, the opposite of simultaneous contrast. That contradiction is the piece.",
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Which grey bar is lighter?"
+        },
+        {
+          "t": 6.7,
+          "say": "The same grey. This one breaks the usual rule."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "mach-bands",
@@ -388,7 +543,20 @@
           "sub": "Separated, they vanish."
         }
       ],
-      "end": 9.5
+      "end": 9.5,
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Look at the edges between the steps."
+        },
+        {
+          "t": 6.7,
+          "say": "Every step is flat. The scallops are yours."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "contrast-sensitivity",
@@ -418,7 +586,20 @@
         }
       ],
       "end": 9.5,
-      "note": "Sweep runs 0 -> 1: a constant-contrast rule fades IN at the reveal. The bars die at different heights along it, so the arc is the viewer's envelope, not the chart's."
+      "note": "Sweep runs 0 -> 1: a constant-contrast rule fades IN at the reveal. The bars die at different heights along it, so the arc is the viewer's envelope, not the chart's.",
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Watch where the bars disappear."
+        },
+        {
+          "t": 6.7,
+          "say": "You see an arc. Contrast is equal along that line."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "troxler",
@@ -452,7 +633,20 @@
         }
       ],
       "end": 12.5,
-      "note": "No sweep by design. The frame is genuinely unchanging; the fading is entirely in the viewer."
+      "note": "No sweep by design. The frame is genuinely unchanging; the fading is entirely in the viewer.",
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Hold the cross. Don't move your eyes."
+        },
+        {
+          "t": 9.2,
+          "say": "The colours faded. Nothing on screen changed."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "peripheral-drift",
@@ -476,7 +670,20 @@
         }
       ],
       "end": 10.5,
-      "note": "Original staging. The famous drifting images are Kitaoka's artwork; the phenomenon is public record, his pictures are not."
+      "note": "Original staging. The famous drifting images are Kitaoka's artwork; the phenomenon is public record, his pictures are not.",
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Let your eyes wander across it."
+        },
+        {
+          "t": 7.7,
+          "say": "The rings seem to turn. Nothing here is moving."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "shepard-tables",
@@ -505,7 +712,20 @@
           "sub": "Nobody believes the overlay."
         }
       ],
-      "end": 10.5
+      "end": 10.5,
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Are these two table tops the same?"
+        },
+        {
+          "t": 6.7,
+          "say": "Congruent. Watch the overlay."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "necker-cube",
@@ -534,7 +754,20 @@
           "sub": "You picked. Then repicked."
         }
       ],
-      "end": 9.5
+      "end": 9.5,
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Which face is nearer?"
+        },
+        {
+          "t": 6.7,
+          "say": "The drawing never said. You chose."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "rubin-vase",
@@ -563,7 +796,20 @@
           "sub": "You cannot see both at once."
         }
       ],
-      "end": 9.5
+      "end": 9.5,
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "A vase, or two faces?"
+        },
+        {
+          "t": 6.7,
+          "say": "One contour, two objects. You can't see both at once."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     },
     {
       "slug": "barber-pole",
@@ -592,7 +838,21 @@
           "sub": "Only the aperture did."
         }
       ],
-      "end": 10.5
+      "end": 10.5,
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Which way are the stripes moving?"
+        },
+        {
+          "t": 7.2,
+          "say": "They never changed. Only the opening did."
+        }
+      ],
+      "voClose": {
+        "say": "There are nineteen of these. All of them interactive, on the site."
+      }
     }
-  ]
+  ],
+  "_close": "The close VO deliberately does NOT speak the URL. The domain is on screen for the whole end card, which is how anyone actually reads it on a phone, and a spoken domain risks mispronouncing his name. Three spoken-URL takes are kept in audio/vo/_alt/ if that call is reversed."
 }

@@ -79,6 +79,14 @@ function page(cfg, drawSrc) {
     letter-spacing:0.26em;text-transform:uppercase;color:${pal.faint}}
   #close3{top:1090px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:28px;
     letter-spacing:0.10em;color:${pal.strong}}
+  /* Progress hairline. Most short-form is watched MUTED, so music cannot be the
+     only signal that the piece has started. A line that is already moving in
+     the first frames says "this is playing, not a still" without sound and
+     without competing with the stimulus. It sits at the very bottom edge, well
+     clear of the foot band. */
+  #prog{position:fixed;left:0;bottom:0;width:${LAYOUT.W}px;height:3px;
+    background:rgba(${cfg.mode === 'light' ? '12,11,9' : '232,224,208'},0.10)}
+  #prog i{display:block;height:100%;width:0;background:${pal.dim}}
 </style>
 </head>
 <body>
@@ -91,8 +99,9 @@ function page(cfg, drawSrc) {
 <div class="t" id="count"></div>
 <div id="veil"></div>
 <div class="t" id="close1">${cfg.close || 'Vision is not recording,<br>it is construction.'}</div>
-<div class="t" id="close2">Photon to Phenomenology</div>
-<div class="t" id="close3">ciamac.com</div>
+<div class="t" id="close2">All ${cfg.seriesCount || 19}, interactive</div>
+<div class="t" id="close3">photon.ciamac.com</div>
+<div id="prog"><i></i></div>
 <script>
 "use strict";
 const CFG = ${JSON.stringify({ ...cfg, fps, frames }, null, 2)};
@@ -159,8 +168,13 @@ window.seek = function (f) {
 
   const endFade = fadeIn(t, CFG.end, CFG.endFade || 1.1);
   runText(t, endFade);
+  // Runs the whole piece including the end card, so the viewer can see how much
+  // is left while the closing lines are up.
+  document.querySelector('#prog i').style.width = (100 * f / (CFG.frames - 1)) + '%';
   el('plate').style.opacity = ${cfg.plate ? 0.92 : 0} * (1 - endFade);
-  el('veil').style.opacity = endFade * 0.94;
+  // 0.985, not 0.94: at 0.94 the figure ghosted through the end card at about 6%
+  // and read as a rendering artifact rather than as a deliberate dissolve.
+  el('veil').style.opacity = endFade * 0.985;
   for (const id of ['close1', 'close2', 'close3']) el(id).style.opacity = endFade;
 };
 window.seek(0);
@@ -176,15 +190,53 @@ const only = process.argv.slice(2);
 const outDir = resolve(ROOT, 'build');
 if (!existsSync(outDir)) mkdirSync(outDir, { recursive: true });
 
+// Timing is DERIVED from the measured voice-over, never authored.
+//
+// The first pass set `end` and `dur` by hand and then rendered the VO against
+// them; 12 of 19 reveal lines ran past their own end card and would have been
+// cut off mid-sentence. The audio is the thing with a real duration, so it is
+// the authority: `end` in the config is now the EARLIEST the end card may start
+// (an editorial floor), and the build pushes it later if the voice needs the
+// room, then sizes the piece to fit the spoken close.
+//
+// Change a line of copy, re-render its VO, rebuild: the timing corrects itself.
+const voManifest = (() => {
+  const p = resolve(ROOT, 'audio', 'vo', 'manifest.json');
+  return existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : null;
+})();
+
+const PAD_AFTER_VO = 0.6;    // beat of silence after the last reveal line
+const PAD_AFTER_CLOSE = 0.9; // dwell on the URL after the close line ends
+const CLOSE_IN = 0.5;        // close line starts this far into the end card
+// NOTE: these three constants are duplicated in engine/music.py and MUST match.
+// If they drift, the mixed audio is a different length from the picture and the
+// whole series goes out of sync.
+
+function fitTiming(cfg) {
+  if (!voManifest) return { ...cfg, voStart: CLOSE_IN };
+  let lastVoEnd = 0;
+  (cfg.vo || []).forEach((v, i) => {
+    const e = voManifest[`${cfg.slug}_${i}`];
+    if (e) lastVoEnd = Math.max(lastVoEnd, v.t + e.dur);
+  });
+  const closeDur = (voManifest._close || { dur: 0 }).dur;
+  const end = Math.max(cfg.end, +(lastVoEnd + PAD_AFTER_VO).toFixed(2));
+  const dur = +(end + CLOSE_IN + closeDur + PAD_AFTER_CLOSE).toFixed(2);
+  return { ...cfg, end, dur, authoredEnd: cfg.end, authoredDur: cfg.dur };
+}
+
 let n = 0;
-for (const cfg of config.pieces) {
+for (let cfg of config.pieces) {
   if (cfg.enabled === false) continue;
   if (only.length && !only.includes(cfg.slug)) continue;
+  cfg = fitTiming(cfg);
   const drawPath = resolve(ROOT, 'draws', `${cfg.slug}.js`);
   if (!existsSync(drawPath)) { console.error(`MISSING draw: draws/${cfg.slug}.js`); process.exitCode = 1; continue; }
   const html = page(cfg, readFileSync(drawPath, 'utf8'));
   writeFileSync(resolve(outDir, `${cfg.slug}.html`), html);
-  console.log(`built build/${cfg.slug}.html  ${cfg.dur}s  ${Math.round(cfg.dur * (cfg.fps || 30))} frames`);
+  const pushed = cfg.authoredEnd !== undefined && cfg.end > cfg.authoredEnd
+    ? `  (end pushed ${cfg.authoredEnd} -> ${cfg.end} to clear the voice)` : '';
+  console.log(`built build/${cfg.slug}.html  ${cfg.dur}s  ${Math.round(cfg.dur * (cfg.fps || 30))} frames${pushed}`);
   n++;
 }
 console.log(`\n${n} page(s) built`);

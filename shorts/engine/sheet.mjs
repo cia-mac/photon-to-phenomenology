@@ -11,6 +11,12 @@
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync, statSync } from 'fs';
 import { execFileSync } from 'child_process';
+
+// Real duration, probed from the encoded file. The config's `dur` is only the
+// authored floor now: engine/short.mjs stretches each piece to fit its measured
+// voice-over, so reading `dur` here reported 4.3 min for a 5.7 min series.
+const realDur = f => parseFloat(execFileSync('ffprobe',
+  ['-v','error','-show_entries','format=duration','-of','csv=p=0', f]).toString().trim());
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -62,7 +68,7 @@ let totalSec = 0, totalBytes = 0, n = 0;
 const card = slug => {
   const p = bySlug[slug];
   if (!p) return `<div class="card missing"><div class="pad">Missing from config: ${slug}</div></div>`;
-  const src = resolve(ROOT, 'out', `${slug}_short_v3.mp4`);
+  const src = resolve(ROOT, 'out', `${slug}_short_v4.mp4`);
   if (!existsSync(src)) return `<div class="card missing"><div class="pad">Not rendered: ${slug}</div></div>`;
   copyFileSync(src, resolve(MEDIA, `${slug}.mp4`));
   // A poster per card. Without one every tile is black until it is played, and
@@ -75,17 +81,18 @@ const card = slug => {
   execFileSync('ffmpeg', ['-y', '-v', 'error', '-ss', String(posterAt.toFixed(2)),
     '-i', src, '-frames:v', '1', '-vf', 'scale=540:-1', '-q:v', '4', poster]);
   const bytes = statSync(src).size;
-  totalSec += p.dur; totalBytes += bytes; n++;
+  const secs = realDur(src);
+  totalSec += secs; totalBytes += bytes; n++;
   const ask = (p.beats.find(b => b.line) || {}).line || '';
   const rev = [...p.beats].reverse().find(b => b.line && b.line !== ask);
   const sub = [...p.beats].reverse().find(b => b.sub);
   return `
       <figure class="card" data-slug="${slug}">
         <div class="frame">
-          <video src="media/${slug}.mp4" poster="media/${slug}.jpg" muted playsinline
+          <video src="media/${slug}.mp4" poster="media/${slug}.jpg" playsinline
                  preload="none" loop tabindex="0" aria-label="${p.piece}"></video>
           <button class="play" aria-label="Play ${p.piece}"><span></span></button>
-          <span class="dur">${p.dur}s</span>
+          <span class="dur">${secs.toFixed(0)}s</span>
         </div>
         <figcaption>
           <h3>${p.piece}</h3>
@@ -212,7 +219,7 @@ ${sections}
 <nav class="bar"><div class="wrap">
   <button id="all">Play all</button>
   <button id="stop">Stop</button>
-  <span class="spacer">Tap any piece to play. Silent by design.</span>
+  <span class="spacer">Tap any piece to play. Sound on: each piece has a voice.</span>
 </div></nav>
 
 <script>
