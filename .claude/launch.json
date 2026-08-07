@@ -4,8 +4,26 @@
     {
       "name": "photon",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4317", "--directory", "public"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4317",
+        "--directory",
+        "public"
+      ],
       "port": 4317
+    },
+    {
+      "name": "photon-sheet",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4319",
+        "--directory",
+        "shorts/sheet"
+      ],
+      "port": 4319
     }
   ]
 }
