@@ -93,7 +93,7 @@ const card = slug => {
   return `
       <figure class="card" data-slug="${slug}">
         <div class="frame">
-          <video src="media/${slug}.mp4" poster="media/${slug}.jpg" playsinline
+          <video src="/shorts/media/${slug}.mp4" poster="/shorts/media/${slug}.jpg" playsinline
                  preload="none" loop tabindex="0" aria-label="${p.piece}"></video>
           <button class="play" aria-label="Play ${p.piece}"><span></span></button>
           <span class="dur">${secs.toFixed(0)}s</span>
