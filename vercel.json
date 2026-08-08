@@ -3,5 +3,12 @@
   "framework": null,
   "outputDirectory": "public",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/photon",
+      "permanent": false
+    }
+  ]
 }

@@ -1,0 +1,8 @@
+# The deployed site is public/ only. Without this the CLI uploaded the whole
+# shorts pipeline: 670 MB and roughly ten thousand PNG frames, which tripped
+# Vercel's 5000-file upload limit and failed the deploy.
+shorts/
+scripts/
+tools/
+*.md
+.claude/
