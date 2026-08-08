@@ -99,7 +99,7 @@ function page(cfg, drawSrc) {
 <div class="t" id="count"></div>
 <div id="veil"></div>
 <div class="t" id="close1">${cfg.close || 'Vision is not recording,<br>it is construction.'}</div>
-<div class="t" id="close2">All ${cfg.seriesCount || 19}, interactive</div>
+<div class="t" id="close2">All ${cfg.seriesCount || 22}, interactive</div>
 <div class="t" id="close3">photon.ciamac.com</div>
 <div id="prog"><i></i></div>
 <script>
@@ -205,9 +205,15 @@ const voManifest = (() => {
   return existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : null;
 })();
 
-const PAD_AFTER_VO = 0.6;    // beat of silence after the last reveal line
+const PAD_AFTER_VO = 0.5;    // beat of silence after the last reveal line
 const PAD_AFTER_CLOSE = 0.9; // dwell on the URL after the close line ends
 const CLOSE_IN = 0.5;        // close line starts this far into the end card
+// The SPOKEN close is gone. It cost 5.6s on every single piece, which on a
+// 16s short is a third of the runtime spent on a sentence nobody needs: the
+// URL is on screen the whole time, which is how anyone reads a domain anyway.
+// A piece with voClose:null gets a silent 2.2s card instead. That alone is the
+// single largest cut available, and it costs the work nothing.
+const SILENT_CARD = 2.2;
 // NOTE: these three constants are duplicated in engine/music.py and MUST match.
 // If they drift, the mixed audio is a different length from the picture and the
 // whole series goes out of sync.
@@ -219,9 +225,12 @@ function fitTiming(cfg) {
     const e = voManifest[`${cfg.slug}_${i}`];
     if (e) lastVoEnd = Math.max(lastVoEnd, v.t + e.dur);
   });
-  const closeDur = (voManifest._close || { dur: 0 }).dur;
+  const spoken = cfg.voClose && voManifest._close;
+  const closeDur = spoken ? voManifest._close.dur : 0;
   const end = Math.max(cfg.end, +(lastVoEnd + PAD_AFTER_VO).toFixed(2));
-  const dur = +(end + CLOSE_IN + closeDur + PAD_AFTER_CLOSE).toFixed(2);
+  const dur = spoken
+    ? +(end + CLOSE_IN + closeDur + PAD_AFTER_CLOSE).toFixed(2)
+    : +(end + SILENT_CARD).toFixed(2);
   return { ...cfg, end, dur, authoredEnd: cfg.end, authoredDur: cfg.dur };
 }
 

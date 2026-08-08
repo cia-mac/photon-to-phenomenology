@@ -19,13 +19,13 @@
       "dur": 20,
       "plate": false,
       "sweep": {
-        "at": 10,
+        "at": 7.0,
         "dur": 0.01,
         "from": 1,
         "to": 0
       },
       "countdown": {
-        "until": 10,
+        "until": 7.0,
         "from": 1.2
       },
       "beats": [
@@ -38,18 +38,18 @@
           "sub": "Do not look away."
         },
         {
-          "t": 10,
+          "t": 8.2,
           "line": "Keep staring.",
           "sub": "",
           "fade": 0.4
         },
         {
-          "t": 12,
+          "t": 8.2,
           "line": "The rose disc is not there.",
           "fade": 0.7
         }
       ],
-      "end": 16,
+      "end": 9.6,
       "note": "10s adaptation is the floor. Shorter produces an afterimage too faint to notice on a phone, which reads as a broken piece rather than a subtle one.",
       "vo": [
         {
@@ -57,17 +57,12 @@
           "say": "Stare at the dot. Don't look away."
         },
         {
-          "t": 10.4,
-          "say": "Keep going."
-        },
-        {
-          "t": 12.4,
+          "t": 7.2,
           "say": "That rose disc is not on the screen. Your eyes made it."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null,
+      "floor": "7.0s is a PERCEPTUAL floor, not an editorial choice. Below this the effect is too weak to notice and the piece reads as broken rather than subtle."
     },
     {
       "slug": "scintillating-grid",
@@ -76,8 +71,8 @@
       "dur": 13,
       "plate": true,
       "sweep": {
-        "at": 1.5,
-        "dur": 5.5,
+        "at": 3.2,
+        "dur": 1.2,
         "from": 1,
         "to": 0
       },
@@ -87,30 +82,28 @@
           "line": "Count the black dots."
         },
         {
-          "t": 7.5,
+          "t": 3.2,
           "line": "There are none.",
-          "fade": 0.5
+          "fade": 0.4
         },
         {
-          "t": 8.2,
-          "sub": "Every disc is the same grey."
+          "t": 4.0,
+          "sub": "Every disc is one grey."
         }
       ],
-      "end": 10.5,
+      "end": 5.6,
       "note": "No adaptation floor; scintillation is immediate. 7.5s is enough to actually try counting before the answer lands.",
       "vo": [
         {
-          "t": 0.6,
+          "t": 0.5,
           "say": "Count the black dots."
         },
         {
-          "t": 7.7,
-          "say": "There are none. Every disc is the same grey."
+          "t": 3.4000000000000004,
+          "say": "None. Every disc is one grey."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null
     },
     {
       "slug": "motion-aftereffect",
@@ -119,13 +112,13 @@
       "dur": 22,
       "plate": false,
       "params": {
-        "stop": 13,
+        "stop": 8.0,
         "omega": 2.6,
         "ramp0": 1.2,
         "ramp1": 2.2
       },
       "countdown": {
-        "until": 13,
+        "until": 8.0,
         "from": 2.6
       },
       "beats": [
@@ -139,16 +132,16 @@
           "fade": 0.3
         },
         {
-          "t": 13,
+          "t": 9.2,
           "line": "Now. Nothing moves.",
           "fade": 0.4
         },
         {
-          "t": 15.5,
+          "t": 9.2,
           "line": "The drift is you."
         }
       ],
-      "end": 19,
+      "end": 10.6,
       "note": "11.8s of rotation is the shortest that still lands. Below ~10s a viewer may see nothing and conclude the piece is broken.",
       "vo": [
         {
@@ -156,21 +149,12 @@
           "say": "Keep your eyes on the centre dot."
         },
         {
-          "t": 2.6,
-          "say": "Hold it."
-        },
-        {
-          "t": 13.2,
-          "say": "Now. Nothing on screen is moving."
-        },
-        {
-          "t": 15.7,
+          "t": 8.2,
           "say": "The drift is yours."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null,
+      "floor": "8.0s is a PERCEPTUAL floor, not an editorial choice. Below this the effect is too weak to notice and the piece reads as broken rather than subtle."
     },
     {
       "slug": "cafe-wall",
@@ -179,8 +163,8 @@
       "dur": 13,
       "plate": false,
       "sweep": {
-        "at": 7.5,
-        "dur": 1.8,
+        "at": 3.2,
+        "dur": 1.2,
         "from": 0.5,
         "to": 0
       },
@@ -190,29 +174,27 @@
           "line": "Are these rows sloping?"
         },
         {
-          "t": 7.5,
+          "t": 3.2,
           "line": "Every line is level.",
-          "fade": 0.5
+          "fade": 0.4
         },
         {
-          "t": 8.3,
-          "sub": "The tiles are just offset."
+          "t": 4.0,
+          "sub": "The tiles are only offset."
         }
       ],
-      "end": 10.5,
+      "end": 5.6,
       "vo": [
         {
-          "t": 0.6,
-          "say": "Do these rows slope?"
+          "t": 0.5,
+          "say": "Are these rows sloping?"
         },
         {
-          "t": 7.7,
-          "say": "Every line is level. The tiles are only offset."
+          "t": 3.4000000000000004,
+          "say": "Dead level. The tiles are offset."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null
     },
     {
       "slug": "cornsweet",
@@ -221,8 +203,8 @@
       "dur": 13,
       "plate": false,
       "sweep": {
-        "at": 7,
-        "dur": 1.6,
+        "at": 3.2,
+        "dur": 1.2,
         "from": 0,
         "to": 1
       },
@@ -232,30 +214,28 @@
           "line": "Which half is lighter?"
         },
         {
-          "t": 7,
+          "t": 3.2,
           "line": "Neither. They match.",
-          "fade": 0.5
+          "fade": 0.4
         },
         {
-          "t": 7.8,
+          "t": 4.0,
           "sub": "Only the seam differs."
         }
       ],
-      "end": 10.5,
+      "end": 5.6,
       "note": "Sweep runs 0 -> 1: the occluder grows over the seam, hiding the cusp, and the two halves snap to one grey.",
       "vo": [
         {
-          "t": 0.6,
+          "t": 0.5,
           "say": "Which half is lighter?"
         },
         {
-          "t": 7.2,
-          "say": "Neither. Cover the seam and they match."
+          "t": 3.4000000000000004,
+          "say": "Neither. Only the seam differs."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null
     },
     {
       "slug": "ebbinghaus",
@@ -264,8 +244,8 @@
       "dur": 12,
       "plate": false,
       "sweep": {
-        "at": 6.5,
-        "dur": 1.8,
+        "at": 3.2,
+        "dur": 1.2,
         "from": 1,
         "to": 0
       },
@@ -275,29 +255,27 @@
           "line": "Which centre is bigger?"
         },
         {
-          "t": 6.5,
+          "t": 3.2,
           "line": "They are identical.",
-          "fade": 0.5
+          "fade": 0.4
         },
         {
-          "t": 7.3,
+          "t": 4.0,
           "sub": "Only the neighbours changed."
         }
       ],
-      "end": 9.5,
+      "end": 5.6,
       "vo": [
         {
-          "t": 0.6,
+          "t": 0.5,
           "say": "Which centre circle is bigger?"
         },
         {
-          "t": 6.7,
-          "say": "They're identical. Only the neighbours changed."
+          "t": 3.4000000000000004,
+          "say": "Identical. Only the neighbours changed."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null
     },
     {
       "slug": "kanizsa",
@@ -306,8 +284,8 @@
       "dur": 12,
       "plate": false,
       "sweep": {
-        "at": 6.5,
-        "dur": 2,
+        "at": 3.2,
+        "dur": 1.2,
         "from": 1,
         "to": 0
       },
@@ -317,30 +295,27 @@
           "line": "Do you see a triangle?"
         },
         {
-          "t": 6.5,
+          "t": 3.2,
           "line": "Nothing was ever drawn.",
-          "sub": "",
-          "fade": 0.5
+          "fade": 0.4
         },
         {
-          "t": 7.4,
+          "t": 4.0,
           "sub": "You supplied the edges."
         }
       ],
-      "end": 9.5,
+      "end": 5.6,
       "vo": [
         {
-          "t": 0.6,
+          "t": 0.5,
           "say": "Do you see a triangle?"
         },
         {
-          "t": 6.7,
-          "say": "Nothing was ever drawn there. You supplied the edges."
+          "t": 3.4000000000000004,
+          "say": "Nothing was drawn. You supplied it."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null
     },
     {
       "slug": "muller-lyer",
@@ -349,8 +324,8 @@
       "dur": 12,
       "plate": false,
       "sweep": {
-        "at": 6.5,
-        "dur": 1.8,
+        "at": 3.2,
+        "dur": 1.2,
         "from": 1,
         "to": 0
       },
@@ -360,29 +335,27 @@
           "line": "Which shaft is longer?"
         },
         {
-          "t": 6.5,
+          "t": 3.2,
           "line": "They are the same.",
-          "fade": 0.5
+          "fade": 0.4
         },
         {
-          "t": 7.3,
+          "t": 4.0,
           "sub": "Only the fins changed."
         }
       ],
-      "end": 9.5,
+      "end": 5.6,
       "vo": [
         {
-          "t": 0.6,
+          "t": 0.5,
           "say": "Which shaft is longer?"
         },
         {
-          "t": 6.7,
+          "t": 3.4000000000000004,
           "say": "The same. Only the fins changed."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null
     },
     {
       "slug": "ponzo",
@@ -391,8 +364,8 @@
       "dur": 12,
       "plate": false,
       "sweep": {
-        "at": 6.5,
-        "dur": 1.8,
+        "at": 3.2,
+        "dur": 1.2,
         "from": 1,
         "to": 0
       },
@@ -402,29 +375,27 @@
           "line": "Which bar is longer?"
         },
         {
-          "t": 6.5,
+          "t": 3.2,
           "line": "They are the same.",
-          "fade": 0.5
+          "fade": 0.4
         },
         {
-          "t": 7.3,
+          "t": 4.0,
           "sub": "The rails did the work."
         }
       ],
-      "end": 9.5,
+      "end": 5.6,
       "vo": [
         {
-          "t": 0.6,
+          "t": 0.5,
           "say": "Which bar is longer?"
         },
         {
-          "t": 6.7,
-          "say": "The same. The rails did all the work."
+          "t": 3.4000000000000004,
+          "say": "The same. The rails did it."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null
     },
     {
       "slug": "simultaneous-contrast",
@@ -433,8 +404,8 @@
       "dur": 12,
       "plate": false,
       "sweep": {
-        "at": 6.5,
-        "dur": 1.8,
+        "at": 3.2,
+        "dur": 1.2,
         "from": 1,
         "to": 0
       },
@@ -444,29 +415,27 @@
           "line": "Which grey is lighter?"
         },
         {
-          "t": 6.5,
-          "line": "Neither. They are one grey.",
-          "fade": 0.5
+          "t": 3.2,
+          "line": "Neither. One grey.",
+          "fade": 0.4
         },
         {
-          "t": 7.3,
+          "t": 4.0,
           "sub": "Only the surrounds differ."
         }
       ],
-      "end": 9.5,
+      "end": 5.6,
       "vo": [
         {
-          "t": 0.6,
+          "t": 0.5,
           "say": "Which grey square is lighter?"
         },
         {
-          "t": 6.7,
-          "say": "Neither. They are one grey."
+          "t": 3.4000000000000004,
+          "say": "Neither. One grey."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null
     },
     {
       "slug": "whites-illusion",
@@ -475,8 +444,8 @@
       "dur": 12,
       "plate": false,
       "sweep": {
-        "at": 6.5,
-        "dur": 1.8,
+        "at": 3.2,
+        "dur": 1.2,
         "from": 1,
         "to": 0
       },
@@ -486,30 +455,28 @@
           "line": "Which grey bar is lighter?"
         },
         {
-          "t": 6.5,
-          "line": "They are the same grey.",
-          "fade": 0.5
+          "t": 3.2,
+          "line": "The same grey.",
+          "fade": 0.4
         },
         {
-          "t": 7.3,
+          "t": 4.0,
           "sub": "This one breaks the rule."
         }
       ],
-      "end": 9.5,
+      "end": 5.6,
       "note": "The grey on the dark stripe reads LIGHTER, the opposite of simultaneous contrast. That contradiction is the piece.",
       "vo": [
         {
-          "t": 0.6,
+          "t": 0.5,
           "say": "Which grey bar is lighter?"
         },
         {
-          "t": 6.7,
-          "say": "The same grey. This one breaks the usual rule."
+          "t": 3.4000000000000004,
+          "say": "The same. This breaks the rule."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null
     },
     {
       "slug": "mach-bands",
@@ -518,8 +485,8 @@
       "dur": 12,
       "plate": false,
       "sweep": {
-        "at": 6.5,
-        "dur": 1.8,
+        "at": 3.2,
+        "dur": 1.2,
         "from": 1,
         "to": 0
       },
@@ -529,34 +496,27 @@
           "line": "Look at the edges."
         },
         {
-          "t": 1.1,
-          "sub": "Each step is one flat tone."
+          "t": 3.2,
+          "line": "Every step is flat.",
+          "fade": 0.4
         },
         {
-          "t": 6.5,
-          "line": "The scallops are yours.",
-          "sub": "",
-          "fade": 0.5
-        },
-        {
-          "t": 7.4,
-          "sub": "Separated, they vanish."
+          "t": 4.0,
+          "sub": "The scallops are yours."
         }
       ],
-      "end": 9.5,
+      "end": 5.6,
       "vo": [
         {
-          "t": 0.6,
-          "say": "Look at the edges between the steps."
+          "t": 0.5,
+          "say": "Look at the edges between steps."
         },
         {
-          "t": 6.7,
-          "say": "Every step is flat. The scallops are yours."
+          "t": 3.4000000000000004,
+          "say": "Every step is flat."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null
     },
     {
       "slug": "contrast-sensitivity",
@@ -565,7 +525,7 @@
       "dur": 12,
       "plate": false,
       "sweep": {
-        "at": 6.5,
+        "at": 3.2,
         "dur": 1.2,
         "from": 0,
         "to": 1
@@ -576,30 +536,28 @@
           "line": "Where do the bars vanish?"
         },
         {
-          "t": 6.5,
+          "t": 3.2,
           "line": "You see an arc.",
-          "fade": 0.5
+          "fade": 0.4
         },
         {
-          "t": 7.3,
+          "t": 4.0,
           "sub": "The line is one contrast."
         }
       ],
-      "end": 9.5,
+      "end": 5.6,
       "note": "Sweep runs 0 -> 1: a constant-contrast rule fades IN at the reveal. The bars die at different heights along it, so the arc is the viewer's envelope, not the chart's.",
       "vo": [
         {
-          "t": 0.6,
-          "say": "Watch where the bars disappear."
+          "t": 0.5,
+          "say": "Watch where the bars vanish."
         },
         {
-          "t": 6.7,
-          "say": "You see an arc. Contrast is equal along that line."
+          "t": 3.4000000000000004,
+          "say": "That arc is your own eye."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null
     },
     {
       "slug": "troxler",
@@ -609,7 +567,7 @@
       "dur": 16,
       "plate": false,
       "countdown": {
-        "until": 9,
+        "until": 6.0,
         "from": 1.2
       },
       "beats": [
@@ -622,17 +580,17 @@
           "sub": "Do not move your eyes."
         },
         {
-          "t": 9,
+          "t": 6.0,
           "line": "The colours faded.",
           "sub": "",
           "fade": 0.5
         },
         {
-          "t": 9.9,
+          "t": 6.0,
           "sub": "Nothing on screen changed."
         }
       ],
-      "end": 12.5,
+      "end": 8.6,
       "note": "No sweep by design. The frame is genuinely unchanging; the fading is entirely in the viewer.",
       "vo": [
         {
@@ -640,13 +598,12 @@
           "say": "Hold the cross. Don't move your eyes."
         },
         {
-          "t": 9.2,
+          "t": 6.2,
           "say": "The colours faded. Nothing on screen changed."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null,
+      "floor": "6.0s is a PERCEPTUAL floor, not an editorial choice. Below this the effect is too weak to notice and the piece reads as broken rather than subtle."
     },
     {
       "slug": "peripheral-drift",
@@ -660,30 +617,28 @@
           "line": "Let your eyes wander."
         },
         {
-          "t": 7.5,
+          "t": 3.2,
           "line": "The rings seem to turn.",
-          "fade": 0.5
+          "fade": 0.4
         },
         {
-          "t": 8.3,
+          "t": 4.0,
           "sub": "Nothing here is moving."
         }
       ],
-      "end": 10.5,
+      "end": 5.6,
       "note": "Original staging. The famous drifting images are Kitaoka's artwork; the phenomenon is public record, his pictures are not.",
       "vo": [
         {
-          "t": 0.6,
-          "say": "Let your eyes wander across it."
+          "t": 0.5,
+          "say": "Let your eyes wander."
         },
         {
-          "t": 7.7,
-          "say": "The rings seem to turn. Nothing here is moving."
+          "t": 3.4000000000000004,
+          "say": "Nothing here is moving."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null
     },
     {
       "slug": "shepard-tables",
@@ -692,8 +647,8 @@
       "dur": 13,
       "plate": false,
       "sweep": {
-        "at": 6.5,
-        "dur": 2.2,
+        "at": 3.2,
+        "dur": 1.2,
         "from": 1,
         "to": 0
       },
@@ -703,29 +658,27 @@
           "line": "Are these two the same?"
         },
         {
-          "t": 6.5,
+          "t": 3.2,
           "line": "They are congruent.",
-          "fade": 0.5
+          "fade": 0.4
         },
         {
-          "t": 7.6,
+          "t": 4.0,
           "sub": "Nobody believes the overlay."
         }
       ],
-      "end": 10.5,
+      "end": 5.6,
       "vo": [
         {
-          "t": 0.6,
-          "say": "Are these two table tops the same?"
+          "t": 0.5,
+          "say": "Are these table tops the same?"
         },
         {
-          "t": 6.7,
-          "say": "Congruent. Watch the overlay."
+          "t": 3.4000000000000004,
+          "say": "Congruent. Watch."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null
     },
     {
       "slug": "necker-cube",
@@ -734,8 +687,8 @@
       "dur": 12,
       "plate": false,
       "sweep": {
-        "at": 6.5,
-        "dur": 1.8,
+        "at": 3.2,
+        "dur": 1.2,
         "from": 1,
         "to": 0
       },
@@ -745,29 +698,27 @@
           "line": "Which face is nearer?"
         },
         {
-          "t": 6.5,
+          "t": 3.2,
           "line": "The drawing never said.",
-          "fade": 0.5
+          "fade": 0.4
         },
         {
-          "t": 7.3,
+          "t": 4.0,
           "sub": "You picked. Then repicked."
         }
       ],
-      "end": 9.5,
+      "end": 5.6,
       "vo": [
         {
-          "t": 0.6,
+          "t": 0.5,
           "say": "Which face is nearer?"
         },
         {
-          "t": 6.7,
+          "t": 3.4000000000000004,
           "say": "The drawing never said. You chose."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null
     },
     {
       "slug": "rubin-vase",
@@ -776,8 +727,8 @@
       "dur": 12,
       "plate": false,
       "sweep": {
-        "at": 6.5,
-        "dur": 1.8,
+        "at": 3.2,
+        "dur": 1.2,
         "from": 1,
         "to": 0
       },
@@ -787,29 +738,27 @@
           "line": "A vase, or two faces?"
         },
         {
-          "t": 6.5,
+          "t": 3.2,
           "line": "One contour. Two objects.",
-          "fade": 0.5
+          "fade": 0.4
         },
         {
-          "t": 7.3,
+          "t": 4.0,
           "sub": "You cannot see both at once."
         }
       ],
-      "end": 9.5,
+      "end": 5.6,
       "vo": [
         {
-          "t": 0.6,
+          "t": 0.5,
           "say": "A vase, or two faces?"
         },
         {
-          "t": 6.7,
-          "say": "One contour, two objects. You can't see both at once."
+          "t": 3.4000000000000004,
+          "say": "One contour, two objects."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "voClose": null
     },
     {
       "slug": "barber-pole",
@@ -818,8 +767,8 @@
       "dur": 13,
       "plate": false,
       "sweep": {
-        "at": 7,
-        "dur": 1.6,
+        "at": 3.2,
+        "dur": 1.2,
         "from": 1,
         "to": 0
       },
@@ -829,29 +778,159 @@
           "line": "Which way is it moving?"
         },
         {
-          "t": 7,
+          "t": 3.2,
           "line": "The stripes never changed.",
-          "fade": 0.5
+          "fade": 0.4
         },
         {
-          "t": 7.9,
+          "t": 4.0,
           "sub": "Only the aperture did."
         }
       ],
-      "end": 10.5,
+      "end": 5.6,
       "vo": [
         {
-          "t": 0.6,
-          "say": "Which way are the stripes moving?"
+          "t": 0.5,
+          "say": "Which way is it moving?"
+        },
+        {
+          "t": 3.4000000000000004,
+          "say": "Only the opening changed."
+        }
+      ],
+      "voClose": null
+    },
+    {
+      "slug": "change-blindness",
+      "piece": "change blindness",
+      "mode": "dark",
+      "dur": 18,
+      "plate": true,
+      "sweep": {
+        "at": 6.0,
+        "dur": 1.2,
+        "from": 1,
+        "to": 0
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Something here keeps changing."
+        },
+        {
+          "t": 1.2,
+          "sub": "Find it."
+        },
+        {
+          "t": 6.0,
+          "line": "Now the blank is gone.",
+          "sub": "",
+          "fade": 0.5
         },
         {
           "t": 7.2,
-          "say": "They never changed. Only the opening did."
+          "sub": "It was always that obvious."
         }
       ],
-      "voClose": {
-        "say": "There are nineteen of these. All of them interactive, on the site."
-      }
+      "end": 8.6,
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Something in this picture keeps changing. Find it."
+        },
+        {
+          "t": 6.2,
+          "say": "It was always that obvious. The gap was hiding it."
+        }
+      ],
+      "voClose": null,
+      "note": "The blank IS the mechanism. A change normally announces itself with a local motion transient; the blank floods the field with transients so the one that matters stops standing out."
+    },
+    {
+      "slug": "inattentional-blindness",
+      "piece": "inattentional blindness",
+      "mode": "dark",
+      "dur": 18,
+      "plate": true,
+      "countdown": {
+        "until": 7.0,
+        "from": 1.4
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Count the pale discs."
+        },
+        {
+          "t": 1.2,
+          "sub": "Only the ones crossing the line."
+        },
+        {
+          "t": 8.2,
+          "line": "Did you see the teal bar?",
+          "sub": "",
+          "fade": 0.5
+        },
+        {
+          "t": 8.2,
+          "sub": "It crossed the whole frame."
+        }
+      ],
+      "end": 9.6,
+      "vo": [
+        {
+          "t": 0.6,
+          "say": "Count the pale discs crossing the line."
+        },
+        {
+          "t": 7.2,
+          "say": "It crossed the whole frame, in plain sight."
+        }
+      ],
+      "voClose": null,
+      "note": "No sweep by design: nothing is hidden. The intruder is fully visible the entire time, which is exactly the claim.",
+      "floor": "7.0s is a PERCEPTUAL floor, not an editorial choice. Below this the effect is too weak to notice and the piece reads as broken rather than subtle."
+    },
+    {
+      "slug": "visual-search",
+      "piece": "visual search",
+      "mode": "dark",
+      "dur": 16,
+      "plate": false,
+      "sweep": {
+        "at": 3.2,
+        "dur": 0.8,
+        "from": 1,
+        "to": 0
+      },
+      "beats": [
+        {
+          "t": 0.3,
+          "line": "Find the cream horizontal."
+        },
+        {
+          "t": 3.2,
+          "line": "There it is.",
+          "fade": 0.4
+        },
+        {
+          "t": 4.0,
+          "sub": "One colour, and it finds you."
+        }
+      ],
+      "end": 5.6,
+      "vo": [
+        {
+          "t": 0.5,
+          "say": "Find the cream horizontal bar."
+        },
+        {
+          "t": 3.4000000000000004,
+          "say": "One colour and it finds you."
+        }
+      ],
+      "voClose": null,
+      "note": "A single-feature difference arrives free no matter how many distractors. A conjunction of two features must be checked item by item."
     }
   ],
   "_close": "The close VO deliberately does NOT speak the URL. The domain is on screen for the whole end card, which is how anyone actually reads it on a phone, and a spoken domain risks mispronouncing his name. Three spoken-URL takes are kept in audio/vo/_alt/ if that call is reversed."

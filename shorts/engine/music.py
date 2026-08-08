@@ -44,7 +44,7 @@ MIX = os.path.join(SHORTS, "audio", "mix")
 os.makedirs(MIX, exist_ok=True)
 
 # Timing must match engine/short.mjs exactly or the audio drifts off the video.
-PAD_AFTER_VO, PAD_AFTER_CLOSE, CLOSE_IN = 0.6, 0.9, 0.5
+PAD_AFTER_VO, PAD_AFTER_CLOSE, CLOSE_IN, SILENT_CARD = 0.5, 0.9, 0.5, 2.2
 
 
 def fit(p):
@@ -53,8 +53,10 @@ def fit(p):
         e = vman.get(f"{p['slug']}_{i}")
         if e:
             last = max(last, v["t"] + e["dur"])
+    spoken = bool(p.get("voClose")) and "_close" in vman
     end = max(p["end"], round(last + PAD_AFTER_VO, 2))
-    dur = round(end + CLOSE_IN + vman["_close"]["dur"] + PAD_AFTER_CLOSE, 2)
+    dur = (round(end + CLOSE_IN + vman["_close"]["dur"] + PAD_AFTER_CLOSE, 2) if spoken
+           else round(end + SILENT_CARD, 2))
     return end, dur
 
 
@@ -132,7 +134,8 @@ def render(p):
         e = vman.get(f"{p['slug']}_{i}")
         if e:
             lines.append((v["t"], os.path.join(SHORTS, "audio", "vo", f"{p['slug']}_{i}.wav"), e["dur"]))
-    lines.append((end + CLOSE_IN, os.path.join(SHORTS, "audio", "vo", "_close.wav"), vman["_close"]["dur"]))
+    if p.get("voClose") and "_close" in vman:
+        lines.append((end + CLOSE_IN, os.path.join(SHORTS, "audio", "vo", "_close.wav"), vman["_close"]["dur"]))
 
     duck = [1.0] * N
     for t0, path, d in lines:

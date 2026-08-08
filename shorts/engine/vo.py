@@ -40,9 +40,12 @@ jobs = []
 for p in pieces:
     for i, v in enumerate(p.get("vo", [])):
         jobs.append((f"{p['slug']}_{i}", v["say"]))
-# One shared close, rendered once and reused by every piece.
-if not only:
-    jobs.append(("_close", pieces[0]["voClose"]["say"]))
+# One shared close, rendered once and reused by every piece. The spoken close
+# was dropped (it cost 5.6s on every short), so this only runs if some piece
+# still asks for one.
+close = next((p["voClose"]["say"] for p in pieces if p.get("voClose")), None)
+if not only and close:
+    jobs.append(("_close", close))
 
 os.chdir(VC)
 import numpy as np, soundfile as sf
@@ -79,8 +82,13 @@ def heard(path):
 
 def take_ok(path, text, dur):
     words = len(text.split())
-    if dur / max(words, 1) > MAX_S_PER_WORD:
-        return False, f"{dur/words:.2f}s per word"
+    # Seconds-per-word is meaningless on very short lines: "Congruent. Watch."
+    # is two words, and the sentence-final pause alone pushes it past any sane
+    # per-word rate. It re-rolled four times on a take that was fine. Below five
+    # words, judge on an absolute ceiling and let whisper do the real work.
+    too_long = (dur > 2.6) if words < 5 else (dur / words > MAX_S_PER_WORD)
+    if too_long:
+        return False, f"{dur:.2f}s for {words} words"
     h = heard(path)
     if h is None:
         return True, "duration only (no whisper)"
