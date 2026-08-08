@@ -17,7 +17,7 @@ actual spoken close instead of a guess.
 
 Needs the sandbox OFF (MLX/Metal).
 """
-import os, sys, json, glob, time, shutil
+import os, sys, json, glob, time, shutil, subprocess, re
 
 SHORTS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VC = os.path.expanduser("~/Developer/voice-clone")
@@ -25,9 +25,12 @@ OUT = os.path.join(SHORTS, "audio", "vo")
 os.makedirs(OUT, exist_ok=True)
 
 REPO = "mlx-community/Qwen3-TTS-12Hz-1.7B-Base-bf16"
-# 0.95 rather than the 0.92 used for the SnakePharm narration: these are
-# instructions to follow in real time, not narration to sit back in.
-SPEED, TEMP = 0.95, 0.5
+# 1.12. The first pass ran 0.95, i.e. SLOWER than natural, on the theory that an
+# instruction you have to follow while fixating wants room. Cia's verdict on
+# hearing it: too slow. These are short imperatives ("Stare at the dot"), not
+# narration, and a slow read of a short imperative sounds laboured rather than
+# careful. Faster also shortens every piece, which the end-card bloat needed.
+SPEED, TEMP = 1.12, 0.5
 
 cfg = json.load(open(os.path.join(SHORTS, "shorts.config.json")))
 only = sys.argv[1:]
@@ -52,18 +55,72 @@ MODEL = load_model(REPO)
 REF, REFTXT = "ref/voice_cia.wav", open("ref/voice_cia.txt").read().strip()
 print(f"model up in {time.time()-t0:.0f}s", file=sys.stderr, flush=True)
 
+# Qwen3-TTS intermittently returns a take with garbage appended: a four-word
+# question comes back four seconds long. It is not deterministic, so the same
+# prompt re-rolled usually comes back clean. Rather than listen to 42 files, gate
+# every take on two machine-checkable facts and re-roll the failures:
+#   1. seconds-per-word inside a sane band
+#   2. whisper hears the words that were asked for
+# This is the canon rule about enforcing machine-testable requirements with a
+# validator instead of trusting the generator's own output.
+MAX_S_PER_WORD = 0.62
+WHISPER = os.path.expanduser("~/.local/share/whisper.cpp/ggml-base.en.bin")
+CLI = "/opt/homebrew/bin/whisper-cli"
+
+def norm(t):
+    return re.sub(r"[^a-z0-9 ]", "", t.lower()).split()
+
+def heard(path):
+    if not (os.path.exists(CLI) and os.path.exists(WHISPER)):
+        return None
+    r = subprocess.run([CLI, "-m", WHISPER, "-f", path, "-ng", "-nt"],
+                       capture_output=True, text=True)
+    return norm(r.stdout)
+
+def take_ok(path, text, dur):
+    words = len(text.split())
+    if dur / max(words, 1) > MAX_S_PER_WORD:
+        return False, f"{dur/words:.2f}s per word"
+    h = heard(path)
+    if h is None:
+        return True, "duration only (no whisper)"
+    want = norm(text)
+    # allow small ASR slips; catch appended garbage and dropped clauses
+    if abs(len(h) - len(want)) > max(2, 0.34 * len(want)):
+        return False, f"heard {len(h)} words, wanted {len(want)}"
+    return True, "ok"
+
 tmp = os.path.join(OUT, "_tmp")
 os.makedirs(tmp, exist_ok=True)
 manifest = {}
 for n, (key, text) in enumerate(jobs, 1):
     for f in glob.glob(f"{tmp}/{key}*"):
         os.remove(f)
-    t1 = time.time()
-    generate_audio(text=text, model=MODEL, ref_audio=REF, ref_text=REFTXT,
-                   instruct=None, temperature=TEMP, speed=SPEED,
-                   output_path=tmp, file_prefix=key, audio_format="wav",
-                   join_audio=True, verbose=False)
-    got = sorted(glob.glob(f"{tmp}/{key}*.wav"))
+    dst = os.path.join(OUT, f"{key}.wav")
+    why = ""
+    for attempt in range(4):
+        for f in glob.glob(f"{tmp}/{key}*"):
+            os.remove(f)
+        generate_audio(text=text, model=MODEL, ref_audio=REF, ref_text=REFTXT,
+                       instruct=None, temperature=TEMP + 0.06 * attempt, speed=SPEED,
+                       output_path=tmp, file_prefix=key, audio_format="wav",
+                       join_audio=True, verbose=False)
+        got = sorted(glob.glob(f"{tmp}/{key}*.wav"))
+        if not got:
+            why = "no output"
+            continue
+        _x, _sr = sf.read(got[0])
+        if _x.ndim > 1:
+            _x = _x.mean(1)
+        _a = np.abs(_x)
+        _i = np.where(_a > 0.012)[0]
+        if len(_i):
+            _x = _x[max(0, _i[0] - int(0.03 * _sr)): min(len(_x), _i[-1] + int(0.12 * _sr))]
+        sf.write(got[0], _x.astype(np.float32), _sr)
+        ok, why = take_ok(got[0], text, len(_x) / _sr)
+        if ok:
+            break
+        print(f"      re-roll {key}: {why}", file=sys.stderr, flush=True)
     if not got:
         print(f"[{n}/{len(jobs)}] NO OUTPUT: {key}", file=sys.stderr, flush=True)
         continue
@@ -80,9 +137,8 @@ for n, (key, text) in enumerate(jobs, 1):
         x = x[max(0, idx[0] - int(0.03 * sr)): min(len(x), idx[-1] + int(0.12 * sr))]
     peak = float(np.max(np.abs(x))) or 1.0
     x = x * (0.72 / peak)
-    dst = os.path.join(OUT, f"{key}.wav")
     sf.write(dst, x, sr)
-    manifest[key] = {"text": text, "dur": round(len(x) / sr, 3), "sr": sr}
+    manifest[key] = {"text": text, "dur": round(len(x) / sr, 3), "sr": sr, "gate": why}
     print(f"[{n:>2}/{len(jobs)}] {manifest[key]['dur']:5.2f}s  {key:26s} {text[:46]}",
           file=sys.stderr, flush=True)
 
