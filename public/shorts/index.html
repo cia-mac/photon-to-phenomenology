@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Photon to Phenomenology · the shorts</title>
+<style>
+  :root{
+    --ink:#0c0b09; --ink2:#131210; --cream:#e8e0d0;
+    --dim:rgba(232,224,208,0.52); --faint:rgba(232,224,208,0.30);
+    --rule:rgba(232,224,208,0.10);
+    --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:"SF Mono",ui-monospace,Menlo,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--ink);color:var(--cream);font-family:var(--sans);font-weight:300;
+       -webkit-font-smoothing:antialiased;padding:0 0 120px}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+
+  header.top{padding:88px 0 44px;border-bottom:1px solid var(--rule);margin-bottom:56px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:0.30em;text-transform:uppercase;
+           color:var(--faint);margin-bottom:20px}
+  h1{font-size:clamp(34px,5vw,58px);font-weight:200;letter-spacing:-0.015em;line-height:1.08}
+  .thesis{margin-top:22px;max-width:62ch;font-size:19px;line-height:1.62;color:var(--dim)}
+  .tally{display:flex;flex-wrap:wrap;gap:36px;margin-top:34px;font-family:var(--mono);font-size:12px;
+         letter-spacing:0.10em;color:var(--faint);text-transform:uppercase}
+  .tally b{display:block;font-family:var(--sans);font-size:30px;font-weight:200;letter-spacing:0;
+           color:var(--cream);text-transform:none;margin-bottom:4px}
+
+  .part{margin-bottom:76px}
+  .parthead{display:grid;grid-template-columns:56px 1fr;gap:0 18px;align-items:baseline;
+            padding-bottom:16px;border-bottom:1px solid var(--rule);margin-bottom:28px}
+  .parthead .num{font-family:var(--mono);font-size:13px;letter-spacing:0.14em;color:var(--faint);
+                 padding-top:6px}
+  .parthead h2{font-size:26px;font-weight:300;letter-spacing:-0.01em}
+  .parthead p{grid-column:2;font-size:16px;color:var(--dim);margin-top:5px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:34px 26px}
+  .card{display:flex;flex-direction:column}
+  .frame{position:relative;background:var(--ink2);border:1px solid var(--rule);border-radius:6px;
+         overflow:hidden;aspect-ratio:9/16}
+  .frame video{width:100%;height:100%;object-fit:cover;display:block;cursor:pointer}
+  .frame:hover{border-color:rgba(232,224,208,0.26)}
+  .dur{position:absolute;right:9px;bottom:9px;font-family:var(--mono);font-size:11px;
+       letter-spacing:0.06em;color:var(--cream);background:rgba(12,11,9,0.72);
+       padding:3px 7px;border-radius:3px;pointer-events:none}
+  .play{position:absolute;inset:0;display:grid;place-items:center;border:0;cursor:pointer;
+        background:rgba(12,11,9,0.30);transition:opacity .18s ease}
+  .play span{width:0;height:0;border-left:19px solid rgba(232,224,208,0.94);
+             border-top:12px solid transparent;border-bottom:12px solid transparent;
+             margin-left:5px;filter:drop-shadow(0 1px 6px rgba(0,0,0,.6))}
+  .card.playing .play{opacity:0;pointer-events:none}
+
+  figcaption{padding-top:13px}
+  figcaption h3{font-size:16px;font-weight:400;letter-spacing:0.01em;text-transform:capitalize}
+  .beats{margin-top:7px;font-size:14px;line-height:1.5}
+  .beats .ask{color:var(--dim)}
+  .beats .rev{display:block;color:var(--cream)}
+  .sub{margin-top:5px;font-size:13px;color:var(--faint);line-height:1.5}
+  .note{margin-top:9px;font-size:12px;line-height:1.55;color:var(--faint);
+        border-left:1px solid var(--rule);padding-left:10px}
+  .card.missing .frame{aspect-ratio:9/16;display:grid;place-items:center}
+  .card.missing .pad{font-family:var(--mono);font-size:12px;color:var(--faint);text-align:center;padding:16px}
+
+  .bar{position:fixed;left:0;right:0;bottom:0;background:rgba(12,11,9,0.94);
+       border-top:1px solid var(--rule);backdrop-filter:blur(8px);z-index:10}
+  .bar .wrap{display:flex;gap:22px;align-items:center;padding:13px 32px;
+             font-family:var(--mono);font-size:12px;letter-spacing:0.08em;color:var(--faint)}
+  .bar button{font:inherit;letter-spacing:inherit;color:var(--cream);background:transparent;
+              border:1px solid var(--rule);border-radius:4px;padding:7px 14px;cursor:pointer}
+  .bar button:hover{border-color:rgba(232,224,208,0.34)}
+  .bar .spacer{margin-left:auto}
+
+  @media (max-width:640px){
+    .wrap{padding:0 18px} .bar .wrap{padding:11px 18px;gap:12px}
+    header.top{padding:52px 0 30px}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:24px 14px}
+    .parthead{grid-template-columns:38px 1fr;gap:0 10px}
+    .note{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">Photon to Phenomenology</p>
+    <h1>The shorts</h1>
+    <p class="thesis">Every piece here catches your visual system in the act of manufacturing
+      something that is not on the screen. Ordered by the argument, not by date: light arrives,
+      the eye invents edges, colour turns out to be in you, a flat image becomes a world, motion
+      appears where none exists, parts become wholes, and the construction becomes your experience.</p>
+    <div class="tally">
+      <div><b>19</b>pieces</div>
+      <div><b>5.7</b>minutes total</div>
+      <div><b>20.1 MB</b>all masters</div>
+      <div><b>7 of 8</b>parts of the spine</div>
+      <div><b>1080&times;1920</b>every piece</div>
+    </div>
+  </header>
+
+    <section class="part">
+      <header class="parthead">
+        <span class="num">I</span>
+        <h2>The eye is not a camera</h2>
+        <p>What actually arrives, and how little of it there is.</p>
+      </header>
+      <div class="grid">
+      <figure class="card" data-slug="troxler">
+        <div class="frame">
+          <video src="media/troxler.mp4" poster="media/troxler.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="troxler fading"></video>
+          <button class="play" aria-label="Play troxler fading"><span></span></button>
+          <span class="dur">20s</span>
+        </div>
+        <figcaption>
+          <h3>troxler fading</h3>
+          <p class="beats"><span class="ask">Hold the cross.</span><span class="rev">The colours faded.</span></p>
+          <p class="sub">Nothing on screen changed.</p>
+          <p class="note">No sweep by design. The frame is genuinely unchanging; the fading is entirely in the viewer.</p>
+        </figcaption>
+      </figure>
+      <figure class="card" data-slug="contrast-sensitivity">
+        <div class="frame">
+          <video src="media/contrast-sensitivity.mp4" poster="media/contrast-sensitivity.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="contrast sensitivity"></video>
+          <button class="play" aria-label="Play contrast sensitivity"><span></span></button>
+          <span class="dur">17s</span>
+        </div>
+        <figcaption>
+          <h3>contrast sensitivity</h3>
+          <p class="beats"><span class="ask">Where do the bars vanish?</span><span class="rev">You see an arc.</span></p>
+          <p class="sub">The line is one contrast.</p>
+          <p class="note">Sweep runs 0 -> 1: a constant-contrast rule fades IN at the reveal. The bars die at different heights along it, so the arc is the viewer's envelope, not the chart's.</p>
+        </figcaption>
+      </figure></div>
+    </section>
+    <section class="part">
+      <header class="parthead">
+        <span class="num">II</span>
+        <h2>Edges and lightness are invented</h2>
+        <p>The first place the brain is caught manufacturing.</p>
+      </header>
+      <div class="grid">
+      <figure class="card" data-slug="mach-bands">
+        <div class="frame">
+          <video src="media/mach-bands.mp4" poster="media/mach-bands.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="mach bands"></video>
+          <button class="play" aria-label="Play mach bands"><span></span></button>
+          <span class="dur">17s</span>
+        </div>
+        <figcaption>
+          <h3>mach bands</h3>
+          <p class="beats"><span class="ask">Look at the edges.</span><span class="rev">The scallops are yours.</span></p>
+          <p class="sub">Separated, they vanish.</p>
+          
+        </figcaption>
+      </figure>
+      <figure class="card" data-slug="cornsweet">
+        <div class="frame">
+          <video src="media/cornsweet.mp4" poster="media/cornsweet.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="the cornsweet edge"></video>
+          <button class="play" aria-label="Play the cornsweet edge"><span></span></button>
+          <span class="dur">18s</span>
+        </div>
+        <figcaption>
+          <h3>the cornsweet edge</h3>
+          <p class="beats"><span class="ask">Which half is lighter?</span><span class="rev">Neither. They match.</span></p>
+          <p class="sub">Only the seam differs.</p>
+          <p class="note">Sweep runs 0 -> 1: the occluder grows over the seam, hiding the cusp, and the two halves snap to one grey.</p>
+        </figcaption>
+      </figure>
+      <figure class="card" data-slug="simultaneous-contrast">
+        <div class="frame">
+          <video src="media/simultaneous-contrast.mp4" poster="media/simultaneous-contrast.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="simultaneous contrast"></video>
+          <button class="play" aria-label="Play simultaneous contrast"><span></span></button>
+          <span class="dur">16s</span>
+        </div>
+        <figcaption>
+          <h3>simultaneous contrast</h3>
+          <p class="beats"><span class="ask">Which grey is lighter?</span><span class="rev">Neither. They are one grey.</span></p>
+          <p class="sub">Only the surrounds differ.</p>
+          
+        </figcaption>
+      </figure>
+      <figure class="card" data-slug="whites-illusion">
+        <div class="frame">
+          <video src="media/whites-illusion.mp4" poster="media/whites-illusion.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="white's illusion"></video>
+          <button class="play" aria-label="Play white's illusion"><span></span></button>
+          <span class="dur">17s</span>
+        </div>
+        <figcaption>
+          <h3>white's illusion</h3>
+          <p class="beats"><span class="ask">Which grey bar is lighter?</span><span class="rev">They are the same grey.</span></p>
+          <p class="sub">This one breaks the rule.</p>
+          <p class="note">The grey on the dark stripe reads LIGHTER, the opposite of simultaneous contrast. That contradiction is the piece.</p>
+        </figcaption>
+      </figure>
+      <figure class="card" data-slug="scintillating-grid">
+        <div class="frame">
+          <video src="media/scintillating-grid.mp4" poster="media/scintillating-grid.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="the scintillating grid"></video>
+          <button class="play" aria-label="Play the scintillating grid"><span></span></button>
+          <span class="dur">18s</span>
+        </div>
+        <figcaption>
+          <h3>the scintillating grid</h3>
+          <p class="beats"><span class="ask">Count the black dots.</span><span class="rev">There are none.</span></p>
+          <p class="sub">Every disc is the same grey.</p>
+          <p class="note">No adaptation floor; scintillation is immediate. 7.5s is enough to actually try counting before the answer lands.</p>
+        </figcaption>
+      </figure></div>
+    </section>
+    <section class="part">
+      <header class="parthead">
+        <span class="num">III</span>
+        <h2>Colour is in you</h2>
+        <p>The part that changes how people talk about seeing.</p>
+      </header>
+      <div class="grid">
+      <figure class="card" data-slug="afterimage">
+        <div class="frame">
+          <video src="media/afterimage.mp4" poster="media/afterimage.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="the negative afterimage"></video>
+          <button class="play" aria-label="Play the negative afterimage"><span></span></button>
+          <span class="dur">23s</span>
+        </div>
+        <figcaption>
+          <h3>the negative afterimage</h3>
+          <p class="beats"><span class="ask">Stare at the dot.</span><span class="rev">The rose disc is not there.</span></p>
+          <p class="sub">Do not look away.</p>
+          <p class="note">10s adaptation is the floor. Shorter produces an afterimage too faint to notice on a phone, which reads as a broken piece rather than a subtle one.</p>
+        </figcaption>
+      </figure></div>
+    </section>
+    <section class="part">
+      <header class="parthead">
+        <span class="num">IV</span>
+        <h2>A flat image becomes a world</h2>
+        <p>The inverse problem, felt rather than argued.</p>
+      </header>
+      <div class="grid">
+      <figure class="card" data-slug="muller-lyer">
+        <div class="frame">
+          <video src="media/muller-lyer.mp4" poster="media/muller-lyer.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="the muller-lyer arrows"></video>
+          <button class="play" aria-label="Play the muller-lyer arrows"><span></span></button>
+          <span class="dur">16s</span>
+        </div>
+        <figcaption>
+          <h3>the muller-lyer arrows</h3>
+          <p class="beats"><span class="ask">Which shaft is longer?</span><span class="rev">They are the same.</span></p>
+          <p class="sub">Only the fins changed.</p>
+          
+        </figcaption>
+      </figure>
+      <figure class="card" data-slug="ponzo">
+        <div class="frame">
+          <video src="media/ponzo.mp4" poster="media/ponzo.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="the ponzo rails"></video>
+          <button class="play" aria-label="Play the ponzo rails"><span></span></button>
+          <span class="dur">16s</span>
+        </div>
+        <figcaption>
+          <h3>the ponzo rails</h3>
+          <p class="beats"><span class="ask">Which bar is longer?</span><span class="rev">They are the same.</span></p>
+          <p class="sub">The rails did the work.</p>
+          
+        </figcaption>
+      </figure>
+      <figure class="card" data-slug="ebbinghaus">
+        <div class="frame">
+          <video src="media/ebbinghaus.mp4" poster="media/ebbinghaus.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="the ebbinghaus circles"></video>
+          <button class="play" aria-label="Play the ebbinghaus circles"><span></span></button>
+          <span class="dur">16s</span>
+        </div>
+        <figcaption>
+          <h3>the ebbinghaus circles</h3>
+          <p class="beats"><span class="ask">Which centre is bigger?</span><span class="rev">They are identical.</span></p>
+          <p class="sub">Only the neighbours changed.</p>
+          
+        </figcaption>
+      </figure>
+      <figure class="card" data-slug="shepard-tables">
+        <div class="frame">
+          <video src="media/shepard-tables.mp4" poster="media/shepard-tables.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="shepard's tables"></video>
+          <button class="play" aria-label="Play shepard's tables"><span></span></button>
+          <span class="dur">17s</span>
+        </div>
+        <figcaption>
+          <h3>shepard's tables</h3>
+          <p class="beats"><span class="ask">Are these two the same?</span><span class="rev">They are congruent.</span></p>
+          <p class="sub">Nobody believes the overlay.</p>
+          
+        </figcaption>
+      </figure></div>
+    </section>
+    <section class="part">
+      <header class="parthead">
+        <span class="num">V</span>
+        <h2>Motion where none exists</h2>
+        <p>The richest territory, and the hardest to fake.</p>
+      </header>
+      <div class="grid">
+      <figure class="card" data-slug="motion-aftereffect">
+        <div class="frame">
+          <video src="media/motion-aftereffect.mp4" poster="media/motion-aftereffect.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="the motion aftereffect"></video>
+          <button class="play" aria-label="Play the motion aftereffect"><span></span></button>
+          <span class="dur">25s</span>
+        </div>
+        <figcaption>
+          <h3>the motion aftereffect</h3>
+          <p class="beats"><span class="ask">Eyes on the centre dot.</span><span class="rev">The drift is you.</span></p>
+          
+          <p class="note">11.8s of rotation is the shortest that still lands. Below ~10s a viewer may see nothing and conclude the piece is broken.</p>
+        </figcaption>
+      </figure>
+      <figure class="card" data-slug="barber-pole">
+        <div class="frame">
+          <video src="media/barber-pole.mp4" poster="media/barber-pole.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="the barber pole"></video>
+          <button class="play" aria-label="Play the barber pole"><span></span></button>
+          <span class="dur">17s</span>
+        </div>
+        <figcaption>
+          <h3>the barber pole</h3>
+          <p class="beats"><span class="ask">Which way is it moving?</span><span class="rev">The stripes never changed.</span></p>
+          <p class="sub">Only the aperture did.</p>
+          
+        </figcaption>
+      </figure>
+      <figure class="card" data-slug="peripheral-drift">
+        <div class="frame">
+          <video src="media/peripheral-drift.mp4" poster="media/peripheral-drift.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="peripheral drift"></video>
+          <button class="play" aria-label="Play peripheral drift"><span></span></button>
+          <span class="dur">17s</span>
+        </div>
+        <figcaption>
+          <h3>peripheral drift</h3>
+          <p class="beats"><span class="ask">Let your eyes wander.</span><span class="rev">The rings seem to turn.</span></p>
+          <p class="sub">Nothing here is moving.</p>
+          <p class="note">Original staging. The famous drifting images are Kitaoka's artwork; the phenomenon is public record, his pictures are not.</p>
+        </figcaption>
+      </figure></div>
+    </section>
+    <section class="part">
+      <header class="parthead">
+        <span class="num">VI</span>
+        <h2>Parts become wholes</h2>
+        <p>Grouping, completion, the invented object.</p>
+      </header>
+      <div class="grid">
+      <figure class="card" data-slug="kanizsa">
+        <div class="frame">
+          <video src="media/kanizsa.mp4" poster="media/kanizsa.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="the kanizsa triangle"></video>
+          <button class="play" aria-label="Play the kanizsa triangle"><span></span></button>
+          <span class="dur">17s</span>
+        </div>
+        <figcaption>
+          <h3>the kanizsa triangle</h3>
+          <p class="beats"><span class="ask">Do you see a triangle?</span><span class="rev">Nothing was ever drawn.</span></p>
+          <p class="sub">You supplied the edges.</p>
+          
+        </figcaption>
+      </figure>
+      <figure class="card" data-slug="cafe-wall">
+        <div class="frame">
+          <video src="media/cafe-wall.mp4" poster="media/cafe-wall.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="the cafe wall"></video>
+          <button class="play" aria-label="Play the cafe wall"><span></span></button>
+          <span class="dur">18s</span>
+        </div>
+        <figcaption>
+          <h3>the cafe wall</h3>
+          <p class="beats"><span class="ask">Are these rows sloping?</span><span class="rev">Every line is level.</span></p>
+          <p class="sub">The tiles are just offset.</p>
+          
+        </figcaption>
+      </figure>
+      <figure class="card" data-slug="rubin-vase">
+        <div class="frame">
+          <video src="media/rubin-vase.mp4" poster="media/rubin-vase.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="the rubin vase"></video>
+          <button class="play" aria-label="Play the rubin vase"><span></span></button>
+          <span class="dur">18s</span>
+        </div>
+        <figcaption>
+          <h3>the rubin vase</h3>
+          <p class="beats"><span class="ask">A vase, or two faces?</span><span class="rev">One contour. Two objects.</span></p>
+          <p class="sub">You cannot see both at once.</p>
+          
+        </figcaption>
+      </figure></div>
+    </section>
+    <section class="part">
+      <header class="parthead">
+        <span class="num">VIII</span>
+        <h2>The construction becomes your world</h2>
+        <p>Where it stops being a trick and starts being unnerving.</p>
+      </header>
+      <div class="grid">
+      <figure class="card" data-slug="necker-cube">
+        <div class="frame">
+          <video src="media/necker-cube.mp4" poster="media/necker-cube.jpg" playsinline
+                 preload="none" loop tabindex="0" aria-label="the necker cube"></video>
+          <button class="play" aria-label="Play the necker cube"><span></span></button>
+          <span class="dur">16s</span>
+        </div>
+        <figcaption>
+          <h3>the necker cube</h3>
+          <p class="beats"><span class="ask">Which face is nearer?</span><span class="rev">The drawing never said.</span></p>
+          <p class="sub">You picked. Then repicked.</p>
+          
+        </figcaption>
+      </figure></div>
+    </section>
+</div>
+
+<nav class="bar"><div class="wrap">
+  <button id="all">Play all</button>
+  <button id="stop">Stop</button>
+  <span class="spacer">Tap any piece to play. Sound on: each piece has a voice.</span>
+</div></nav>
+
+<script>
+// One player at a time: two illusions running side by side compete for the same
+// eye and neither lands. Playing one stops the rest.
+const cards = [...document.querySelectorAll('.card[data-slug]')];
+const stopAll = except => cards.forEach(c => {
+  const v = c.querySelector('video');
+  if (v && v !== except) { v.pause(); v.currentTime = 0; c.classList.remove('playing'); }
+});
+const play = c => {
+  const v = c.querySelector('video');
+  stopAll(v); c.classList.add('playing'); v.play();
+};
+for (const c of cards) {
+  const v = c.querySelector('video');
+  c.querySelector('.play').addEventListener('click', () => play(c));
+  v.addEventListener('click', () => {
+    if (v.paused) play(c);
+    else { v.pause(); c.classList.remove('playing'); }
+  });
+  v.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); play(c); } });
+}
+document.getElementById('stop').addEventListener('click', () => stopAll(null));
+// Play all: run the series in spine order, one after another, no loop.
+document.getElementById('all').addEventListener('click', () => {
+  let i = 0;
+  const next = () => {
+    if (i >= cards.length) return;
+    const c = cards[i++], v = c.querySelector('video');
+    v.loop = false;
+    v.addEventListener('ended', function done() { v.removeEventListener('ended', done); v.loop = true; next(); });
+    play(c);
+    c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+  next();
+});
+</script>
+</body>
+</html>

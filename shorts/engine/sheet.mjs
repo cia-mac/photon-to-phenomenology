@@ -4,10 +4,14 @@
 // from what actually exists. Adding a piece and re-running this is the whole
 // maintenance story.
 //
-//   node engine/sheet.mjs        -> sheet/index.html + sheet/media/*.mp4
+//   node engine/sheet.mjs        -> public/shorts/index.html + media/*
 //
-// The page is self-contained under sheet/ so it can be served, zipped, or
-// dropped on a drive without the repo around it.
+// It builds STRAIGHT INTO the deployed site (public/shorts) rather than into a
+// local-only folder that then has to be copied. One location, so the served page
+// can never lag behind the built one.
+//
+// The page carries noindex/nofollow and nothing links to it: it is a private
+// review surface at a public URL, not a release.
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync, statSync } from 'fs';
 import { execFileSync } from 'child_process';
@@ -60,7 +64,7 @@ if (orphans.length) {
     slugs: orphans });
 }
 
-const SHEET = resolve(ROOT, 'sheet');
+const SHEET = resolve(ROOT, '..', 'public', 'shorts');
 const MEDIA = resolve(SHEET, 'media');
 mkdirSync(MEDIA, { recursive: true });
 

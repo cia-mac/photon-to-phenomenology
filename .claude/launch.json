@@ -21,7 +21,7 @@
         "http.server",
         "4319",
         "--directory",
-        "shorts/sheet"
+        "public/shorts"
       ],
       "port": 4319
     }
