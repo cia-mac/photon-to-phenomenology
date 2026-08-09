@@ -10,7 +10,9 @@ function draw(ctx, t, C) {
   const RINGS = 5, PER = 16;
   const steps = ['#3a382f', '#0c0b09', '#a49c88', '#e8e0d0'];
   for (let r = 0; r < RINGS; r++) {
-    const rad = 130 + r * 92;
+    // 120 + 88r keeps the outer ring inside 1080 with a margin. At 130 + 92r the
+    // outermost ring reached x=0 and x=1074 and was clipped by the frame.
+    const rad = 120 + r * 88;
     const phase = r * 0.42;
     const tile = 2 * Math.PI / PER;
     for (let i = 0; i < PER; i++) {

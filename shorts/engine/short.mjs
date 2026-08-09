@@ -172,9 +172,13 @@ window.seek = function (f) {
   // is left while the closing lines are up.
   document.querySelector('#prog i').style.width = (100 * f / (CFG.frames - 1)) + '%';
   el('plate').style.opacity = ${cfg.plate ? 0.92 : 0} * (1 - endFade);
-  // 0.985, not 0.94: at 0.94 the figure ghosted through the end card at about 6%
-  // and read as a rendering artifact rather than as a deliberate dissolve.
-  el('veil').style.opacity = endFade * 0.985;
+  // Fully opaque at rest. 0.94 ghosted the figure through at 6% and read as an
+  // artifact; 0.985 left a residual the frame audit could still measure. There
+  // is no reason for a partially transparent card: the veil IS the field colour,
+  // so at 1.0 the afterimage still closes on the neutral grey it needs, and the
+  // invariant "nothing shows through the settled card" becomes trivially true
+  // instead of being a threshold someone has to keep tuning.
+  el('veil').style.opacity = endFade;
   for (const id of ['close1', 'close2', 'close3']) el(id).style.opacity = endFade;
 };
 window.seek(0);

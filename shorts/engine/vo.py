@@ -24,6 +24,17 @@ VC = os.path.expanduser("~/Developer/voice-clone")
 OUT = os.path.join(SHORTS, "audio", "vo")
 os.makedirs(OUT, exist_ok=True)
 
+# ENGINE SWAP POINT. Cia has decided the voice should be redone on ElevenLabs
+# (a separate session is building that clone). When its samples win, this file is
+# the only thing that changes: point ENGINE at "elevenlabs", keep the same
+# manifest contract (per-line wav + measured duration), and the entire series
+# re-times and re-renders itself off the new audio. Nothing downstream knows or
+# cares which engine produced the wavs.
+#
+# The validation gate below stays either way. It caught 3 bad takes in 42 from
+# the local engine; whether a paid engine needs it is exactly what the A/B
+# should answer, and running it costs nothing.
+ENGINE = os.environ.get("VO_ENGINE", "local")
 REPO = "mlx-community/Qwen3-TTS-12Hz-1.7B-Base-bf16"
 # 1.12. The first pass ran 0.95, i.e. SLOWER than natural, on the theory that an
 # instruction you have to follow while fixating wants room. Cia's verdict on
