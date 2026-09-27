@@ -7,6 +7,54 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-09-27 EXIT - Reconciliation: ten commits since 2026-08-05 recorded from git (CLOSED)
+
+Snapshot before this block: none (append only).
+Written by the harness session (D-0495 follow-up) because harness-check flagged this lane; it records what the files and git show, not a work session.
+
+### Done
+- [observed] cfdc037 2026-09-04 "photon: report page engagement to a.ciamac.com"
+- [observed] 235045e 2026-08-08 "Frame-level audit: catch overlapping graphics by measurement, not by eye"
+- [observed] 2a53f8d 2026-08-08 "Halve the runtime for X, and close the spine at 8 of 8"
+- [observed] ce340a7 2026-08-08 "Faster voice, and a validator so bad TTS takes cannot ship"
+- [observed] a766084 2026-08-08 "Fix the black tiles: absolute media paths on the published sheet"
+- [observed] c389874 2026-08-08 "Publish the review sheet at photon.ciamac.com/shorts"
+- [observed] a8f0259 2026-08-08 "Make the bare domain resolve, and stop uploading the render pipeline"
+- [observed] d2e03cd 2026-08-07 "exit ritual: audio pass, series at 19 with sound"
+- [observed] 5e06c08 2026-08-07 "Sound, voice, and an end card that goes somewhere"
+- [observed] 6da819e 2026-08-07 "Contact sheet: one page for the whole series"
+- [observed] main is 19 commits ahead of origin (not pushed); pushing this repo deploys photon.ciamac.com.
+
+### Previous pending
+- carried: the 2026-08-05 block's pending items are not re-assessed here; read that block.
+
+### Pending / open
+- 19 local commits not pushed; a push is a live deploy and needs Cia's go.
+
+### Operational notes
+- none
+
+### Durable thought
+none, reason: reconciliation only.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-09-27T00:47:24-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `cfdc037 photon: report page engagement to a.ciamac.com` (committed 2026-09-04)
+- tree: clean
+- upstream: origin/main (ahead 19, behind 0)
+- merged into HEAD: none
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished
+
+---
+
 ## 2026-08-05 EXIT (4 of 4) - sound, voice, end card; series at 19 with audio
 
 Commit `5e06c08`. Trigger: Cia, "lets work on the presentation / music so the
