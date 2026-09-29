@@ -7,6 +7,46 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-09-29 EXIT - Fix 404s on gallery and book index links (CLOSED)
+
+Snapshot before this block: none (append only).
+
+### Done
+- [observed] Root cause: bare domain 307s to /photon (no trailing slash), so relative hrefs on public/photon/index.html and public/photon/book/index.html resolved against /, /photon/book/x.html became /photon/x.html etc. Pieces and chrome.js already use root-absolute paths, so only these two indexes were affected (book index had the same bug, not in the report).
+- [observed] 082fede: 10 hrefs in photon/index.html and 7 in photon/book/index.html rewritten to /photon/<slug>, /photon/book, /photon/book/<slug> (clean URLs).
+- [observed] Local: script resolved all 17 hrefs from their real page URL against public/ with cleanUrls semantics, 0 bad.
+- [observed] Stage: preview deploy photon-to-phenomenology-q0rh8tbhd-ciamacparhizi-9083s-projects.vercel.app (SSO-protected, read with vercel curl); / 307 to /photon, /photon and /photon/book 200, all 17 index links 200.
+
+### Previous pending
+- carried: 19 local commits unpushed, now 21; push is a live deploy and needs Cia's go.
+
+### Pending / open
+- Live NOT deployed. Push of main ships ALL 21 unpushed commits (shorts sheet, audio, analytics beacon, this fix), not just the fix. Needs Cia's explicit go.
+
+### Operational notes
+- Two preview deploys were created by this session (first output was truncated). Previews only, target null.
+
+### Durable thought
+none, reason: routine relative-link bug; already captured by the cleanUrls/redirect config in vercel.json.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-09-29T01:47:48-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `082fede Fix 404s from the gallery and book indexes: root-absolute links` (committed 2026-09-29)
+- tree: **1 uncommitted change(s)**
+- upstream: origin/main (ahead 21, behind 0)
+- merged into HEAD: none
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished; live deploy gated on Cia's go
+
+---
+
 ## 2026-09-27 EXIT - Reconciliation: ten commits since 2026-08-05 recorded from git (CLOSED)
 
 Snapshot before this block: none (append only).
