@@ -7,6 +7,45 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-01 EXIT - Ship and rollback runbook for the index link fix (CLOSED, NOT DEPLOYED)
+
+Snapshot before this block: none (append only).
+
+### Done
+- [observed] Fix is commit 082fede (public/photon/index.html, public/photon/book/index.html). Tested locally (17 of 17 hrefs resolve) and on a stage preview (all 17 links 200). NOT deployed live; no Cia go exists.
+
+### Previous pending
+- carried: live deploy awaits Cia's explicit go. main is 22 commits ahead of origin, so a push ships all of them, not only 082fede.
+
+### Pending / open
+- DEPLOY (needs Cia's go): `git -C ~/Developer/photon-to-phenomenology push origin main` (auto-deploys photon.ciamac.com, ships all unpushed commits). Verify: `curl -sIL https://photon.ciamac.com/photon/kanizsa | grep -i '^HTTP'` and open /photon and /photon/book links.
+- FIX-ONLY alternative (needs Cia's go): branch from origin/main, `git cherry-pick 082fede`, push the branch for a preview, then merge.
+- ROLLBACK: current live production deployment before this ship is photon-to-phenomenology-33chpn7xl-ciamacparhizi-9083s-projects.vercel.app (read 2026-10-01 via `vercel ls --prod`). Run `vercel rollback photon-to-phenomenology-33chpn7xl-ciamacparhizi-9083s-projects.vercel.app` (or `vercel promote` of the same URL) from the repo dir. Source rollback: `git revert 082fede` then push. Re-run `vercel ls --prod` first; the live URL may have changed.
+
+### Operational notes
+- Two preview deploys from 2026-09-29 exist (target null); harmless.
+
+### Durable thought
+none, reason: runbook only.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-01T00:28:47-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `b7c1933 exit ritual: index link fix` (committed 2026-09-29)
+- tree: **1 uncommitted change(s)**
+- upstream: origin/main (ahead 22, behind 0)
+- merged into HEAD: none
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished; live deploy gated on Cia's go
+
+---
+
 ## 2026-09-29 EXIT - Fix 404s on gallery and book index links (CLOSED)
 
 Snapshot before this block: none (append only).
