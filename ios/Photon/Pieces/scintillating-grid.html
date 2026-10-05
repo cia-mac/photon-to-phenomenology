@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>The scintillating grid · Photon to Phenomenology</title>
+<link rel="stylesheet" href="chrome_app.css">
+<style>
+  :root{ --ink:#0c0b09; --cream:#e8e0d0; --dim:rgba(232,224,208,0.40); --faint:rgba(232,224,208,0.15); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:var(--ink);overflow:hidden}
+  body{
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--cream);
+    -webkit-font-smoothing:antialiased;touch-action:none;cursor:ew-resize;
+  }
+  canvas{display:block;width:100%;height:100%;position:fixed;inset:0}
+  .chrome{position:fixed;pointer-events:none;user-select:none}
+  #chapter{top:var(--shell-top);left:var(--shell-side);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--dim)}
+  #title{top:calc(var(--shell-top) + 18px);left:var(--shell-side);font-size:15px;letter-spacing:0.04em;color:var(--cream);font-weight:400}
+  #readout{
+    top:calc(var(--shell-top) - 2px);right:var(--shell-side);text-align:right;
+    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:11px;color:var(--dim);line-height:1.7;
+  }
+  #readout .lab{font-size:9.5px;text-transform:uppercase;letter-spacing:0.12em;color:var(--faint);margin-right:.6em}
+  #count{margin-top:8px;font-size:11px;letter-spacing:0.04em;color:var(--cream)}
+  #draghint{margin-top:12px;font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim);transition:opacity .6s ease}
+  #thesis{
+    bottom:calc(var(--shell-bottom) + 62px);right:var(--shell-side);text-align:right;max-width:min(48ch,72vw);
+    font-size:14px;line-height:1.55;color:var(--cream);opacity:0;transition:opacity 1.6s ease;
+  }
+  #thesis .lead{color:var(--dim);font-size:12.5px;display:block;margin-bottom:.5em}
+  @media (max-width:680px){ #thesis{left:var(--shell-side);text-align:left;max-width:none} #readout{top:calc(var(--shell-top) + 46px);left:var(--shell-side);right:auto;text-align:left} }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div class="chrome" id="chapter">Gallery · the scintillating grid</div>
+<div class="chrome" id="title">Count the black dots</div>
+<div class="chrome" id="readout">
+  <div><span class="lab">spacing</span><span id="rSp">·</span></div>
+  <div id="count">they flicker where you don’t look</div>
+  <div id="draghint">&#8646; drag anywhere to change spacing</div>
+</div>
+<div class="chrome" id="thesis">
+  <span class="lead">Every disc on this grid is the same pale grey. There is not one black dot anywhere in the image.</span>
+  Your retina sharpens edges by having bright neighbours suppress each other, and at the crossings it overshoots into darkness. The dots are made by you. Vision is not recording, it is construction.
+</div>
+
+<script src="chrome_app.js"></script>
+<script>
+(() => {
+  "use strict";
+  const cv=document.getElementById('c'); const ctx=cv.getContext('2d');
+  const rSp=document.getElementById('rSp'), count=document.getElementById('count');
+
+  let W=0,H=0,DPR=1;
+  let tight=false;                               // reveal state, for the shell haptic
+  let sp={cur:0,tgt:0};                          // grid spacing (px)
+  const barFrac=0.16;                            // bar thickness as fraction of spacing
+
+  function resize(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    {const B=PhotonApp.fit(cv,{reserveGuide:true}); W=B.w; H=B.h;}
+    cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    const lo=Math.min(W,H)*0.045, hi=Math.min(W,H)*0.20, s=Math.min(W,H)*0.11;
+    if(sp.cur===0){ sp.cur=s; sp.tgt=s; }                 // first load
+    else { sp.tgt=Math.max(lo,Math.min(hi,sp.tgt)); sp.cur=Math.max(lo,Math.min(hi,sp.cur)); } // keep valid on resize
+  }
+  function lerp(a,b,t){return a+(b-a)*t;}
+
+  function draw(){
+    sp.cur=lerp(sp.cur,sp.tgt,0.14);
+    const S=sp.cur, bw=Math.max(6,S*barFrac), dr=bw*0.62;
+
+    ctx.fillStyle='#0c0b09'; ctx.fillRect(0,0,W,H);
+
+    // grey bars (the channels between dark cells)
+    ctx.fillStyle='#5f5848';
+    for(let x=S; x<W+S; x+=S){ ctx.fillRect(x-bw/2,0,bw,H); }
+    for(let y=S; y<H+S; y+=S){ ctx.fillRect(0,y-bw/2,W,bw); }
+    // pale discs at every crossing (all identical — no black anywhere)
+    ctx.fillStyle='#e8e0d0';
+    for(let x=S; x<W+S; x+=S){
+      for(let y=S; y<H+S; y+=S){
+        ctx.beginPath(); ctx.arc(x,y,dr,0,Math.PI*2); ctx.fill();
+      }
+    }
+
+    rSp.textContent=Math.round(S)+' px';
+    const nowTight = S<Math.min(W,H)*0.06;
+    if(nowTight!==tight){ tight=nowTight; PhotonApp.haptic('reveal'); }
+    count.textContent = S<Math.min(W,H)*0.06 ? 'tighter grid, more flicker' : 'they flicker where you don’t look';
+    requestAnimationFrame(draw);
+  }
+
+  function cX(e){return (e.touches?e.touches[0]:e).clientX;}
+  let dragging=false,lastX=0;
+  function onDown(e){ e.preventDefault(); dragging=true; lastX=cX(e); }
+  function onMove(e){ if(!dragging)return; e.preventDefault();
+    const x=cX(e); sp.tgt=Math.max(Math.min(W,H)*0.045, Math.min(Math.min(W,H)*0.20, sp.tgt+(x-lastX)*0.25)); lastX=x; }
+  function onUp(){ dragging=false; }
+
+  cv.addEventListener('mousedown',onDown);
+  window.addEventListener('mousemove',onMove);
+  window.addEventListener('mouseup',onUp);
+  cv.addEventListener('touchstart',onDown,{passive:false});
+  window.addEventListener('touchmove',onMove,{passive:false});
+  window.addEventListener('touchend',onUp);
+  window.addEventListener('resize',resize);
+
+  // ---- guided walkthrough (per-instrument script) ----
+  const WALK=[
+    {t:"A regular lattice of grey bars with a pale disc at every crossing. Every disc is <b>the same flat grey</b>. Hold still and let the whole field sit in front of you.", act(){sp.tgt=Math.min(W,H)*0.11;}},
+    {t:"Now let your eyes drift around the grid. <b>Dark dots shimmer at the crossings</b>, blinking on and off, always just off to the side of wherever you look.", act(){sp.tgt=Math.min(W,H)*0.085;}},
+    {t:"Fix on one single crossing and stare. The dot there vanishes. The darkness <b>only lives in your periphery</b>, never on the spot you aim at.", act(){sp.tgt=Math.min(W,H)*0.07;}},
+    {t:"The dots are not on the page. Your retina overshoots into phantom darkness where bright neighbours crowd a crossing. <b>Vision is construction, not a recording.</b>", act(){sp.tgt=Math.min(W,H)*0.11;}},
+  ];
+  PhotonChrome.init({here:'scintillating-grid', walk:WALK});
+
+  resize();
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

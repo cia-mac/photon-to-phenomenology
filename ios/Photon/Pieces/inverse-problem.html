@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>The inverse problem · Photon to Phenomenology</title>
+<link rel="stylesheet" href="chrome_app.css">
+<style>
+  :root{ --ink:#0c0b09; --cream:#e8e0d0; --dim:rgba(232,224,208,0.40); --faint:rgba(232,224,208,0.15); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:var(--ink);overflow:hidden}
+  body{
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--cream);
+    -webkit-font-smoothing:antialiased;touch-action:none;cursor:grab;
+  }
+  body.grab{cursor:grabbing}
+  canvas{display:block;width:100%;height:100%;position:fixed;inset:0}
+  .chrome{position:fixed;pointer-events:none;user-select:none}
+  #chapter{top:var(--shell-top);left:var(--shell-side);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--dim)}
+  #title{top:calc(var(--shell-top) + 18px);left:var(--shell-side);font-size:15px;letter-spacing:0.04em;color:var(--cream);font-weight:400}
+  #readout{
+    top:calc(var(--shell-top) - 2px);right:var(--shell-side);text-align:right;
+    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:11px;color:var(--dim);line-height:1.7;
+  }
+  #readout .lab{font-size:9.5px;text-transform:uppercase;letter-spacing:0.12em;color:var(--faint);margin-right:.6em}
+  #verdict{margin-top:8px;font-size:11px;letter-spacing:0.04em;color:var(--cream)}
+  #thesis{
+    bottom:calc(var(--shell-bottom) + 62px);right:var(--shell-side);text-align:right;max-width:min(48ch,72vw);
+    font-size:14px;line-height:1.55;color:var(--cream);opacity:0;transition:opacity 1.6s ease;
+  }
+  #thesis .lead{color:var(--dim);font-size:12.5px;display:block;margin-bottom:.5em}
+  @media (max-width:680px){ #thesis{left:var(--shell-side);text-align:left;max-width:none} #readout{top:calc(var(--shell-top) + 46px);left:var(--shell-side);right:auto;text-align:left} }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div class="chrome" id="chapter">Ch. 1 · The inverse problem</div>
+<div class="chrome" id="title">From here, a cube</div>
+<div class="chrome" id="readout">
+  <div><span class="lab">viewpoint</span><span id="rView">·</span></div>
+  <div id="verdict">reads as a cube</div>
+</div>
+<div class="chrome" id="thesis">
+  <span class="lead">There was never a cube. Eight wires hang at unrelated depths. From one viewpoint they line up, and your visual system reads a solid.</span>
+  The flat image fit endless arrangements; you saw the simplest. Vision is not recording, it is construction.
+</div>
+
+<script src="chrome_app.js"></script>
+<script>
+(() => {
+  "use strict";
+  const cv=document.getElementById('c'); const ctx=cv.getContext('2d');
+  const rView=document.getElementById('rView'), verdict=document.getElementById('verdict');
+
+  // 8 vertices in IMAGE space (x,y): the canonical cube line-drawing.
+  // front square + back square offset up-right, joined. From the front view
+  // (yaw=pitch=0) the orthographic projection IS exactly this drawing.
+  const o=0.55;
+  const P=[
+    [-1,-1],[ 1,-1],[ 1, 1],[-1, 1],            // 0..3 front square
+    [-1+o,-1-o],[1+o,-1-o],[1+o,1-o],[-1+o,1-o] // 4..7 back square (up-right)
+  ];
+  // TRUE depths: deliberately scrambled, so the 8 points hang at unrelated z.
+  const Z=[ 0.9, -1.4, 1.3, -0.6, 1.5, -1.2, 0.3, -1.5 ];
+  const V=P.map((p,i)=>[p[0],p[1],Z[i]]);
+  const EDGES=[[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+
+  let W=0,H=0,DPR=1,cx=0,cy=0,scale=160;
+  let yaw={cur:0,tgt:0}, pitch={cur:0,tgt:0};
+  let dragging=false, lastX=0, lastY=0;
+
+  function resize(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    {const B=PhotonApp.fit(cv,{reserveGuide:true}); W=B.w; H=B.h;}   // app: the figure sits between the text and the open guide card
+    cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    cx=W/2; cy=H/2; scale=Math.min(W,H)*0.20;
+  }
+  function lerp(a,b,t){return a+(b-a)*t;}
+
+  function project(v,ya,pi){
+    let [x,y,z]=v;
+    // yaw about Y
+    let x1=x*Math.cos(ya)+z*Math.sin(ya);
+    let z1=-x*Math.sin(ya)+z*Math.cos(ya);
+    // pitch about X
+    let y1=y*Math.cos(pi)-z1*Math.sin(pi);
+    let z2=y*Math.sin(pi)+z1*Math.cos(pi);
+    return [cx+x1*scale, cy+y1*scale, z2];
+  }
+
+  let wasCube=true;                               // reveal state, for the shell haptic
+  let walking=false;                              // true while the guided walkthrough holds a pose
+
+  function draw(){
+    if(!dragging && !walking){ yaw.tgt=0; pitch.tgt=0; } // released: ease home, reassembling the cube
+    yaw.cur=lerp(yaw.cur,yaw.tgt,0.10);
+    pitch.cur=lerp(pitch.cur,pitch.tgt,0.10);
+
+    ctx.fillStyle='#0c0b09'; ctx.fillRect(0,0,W,H);
+
+    const pts=V.map(v=>project(v,yaw.cur,pitch.cur));
+    // edges, opacity gently keyed to mean depth so 3D structure reads when turned
+    for(const [a,b] of EDGES){
+      const pa=pts[a], pb=pts[b];
+      const md=(pa[2]+pb[2])/2;                   // mean z, ~[-1.5..1.5]
+      const al=0.30 + 0.55*(1-Math.min(Math.max((md+1.6)/3.2,0),1));
+      ctx.beginPath(); ctx.moveTo(pa[0],pa[1]); ctx.lineTo(pb[0],pb[1]);
+      ctx.lineWidth=1.5; ctx.strokeStyle='rgba(232,224,208,'+al.toFixed(3)+')'; ctx.stroke();
+    }
+    // vertices
+    for(const p of pts){
+      ctx.beginPath(); ctx.arc(p[0],p[1],2.4,0,Math.PI*2);
+      ctx.fillStyle='rgba(232,224,208,0.85)'; ctx.fill();
+    }
+
+    // readout: how far from the cube viewpoint, and how cube-like it still reads
+    const off=Math.hypot(yaw.cur,pitch.cur);
+    const deg=Math.round(off*180/Math.PI);
+    rView.textContent = deg===0 ? 'aligned' : deg+'° off';
+    const match=Math.round(100*Math.max(0,Math.cos(Math.min(off,Math.PI/2))));
+    const isCube=match>97; if(isCube!==wasCube){ wasCube=isCube; if(isCube && Math.hypot(yaw.tgt,pitch.tgt)<0.23) PhotonApp.haptic('reveal'); }
+    verdict.textContent = match>97 ? 'reads as a cube'
+                        : match>55 ? 'a cube coming apart'
+                        : 'just wires in space';
+    requestAnimationFrame(draw);
+  }
+
+  function cX(e){return (e.touches?e.touches[0]:e).clientX;}
+  function cY(e){return (e.touches?e.touches[0]:e).clientY;}
+  function onDown(e){
+    e.preventDefault(); dragging=true; document.body.classList.add('grab');
+    lastX=cX(e); lastY=cY(e);
+  }
+  function onMove(e){
+    if(!dragging) return; e.preventDefault();
+    const x=cX(e), y=cY(e);
+    yaw.tgt += (x-lastX)*0.008;
+    pitch.tgt += (y-lastY)*0.008;
+    pitch.tgt=Math.max(-1.3,Math.min(1.3,pitch.tgt));
+    lastX=x; lastY=y;
+  }
+  function onUp(){ dragging=false; document.body.classList.remove('grab'); }
+
+  cv.addEventListener('mousedown',onDown);
+  window.addEventListener('mousemove',onMove);
+  window.addEventListener('mouseup',onUp);
+  cv.addEventListener('touchstart',onDown,{passive:false});
+  window.addEventListener('touchmove',onMove,{passive:false});
+  window.addEventListener('touchend',onUp);
+  window.addEventListener('resize',resize);
+
+  // ---- guided walkthrough (per-instrument script) ----
+  const WALK=[
+    {t:"Right now you are looking at a cube, square on. Eight points, twelve edges, <b>one solid box</b>. Hold that reading for a moment.", act(){walking=true; yaw.tgt=0; pitch.tgt=0;}},
+    {t:"Now turn it. The box comes apart. The eight points were never a cube. They hang at unrelated depths and <b>only lined up from where you stood</b>.", act(){walking=true; yaw.tgt=0.85; pitch.tgt=0.55;}},
+    {t:"This loose cloud of points is one scene that fits the flat image. Endless other arrangements fit it just as well. <b>The picture alone cannot tell them apart.</b>", act(){walking=true; yaw.tgt=-0.7; pitch.tgt=-0.45;}},
+    {t:"Return to the one viewpoint where they align, and your visual system <b>commits instantly to the simplest cause</b>: a cube.", act(){walking=true; yaw.tgt=0; pitch.tgt=0;}},
+    {t:"There was never a cube. The flat image fit endless scenes; you saw the simplest. <b>Vision is not recording, it is construction.</b>", act(){walking=false; yaw.tgt=0; pitch.tgt=0;}},
+  ];
+  PhotonChrome.init({here:'inverse-problem', walk:WALK, onEnd(){ walking=false; }});   // early close: release the pose so the cube eases home
+
+  resize();
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>The Ponzo illusion · Photon to Phenomenology</title>
+<link rel="stylesheet" href="chrome_app.css">
+<style>
+  :root{ --ink:#0c0b09; --cream:#e8e0d0; --dim:rgba(232,224,208,0.40); --faint:rgba(232,224,208,0.15); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:var(--ink);overflow:hidden}
+  body{
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--cream);
+    -webkit-font-smoothing:antialiased;touch-action:none;cursor:ew-resize;
+  }
+  canvas{display:block;width:100%;height:100%;position:fixed;inset:0}
+  .chrome{position:fixed;pointer-events:none;user-select:none}
+  #chapter{top:var(--shell-top);left:var(--shell-side);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--dim)}
+  #title{top:calc(var(--shell-top) + 18px);left:var(--shell-side);font-size:15px;letter-spacing:0.04em;color:var(--cream);font-weight:400}
+  #readout{
+    top:calc(var(--shell-top) - 2px);right:var(--shell-side);text-align:right;
+    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:11px;color:var(--dim);line-height:1.7;
+  }
+  #readout .lab{font-size:9.5px;text-transform:uppercase;letter-spacing:0.12em;color:var(--faint);margin-right:.6em}
+  #verdict{margin-top:8px;font-size:11px;letter-spacing:0.04em;color:var(--cream)}
+  #thesis{
+    bottom:calc(var(--shell-bottom) + 62px);right:var(--shell-side);text-align:right;max-width:min(48ch,72vw);
+    font-size:14px;line-height:1.55;color:var(--cream);opacity:0;transition:opacity 1.6s ease;
+  }
+  #thesis .lead{color:var(--dim);font-size:12.5px;display:block;margin-bottom:.5em}
+  @media (max-width:680px){ #thesis{left:var(--shell-side);text-align:left;max-width:none} #readout{top:calc(var(--shell-top) + 46px);left:var(--shell-side);right:auto;text-align:left} }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div class="chrome" id="chapter">Gallery · the Ponzo illusion</div>
+<div class="chrome" id="title">Two bars, the same length</div>
+<div class="chrome" id="readout">
+  <div><span class="lab">top bar</span><span id="rT">·</span></div>
+  <div><span class="lab">bottom bar</span><span id="rB">·</span></div>
+  <div id="verdict">the top bar looks longer</div>
+</div>
+<div class="chrome" id="thesis">
+  <span class="lead">Both bars are exactly the same width. Straighten the rails and you can see it at once.</span>
+  The converging lines read as depth, so the upper bar must be farther, so your visual system enlarges it to keep the world constant. Vision is not recording, it is construction.
+</div>
+
+<script src="chrome_app.js"></script>
+<script>
+(() => {
+  "use strict";
+  const cv=document.getElementById('c'); const ctx=cv.getContext('2d');
+  const rT=document.getElementById('rT'), rB=document.getElementById('rB'), verdict=document.getElementById('verdict');
+
+  let W=0,H=0,DPR=1,cx=0,cy=0,barLen=240,topY=0,botY=0;
+  let conv={cur:0.5,tgt:0.5};                   // convergence 0..1
+  let wasSeen=true, armed=false;                // illusion state, for the shell haptic
+
+  function resize(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    {const B=PhotonApp.fit(cv); W=B.w; H=B.h;}
+    cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    cx=W/2; cy=H/2; barLen=Math.min(W*0.30, 360);
+    topY=cy-Math.min(H*0.26,230); botY=cy+Math.min(H*0.26,230);
+  }
+  function lerp(a,b,t){return a+(b-a)*t;}
+
+  function draw(){
+    conv.cur=lerp(conv.cur,conv.tgt,0.14);
+    ctx.fillStyle='#0c0b09'; ctx.fillRect(0,0,W,H);
+
+    // converging rails: wide at bottom, narrow at top (perspective)
+    const spreadBot=Math.min(W*0.42,560), spreadTop=spreadBot*(1-0.82*conv.cur);
+    const yTop=cy-Math.min(H*0.40,360), yBot=cy+Math.min(H*0.40,360);
+    ctx.strokeStyle='rgba(232,224,208,0.45)'; ctx.lineWidth=1.6;
+    ctx.beginPath();
+    ctx.moveTo(cx-spreadTop/2, yTop); ctx.lineTo(cx-spreadBot/2, yBot);
+    ctx.moveTo(cx+spreadTop/2, yTop); ctx.lineTo(cx+spreadBot/2, yBot);
+    ctx.stroke();
+
+    // two identical horizontal bars
+    ctx.strokeStyle='#e8e0d0'; ctx.lineWidth=5; ctx.lineCap='round';
+    ctx.beginPath();
+    ctx.moveTo(cx-barLen/2, topY); ctx.lineTo(cx+barLen/2, topY);
+    ctx.moveTo(cx-barLen/2, botY); ctx.lineTo(cx+barLen/2, botY);
+    ctx.stroke();
+
+    rT.textContent=Math.round(barLen)+' px'; rB.textContent=Math.round(barLen)+' px';
+    const seen=conv.cur>=0.06; if(seen!==wasSeen){ wasSeen=seen; if(armed) PhotonApp.haptic('reveal'); } armed=true;
+    verdict.textContent = conv.cur<0.06 ? 'now they look equal' : 'the top bar looks longer';
+    requestAnimationFrame(draw);
+  }
+
+  function cX(e){return (e.touches?e.touches[0]:e).clientX;}
+  let dragging=false,lastX=0;
+  function onDown(e){ e.preventDefault(); dragging=true; lastX=cX(e); }
+  function onMove(e){ if(!dragging)return; e.preventDefault();
+    const x=cX(e); conv.tgt=Math.max(0, Math.min(1, conv.tgt+(x-lastX)*0.004)); lastX=x; }
+  function onUp(){ dragging=false; }
+
+  cv.addEventListener('mousedown',onDown);
+  window.addEventListener('mousemove',onMove);
+  window.addEventListener('mouseup',onUp);
+  cv.addEventListener('touchstart',onDown,{passive:false});
+  window.addEventListener('touchmove',onMove,{passive:false});
+  window.addEventListener('touchend',onUp);
+  window.addEventListener('resize',resize);
+
+  // ---- guided walkthrough (per-instrument script) ----
+  const WALK=[
+    {t:"Two pale horizontal bars, upper and lower, framed by a pair of rails that converge toward the top <b>like a road running into the distance</b>.", act(){conv.tgt=1;}},
+    {t:"Look at the upper bar. It sits where the rails pinch together, and it <b>reads as plainly longer</b> than the lower one. Trust your eyes for a moment.", act(){conv.tgt=1;}},
+    {t:"Now watch the bars as the rails straighten out. <b>The depth cue drains away.</b>", act(){conv.tgt=0;}},
+    {t:"Rails gone, the two bars are <b>flatly, obviously equal</b>. Check the readout: both have measured the same width the entire time.", act(){conv.tgt=0;}},
+    {t:"The converging lines read as depth, so the upper bar must be farther, so your visual system enlarged it to keep the world constant. <b>Vision is construction, not a recording.</b>", act(){conv.tgt=0;}},
+  ];
+  PhotonChrome.init({here:'ponzo', walk:WALK});
+
+  resize();
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

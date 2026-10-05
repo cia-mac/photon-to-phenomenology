@@ -7,6 +7,463 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## IN FLIGHT 2026-10-04 (8) - about to push main (Cia said "push commit, do whatever you need")
+
+### Done
+- [observed] Cia gave the go in chat to commit and push. Local main is 23 commits ahead of origin and 0 behind (fetched). Added lines scanned for secrets: none.
+- [observed] What goes live: git auto-deploys photon.ciamac.com. /shorts already answers 200 on the current production deployment, so the media and the root redirect in the earlier commits are already live; the new live change is the index link fix (082fede). My commit adds ios/ only, which is not under public/ and is not served.
+- [observed] Not committed on purpose: the other session's unfinished shorts work in this checkout (shorts/engine edits, shorts/audio, build_v5, vo_v5.py, gallery_v5 to v7 and the rest of the untracked shorts files), plus shorts/gallery_v4.html and shorts/CONTACT_SHEET_v4.png from this session, and SESSION_STATE.md.lock.
+
+### Previous pending
+- carried: all earlier items; the push below executes "live deploy of the index link fix awaits Cia's go".
+
+### Pending / open
+- ROLLBACK if the live site is wrong after the push: `vercel rollback photon-to-phenomenology-33chpn7xl-ciamacparhizi-9083s-projects.vercel.app` from ~/Developer/photon-to-phenomenology (that is the production deployment read just before the push, 30 days old). Source rollback: `git revert 082fede` then push.
+- After the push: verify /photon, /photon/book and all 17 index links return 200 on photon.ciamac.com.
+
+### Durable thought
+none, reason: pre-push checkpoint.
+
+---
+
+## IN FLIGHT 2026-10-04 (7) - Photon iOS app: iPad landscape, privacy manifest, store screenshots, listing draft (D-0624)
+
+### Done
+- [observed] iPad landscape (1376 by 1032) added to ios/tools/verify_piece.mjs; it found troxler-fading, change-blindness and inverse-problem failing. All three fixed (fit box with the guide reserved; change-blindness measures taps from the box, tap tested in the app: "not that one" and the marker lands on the tapped tile). tools/verify_all.sh: failures 0 of 21 at phone, iPad portrait and iPad landscape. ios/CONSTITUTION_APP_v9.md (v1 to v8 kept).
+- [observed] Privacy manifest Photon/PrivacyInfo.xcprivacy (no tracking, no collected data, no restricted APIs) is bundled in the built app. UserDefaults appears only in DEBUG test hooks.
+- [observed] App Store screenshot drafts, exact sizes 1320 by 2868 (iPhone 6.9 inch, simulator iPhone 17 Pro Max) and 2064 by 2752 (iPad 13 inch): 8 each in ios/build/store/final/ (kanizsa, ebbinghaus, cornsweet, cafe-wall in their illusion states, checker-shadow, motion-induced-blindness, receptive-field, library), contact sheets SHEET_iphone69.png and SHEET_ipad13.png. Scripts: tools/shoot_store.sh. build/ is gitignored.
+- [observed] ios/APP_STORE_LISTING_DRAFT_v1.md: name, subtitle, description, keywords, category, age rating, privacy answers, review notes, things to know. All proposals; nothing entered anywhere.
+
+### Previous pending
+- done: iPad landscape; privacy manifest; store screenshots draft; listing draft.
+- carried: real-device check (haptics, screen hold); Cia's name, price, icon pick, listing sign-off; privacy policy page (needs a deploy, so needs Cia's go); live deploy of the index link fix awaits Cia's go; apparent-motion keeps a small dot on iPad.
+
+### Pending / open
+- Needs Cia's go (account or outward-facing): signing and archiving (registers com.ciamac.photon on team 3AUT8DTWP3), TestFlight, App Store Connect record and upload, privacy policy page on photon.ciamac.com, submission.
+- Cia to decide: whether to add a short flashing-content line (apparent-motion blinks two small dots up to about 14 per second; area is small, under the general flash-safety area threshold).
+
+### Durable thought
+none, reason: in-flight checkpoint; capture at exit.
+
+---
+
+## IN FLIGHT 2026-10-04 (6) - Photon iOS app: iPad touch verified, clearance rule, icon candidates (D-0624)
+
+### Done
+- [observed] iPad touch by hand on the iPad Pro 13 simulator for the three enlarged pieces: aperture-problem rim drag widened the aperture; troxler-fading drag moved the ring outward and reset the still timer; motion-induced-blindness drag raised the mask speed to 0.76 rad/s and the lattice rotated across three screenshots (build/app/ipt_all.png, ipt_mib_seq.png).
+- [observed] Guide card clearance: verifier now requires 10 points of clear air above the card; all 21 pieces pass at phone and iPad size. ios/CONSTITUTION_APP_v8.md (v1 to v7 kept).
+- [observed] App icon: three candidates in ios/icon_candidates/ (A Kanizsa triangle, B spiral, C Ponzo rails; preview icons_preview.png). Candidate A installed as the working icon in Assets.xcassets/AppIcon.appiconset; it shows on the simulator home screen (build/app/home_s.png). The choice of icon is Cia's.
+
+### Previous pending
+- done: iPad touch for the enlarged pieces; tight clearance above the guide card.
+- carried: real-device check (haptics, screen hold); Cia's name, price, icon pick, listing text, privacy answers; live deploy of the index link fix awaits Cia's go; apparent-motion keeps a small dot on iPad.
+
+### Pending / open
+- NOT started, each needs Cia's go because it touches his Apple account or is outward-facing: signing and archiving (automatic signing registers the app id com.ciamac.photon on team 3AUT8DTWP3), a TestFlight build, App Store Connect record, screenshots upload, submission.
+- Working bundle id com.ciamac.photon and display name Photon are placeholders.
+
+### Durable thought
+none, reason: in-flight checkpoint; capture at exit.
+
+---
+
+## IN FLIGHT 2026-10-04 (5) - Photon iOS app: guide card no longer covers any figure (D-0624)
+
+### Done
+- [observed] Cia asked again for the guide card fix. The earlier check (1 percent of the card's box) missed thin figures. Tightened to any visible figure (40 or more device pixels) under the card at any guide step, at phone and iPad size.
+- [observed] Two false alarms from the test fixed in ios/tools/verify_piece.mjs: the guide's step dots fade out slowly (counted as figure), and hiding the card with display:none made the page re-fit the figure under it. The card is now hidden with a style that changes no layout.
+- [observed] Strict result before the fix: 5 of 21 covered (cafe-wall, cornsweet, scintillating-grid at first; then motion-aftereffect, motion-induced-blindness once the false alarms were removed). Fixed: motion-aftereffect uses PhotonApp.fit(cv,{reserveGuide:true}); motion-induced-blindness uses PhotonApp.bands({reserveGuide:true}). All 21 pass at both sizes.
+- [observed] Seen in the running app, guide open, all 21 pieces on the iPhone 18 Pro and iPad Pro 13 simulators: CONTACT_SHEET_guide_phone.png and CONTACT_SHEET_guide_pad.png in ios/. Tools: ios/tools/shoot_guide.sh.
+- [observed] ios/CONSTITUTION_APP_v7.md written (v1 to v6 kept).
+
+### Previous pending
+- done: guide card covers the figure (strict).
+- carried: real-device check (haptics, screen hold); touch on the iPad for the enlarged pieces; Cia's name, price, icon, listing; live deploy of the index link fix awaits Cia's go; apparent-motion keeps a small dot on iPad.
+
+### Pending / open
+- Tight but not overlapping on a phone: the lower arrow of the Muller-Lyer figure and the checker-shadow board sit a few points above the card with the guide open.
+
+### Durable thought
+none, reason: in-flight checkpoint; capture at exit.
+
+---
+
+## IN FLIGHT 2026-10-04 (4) - Shorts: Cia named v7 the master
+
+### Done
+- [observed] Cia in chat: "v7 is the master". Recorded in the decision log this session (see CANON line in the session report).
+
+### Previous pending
+- done: master pick among v5, v6, v7.
+- carried: release lane needs new copy and durations, nothing staged; Photon repo changes uncommitted; new audio and build folders not in .gitignore; index link fix deploy awaits Cia's go; iOS items.
+
+### Pending / open
+- Handover to the release lane needs Cia's explicit go; v7 masters are a single copy on this disk (shorts/out, gitignored).
+
+### Operational notes
+- none
+
+### Durable thought
+none, reason: a pick, recorded in the decision log.
+
+---
+
+## IN FLIGHT 2026-10-04 (4) - Photon iOS app: guide card and blank start fixed, Release build checked (D-0624)
+
+### Done
+- [observed] New verifier check (ios/tools/verify_piece.mjs): steps through every guide step, hides the card, tests the pixels under it. It found 3 of 21 pieces covered: cafe-wall, cornsweet, scintillating-grid. The other 18 were not.
+- [observed] Fix: the guide card now has one constant height (the tallest step) set in chrome_app.js init, and PhotonApp.fit(cv,{reserveGuide:true}) keeps the figure box above it; used by those three. All 21 pass the verifier. Seen in the running app on the iPhone 18 Pro simulator (build/app/fix_sheet.png): figures end above the card.
+- [observed] trichromatic-mixing now opens with red at 100 percent (source opened blank). One attribute; recorded as a named exception in ios/CONSTITUTION_APP_v6.md.
+- [observed] Release build (build-release/) contains none of PHOTON-BRIDGE, skipGuide or wskip; the Debug build contains all three. So the test hooks do not ship.
+
+### Previous pending
+- done: guide card covers the figure; trichromatic blank start; DEBUG hooks excluded from Release.
+- carried: real-device check (haptics, screen hold); Cia's name, price, icon, listing; live deploy of the index link fix awaits Cia's go; apparent-motion keeps a small dot on iPad.
+
+### Pending / open
+- Not yet checked: touch on the iPad for the enlarged pieces; the Release build was built for the simulator unsigned, not archived.
+
+### Durable thought
+none, reason: in-flight checkpoint; capture at exit.
+
+---
+
+## IN FLIGHT 2026-10-04 (3) - Photon iOS app: iPad figure sizes and button overlap fixed (D-0624)
+
+### Done
+- [observed] aperture-problem, motion-induced-blindness and troxler-fading now lay out on a phone-sized logical canvas and enlarge it (K = max(1, min(w,h)/402), pointer divided by K). On a phone K is 1. On the iPad Pro 13 simulator all three fill the screen (build/app/new_pad_trio.png, CONTACT_SHEET_app_v4_pad.png).
+- [observed] motion-induced-blindness clips its drawing to PhotonApp.bands() (new, chrome_app.js) so the scaled lattice stays out from under the thesis text.
+- [observed] Native scrim behind the button row on scrolling pages (Piece.scrolls = the Lab section; PieceScreen.swift). On the phone, contrast-sensitivity scrolled: content is hidden behind the band and the buttons sit clear; at scroll zero the first line is not dimmed. On the iPad the lab pages barely scroll in portrait, so the overlap rarely arises there.
+- [observed] node ios/tools/verify_piece.mjs exits 0 for all 21 pieces. ios/CONSTITUTION_APP_v5.md written (v1 to v4 kept).
+
+### Previous pending
+- done: iPad figure sizes; button overlap on scrolled lab pages.
+- carried: guide card covers the lowest part of the figure on a phone while open; trichromatic-mixing opens blank (source starts all lights at zero); apparent-motion keeps a small dot on iPad (its size is already proportional); real-device check of haptics and screen hold; Release build must exclude the DEBUG hooks; Cia's name, price, icon, listing; live deploy of the index link fix awaits Cia's go.
+
+### Pending / open
+- Interaction on the iPad (drag on the enlarged aperture, troxler and mask pieces) not exercised by touch; only measured and photographed.
+
+### Durable thought
+none, reason: in-flight checkpoint; capture at exit.
+
+---
+
+## 2026-10-04 EXIT (3) - Shorts v7: raised to -14 LUFS (CLOSED)
+
+Snapshot before this block: none (append only).
+Cia asked for -14. v7 is the v5 picture (stream copy) with audio at -14 LUFS; v6, v5, v4 kept.
+
+### Done
+- [observed] audio/mix_v7/*.wav from audio/mix_v5_raw: per-file gain +3.1 to +7.7 dB (most: motion-aftereffect), alimiter ceiling -1.5 dBFS; loudness.json holds each gain.
+- [observed] 22 files shorts/out/<slug>_short_v7.mp4. VER=v7 python3 shorts/verify_v5.py: ALL CHECKS PASS, loudness -14.2 to -14.0 LUFS, peaks -1.5 to -0.8 dBFS, lengths and timing identical to v5. File counts in out/: v4 22, v5 22, v6 22, v7 22.
+- [observed] shorts/gallery_v7.html written and opened in Chrome.
+
+### Previous pending
+- done: the -14 option noted in the previous block.
+- carried: Cia's ear on the set (now v7); release lane needs new copy and durations, nothing staged; Photon repo changes uncommitted; new audio and build folders not in .gitignore; index link fix deploy awaits Cia's go; iOS items.
+
+### Pending / open
+- Limiter strain is unjudged by ear: up to 7.7 dB of gain into the limiter on motion-aftereffect. If it sounds squashed, v6 (-16) is the fallback.
+- Which of v5, v6, v7 is the master for release is Cia's call; only one may go to the release folder (RELEASE_CONTRACT_v1.md point 1).
+
+### Operational notes
+- v6 and v7 are level passes on the v5 picture. A wording or timing change means re-rendering from the v5 recipe, then repeating the level step.
+
+### Durable thought
+none, reason: a level pass.
+
+### Repo state
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-04T09:07:36-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `dfd03f0 exit ritual: ship and rollback runbook for index link fix` (committed 2026-10-01)
+- tree: **20 uncommitted change(s)**
+- upstream: origin/main (ahead 23, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+- test: `python3 shorts/verify_v5.py` -> exit 0: ALL CHECKS PASS
+
+### Why we stopped
+finished
+
+---
+
+## 2026-10-04 EXIT (2) - Shorts v6: v5 raised to -16 LUFS through a limiter (CLOSED)
+
+Snapshot before this block: none (append only).
+Cia asked for the limiter pass and more volume. v6 is the v5 picture (stream copy) with louder audio; v5 and v4 kept.
+
+### Done
+- [observed] audio/mix_v6/*.wav made from audio/mix_v5_raw: per-file gain +1.0 to +5.2 dB, then ffmpeg alimiter, ceiling -2 dBFS; loudness.json holds each gain.
+- [observed] 22 files shorts/out/<slug>_short_v6.mp4. VER=v6 python3 shorts/verify_v5.py: ALL CHECKS PASS, loudness -16.1 to -16.0 LUFS, peaks -2.2 to -1.6 dBFS, lengths, VO gaps and timing identical to v5. 22 v5 and 22 v4 files still present.
+- [observed] shorts/gallery_v6.html written and opened in Chrome. verify_v5.py now takes VER (default v5).
+
+### Previous pending
+- done: limiter pass (was offered in the previous block).
+- carried: Cia's ear on the set (now v6); release lane needs new copy and durations, nothing staged; Photon repo changes uncommitted; new audio and build folders not in .gitignore; index link fix deploy awaits Cia's go; iOS items.
+
+### Pending / open
+- Target was my choice: -16 LUFS. Platforms normalise near -14; going there means about 2 dB more limiting on the voice. Not done.
+
+### Operational notes
+- v6 = v5 picture. Any future wording or timing change must re-render from the v5 recipe, then repeat the level step.
+
+### Durable thought
+none, reason: a level pass; nothing new beyond the previous block's thought.
+
+### Repo state
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-04T08:57:47-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `dfd03f0 exit ritual: ship and rollback runbook for index link fix` (committed 2026-10-01)
+- tree: **19 uncommitted change(s)**
+- upstream: origin/main (ahead 23, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+- test: `python3 shorts/verify_v5.py` -> exit 0: ALL CHECKS PASS
+
+### Why we stopped
+finished
+
+---
+
+## 2026-10-04 EXIT - Shorts v5: all 22 re-voiced (Heart) with simpler wording, measured, gallery built (CLOSED)
+
+Snapshot before this block: none (append only).
+Cia picked the Kokoro Heart voice (D-0625) and approved the simpler wording, end card kept (D-0628). All 22 shorts rendered as v5; v4 untouched.
+
+### Done
+- [observed] shorts/shorts.config.v5.json: approved wording (41 screen-text replacements, 31 spoken lines changed); shorts.config.json unchanged.
+- [observed] 44 VO lines in shorts/audio/vo_v5/ (manifest.json with measured durations), voice af_heart speed 0.88; 44 of 44 passed the word-content gate (base.en exact).
+- [observed] verify_layout.mjs on build_v5/*.html: all pages PASS (header max 441 of 470).
+- [observed] 22 files shorts/out/<slug>_short_v5.mp4. python3 shorts/verify_v5.py: ALL CHECKS PASS: audio stream in every file, audio and video lengths agree, smallest gap between VO lines 1.06 s, every last line ends 0.50 s or more before the end card, loudness -21.0 to -20.9 LUFS across the set, countdown, sweep, authored end and every VO start time identical to v4 config.
+- [observed] Assembled-piece check: audio of each finished mp4 transcribed by whisper large-v3-turbo, 22 of 22 match the script exactly.
+- [observed] 22 v4 files still in out/ (kanizsa v4 mtime Aug 8). shorts/gallery_v5.html written and opened in Chrome.
+- [observed] Mixes: audio/mix_v5_raw (as mixed, -17.0 to -20.9 LUFS) and audio/mix_v5 (levelled by attenuation to -20.9; loudness.json).
+
+### Previous pending
+- done: wording approval and the v5 render (this block).
+- carried: live deploy of the index link fix (082fede) awaits Cia's explicit go; main is ahead of origin.
+- carried: iOS app items from the 2026-10-03 IN FLIGHT blocks (not this session's scope; ios/ untouched).
+
+### Pending / open
+- Cia's ear on the v5 set (gallery_v5.html). The set sits at -20.9 LUFS, about 1.5 LU quieter than v4; raising it needs a limiter pass, offered not done.
+- Release lane: v5 lengths and wording differ from v4, so any staged copy or durations need redoing before release. Nothing was staged or uploaded (RELEASE_CONTRACT_v1.md).
+- Uncommitted in the Photon repo: engine/short.mjs, music.py, render.mjs (env switches, defaults reproduce v4), new engine/vo_v5.py, engine/vo_gate.py, verify_v5.py, shorts.config.v5.json, gallery_v5.html, audition_v5.html, WORDING_v5_PROPOSAL_v1.md. Cia said no commits this session.
+- shorts/audio/vo_v5, mix_v5, mix_v5_raw, audition_v5_2026-10-03, build_v5 are NOT covered by .gitignore patterns (only audio/vo and audio/mix are); decide ignore versus track before the next commit.
+
+### Operational notes
+- Run recipe: SHORTS_CONFIG=shorts.config.v5.json SHORTS_VO_DIR=audio/vo_v5 SHORTS_MIX_DIR=audio/mix_v5 SHORTS_BUILD=build_v5 SHORTS_FRAMES=frames/v5 SHORTS_VER=v5, then vo_v5.py, music.py (to mix_v5_raw, then level), short.mjs, verify_layout.mjs, render.mjs, verify_v5.py. Sandbox off.
+- Kokoro venv lived in the session scratchpad and is gone after this session. Rebuild: uv venv -p 3.11; uv pip install "kokoro>=0.9" "transformers>=4.44" "tokenizers>=0.19" soundfile numpy; HF_HUB_DISABLE_XET=1; needs Homebrew espeak-ng (vo_v5.py points at it).
+
+### Durable thought
+Captured to Open Brain: for a non-clone narrator, Kokoro-82M stock voices run locally and free, and passed the word gate 44 of 44; see the exit report.
+
+### Repo state
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-04T00:33:50-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `dfd03f0 exit ritual: ship and rollback runbook for index link fix` (committed 2026-10-01)
+- tree: **18 uncommitted change(s)**
+- upstream: origin/main (ahead 23, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+- test: `python3 shorts/verify_v5.py` -> exit 0: ALL CHECKS PASS
+
+### Why we stopped
+finished
+
+---
+
+## IN FLIGHT 2026-10-04 (2) - Photon iOS app: all 21 pieces opened and inspected inside the app (D-0624)
+
+### Done
+- [observed] All 21 pieces launched inside the app on iPhone 18 Pro and iPad Pro 13 simulators via debug launch hooks (`-piece <slug> -skipGuide YES`, DEBUG builds only) and photographed guide open and guide closed; contact sheets ios/build/app/SHEET_{phone,pad}_{open,closed}.png. Scripts: ios/tools/shoot_app.sh, ios/tools/sheet_app.py.
+- [observed] Touch checks in the running app: contrast-sensitivity scrolls to its end and a slider drag changes viewing distance without scrolling; kanizsa drag rotates the discs (153 to 239 degrees) without scrolling; receptive-field light drag flips EXCITED to SUPPRESSED without scrolling.
+- [observed] Bridge reaches the native side from a real web view (NSLog under DEBUG): kanizsa sent 2 reveal haptics in 24 s of the guided walk, afterimage sent hold on then off, troxler-fading sent hold on. The device-side effect (haptic, idle timer) cannot be seen in the simulator.
+- [observed] Fixed: a test hook clicked a skip button lab pages lack, which showed a stray "guide me again" pill on lab pages (artifact of the test only).
+
+### Previous pending
+- done: remaining pieces opened and inspected in the app.
+- carried: real-device check (haptics, screen hold); Cia's name, price, icon, listing; live deploy of the index link fix (082fede) awaits Cia's go.
+
+### Pending / open
+- Minor, not fixed: (1) on a phone the guide card covers the lowest part of the figure while it is open (worst on cafe-wall); (2) on long lab pages the floating native buttons sit over scrolled content, including a slider; (3) on the 13-inch iPad aperture-problem, motion-induced-blindness and troxler-fading keep phone-sized figures and look sparse; (4) trichromatic-mixing starts blank because the source starts all lights at 0.
+- The debug hooks (LibraryView .onAppear, PieceScreen didFinish and NSLog) sit under #if DEBUG; confirm a Release build excludes them before any submission.
+
+### Durable thought
+none, reason: in-flight checkpoint; capture at exit.
+
+---
+
+## IN FLIGHT 2026-10-04 - Shorts v5: voice picked (Heart), wording proposal waiting on Cia
+
+### Done
+- [observed] Cia picked voice A, Kokoro af_heart, and "simplify, show me first" (AskUserQuestion answers, 2026-10-04). Recorded in the decision log this session.
+- [observed] shorts/WORDING_v5_PROPOSAL_v1.md written: before and after for all 22, spoken and on-screen. shorts.config.json NOT changed.
+- [observed] v5 pipeline built and dry-run on kanizsa and troxler into test folders (since removed): engine/vo_v5.py (new), engine/vo_gate.py (copied from branch claude/quizzical-meitner-afa864), env switches SHORTS_CONFIG, SHORTS_VO_DIR, SHORTS_MIX_DIR, SHORTS_BUILD, SHORTS_FRAMES, SHORTS_VER added to short.mjs, music.py, render.mjs (defaults reproduce v4). Test result: 4 of 4 lines passed the word gate; kanizsa 8.24 s video and audio, -19.0 LUFS; troxler 11.73 s, -20.3 LUFS. 22 v4 files still present in out/.
+
+### Previous pending
+- done: voice pick (A, Heart).
+- carried: everything else in the 2026-10-03 EXIT block below.
+
+### Pending / open
+- WAITING ON CIA: approve, edit or reject the wording list, and the optional end card line.
+- THEN: write shorts.config.v5.json (copy plus approved wording; never edit shorts.config.json), run with SHORTS_CONFIG=shorts.config.v5.json SHORTS_VO_DIR=audio/vo_v5 SHORTS_MIX_DIR=audio/mix_v5 SHORTS_BUILD=build_v5 SHORTS_FRAMES=frames/v5 SHORTS_VER=v5: vo_v5.py, music.py, short.mjs, verify_layout.mjs, render.mjs. Then loudness-normalise the set to one target, measure, gallery_v5.html.
+- Loudness varies about 1.3 LU between pieces as mixed; add a per-file normalise step for v5.
+
+### Operational notes
+- Kokoro venv is still in the session scratchpad (temp). See the block below for the rebuild recipe. short.mjs log line still prints "build/" regardless of SHORTS_BUILD (cosmetic).
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
+## IN FLIGHT 2026-10-04 - Photon iOS app: inset rule applied, 21 of 21 pass, runs on iPhone and iPad simulators (D-0624)
+
+### Done
+- [observed] Cia ruled for the inset. PhotonApp.fit() added to ios/Photon/Pieces/chrome_app.js and applied to scintillating-grid, cafe-wall, cornsweet, ponzo, ebbinghaus, checker-shadow. Ebbinghaus also scaled and centred by extent so no ring leaves the screen.
+- [observed] ios/tools/verify_piece.mjs gained a figure-under-text check (hide text, photograph, test pixels under each text box) and a late-safe-area test. Without the watcher the late-inset test fails cornsweet; with it, it passes. `verify_piece.mjs` exits 0 for all 21 pieces.
+- [observed] Two bugs found by using the running app: PieceScreen did not reload the page on next/previous (fixed with .id(piece.slug)), and the figure was fitted before iOS applied the top inset (fixed with a re-fit watcher). Checked on iPhone 18 Pro (Ebbinghaus, next to Cornsweet) and iPad Pro 13 (Ebbinghaus).
+- [observed] ios/CONSTITUTION_APP_v4.md written (v1 to v3 kept). Contact sheet ios/CONTACT_SHEET_app_v2.png.
+
+### Previous pending
+- carried: live deploy of the index link fix (082fede) awaits Cia's explicit go; main is 22 commits ahead of origin.
+- done: figure-versus-text collisions (the NEXT item of the previous block).
+- carried: not yet checked on a real device (haptics, screen hold); not yet checked: the other 19 pieces opened inside the app (only 3 opened there; all 21 measured in a browser at both sizes).
+
+### Pending / open
+- Open the remaining pieces inside the app on both simulators and look at each, especially the five lab pieces (long scrolling pages) and the fixation pieces.
+- Cia's: app name, price, icon (placeholder set, no image), App Store listing, privacy details. Nothing signed, uploaded, committed, pushed or deployed.
+- Minor open: a drag must start on the figure box (not the text bands); motion-aftereffect releases the screen hold when the spiral stops; about 10 shorts-only pieces have no interactive page.
+
+### Operational notes
+- xcodegen, xcodebuild, simctl and the verifier need the sandbox off. Simulator screenshot: pass the UDID (iPhone 18 Pro 88000C4C-0FFA-497C-B9EA-5502F27929CA, iPad Pro 13 6246D73A-FCF1-45E5-A8BA-5EDE185DD7D0).
+- The audio re-voicing of the shorts runs in a separate session (spawned 2026-10-03); this lane does not touch shorts/.
+
+### Durable thought
+none, reason: in-flight checkpoint; capture at exit.
+
+---
+
+## 2026-10-03 EXIT - Shorts v5 re-voice for children: audition delivered, waiting on Cia's voice pick (OPEN)
+
+Snapshot before this block: none (append only).
+Cia asked for a voice that appeals to children and young people on the 22 v4 shorts. Step 1 (measure the current voice) and step 2 (audition on kanizsa) are done; bulk re-voice has NOT started and must not start before he picks.
+
+### Done
+- [observed] Engine question settled from canon: the "redo on ElevenLabs" note in shorts/engine/vo.py is stale. D-0334 (2026-09-08) keeps the local engine; primary ElevenLabs account is payg with cloning off; second plan ends 2026-10-19 (D-0469).
+- [observed] Current v4 voice measured over all 44 lines in shorts/audio/vo: median pitch 91 Hz (low adult male), pace 1.31 to 4.36 words/s across lines (mean 156 wpm), "Do you see a triangle?" spoken in 1.15 s. v4 loudness on three files: kanizsa -19.6, afterimage -19.4, troxler -20.7 LUFS.
+- [observed] Five audition takes on kanizsa with Kokoro-82M stock voices (local, free, no real person cloned), speed 0.88: A af_heart (about 210 Hz), B am_puck (122 Hz), C bf_emma (183 Hz), D af_bella (200 Hz), E af_heart with simpler wording. All ten lines transcribed word-for-word correct by whisper large-v3-turbo. Files: shorts/audio/audition_v5_2026-10-03/ (wavs, manifest.json, kanizsa_<X>.mp4 = v4 picture + voice only, render_audition.py). Page: shorts/audition_v5.html.
+- [proposed] Simpler-wording list for children (see Pending); nothing in shorts.config.json was changed.
+
+### Previous pending
+- carried: live deploy of the index link fix (082fede) awaits Cia's explicit go; main is 22 commits ahead of origin.
+- carried: iOS app items (figure-versus-text collisions on six pieces, iPad and device checks, app name, price, icon, listing). Not this session's scope; ios/ untouched.
+
+### Pending / open
+- WAITING ON CIA: pick a voice (A, B, C, D, or ask for other stock voices), and say yes or no to simpler wording.
+- THEN: re-voice all 22 to shorts/audio/vo_v5/ (new folder, own manifest.json), mix to shorts/audio/mix_v5/, render shorts/out/<slug>_short_v5.mp4, measure (audio stream, no VO overlap, LUFS per file, countdown timing unchanged on afterimage, motion-aftereffect, troxler), build gallery_v5.html.
+- music.py and short.mjs read audio/vo/manifest.json by fixed path; v5 needs a path switch (env var), not an overwrite.
+- The word-content gate (vo_gate.py, verify_vo.py, commit e21ed7b) exists only on branch claude/quizzical-meitner-afa864, not on main. Bring it over (as files, no merge) for the v5 pass.
+- Wording a child may not follow: "Congruent" (shepard-tables), "You supplied it" (kanizsa), "One contour, two objects" (rubin-vase), "Dead level" (cafe-wall), "shaft", "fins" (muller-lyer), "seam" (cornsweet). The on-screen beats carry the same words, so a wording change touches picture as well as voice.
+
+### Operational notes
+- Kokoro runs from a throwaway venv in the session scratchpad (kk/, with HF_HOME and UV_CACHE_DIR also there); it is temp and will vanish. Rebuild: uv venv -p 3.11, uv pip install "kokoro>=0.9" "transformers>=4.44" "tokenizers>=0.19" soundfile numpy. Three fixes needed: point espeakng_loader at /opt/homebrew/lib/libespeak-ng.dylib and /opt/homebrew/share/espeak-ng-data (the bundled path hard-exits the process), set UV_CACHE_DIR and HF_HOME to a writable dir, set HF_HUB_DISABLE_XET=1. All in render_audition.py.
+- Writing into shorts/ from a worktree session needs the sandbox off. whisper-cli prints nothing inside the sandbox without -ng (Metal blocked).
+- The fresh worktree branch (claude/competent-wiles-11277d at 69c3077) has no shorts/ at all; all work is by absolute path in the main checkout.
+
+### Durable thought
+none, reason: audition only; nothing learned yet that changes a future action beyond the operational notes above.
+
+### Repo state
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-03T23:56:23-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `dfd03f0 exit ritual: ship and rollback runbook for index link fix` (committed 2026-10-01)
+- tree: **7 uncommitted change(s)**
+- upstream: origin/main (ahead 23, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+Blocked on Cia's voice pick (his taste call, by instruction).
+
+---
+
+## IN FLIGHT 2026-10-03 (2) - Photon iOS app: 21 pieces ported, measured, in the simulator build (D-0615)
+
+### Done
+- [observed] 21 pieces in ios/Photon/Pieces; `node ios/tools/verify_piece.mjs <slug>` exits 0 for all 21 (run 23:2x, failures: 0 of 21). App rebuilt (BUILD SUCCEEDED) with 21 pages in the bundle; library screen seen on iPhone 18 Pro and iPad Pro 13 simulators.
+- [observed] Swarm run 1 (haiku workers, wf_3219fd66-4e7) halted at the audition: the worker fired the reveal haptic on every tap and did not fix it on rework. Run 2 (sonnet workers, wf_96ad927f-e09): 18 passed the fidelity check, 1 disputed (contrast-sensitivity, no haptic), 0 unverified. Token use is in the workflow run record.
+- [observed] Orchestrator rulings: contrast-sensitivity carries no haptic (no discrete reveal); vertical scrolling is not clipping. Both written into ios/CONSTITUTION_APP_v3.md (v1, v2 kept). Verifier corrected four times against its own false failures (guide-close step, scroll pages, inner scroll panels, hold(variable)).
+- [observed] Hand fixes by the orchestrator: afterimage haptic gated on the page own adaptation threshold and "now click" changed to "now tap"; receptive-field label margin widened (overlap existed in the source).
+- [inferred] from ios/CONTACT_SHEET_app_v1.png (phone size, guide closed): text collides with the FIGURE on scintillating-grid, cafe-wall, cornsweet, ponzo, checker-shadow, and the Ebbinghaus rings clip at the left edge. The verifier measures text against text, not text against canvas, so it passed them.
+
+### Previous pending
+- carried: live deploy of the index link fix (082fede) awaits Cia's explicit go; main is 22 commits ahead of origin.
+- done: port swarm returned and was measured.
+
+### Pending / open
+- NEXT: figure-versus-text collisions on the six pieces above. Needs a rule (figure inset or a text backing) and a verifier check that samples the canvas under each text block. Taste call on the rule is Cia's.
+- Not yet checked: opening pieces on the iPad simulator, the native previous/next buttons, haptics and screen-hold on a real device (the simulator has neither).
+- Open minor findings in the swarm output (tasks/w52b1lgft.output): #readout 2px above shell-top on iPad in several gallery pieces; motion-aftereffect releases the screen hold when the spiral stops, which is when the viewer is watching.
+- Cia's: app name, price, icon (placeholder set, no image), App Store listing. Nothing signed, uploaded, committed, pushed or deployed.
+- About 10 shorts-only pieces have no interactive page yet.
+
+### Operational notes
+- xcodegen, xcodebuild, simctl and the verifier all need the sandbox off.
+- Swarm v2 script: /private/tmp/claude-501/-Users-ciamac/5881f877-6da0-4028-9ba3-f1cac9376027/scratchpad/swarm_v2.js (temp; copy before reuse).
+
+### Durable thought
+none, reason: in-flight checkpoint; capture at exit.
+
+---
+
+## IN FLIGHT 2026-10-03 - Photon iOS app: shell built, port swarm running (D-0615)
+
+### Done
+- [observed] Native shell written at ios/ (project.yml, Photon/*.swift, Pieces/chrome_app.{js,css}, catalog.json). `xcodebuild ... -sdk iphonesimulator` returned BUILD SUCCEEDED on Xcode 27.0.
+- [observed] Pilot piece kanizsa ported by hand; opens from the app bundle on the iPhone 18 Pro simulator (screenshot seen: guide card, native back button clear of text).
+- [observed] ios/tools/verify_piece.mjs: kanizsa passes with 0 findings and 2 haptic messages; an unported copy of ponzo fails with 30+ findings. Must run outside the sandbox (it launches a browser).
+- [observed] ios/CONSTITUTION_APP_v1.md written. Decision recorded as D-0615.
+- [observed] Inventory corrected: 21 interactive pages (9 gallery, 7 book, 5 sandbox), not 23; 22 shorts at v4 in shorts/out (gitignored, this disk only).
+
+### Previous pending
+- carried: live deploy of the index link fix (082fede) awaits Cia's explicit go; main is 22 commits ahead of origin.
+
+### Pending / open
+- Port swarm in flight: Workflow run wf_3219fd66-4e7, 20 pieces, haiku workers, fidelity checker per piece. Script path is in the session transcript. After it returns: run `node ios/tools/verify_piece.mjs <slug>` for every piece (outside the sandbox), send findings back for rework, adjudicate disputes, rebuild, check on iPhone and iPad simulators.
+- Not started: app icon (placeholder set, no image), App Store listing, privacy details, TestFlight. All need Cia. Nothing is signed or uploaded.
+- About 10 shorts-only pieces have no interactive page yet (later update).
+
+### Operational notes
+- xcodegen and xcodebuild need the sandbox off (Info.plist write and CoreSimulator are blocked inside it).
+- The simulator screenshot tool defaults to another booted device; pass the UDID (iPhone 18 Pro 88000C4C-0FFA-497C-B9EA-5502F27929CA).
+- New untracked files in the Photon repo: ios/, shorts/gallery_v4.html, shorts/CONTACT_SHEET_v4.png. Nothing committed, pushed or deployed.
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
 ## 2026-10-01 EXIT - Ship and rollback runbook for the index link fix (CLOSED, NOT DEPLOYED)
 
 Snapshot before this block: none (append only).

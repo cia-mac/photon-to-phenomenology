@@ -1,0 +1,23 @@
+[
+  {"slug":"kanizsa","title":"Illusory contours","section":"Gallery","line":"A triangle that is not there."},
+  {"slug":"motion-aftereffect","title":"The motion aftereffect","section":"Gallery","line":"Stillness that appears to move."},
+  {"slug":"afterimage","title":"The negative afterimage","section":"Gallery","line":"A colour your eye supplies."},
+  {"slug":"scintillating-grid","title":"The scintillating grid","section":"Gallery","line":"Dots that vanish when you look."},
+  {"slug":"ebbinghaus","title":"The Ebbinghaus circles","section":"Gallery","line":"Size judged by its neighbours."},
+  {"slug":"cornsweet","title":"The Cornsweet edge","section":"Gallery","line":"One edge shades two fields."},
+  {"slug":"cafe-wall","title":"The café wall","section":"Gallery","line":"Parallel rows that seem to slope."},
+  {"slug":"ponzo","title":"The Ponzo illusion","section":"Gallery","line":"Depth cues stretch a line."},
+  {"slug":"muller-lyer","title":"The Müller-Lyer lines","section":"Gallery","line":"Equal shafts, unequal look."},
+  {"slug":"inverse-problem","title":"The inverse problem","section":"The Book","line":"Many worlds cast one image."},
+  {"slug":"checker-shadow","title":"The checker-shadow","section":"The Book","line":"Two squares, one grey."},
+  {"slug":"aperture-problem","title":"The aperture problem","section":"The Book","line":"Motion seen through a keyhole."},
+  {"slug":"apparent-motion","title":"Apparent motion","section":"The Book","line":"Two flashes become one movement."},
+  {"slug":"troxler-fading","title":"Troxler fading","section":"The Book","line":"Hold still and the world fades."},
+  {"slug":"motion-induced-blindness","title":"Motion-induced blindness","section":"The Book","line":"Plain dots that disappear."},
+  {"slug":"change-blindness","title":"Change blindness","section":"The Book","line":"A change you cannot find."},
+  {"slug":"contrast-sensitivity","title":"Contrast sensitivity","section":"The Lab","line":"Where the bars vanish."},
+  {"slug":"gestalt-grouping","title":"Gestalt grouping","section":"The Lab","line":"Parts that insist on wholes."},
+  {"slug":"opponent-afterimage","title":"Opponent afterimages","section":"The Lab","line":"Colour in paired channels."},
+  {"slug":"receptive-field","title":"The receptive field","section":"The Lab","line":"What one cell reports."},
+  {"slug":"trichromatic-mixing","title":"Trichromatic mixing","section":"The Lab","line":"Three cones, every colour."}
+]

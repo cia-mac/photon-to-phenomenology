@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Troxler fading · Photon to Phenomenology</title>
+<link rel="stylesheet" href="chrome_app.css">
+<style>
+  :root{ --ink:#0c0b09; --cream:#e8e0d0; --dim:rgba(232,224,208,0.40); --faint:rgba(232,224,208,0.15); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:var(--ink);overflow:hidden}
+  body{
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--cream);
+    -webkit-font-smoothing:antialiased;touch-action:none;cursor:crosshair;
+  }
+  canvas{display:block;width:100%;height:100%;position:fixed;inset:0}
+  .chrome{position:fixed;pointer-events:none;user-select:none}
+  #chapter{top:var(--shell-top);left:var(--shell-side);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--dim)}
+  #title{top:calc(var(--shell-top) + 18px);left:var(--shell-side);font-size:15px;letter-spacing:0.04em;color:var(--cream);font-weight:400}
+  #readout{
+    top:calc(var(--shell-top) - 2px);right:var(--shell-side);text-align:right;
+    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:11px;color:var(--dim);line-height:1.7;
+  }
+  #readout .lab{font-size:9.5px;text-transform:uppercase;letter-spacing:0.12em;color:var(--faint);margin-right:.6em}
+  #hold{margin-top:8px;font-size:11px;letter-spacing:0.04em;color:var(--cream)}
+  #thesis{
+    bottom:calc(var(--shell-bottom) + 62px);right:var(--shell-side);text-align:right;max-width:min(48ch,72vw);
+    font-size:14px;line-height:1.55;color:var(--cream);opacity:0;transition:opacity 1.6s ease;
+  }
+  #thesis .lead{color:var(--dim);font-size:12.5px;display:block;margin-bottom:.5em}
+  @media (max-width:680px){ #thesis{left:var(--shell-side);text-align:left;max-width:none} #readout{top:calc(var(--shell-top) + 46px);left:var(--shell-side);right:auto;text-align:left} }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div class="chrome" id="chapter">Ch. 11 · Troxler fading</div>
+<div class="chrome" id="title">Hold still and the ring leaves</div>
+<div class="chrome" id="readout">
+  <div><span class="lab">eccentricity</span><span id="rEcc">·</span></div>
+  <div><span class="lab">held still</span><span id="rTime">0.0 s</span></div>
+  <div id="hold">fixate the centre</div>
+</div>
+<div class="chrome" id="thesis">
+  <span class="lead">The ring is still on the screen. Flick your eyes and it returns at full strength.</span>
+  Steady, unchanging input stops being reported. Your visual system spends its bandwidth on change, and erases the rest. Vision is not recording, it is construction.
+</div>
+
+<script src="chrome_app.js"></script>
+<script>
+(() => {
+  "use strict";
+  const cv=document.getElementById('c'); const ctx=cv.getContext('2d');
+  const rEcc=document.getElementById('rEcc'), rTime=document.getElementById('rTime'), hold=document.getElementById('hold');
+
+  let W=0,H=0,DPR=1,cx=0,cy=0,K=1,oy=0;
+  let ecc={cur:0,tgt:0};                 // ring radius (px)
+  const N=8, blobR=46;
+  let stillMs=0, lastMoveT=performance.now(), lastT=performance.now();
+  let wasGone=false;                     // ring-gone state, for the shell haptic
+
+  function resize(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    const B=PhotonApp.fit(cv,{reserveGuide:true});   // app: draw in the box between the text and the open guide card
+    K=Math.max(1,Math.min(B.w,B.h)/402);   // and lay out on a phone-sized canvas, enlarged for a bigger screen
+    W=B.w/K;H=B.h/K; oy=B.y;
+    cv.width=Math.round(B.w*DPR);cv.height=Math.round(B.h*DPR);
+    ctx.setTransform(DPR*K,0,0,DPR*K,0,0);
+    cx=W/2; cy=H/2;
+    const e=Math.min(W,H)*0.32; ecc.tgt=e; if(ecc.cur===0) ecc.cur=e;
+  }
+  function lerp(a,b,t){return a+(b-a)*t;}
+
+  function blob(x,y){
+    const g=ctx.createRadialGradient(x,y,0,x,y,blobR);
+    // soft, low-contrast warm patch (functional softness, not decorative glow)
+    g.addColorStop(0,'rgba(160,150,132,0.34)');
+    g.addColorStop(0.6,'rgba(140,131,116,0.18)');
+    g.addColorStop(1,'rgba(140,131,116,0)');
+    ctx.fillStyle=g;
+    ctx.beginPath(); ctx.arc(x,y,blobR,0,Math.PI*2); ctx.fill();
+  }
+
+  function draw(now){
+    const dt=now-lastT; lastT=now;
+    ecc.cur=lerp(ecc.cur,ecc.tgt,0.12);
+    stillMs=now-lastMoveT;
+
+    ctx.fillStyle='#0c0b09'; ctx.fillRect(0,0,W,H);
+
+    // peripheral ring of soft patches (physically constant — the fade is yours)
+    for(let i=0;i<N;i++){
+      const a=(i/N)*Math.PI*2 - Math.PI/2;
+      blob(cx+Math.cos(a)*ecc.cur, cy+Math.sin(a)*ecc.cur);
+    }
+
+    // central fixation cross, crisp and steady
+    ctx.strokeStyle='rgba(232,224,208,0.92)'; ctx.lineWidth=1.4;
+    ctx.beginPath();
+    ctx.moveTo(cx-7,cy); ctx.lineTo(cx+7,cy);
+    ctx.moveTo(cx,cy-7); ctx.lineTo(cx,cy+7);
+    ctx.stroke();
+
+    // readout
+    rEcc.textContent=Math.round(ecc.cur)+' px';
+    const s=stillMs/1000;
+    rTime.textContent=s.toFixed(1)+' s';
+    const gone=s>=8; if(gone!==wasGone){ wasGone=gone; if(gone && dt<250) PhotonApp.haptic('reveal'); }
+    hold.textContent = s<3 ? 'fixate the centre'
+                     : s<8 ? 'keep holding…'
+                     : 'is the ring still there?';
+    requestAnimationFrame(draw);
+  }
+
+  function cX(e){return (e.touches?e.touches[0]:e).clientX/K;}
+  function cY(e){return ((e.touches?e.touches[0]:e).clientY-oy)/K;}
+  let dragging=false;
+  function moved(){ lastMoveT=performance.now(); PhotonApp.hold(false); }
+  function onDown(e){ e.preventDefault(); dragging=true; setEcc(e); }
+  function onMove(e){ if(dragging){ e.preventDefault(); setEcc(e);} }
+  function onUp(){ if(dragging){ dragging=false; PhotonApp.hold(true); } }
+  function setEcc(e){
+    moved();
+    const d=Math.hypot(cX(e)-cx, cY(e)-cy);
+    ecc.tgt=Math.max(Math.min(W,H)*0.12, Math.min(Math.min(W,H)*0.46, d));
+  }
+
+  cv.addEventListener('mousedown',onDown);
+  window.addEventListener('mousemove',onMove);
+  window.addEventListener('mouseup',onUp);
+  cv.addEventListener('touchstart',onDown,{passive:false});
+  window.addEventListener('touchmove',onMove,{passive:false});
+  window.addEventListener('touchend',onUp);
+  window.addEventListener('resize',resize);
+
+  // ---- guided walkthrough (per-instrument script) ----
+  const WALK=[
+    {t:"A soft ring sits out in your periphery and a small cross marks the centre. <b>Fix your gaze on that cross</b> and do not let your eyes wander.", act(){ecc.tgt=Math.min(W,H)*0.32; lastMoveT=performance.now();}},
+    {t:"Hold steady. Keep staring straight at the cross and let the ring stay at the corner of your vision. <b>Do not chase it.</b>", act(){lastMoveT=performance.now();}},
+    {t:"Wait a few seconds without moving. The ring softens, thins, and <b>slips out of awareness</b>, even though it is still on the screen at full strength.", act(){lastMoveT=performance.now();}},
+    {t:"Now flick your eyes and it snaps back. Steady, unchanging input stops being reported. <b>Vision is not recording, it is construction.</b>", act(){lastMoveT=performance.now();}},
+  ];
+  PhotonChrome.init({here:'troxler-fading', walk:WALK});
+
+  resize();
+  PhotonApp.hold(true);
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

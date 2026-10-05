@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<link rel="stylesheet" href="chrome_app.css">
+<title>Trichromatic / Additive Light Mixing · Photon to Phenomenology</title>
+<style>
+  :root{
+    --ink:#0c0b09;
+    --cream:#e8e0d0;
+    --caspian:#4d7fe0;
+    --focus:#78b4ff;
+    --face-sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --face-mono:"SF Mono",ui-monospace,Menlo,Monaco,"Roboto Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--ink);color:var(--cream);}
+  body{
+    font-family:var(--face-sans);
+    font-weight:300;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    padding:var(--shell-top) var(--shell-side) calc(var(--shell-bottom) + 62px);
+    max-width:760px;
+    margin:0 auto;
+    overflow-x:hidden;
+  }
+  .eyebrow{
+    font-family:var(--face-mono);
+    font-size:11px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--cream);
+    opacity:0.62;
+    margin:0 0 14px;
+  }
+  h1{
+    font-weight:300;
+    font-size:clamp(21px,4.6vw,27px);
+    letter-spacing:0.005em;
+    margin:0 0 4px;
+    line-height:1.2;
+  }
+  .cite{
+    font-family:var(--face-mono);
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    opacity:0.55;
+    margin:0 0 22px;
+  }
+  .instruction{
+    font-weight:300;
+    font-size:clamp(15px,2.6vw,17px);
+    max-width:56ch;
+    margin:0 0 26px;
+    line-height:1.55;
+    color:var(--cream);
+  }
+  .stage{
+    display:flex;
+    justify-content:center;
+    margin:0;
+    padding:0 0 26px;
+    touch-action:none;
+  }
+  canvas{
+    display:block;
+    width:min(440px,86vw);
+    height:min(440px,86vw);
+    background:var(--ink);
+    image-rendering:auto;
+    touch-action:none;
+  }
+  /* ---- sliders ---- */
+  .controls{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    max-width:560px;
+    margin:0 auto 30px;
+  }
+  .ctl-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    font-family:var(--face-mono);
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    margin-bottom:7px;
+  }
+  .ctl-head .val{opacity:0.85;letter-spacing:0.08em;}
+  input[type=range]{
+    -webkit-appearance:none;
+    appearance:none;
+    width:100%;
+    height:44px;
+    background:transparent;
+    margin:0;
+    cursor:pointer;
+    min-height:44px;
+    touch-action:pan-y;
+  }
+  input[type=range]:focus{outline:none;}
+  /* track */
+  input[type=range]::-webkit-slider-runnable-track{
+    height:3px;
+    background:#26251f;
+    border:none;
+  }
+  input[type=range]::-moz-range-track{
+    height:3px;
+    background:#26251f;
+    border:none;
+  }
+  /* thumb */
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    appearance:none;
+    width:17px;height:17px;
+    margin-top:-7px;
+    border-radius:50%;
+    background:var(--caspian);
+    border:none;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:17px;height:17px;
+    border-radius:50%;
+    background:var(--caspian);
+    border:none;
+  }
+  input[type=range]:hover::-webkit-slider-thumb{background:var(--focus);}
+  input[type=range]:hover::-moz-range-thumb{background:var(--focus);}
+  input[type=range]:focus-visible::-webkit-slider-thumb{
+    box-shadow:0 0 0 2px var(--ink),0 0 0 4px var(--focus);
+  }
+  input[type=range]:focus-visible::-moz-range-thumb{
+    box-shadow:0 0 0 2px var(--ink),0 0 0 4px var(--focus);
+  }
+  input[type=range]:focus-visible{
+    outline:2px solid var(--focus);
+    outline-offset:3px;
+  }
+  /* filled portion via gradient background on track */
+  input[type=range].fill::-webkit-slider-runnable-track{
+    background:linear-gradient(var(--caspian),var(--caspian)) 0/var(--pct,0%) 100% no-repeat,#26251f;
+  }
+  input[type=range].fill::-moz-range-track{
+    background:linear-gradient(var(--caspian),var(--caspian)) 0/var(--pct,0%) 100% no-repeat,#26251f;
+  }
+  /* ---- readout ---- */
+  .readout{
+    font-family:var(--face-mono);
+    font-size:12px;
+    letter-spacing:0.04em;
+    max-width:560px;
+    margin:0 auto 30px;
+    border-top:1px solid #201f1a;
+    padding-top:16px;
+  }
+  .readout h2{
+    font-size:11px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    font-weight:300;
+    opacity:0.6;
+    margin:0 0 12px;
+  }
+  .rrow{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:2px;
+    padding:9px 0;
+    border-bottom:1px solid #18170f;
+  }
+  .rrow:last-child{border-bottom:none;}
+  .rlabel{
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    opacity:0.9;
+  }
+  .rvals{opacity:0.72;font-size:11.5px;word-break:break-word;}
+  .rswatch{
+    display:inline-block;
+    width:11px;height:11px;
+    vertical-align:-1px;
+    margin-right:7px;
+    border:1px solid #3a382f;
+  }
+  .percept{opacity:0.72;font-size:11.5px;}
+  .percept em{font-style:normal;color:var(--cream);opacity:1;}
+  .honest-note{
+    font-family:var(--face-sans);
+    font-weight:300;
+    font-size:13px;
+    line-height:1.55;
+    opacity:0.7;
+    max-width:56ch;
+    margin:14px auto 0;
+  }
+  /* ---- contrast reference panel ---- */
+  .contrast{
+    max-width:560px;
+    margin:0 auto 30px;
+    border:1px solid #201f1a;
+    padding:16px 16px 18px;
+  }
+  .contrast .tag{
+    font-family:var(--face-mono);
+    font-size:10px;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    opacity:0.5;
+    margin:0 0 14px;
+  }
+  .cpair{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:12px;
+    align-items:center;
+    padding:8px 0;
+  }
+  .cpair + .cpair{border-top:1px solid #18170f;}
+  .cswatches{display:flex;gap:0;}
+  .cswatches span{
+    width:22px;height:22px;
+    display:block;
+    position:relative;
+  }
+  .cwrap{position:relative;width:44px;height:22px;}
+  .cwrap span{position:absolute;top:0;width:22px;height:22px;}
+  .ctext{font-family:var(--face-mono);font-size:11px;letter-spacing:0.05em;line-height:1.45;}
+  .ctext b{font-weight:300;letter-spacing:0.14em;text-transform:uppercase;opacity:0.95;}
+  .ctext .sub{opacity:0.62;font-size:10.5px;}
+  footer{
+    font-family:var(--face-mono);
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    opacity:0.5;
+    text-align:center;
+    margin-top:8px;
+  }
+  .sr-only{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important;}
+  }
+</style>
+</head>
+<body>
+  <p class="eyebrow">Photon to Phenomenology</p>
+  <h1>Trichromatic / additive light mixing</h1>
+  <p class="cite">Palmer, Vision Science §3.2 · the psychophysics of color</p>
+
+  <p class="instruction">
+    Raise each light. Where two overlap, a new color appears; where all three meet, white.
+    None of it is in the light. Your eye makes it.
+  </p>
+
+  <div class="stage">
+    <canvas id="cv" width="880" height="880" role="img"
+      aria-label="Three overlapping circular lights on a black field: red at top, green lower-left, blue lower-right, arranged as an additive trefoil. Overlaps show the additive sum of the covering lights."></canvas>
+  </div>
+
+  <div class="controls">
+    <div>
+      <div class="ctl-head"><label for="r">Red light</label><span class="val" id="rv">0%</span></div>
+      <input class="fill" type="range" id="r" min="0" max="100" step="1" value="100"
+        aria-label="Red light intensity, percent" aria-valuetext="0 percent">
+    </div>
+    <div>
+      <div class="ctl-head"><label for="g">Green light</label><span class="val" id="gv">0%</span></div>
+      <input class="fill" type="range" id="g" min="0" max="100" step="1" value="0"
+        aria-label="Green light intensity, percent" aria-valuetext="0 percent">
+    </div>
+    <div>
+      <div class="ctl-head"><label for="b">Blue light</label><span class="val" id="bv">0%</span></div>
+      <input class="fill" type="range" id="b" min="0" max="100" step="1" value="0"
+        aria-label="Blue light intensity, percent" aria-valuetext="0 percent">
+    </div>
+  </div>
+
+  <div class="readout" aria-live="polite">
+    <h2>Emitted stimulus: the pixels, not a color name</h2>
+    <div id="rows"></div>
+    <p class="honest-note">
+      The readout reports what the pixels actually emit: a linear-RGB radiance triple encoded to
+      an sRGB hex code. The <em>&ldquo;you likely see&rdquo;</em> line is your visual system&rsquo;s
+      construction, not a property of the light. The red-plus-green overlap emits only
+      red-primary and green-primary light, no yellow-wavelength photons; &ldquo;yellow&rdquo; is built
+      by three cone signals (the L/M/S cone basis is Palmer §3.3). Turn a light off and its
+      contribution vanishes from every overlap it fed, proof the secondaries are sums, not paint.
+    </p>
+  </div>
+
+  <div class="contrast">
+    <p class="tag">Reference · not interactive</p>
+    <div class="cpair">
+      <div class="cwrap" aria-hidden="true">
+        <span style="left:0;background:#ff0000;mix-blend-mode:screen"></span>
+        <span style="left:14px;background:#00ff00;mix-blend-mode:screen"></span>
+        <span style="left:22px;background:#0000ff;mix-blend-mode:screen"></span>
+      </div>
+      <div class="ctext"><b>Additive · this piece</b><br>
+        <span class="sub">RGB lights · black ground · energies sum up toward white</span></div>
+    </div>
+    <div class="cpair">
+      <div class="cwrap" aria-hidden="true">
+        <span style="left:0;background:#00ffff;mix-blend-mode:multiply"></span>
+        <span style="left:14px;background:#ff00ff;mix-blend-mode:multiply"></span>
+        <span style="left:22px;background:#ffff00;mix-blend-mode:multiply"></span>
+      </div>
+      <div class="ctext"><b>Subtractive</b><br>
+        <span class="sub">CMY pigments · white ground · absorb down toward black</span></div>
+    </div>
+  </div>
+
+  <footer>Palmer, Vision Science §3.2</footer>
+
+<script src="chrome_app.js"></script>
+<script>
+(function(){
+  "use strict";
+  var cv = document.getElementById("cv");
+  var ctx = cv.getContext("2d", { willReadFrequently:true });
+
+  // ---- sRGB transfer functions (linear <-> encoded), all in [0,1] ----
+  function s2l(v){ v/=255; return v<=0.04045 ? v/12.92 : Math.pow((v+0.055)/1.055,2.4); }
+  function encode(c){ // linear -> 0..255 sRGB code
+    if(c<0)c=0; if(c>1)c=1;
+    var e = c<=0.0031308 ? 12.92*c : 1.055*Math.pow(c,1/2.4)-0.055;
+    return Math.round(e*255);
+  }
+  function hex2(n){ return (n<16?"0":"")+n.toString(16); }
+
+  // Field #0c0b09 as LINEAR radiance (the darkroom floor the lights add onto).
+  var F = { r:s2l(0x0c), g:s2l(0x0b), b:s2l(0x09) };
+
+  // intensities in [0,1]
+  var I = { r:0, g:0, b:0 };
+
+  var W=0,H=0;                 // backing pixel size (square)
+  var mask=null;               // Uint8Array, bit0=red bit1=green bit2=blue coverage
+  var img=null;               // ImageData
+
+  function buildGeometry(){
+    var dpr = Math.min(window.devicePixelRatio||1, 2);
+    var cssPx = cv.clientWidth || 380;
+    W = Math.max(64, Math.round(cssPx*dpr));
+    H = W;
+    cv.width = W; cv.height = H;
+
+    var off = W*0.145;         // disk-center distance from canvas centre
+    var rad = W*0.262;         // disk radius
+    var cx = W/2, cy = H/2;
+    // Red top, Green lower-left, Blue lower-right (classic additive trefoil)
+    var cxR=cx,           cyR=cy-off;
+    var cxG=cx-off*0.8660254, cyG=cy+off*0.5;
+    var cxB=cx+off*0.8660254, cyB=cy+off*0.5;
+    var r2 = rad*rad;
+
+    mask = new Uint8Array(W*H);
+    var i=0;
+    for(var y=0;y<H;y++){
+      for(var x=0;x<W;x++,i++){
+        var m=0;
+        var dx=x-cxR, dy=y-cyR; if(dx*dx+dy*dy<=r2) m|=1;
+        dx=x-cxG; dy=y-cyG; if(dx*dx+dy*dy<=r2) m|=2;
+        dx=x-cxB; dy=y-cyB; if(dx*dx+dy*dy<=r2) m|=4;
+        mask[i]=m;
+      }
+    }
+    img = ctx.createImageData(W,H);
+  }
+
+  // linear radiance for a coverage mask given current intensities (field floor + sums)
+  function linForMask(m){
+    return {
+      r: F.r + ((m&1)?I.r:0),
+      g: F.g + ((m&2)?I.g:0),
+      b: F.b + ((m&4)?I.b:0)
+    };
+  }
+
+  function render(){
+    if(!img) return;
+    // Precompute the 8 possible RGBA outputs; blit by mask (fast, geometry is fixed).
+    var lut = new Uint8Array(8*4);
+    for(var m=0;m<8;m++){
+      var L = linForMask(m);
+      lut[m*4]   = encode(L.r);
+      lut[m*4+1] = encode(L.g);
+      lut[m*4+2] = encode(L.b);
+      lut[m*4+3] = 255;
+    }
+    var d = img.data, n = mask.length, p=0;
+    for(var i=0;i<n;i++,p+=4){
+      var o = mask[i]*4;
+      d[p]=lut[o]; d[p+1]=lut[o+1]; d[p+2]=lut[o+2]; d[p+3]=255;
+    }
+    ctx.putImageData(img,0,0);
+    updateReadout();
+  }
+
+  // ---- percept naming: the viewer's construction, framed as such ----
+  function perceptName(hasR,hasG,hasB){
+    // "lit" = this primary meaningfully contributes to the region
+    if(hasR&&hasG&&hasB) return "white";
+    if(hasR&&hasG) return "yellow";
+    if(hasG&&hasB) return "cyan";
+    if(hasR&&hasB) return "magenta";
+    if(hasR) return "red";
+    if(hasG) return "green";
+    if(hasB) return "blue";
+    return "darkness, no light";
+  }
+
+  function regionRow(name, coversR,coversG,coversB){
+    var m = (coversR?1:0)|(coversG?2:0)|(coversB?4:0);
+    var L = linForMask(m);
+    var R8=encode(L.r), G8=encode(L.g), B8=encode(L.b);
+    var hex = "#"+hex2(R8)+hex2(G8)+hex2(B8);
+    var litR = coversR && I.r>0.02;
+    var litG = coversG && I.g>0.02;
+    var litB = coversB && I.b>0.02;
+    var seen = perceptName(litR,litG,litB);
+    return {
+      name:name,
+      lin:"lin ("+L.r.toFixed(3)+", "+L.g.toFixed(3)+", "+L.b.toFixed(3)+")",
+      hex:hex.toUpperCase(),
+      swatch:"rgb("+R8+","+G8+","+B8+")",
+      seen:seen
+    };
+  }
+
+  var wasWhite=false;          // reveal state, for the shell haptic
+  var rowsEl = document.getElementById("rows");
+  function updateReadout(){
+    var regions = [
+      regionRow("Centre · R + G + B", true,true,true),
+      regionRow("Overlap · R + G", true,true,false),
+      regionRow("Overlap · G + B", false,true,true),
+      regionRow("Overlap · R + B", true,false,true)
+    ];
+    var html="";
+    for(var i=0;i<regions.length;i++){
+      var r=regions[i];
+      html += '<div class="rrow">'
+        + '<div class="rlabel">'+r.name+'</div>'
+        + '<div class="rvals"><span class="rswatch" style="background:'+r.swatch+'"></span>'
+        + r.lin+' · '+r.hex+'</div>'
+        + '<div class="percept">you likely see: <em>'+r.seen+'</em></div>'
+        + '</div>';
+    }
+    rowsEl.innerHTML = html;
+    var white = I.r>0.02 && I.g>0.02 && I.b>0.02;   // same condition that makes the centre read "white"
+    if(white!==wasWhite){ wasWhite=white; if(white) PhotonApp.haptic('reveal'); }
+  }
+
+  // ---- wire sliders ----
+  function bind(id, valId, key){
+    var el=document.getElementById(id), out=document.getElementById(valId);
+    function upd(){
+      var pct=+el.value;
+      I[key]=pct/100;
+      out.textContent=pct+"%";
+      el.setAttribute("aria-valuetext", pct+" percent");
+      el.style.setProperty("--pct", pct+"%");
+      render();
+    }
+    el.addEventListener("input", upd);
+    upd();
+  }
+
+  function boot(){
+    buildGeometry();
+    bind("r","rv","r"); bind("g","gv","g"); bind("b","bv","b");
+    render();
+  }
+
+  var rz=null;
+  window.addEventListener("resize", function(){
+    if(rz) return;
+    rz=requestAnimationFrame(function(){ rz=null; buildGeometry(); render(); });
+  });
+
+  boot();
+})();
+</script>
+</body>
+</html>

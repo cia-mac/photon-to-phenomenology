@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Opponent afterimage</title>
+<link rel="stylesheet" href="chrome_app.css">
+<style>
+  :root{
+    --ink:#0c0b09;
+    --cream:#e8e0d0;
+    --caspian:#4d7fe0;
+    --caspian-hi:#78b4ff;
+    --neutral:#7f7f7f;        /* photometric near-neutral test gray, R=G=B */
+    --cross:#141414;          /* small neutral fixation cross */
+    --bone:#a9a196;           /* muted bone for eyebrow / labels */
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight:300;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    padding:0;
+  }
+  html,body{ height:100%; overflow:hidden; }
+  #scroller{
+    position:fixed; top:0; left:0; right:0; bottom:0;
+    overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch;
+    padding:calc(var(--shell-top) + 8px) var(--shell-side) calc(var(--shell-bottom) + 62px);
+  }
+  .wrap{ max-width:720px; margin:0 auto; }
+
+  .mono{
+    font-family:"SF Mono","SFMono-Regular",Menlo,Consolas,monospace;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-size:12px;
+  }
+
+  .eyebrow{ color:var(--bone); margin:0 0 14px; }
+  h1{
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight:300;
+    color:var(--cream);
+    font-size:30px;
+    line-height:1.15;
+    margin:0 0 14px;
+    letter-spacing:0.01em;
+  }
+  .instruction{
+    color:var(--cream);
+    font-size:16px;
+    max-width:60ch;
+    margin:0 0 26px;
+  }
+
+  /* ---- Stage ---- */
+  .stage-holder{ margin:0 0 18px; }
+  .stage{
+    position:relative;
+    width:100%;
+    max-width:640px;
+    aspect-ratio:4 / 3;
+    margin:0 auto;
+    background:var(--neutral);      /* constant near-neutral gray, both phases */
+    overflow:hidden;
+    touch-action:none;
+  }
+  .shape{
+    position:absolute;
+    top:50%; left:50%;
+    width:40%;
+    aspect-ratio:1;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:transparent;         /* set to concept hue only while adapting */
+  }
+  .shape[hidden]{ display:none; }
+  /* fixation cross — identical pixel position both phases */
+  .cross{
+    position:absolute;
+    top:50%; left:50%;
+    width:14px; height:14px;
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+  .cross::before,.cross::after{
+    content:""; position:absolute; background:var(--cross);
+  }
+  .cross::before{ top:6px; left:0; width:14px; height:2px; }
+  .cross::after{ left:6px; top:0; width:2px; height:14px; }
+
+  /* ---- Readout ---- */
+  .readout{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px 28px;
+    border-top:1px solid #26231d;
+    border-bottom:1px solid #26231d;
+    padding:16px 0;
+    margin:0 0 26px;
+  }
+  .ro-item{ display:flex; flex-direction:column; gap:4px; }
+  .ro-k{ color:var(--bone); }
+  .ro-v{
+    font-family:"SF Mono","SFMono-Regular",Menlo,Consolas,monospace;
+    text-transform:uppercase;
+    letter-spacing:0.10em;
+    font-size:14px;
+    color:var(--cream);
+  }
+  .pred-row{ display:flex; align-items:center; gap:10px; }
+  .pred-swatch{
+    width:16px; height:16px; flex:0 0 16px;
+    background:var(--neutral);
+    outline:1px solid #26231d;
+  }
+  .pred-note{ color:var(--bone); font-size:10px; letter-spacing:0.10em; }
+
+  /* ---- Controls ---- */
+  .controls{ display:flex; flex-direction:column; gap:22px; margin:0 0 30px; }
+  fieldset{ border:1px solid #26231d; margin:0; padding:14px 16px 16px; }
+  legend{ padding:0 8px; color:var(--bone); }
+  .radios{ display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+  .radio-opt{ position:relative; }
+  .radio-opt input{
+    position:absolute; opacity:0; width:1px; height:1px;
+  }
+  .radio-opt label{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:8px 12px; cursor:pointer; min-height:44px; min-width:44px;
+    border:1px solid #33302a;
+    font-family:"SF Mono","SFMono-Regular",Menlo,Consolas,monospace;
+    text-transform:uppercase; letter-spacing:0.10em; font-size:12px;
+    color:var(--cream);
+  }
+  .radio-opt .sw{ width:14px; height:14px; flex:0 0 14px; outline:1px solid #000; }
+  .radio-opt input:checked + label{ border-color:var(--caspian); }
+  .radio-opt input:focus-visible + label{
+    outline:2px solid var(--caspian-hi); outline-offset:3px;
+  }
+
+  .slider-row{ display:flex; align-items:center; gap:16px; }
+  .slider-row label{ color:var(--bone); }
+  input[type=range]{
+    -webkit-appearance:none; appearance:none;
+    flex:1; height:44px; min-height:44px; background:transparent; outline:none; margin:0;
+  }
+  input[type=range]::-webkit-slider-runnable-track{ height:2px; background:#33302a; }
+  input[type=range]::-moz-range-track{ height:2px; background:#33302a; }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none;
+    width:18px; height:18px; border-radius:50%;
+    background:var(--caspian); cursor:pointer; border:none; margin-top:-8px;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:18px; height:18px; border-radius:50%;
+    background:var(--caspian); cursor:pointer; border:none;
+  }
+  input[type=range]:hover::-webkit-slider-thumb{ background:var(--caspian-hi); }
+  input[type=range]:hover::-moz-range-thumb{ background:var(--caspian-hi); }
+  input[type=range]:focus-visible{ outline:2px solid var(--caspian-hi); outline-offset:3px; }
+  .slider-val{
+    font-family:"SF Mono","SFMono-Regular",Menlo,Consolas,monospace;
+    font-size:14px; min-width:4ch; color:var(--cream);
+  }
+
+  .btns{ display:flex; flex-wrap:wrap; gap:12px; }
+  button{
+    font-family:"SF Mono","SFMono-Regular",Menlo,Consolas,monospace;
+    text-transform:uppercase; letter-spacing:0.12em; font-size:12px;
+    color:var(--cream); background:transparent;
+    border:1px solid var(--caspian);
+    padding:11px 18px; cursor:pointer; min-height:44px; min-width:44px;
+  }
+  button:hover{ border-color:var(--caspian-hi); color:var(--caspian-hi); }
+  button:focus-visible{ outline:2px solid var(--caspian-hi); outline-offset:3px; }
+  button[disabled]{ opacity:0.38; cursor:not-allowed; }
+  button.primary{ background:var(--caspian); color:var(--ink); border-color:var(--caspian); }
+  button.primary:hover{ background:var(--caspian-hi); border-color:var(--caspian-hi); color:var(--ink); }
+
+  /* ---- Footer ---- */
+  footer{ border-top:1px solid #26231d; padding-top:22px; }
+  .legend-line{ color:var(--bone); margin:0 0 12px; }
+  .honesty{ color:var(--cream); font-size:14px; max-width:64ch; margin:0 0 10px; }
+  .src{ color:var(--bone); font-size:11px; letter-spacing:0.06em; max-width:64ch; }
+  .src a{ color:var(--caspian); }
+
+  @media (max-width:520px){
+    h1{ font-size:24px; }
+    .readout{ grid-template-columns:1fr; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+</style>
+</head>
+<body>
+<div id="scroller">
+<div class="wrap">
+  <header>
+    <p class="mono eyebrow">OPPONENT PROCESS · NEGATIVE AFTERIMAGE</p>
+    <h1>The color your eyes invent when the signal is removed</h1>
+    <p class="instruction">
+      Pick an adapting color and press Start. Keep your eyes locked on the small
+      cross, do not move them, until the field goes neutral gray, then
+      keep staring: you will see the shape return as a ghost in its
+      <em>opposite</em> color, painted by your own visual system in a field where no
+      such color exists.
+    </p>
+  </header>
+
+  <div class="stage-holder">
+    <div class="stage" id="stage" role="img"
+         aria-label="Adaptation stage: a saturated colored disk on a neutral gray field with a central fixation cross during adaptation; a uniform neutral gray field with the same central cross during the test phase.">
+      <div class="shape" id="shape" hidden></div>
+      <div class="cross" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <section class="readout" aria-label="Live readout" aria-live="polite">
+    <div class="ro-item">
+      <span class="ro-k mono">Phase</span>
+      <span class="ro-v" id="ro-phase">IDLE</span>
+    </div>
+    <div class="ro-item">
+      <span class="ro-k mono">Adapting color</span>
+      <span class="ro-v" id="ro-color">RED</span>
+    </div>
+    <div class="ro-item">
+      <span class="ro-k mono">Predicted afterimage</span>
+      <div class="pred-row">
+        <span class="pred-swatch" id="ro-swatch" aria-hidden="true"></span>
+        <span class="ro-v" id="ro-pred">CYAN (BLUE-GREEN)</span>
+      </div>
+      <span class="pred-note mono">reference swatch · outside the field</span>
+    </div>
+    <div class="ro-item">
+      <span class="ro-k mono">Elapsed</span>
+      <span class="ro-v" id="ro-elapsed">0:00</span>
+    </div>
+  </section>
+
+  <div class="controls">
+    <fieldset>
+      <legend class="mono">Adapting color</legend>
+      <div class="radios" id="radios" role="radiogroup" aria-label="Adapting color"></div>
+    </fieldset>
+
+    <div class="slider-row">
+      <label class="mono" for="dur">Adaptation</label>
+      <input type="range" id="dur" min="5" max="30" step="1" value="15"
+             aria-label="Adaptation duration in seconds">
+      <span class="slider-val" id="dur-val">15S</span>
+    </div>
+
+    <div class="btns">
+      <button class="primary" id="start" aria-label="Start adaptation">Start</button>
+      <button id="switch" disabled aria-label="Switch to test field now">Switch now</button>
+      <button id="restart" aria-label="Restart and reset">Restart</button>
+    </div>
+  </div>
+
+  <footer>
+    <p class="legend-line mono">Opponent channels &nbsp;·&nbsp; red&ndash;green &nbsp;·&nbsp; blue&ndash;yellow &nbsp;·&nbsp; light&ndash;dark</p>
+    <p class="honesty">
+      The color on the neutral field is in none of the pixels; sample the
+      screen and it is uniform gray. Your eyes make it. The predicted hue lives only
+      as text and as the reference swatch outside the stage; it is never painted
+      inside the field.
+    </p>
+    <p class="src">
+      Palmer, <em>Vision Science: Photons to Phenomenology</em> (MIT Press, 1999),
+      §3.2, opponent-process theory (Hering): red&ndash;green, blue&ndash;yellow,
+      light&ndash;dark channels adapt, so a neutral field after prolonged fixation
+      reads in the complementary hue. Nuance: a saturated red also modulates the
+      blue&ndash;yellow channel, so its afterimage is typically blue-green/cyan rather
+      than a pure green. The neutral test field is a spectrally near-flat gray (not
+      the warm cream) so it does not bias warm-vs-cool afterimages.
+    </p>
+  </footer>
+</div>
+</div>
+
+<script src="chrome_app.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  // Opponent mapping: adapting hue -> {stimulus RGB, predicted name, predicted swatch RGB}
+  var COLORS = {
+    red:     { label:"RED",     rgb:"rgb(230,20,20)",   pred:"CYAN (BLUE-GREEN)", predRGB:"rgb(0,190,190)" },
+    green:   { label:"GREEN",   rgb:"rgb(20,180,40)",   pred:"MAGENTA",           predRGB:"rgb(220,40,190)" },
+    blue:    { label:"BLUE",    rgb:"rgb(30,70,235)",   pred:"YELLOW",            predRGB:"rgb(225,215,20)" },
+    yellow:  { label:"YELLOW",  rgb:"rgb(235,215,20)",  pred:"BLUE",              predRGB:"rgb(30,70,235)" },
+    cyan:    { label:"CYAN",    rgb:"rgb(20,200,200)",  pred:"RED",               predRGB:"rgb(230,20,20)" },
+    magenta: { label:"MAGENTA", rgb:"rgb(220,40,190)",  pred:"GREEN",             predRGB:"rgb(20,180,40)" }
+  };
+  var ORDER = ["red","green","blue","yellow","cyan","magenta"];
+
+  var $ = function(id){ return document.getElementById(id); };
+  var shape = $("shape");
+  var roPhase = $("ro-phase"), roColor = $("ro-color"), roPred = $("ro-pred"),
+      roSwatch = $("ro-swatch"), roElapsed = $("ro-elapsed");
+  var dur = $("dur"), durVal = $("dur-val");
+  var startBtn = $("start"), switchBtn = $("switch"), restartBtn = $("restart");
+
+  var current = "red";
+  var phase = "idle";       // idle | adapting | test
+  var tick = null;
+  var remaining = 0;        // seconds left in adapt
+  var elapsed = 0;          // total seconds since Start
+  var revealed = false;     // shell haptic fires once per run, on full adaptation only
+
+  // Build radio group
+  var radios = $("radios");
+  ORDER.forEach(function(key, i){
+    var c = COLORS[key];
+    var opt = document.createElement("div");
+    opt.className = "radio-opt";
+    var input = document.createElement("input");
+    input.type = "radio"; input.name = "acolor"; input.id = "c-" + key;
+    input.value = key; if(key === current) input.checked = true;
+    var label = document.createElement("label");
+    label.setAttribute("for", "c-" + key);
+    var sw = document.createElement("span");
+    sw.className = "sw"; sw.style.background = c.rgb;
+    var txt = document.createElement("span");
+    txt.textContent = c.label;
+    label.appendChild(sw); label.appendChild(txt);
+    opt.appendChild(input); opt.appendChild(label);
+    radios.appendChild(opt);
+    input.addEventListener("change", function(){
+      current = key;
+      if(phase === "idle" || phase === "test"){ resetToIdle(); }
+      updateReadout();
+    });
+  });
+
+  function fmt(s){
+    s = Math.max(0, Math.floor(s));
+    var m = Math.floor(s / 60), r = s % 60;
+    return m + ":" + (r < 10 ? "0" : "") + r;
+  }
+
+  function updateReadout(){
+    var c = COLORS[current];
+    roColor.textContent = c.label;
+    roPred.textContent = c.pred;
+    roSwatch.style.background = c.predRGB;
+    roElapsed.textContent = fmt(elapsed);
+    if(phase === "adapting"){
+      roPhase.textContent = "ADAPTING " + fmt(remaining);
+    } else if(phase === "test"){
+      roPhase.textContent = "TEST · HOLD FIXATION";
+    } else {
+      roPhase.textContent = "IDLE";
+    }
+  }
+
+  function clearTick(){ if(tick){ clearInterval(tick); tick = null; } }
+
+  function resetToIdle(){
+    clearTick();
+    phase = "idle";
+    remaining = 0; elapsed = 0;
+    revealed = false;
+    PhotonApp.hold(false);
+    shape.hidden = true;
+    shape.style.background = "transparent";
+    startBtn.disabled = false;
+    switchBtn.disabled = true;
+    enableColorInputs(true);
+    updateReadout();
+  }
+
+  function enableColorInputs(on){
+    var ins = radios.querySelectorAll("input");
+    for(var i=0;i<ins.length;i++){ ins[i].disabled = !on; }
+    dur.disabled = !on;
+  }
+
+  function startAdapt(){
+    clearTick();
+    current = (radios.querySelector("input:checked")||{value:current}).value;
+    var c = COLORS[current];
+    phase = "adapting";
+    remaining = parseInt(dur.value, 10);
+    elapsed = 0;
+    revealed = false;
+    PhotonApp.hold(true);
+    shape.style.background = c.rgb;   // physical stimulus in its real hue
+    shape.hidden = false;
+    startBtn.disabled = true;
+    switchBtn.disabled = false;
+    enableColorInputs(false);
+    updateReadout();
+    tick = setInterval(function(){
+      elapsed += 1;
+      remaining -= 1;
+      if(remaining <= 0){ enterTest(true); }
+      else { updateReadout(); }
+    }, 1000);
+  }
+
+  function enterTest(adapted){
+    clearTick();
+    phase = "test";
+    if(adapted && !revealed){ revealed = true; PhotonApp.haptic("reveal"); }
+    // HARD CUT: remove the colored shape entirely. Stage is now a single flat
+    // neutral-gray fill (plus the small neutral cross). Uniformity is structural:
+    // no element inside the stage carries the complementary hue.
+    shape.hidden = true;
+    shape.style.background = "transparent";
+    switchBtn.disabled = true;
+    startBtn.disabled = false;   // allow a fresh run
+    enableColorInputs(true);
+    updateReadout();
+    tick = setInterval(function(){
+      elapsed += 1;
+      updateReadout();
+    }, 1000);
+  }
+
+  startBtn.addEventListener("click", startAdapt);
+  switchBtn.addEventListener("click", function(){
+    if(phase === "adapting"){ enterTest(false); }
+  });
+  restartBtn.addEventListener("click", resetToIdle);
+
+  dur.addEventListener("input", function(){
+    durVal.textContent = dur.value + "S";
+  });
+
+  // init
+  durVal.textContent = dur.value + "S";
+  resetToIdle();
+})();
+</script>
+</body>
+</html>

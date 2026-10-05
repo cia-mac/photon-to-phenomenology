@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>The café wall · Photon to Phenomenology</title>
+<link rel="stylesheet" href="chrome_app.css">
+<style>
+  :root{ --ink:#0c0b09; --cream:#e8e0d0; --dim:rgba(232,224,208,0.40); --faint:rgba(232,224,208,0.15); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:var(--ink);overflow:hidden}
+  body{
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--cream);
+    -webkit-font-smoothing:antialiased;touch-action:none;cursor:ew-resize;
+  }
+  canvas{display:block;width:100%;height:100%;position:fixed;inset:0}
+  .chrome{position:fixed;pointer-events:none;user-select:none}
+  #chapter{top:var(--shell-top);left:var(--shell-side);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--dim)}
+  #title{top:calc(var(--shell-top) + 18px);left:var(--shell-side);font-size:15px;letter-spacing:0.04em;color:var(--cream);font-weight:400}
+  #readout{
+    top:calc(var(--shell-top) - 2px);right:var(--shell-side);text-align:right;
+    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:11px;color:var(--dim);line-height:1.7;
+  }
+  #readout .lab{font-size:9.5px;text-transform:uppercase;letter-spacing:0.12em;color:var(--faint);margin-right:.6em}
+  #verdict{margin-top:8px;font-size:11px;letter-spacing:0.04em;color:var(--cream)}
+  #thesis{
+    bottom:calc(var(--shell-bottom) + 62px);right:var(--shell-side);text-align:right;max-width:min(48ch,72vw);
+    font-size:14px;line-height:1.55;color:var(--cream);opacity:0;transition:opacity 1.6s ease;
+  }
+  #thesis .lead{color:var(--dim);font-size:12.5px;display:block;margin-bottom:.5em}
+  @media (max-width:680px){ #thesis{left:var(--shell-side);text-align:left;max-width:none} #readout{top:calc(var(--shell-top) + 46px);left:var(--shell-side);right:auto;text-align:left} }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div class="chrome" id="chapter">Gallery · the café wall</div>
+<div class="chrome" id="title">Every row is level</div>
+<div class="chrome" id="readout">
+  <div><span class="lab">shift</span><span id="rOff">·</span></div>
+  <div id="verdict">the rows look wedged</div>
+</div>
+<div class="chrome" id="thesis">
+  <span class="lead">Every horizontal line is exactly level and parallel. Slide the shift to zero and you can see it.</span>
+  Offset tiles and thin grey mortar make your visual system tilt the edges. The slope is added by you. Vision is not recording, it is construction.
+</div>
+
+<script src="chrome_app.js"></script>
+<script>
+(() => {
+  "use strict";
+  const cv=document.getElementById('c'); const ctx=cv.getContext('2d');
+  const rOff=document.getElementById('rOff'), verdict=document.getElementById('verdict');
+
+  let W=0,H=0,DPR=1,T=56,mortar=4;
+  let off={cur:0.30,tgt:0.30};                 // row shift as fraction of a tile
+  let wasLevel=false, armed=false;             // level state, for the shell haptic
+
+  function resize(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    {const B=PhotonApp.fit(cv,{reserveGuide:true}); W=B.w; H=B.h;}
+    cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    T=Math.max(40, Math.min(W,H)*0.075); mortar=Math.max(3,T*0.085);
+  }
+  function lerp(a,b,t){return a+(b-a)*t;}
+
+  function draw(){
+    off.cur=lerp(off.cur,off.tgt,0.14);
+    ctx.fillStyle='#0c0b09'; ctx.fillRect(0,0,W,H);
+
+    const rowH=T, period=2*T;
+    const cols=Math.ceil(W/period)+2, rows=Math.ceil(H/(rowH+mortar))+2;
+    for(let r=0;r<rows;r++){
+      const y=r*(rowH+mortar);
+      const shift=((r%2===0)? off.cur : -off.cur)*T;
+      // mortar band (mid grey) under each row
+      ctx.fillStyle='#6f6757';
+      ctx.fillRect(0, y+rowH, W, mortar);
+      // tiles
+      for(let c=-1;c<cols;c++){
+        const x=c*period + shift;
+        ctx.fillStyle='#e8e0d0'; ctx.fillRect(x, y, T, rowH);            // cream
+        ctx.fillStyle='#0c0b09'; ctx.fillRect(x+T, y, T, rowH);          // ink
+      }
+    }
+
+    rOff.textContent=(off.cur*100).toFixed(0)+'% of a tile';
+    const level=off.cur<0.03; if(level!==wasLevel){ wasLevel=level; if(armed) PhotonApp.haptic('reveal'); } armed=true;
+    verdict.textContent = off.cur<0.03 ? 'now the rows look level'
+                        : off.cur<0.16 ? 'a faint wedge' : 'the rows look wedged';
+    requestAnimationFrame(draw);
+  }
+
+  function cX(e){return (e.touches?e.touches[0]:e).clientX;}
+  let dragging=false,lastX=0;
+  function onDown(e){ e.preventDefault(); dragging=true; lastX=cX(e); }
+  function onMove(e){ if(!dragging)return; e.preventDefault();
+    const x=cX(e); off.tgt=Math.max(0, Math.min(0.5, off.tgt+(x-lastX)*0.0016)); lastX=x; }
+  function onUp(){ dragging=false; }
+
+  cv.addEventListener('mousedown',onDown);
+  window.addEventListener('mousemove',onMove);
+  window.addEventListener('mouseup',onUp);
+  cv.addEventListener('touchstart',onDown,{passive:false});
+  window.addEventListener('touchmove',onMove,{passive:false});
+  window.addEventListener('touchend',onUp);
+  window.addEventListener('resize',resize);
+
+  // ---- guided walkthrough (per-instrument script) ----
+  const WALK=[
+    {t:"Rows of light and dark tiles, stacked with thin grey mortar between them. The rows are shifted, each one nudged against the one above. The lines look like they <b>slope and pinch into wedges</b>.", act(){off.tgt=0.30;}},
+    {t:"Push the shift further. The slopes steepen, the rows seem to taper and tilt even harder. <b>Every grey line looks bent.</b>", act(){off.tgt=0.50;}},
+    {t:"Now slide the offset back toward zero. Watch the mortar lines as the <b>tiles line up</b>.", act(){off.tgt=0.12;}},
+    {t:"Zero shift. Every row snaps flat. The lines were <b>dead level and parallel</b> the whole time.", act(){off.tgt=0;}},
+    {t:"Nothing tilted but your read of it. Offset tiles and grey mortar made you bend straight lines. The slope was added by you. <b>Vision is construction, not a recording.</b>", act(){off.tgt=0;}},
+  ];
+  PhotonChrome.init({here:'cafe-wall', walk:WALK});
+
+  resize();
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

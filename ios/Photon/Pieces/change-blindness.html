@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Change blindness · Photon to Phenomenology</title>
+<link rel="stylesheet" href="chrome_app.css">
+<style>
+  :root{ --ink:#0c0b09; --cream:#e8e0d0; --dim:rgba(232,224,208,0.40); --faint:rgba(232,224,208,0.15); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:var(--ink);overflow:hidden}
+  body{
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--cream);
+    -webkit-font-smoothing:antialiased;touch-action:none;cursor:crosshair;
+  }
+  canvas{display:block;width:100%;height:100%;position:fixed;inset:0}
+  .chrome{position:fixed;pointer-events:none;user-select:none}
+  #chapter{top:var(--shell-top);left:var(--shell-side);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--dim)}
+  #title{top:calc(var(--shell-top) + 18px);left:var(--shell-side);font-size:15px;letter-spacing:0.04em;color:var(--cream);font-weight:400}
+  #readout{
+    top:calc(var(--shell-top) - 2px);right:var(--shell-side);text-align:right;
+    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:11px;color:var(--dim);line-height:1.7;
+  }
+  #readout .lab{font-size:9.5px;text-transform:uppercase;letter-spacing:0.12em;color:var(--faint);margin-right:.6em}
+  #status{margin-top:8px;font-size:11px;letter-spacing:0.04em;color:var(--cream)}
+  #thesis{
+    bottom:calc(var(--shell-bottom) + 62px);right:var(--shell-side);text-align:right;max-width:min(48ch,72vw);
+    font-size:14px;line-height:1.55;color:var(--cream);opacity:0;transition:opacity 1.6s ease;
+  }
+  #thesis .lead{color:var(--dim);font-size:12.5px;display:block;margin-bottom:.5em}
+  @media (max-width:680px){ #thesis{left:var(--shell-side);text-align:left;max-width:none} #readout{top:calc(var(--shell-top) + 46px);left:var(--shell-side);right:auto;text-align:left} }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div class="chrome" id="chapter">Ch. 11 · Change blindness</div>
+<div class="chrome" id="title">A whole tile, changing in plain sight</div>
+<div class="chrome" id="readout">
+  <div><span class="lab">blank</span><span id="rBlank">·</span></div>
+  <div id="status">one tile is changing</div>
+</div>
+<div class="chrome" id="thesis">
+  <span class="lead">With the blank between flashes, the change hid in plain sight. Close the blank and it leaps out at once.</span>
+  You never stored the scene. Without a transient to point your attention, even a large change goes unseen. Vision is not recording, it is construction.
+</div>
+
+<script src="chrome_app.js"></script>
+<script>
+(() => {
+  "use strict";
+  const cv=document.getElementById('c'); const ctx=cv.getContext('2d');
+  const rBlank=document.getElementById('rBlank'), status=document.getElementById('status');
+
+  const COLS=5, ROWS=3, HOT=7;                 // hot tile index that changes
+  // fixed warm-grey shades for the static tiles + the two states of the hot tile
+  const SHADES=[0.30,0.52,0.20,0.62,0.40, 0.46,0.26,0.58,0.34,0.50, 0.24,0.56,0.38,0.28,0.48];
+  const HOT_A=0.58, HOT_B=0.22;
+
+  let W=0,H=0,DPR=1, gx=0,gy=0,T=80,gap=10,oy=0;
+  let blank={cur:150,tgt:150};                 // blank duration ms
+  const TON=620;                               // each state shown for this long
+  let phaseT=0, lastT=performance.now(), state=0, cycleCount=0; // state 0=A,1=B; phase within cycle
+  let found=false, guess=-1;
+  let wasPopped=false, lastDragT=-1e9;         // pop-out state, for the shell haptic
+
+  function resize(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    {const B=PhotonApp.fit(cv,{reserveGuide:true}); W=B.w; H=B.h; oy=B.y;}   // app: the grid sits between the text and the open guide card; taps are measured from the box
+    cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    T=Math.min((W*0.74)/COLS,(H*0.56)/ROWS); gap=T*0.14;
+    const gw=COLS*T+(COLS-1)*gap, gh=ROWS*T+(ROWS-1)*gap;
+    gx=(W-gw)/2; gy=(H-gh)/2 + Math.min(H*0.02,16);
+  }
+  function lerp(a,b,t){return a+(b-a)*t;}
+  function grey(v){
+    const d=[20,17,12], l=[232,224,208];
+    const r=Math.round(d[0]+(l[0]-d[0])*v), g=Math.round(d[1]+(l[1]-d[1])*v), b=Math.round(d[2]+(l[2]-d[2])*v);
+    return 'rgb('+r+','+g+','+b+')';
+  }
+  function tileXY(i){ const c=i%COLS, r=(i/COLS)|0; return [gx+c*(T+gap), gy+r*(T+gap)]; }
+
+  function draw(now){
+    const dt=now-lastT; lastT=now;
+    blank.cur=lerp(blank.cur,blank.tgt,0.15);
+    phaseT+=dt;
+    // cycle: A (TON) -> blank -> B (TON) -> blank -> ... advanced incrementally so
+    // easing the blank duration never makes the phase jump (no spurious flips).
+    const cycle=TON+blank.cur;
+    while(phaseT>=cycle){ phaseT-=cycle; cycleCount++; }
+    const inBlank = phaseT > TON;
+    state = cycleCount%2;                        // alternate A/B each visible window
+
+    ctx.fillStyle='#0c0b09'; ctx.fillRect(0,0,W,H);
+
+    if(!inBlank){
+      for(let i=0;i<COLS*ROWS;i++){
+        let v=SHADES[i];
+        if(i===HOT) v = (state===0)?HOT_A:HOT_B;
+        const [x,y]=tileXY(i);
+        ctx.fillStyle=grey(v);
+        ctx.fillRect(x,y,T,T);
+      }
+    }
+    // persistent marker once found / guessed
+    if(found){
+      const [x,y]=tileXY(HOT);
+      ctx.strokeStyle='#d8a657'; ctx.lineWidth=2;
+      ctx.strokeRect(x-3,y-3,T+6,T+6);
+    } else if(guess>=0){
+      const [x,y]=tileXY(guess);
+      ctx.strokeStyle='rgba(232,224,208,0.5)'; ctx.lineWidth=1.4;
+      ctx.strokeRect(x-3,y-3,T+6,T+6);
+    }
+
+    if(dragging) lastDragT=now;
+    const popped=blank.cur<40; if(popped!==wasPopped){ wasPopped=popped; if(popped && now-lastDragT<600) PhotonApp.haptic('reveal'); }
+    rBlank.textContent=Math.round(blank.cur)+' ms';
+    status.textContent = found ? 'found it'
+                       : blank.cur<40 ? 'now it pops out'
+                       : guess>=0 ? 'not that one' : 'one tile is changing';
+    requestAnimationFrame(draw);
+  }
+
+  function cX(e){return (e.touches?e.touches[0]:e).clientX;}
+  function cY(e){return (e.touches?e.touches[0]:e).clientY;}
+  let dragging=false,lastX=0,downX=0,downY=0,moved=false;
+  function onDown(e){ e.preventDefault(); dragging=true; lastX=cX(e); downX=cX(e); downY=cY(e); moved=false; }
+  function onMove(e){ if(!dragging)return; e.preventDefault();
+    const x=cX(e); if(Math.abs(x-downX)>4) moved=true;
+    blank.tgt=Math.max(0, Math.min(420, blank.tgt+(x-lastX)*0.8)); lastX=x; }
+  function onUp(e){
+    dragging=false;
+    if(!moved){ // a click -> guess the tile under the pointer
+      for(let i=0;i<COLS*ROWS;i++){ const [x,y]=tileXY(i);
+        if(downX>=x&&downX<=x+T&&downY-oy>=y&&downY-oy<=y+T){ guess=i; if(i===HOT) found=true; break; } }
+    }
+  }
+
+  cv.addEventListener('mousedown',onDown);
+  window.addEventListener('mousemove',onMove);
+  window.addEventListener('mouseup',onUp);
+  cv.addEventListener('touchstart',onDown,{passive:false});
+  window.addEventListener('touchmove',onMove,{passive:false});
+  window.addEventListener('touchend',onUp);
+  window.addEventListener('resize',resize);
+
+  // ---- guided walkthrough (per-instrument script) ----
+  const WALK=[
+    {t:"Fifteen warm-grey tiles flash on, then off, then on again. One of them is <b>silently switching shades every cycle</b>. Study the grid and try to catch which tile it is.", act(){ found=false; guess=-1; blank.tgt=150; }},
+    {t:"A blank flash sits between every frame. That gap wipes the transient that would normally yank your eye to the change. The switch is large, yet with the blank in the way you <b>probably cannot find it</b>.", act(){ found=false; blank.tgt=150; }},
+    {t:"Now close the blank. With the two frames butting straight together, the changing tile <b>flickers and pops out at once</b>. Same change, no gap to hide it.", act(){ blank.tgt=0; }},
+    {t:"There it is, marked. You never stored the scene to compare. Without a transient to point your attention, even a whole tile changing in plain sight goes unseen. <b>Vision is construction, not a recording.</b>", act(){ found=true; blank.tgt=0; }},
+  ];
+  PhotonChrome.init({here:'change-blindness', walk:WALK});
+
+  resize();
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

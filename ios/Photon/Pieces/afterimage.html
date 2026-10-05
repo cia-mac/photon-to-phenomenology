@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>The negative afterimage · Photon to Phenomenology</title>
+<link rel="stylesheet" href="chrome_app.css">
+<style>
+  :root{ --field:#8d8579; --ink:#0c0b09; --cream:#0c0b09; --dim:rgba(12,11,9,0.52); --faint:rgba(12,11,9,0.30); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:var(--field);overflow:hidden}
+  body{
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--ink);
+    -webkit-font-smoothing:antialiased;touch-action:none;cursor:pointer;
+  }
+  canvas{display:block;width:100%;height:100%;position:fixed;inset:0}
+  .chrome{position:fixed;pointer-events:none;user-select:none}
+  #chapter{top:var(--shell-top);left:var(--shell-side);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--dim)}
+  #title{top:calc(var(--shell-top) + 18px);left:var(--shell-side);font-size:15px;letter-spacing:0.04em;color:var(--ink);font-weight:500}
+  #readout{
+    top:calc(var(--shell-top) - 2px);right:var(--shell-side);text-align:right;
+    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:11px;color:var(--dim);line-height:1.7;
+  }
+  #readout .lab{font-size:9.5px;text-transform:uppercase;letter-spacing:0.12em;color:var(--faint);margin-right:.6em}
+  #state{margin-top:8px;font-size:11px;letter-spacing:0.04em;color:var(--ink)}
+  #thesis{
+    bottom:calc(var(--shell-bottom) + 62px);right:var(--shell-side);text-align:right;max-width:min(48ch,72vw);
+    font-size:14px;line-height:1.55;color:var(--ink);opacity:0;transition:opacity 1.6s ease;
+  }
+  #thesis .lead{color:var(--dim);font-size:12.5px;display:block;margin-bottom:.5em}
+  @media (max-width:680px){ #thesis{left:var(--shell-side);text-align:left;max-width:none} #readout{top:calc(var(--shell-top) + 46px);left:var(--shell-side);right:auto;text-align:left} }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div class="chrome" id="chapter">Gallery · the negative afterimage</div>
+<div class="chrome" id="title">A colour with no light behind it</div>
+<div class="chrome" id="readout">
+  <div><span class="lab">adapting</span><span id="rAd">0.0 s</span></div>
+  <div id="state">fixate the dot on the teal disc</div>
+</div>
+<div class="chrome" id="thesis">
+  <span class="lead">On the empty grey, a soft rose disc appears where the teal one was. Nothing rose is on the screen.</span>
+  The cones that drank the teal are tired, so the grey now tips toward teal's opposite. You are seeing fatigue, rendered as colour. Vision is not recording, it is construction.
+</div>
+
+<script src="chrome_app.js"></script>
+<script>
+(() => {
+  "use strict";
+  const cv=document.getElementById('c'); const ctx=cv.getContext('2d');
+  const rAd=document.getElementById('rAd'), stateEl=document.getElementById('state');
+
+  let W=0,H=0,DPR=1,cx=0,cy=0,discR=120;
+  let mode='adapt', adaptMs=0, lastT=performance.now();
+
+  function resize(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    W=innerWidth;H=innerHeight;
+    cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    cx=W/2; cy=H/2; discR=Math.min(W,H)*0.17;
+  }
+
+  function draw(now){
+    const dt=now-lastT; lastT=now;
+    if(mode==='adapt') adaptMs+=dt;
+
+    ctx.fillStyle='#8d8579'; ctx.fillRect(0,0,W,H);   // the neutral field, always
+
+    if(mode==='adapt'){
+      // saturated teal disc (the adapting stimulus)
+      ctx.beginPath(); ctx.arc(cx,cy,discR,0,Math.PI*2);
+      ctx.fillStyle='#1ba29a'; ctx.fill();
+      // progress ring (a quiet suggestion of how long to hold)
+      const p=Math.min(adaptMs/15000,1);
+      ctx.beginPath(); ctx.arc(cx,cy,discR+14,-Math.PI/2,-Math.PI/2+p*2*Math.PI);
+      ctx.lineWidth=2; ctx.strokeStyle='rgba(12,11,9,0.35)'; ctx.stroke();
+    }
+    // central fixation dot, on both phases (the anchor for the afterimage)
+    ctx.beginPath(); ctx.arc(cx,cy,4,0,Math.PI*2); ctx.fillStyle='#0c0b09'; ctx.fill();
+
+    rAd.textContent=(adaptMs/1000).toFixed(1)+' s';
+    if(mode==='adapt') stateEl.textContent = adaptMs>15000 ? 'well adapted, now tap' : 'fixate the dot on the teal disc';
+    else stateEl.textContent = 'keep your eyes on the dot';
+    requestAnimationFrame(draw);
+  }
+
+  function setMode(m,reset){
+    const was=mode;
+    mode=m;
+    if(m==='adapt'){
+      if(reset) adaptMs=0;
+      PhotonApp.hold(true);
+    } else {
+      PhotonApp.hold(false);
+      if(was==='adapt' && adaptMs>15000) PhotonApp.haptic('reveal');   // only when the page's own threshold says an afterimage exists
+    }
+  }
+
+  function toggle(e){
+    e.preventDefault();
+    setMode(mode==='adapt'?'reveal':'adapt', true);
+  }
+
+  cv.addEventListener('mousedown',toggle);
+  cv.addEventListener('touchstart',toggle,{passive:false});
+  window.addEventListener('resize',resize);
+
+  // ---- guided walkthrough (per-instrument script) ----
+  const WALK=[
+    {t:"A saturated teal disc sits on a neutral grey field, with a small dark dot at its centre. The ring around it <b>counts out the hold time</b>.", act(){setMode('adapt',true);}},
+    {t:"Lock your gaze on the centre dot. Do not let your eyes wander. Hold for about fifteen seconds while the cones that drink teal <b>slowly tire</b>.", act(){setMode('adapt',true);}},
+    {t:"Now the teal is gone and only the empty grey remains. <b>Keep your eyes pinned to where the dot was</b>, and do not blink hard.", act(){setMode('reveal');}},
+    {t:"A soft rose disc blooms where the teal used to be. <b>Nothing rose is on the screen.</b> The tired cones tip the grey toward teal's opposite.", act(){setMode('reveal');}},
+    {t:"You are seeing fatigue, rendered as colour. <b>Vision is not recording, it is construction.</b>", act(){setMode('reveal');}},
+  ];
+  PhotonChrome.init({here:'afterimage', walk:WALK});
+
+  resize();
+  PhotonApp.hold(true);
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

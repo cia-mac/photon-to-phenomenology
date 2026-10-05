@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Contrast Sensitivity · Campbell–Robson Chart</title>
+<link rel="stylesheet" href="chrome_app.css">
+<style>
+  :root{
+    --ink:#0c0b09;
+    --cream:#e8e0d0;
+    --caspian:#4d7fe0;
+    --focus:#78b4ff;
+    --rule:#1d1d20;
+    --face-sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --face-mono:"SF Mono",ui-monospace,Menlo,Monaco,"Cascadia Mono",monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--ink);color:var(--cream);}
+  body{
+    font-family:var(--face-sans);
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+    padding:clamp(16px,3vw,40px);
+    padding-top:var(--shell-top);
+    padding-left:max(clamp(16px,3vw,40px),var(--shell-side));
+    padding-right:max(clamp(16px,3vw,40px),var(--shell-side));
+    padding-bottom:calc(var(--shell-bottom) + 62px);
+    max-width:1400px;
+    margin:0 auto;
+  }
+  .eyebrow{
+    font-family:var(--face-mono);
+    font-size:11px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--cream);
+    opacity:0.62;
+    margin:0 0 14px 0;
+  }
+  .instruction{
+    font-family:var(--face-sans);
+    font-weight:300;
+    font-size:clamp(15px,1.5vw,18px);
+    color:var(--cream);
+    max-width:70ch;
+    margin:0 0 26px 0;
+  }
+  .stage{
+    display:flex;
+    flex-wrap:wrap;
+    gap:clamp(20px,3vw,44px);
+    align-items:flex-start;
+  }
+  .chartblock{
+    flex:1 1 520px;
+    min-width:0;
+    max-width:1000px;
+  }
+  /* chart + axes grid: left axis column, then chart; bottom axis under chart */
+  .chartgrid{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    grid-template-rows:auto auto;
+    gap:0;
+  }
+  .leftaxis{
+    grid-column:1;grid-row:1;
+    position:relative;
+    width:64px;
+  }
+  .leftaxis .axtitle{
+    position:absolute;
+    left:0;top:50%;
+    transform:translate(-0%, -50%) rotate(180deg);
+    writing-mode:vertical-rl;
+    font-family:var(--face-mono);
+    font-size:10px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--cream);
+    opacity:0.72;
+    white-space:nowrap;
+  }
+  .leftaxis .ticks{
+    position:absolute;
+    right:8px;top:0;bottom:0;
+    width:44px;
+  }
+  .leftaxis .tick{
+    position:absolute;
+    right:0;
+    transform:translateY(-50%);
+    font-family:var(--face-mono);
+    font-size:10px;
+    letter-spacing:0.06em;
+    color:var(--cream);
+    opacity:0.78;
+    text-align:right;
+    white-space:nowrap;
+  }
+  .chartcol{grid-column:2;grid-row:1;min-width:0;}
+  .canvaswrap{
+    position:relative;
+    width:100%;
+    max-width:1000px;
+    aspect-ratio:3/2;
+    border:1px solid var(--rule);
+    touch-action:none;
+  }
+  canvas{
+    touch-action:none;
+    position:absolute;inset:0;
+    width:100%;height:100%;
+    display:block;
+  }
+  #overlay{pointer-events:none;}
+  #overlay.interactive{pointer-events:auto;cursor:ns-resize;}
+  #overlay.marking{pointer-events:auto;cursor:crosshair;}
+  .bottomaxis{
+    grid-column:2;grid-row:2;
+    position:relative;
+    height:42px;
+    margin-top:6px;
+  }
+  .bottomaxis .ticks{position:absolute;left:0;right:0;top:0;height:16px;}
+  .bottomaxis .tick{
+    position:absolute;top:0;
+    transform:translateX(-50%);
+    font-family:var(--face-mono);
+    font-size:10px;
+    letter-spacing:0.06em;
+    color:var(--cream);
+    opacity:0.78;
+    white-space:nowrap;
+  }
+  .bottomaxis .axtitle{
+    position:absolute;left:0;right:0;bottom:0;
+    text-align:center;
+    font-family:var(--face-mono);
+    font-size:10px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--cream);
+    opacity:0.72;
+  }
+
+  /* control rail */
+  .rail{
+    flex:0 1 320px;
+    min-width:260px;
+    display:flex;
+    flex-direction:column;
+    gap:26px;
+  }
+  .ctl{display:flex;flex-direction:column;gap:8px;}
+  .ctl .row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:12px;
+  }
+  .ctl label,.ctl .clabel{
+    font-family:var(--face-mono);
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--cream);
+    opacity:0.85;
+  }
+  .ctl output,.ctl .readout{
+    font-family:var(--face-mono);
+    font-size:12px;
+    letter-spacing:0.04em;
+    color:var(--caspian);
+    text-align:right;
+  }
+  .note{
+    font-family:var(--face-mono);
+    font-size:10px;
+    letter-spacing:0.03em;
+    line-height:1.5;
+    color:var(--cream);
+    opacity:0.5;
+  }
+  .dual{display:flex;gap:14px;}
+  .dual .ctl{flex:1;}
+
+  input[type=range]{
+    -webkit-appearance:none;appearance:none;
+    width:100%;height:44px;min-height:44px;
+    background:transparent;
+    outline:none;margin:0;
+    cursor:pointer;
+  }
+  input[type=range]::-webkit-slider-runnable-track{height:2px;background:var(--rule);}
+  input[type=range]::-moz-range-track{height:2px;background:var(--rule);}
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;
+    width:16px;height:16px;border-radius:50%;margin-top:-7px;
+    background:var(--caspian);border:none;cursor:pointer;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:16px;height:16px;border-radius:50%;
+    background:var(--caspian);border:none;cursor:pointer;
+  }
+  input[type=range]:focus-visible{outline:none;}
+  input[type=range]:focus-visible::-webkit-slider-thumb{
+    box-shadow:0 0 0 3px var(--ink),0 0 0 5px var(--focus);
+  }
+  input[type=range]:focus-visible::-moz-range-thumb{
+    box-shadow:0 0 0 3px var(--ink),0 0 0 5px var(--focus);
+  }
+
+  .toggles{display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--rule);padding-top:20px;}
+  .toggle{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    background:none;border:1px solid var(--rule);
+    color:var(--cream);
+    font-family:var(--face-mono);
+    font-size:11px;letter-spacing:0.14em;text-transform:uppercase;
+    padding:11px 14px;min-height:44px;cursor:pointer;text-align:left;
+    transition:border-color 120ms linear,color 120ms linear;
+  }
+  .toggle .state{color:var(--cream);opacity:0.5;}
+  .toggle[aria-pressed=true]{border-color:var(--caspian);color:var(--caspian);}
+  .toggle[aria-pressed=true] .state{color:var(--caspian);opacity:1;}
+  .toggle:hover{border-color:var(--focus);}
+  .toggle:focus-visible{outline:2px solid var(--focus);outline-offset:3px;}
+  .probeout{
+    font-family:var(--face-mono);
+    font-size:11px;letter-spacing:0.03em;line-height:1.7;
+    color:var(--cream);opacity:0.85;
+    min-height:1px;
+  }
+  .probeout b{color:var(--caspian);font-weight:300;}
+  .probeout .samples{opacity:0.55;font-size:10px;}
+  .colophon{
+    margin-top:40px;padding-top:20px;border-top:1px solid var(--rule);
+    font-family:var(--face-mono);font-size:10px;letter-spacing:0.04em;
+    line-height:1.8;color:var(--cream);opacity:0.5;max-width:80ch;
+  }
+  a{color:var(--caspian);text-decoration:none;}
+  a:hover,a:focus-visible{color:var(--focus);}
+  a:focus-visible{outline:2px solid var(--focus);outline-offset:3px;}
+  @media (max-width:720px){
+    .rail{flex:1 1 100%;}
+    .leftaxis{width:44px;}
+    .leftaxis .axtitle{display:none;}
+  }
+</style>
+
+<p class="eyebrow">Photon to Phenomenology · §4.2 Spatial-Frequency Channels</p>
+<h1 style="font-weight:300;font-size:clamp(20px,2.4vw,30px);margin:0 0 8px 0;letter-spacing:-0.01em;">Contrast sensitivity · the Campbell–Robson chart</h1>
+<p class="instruction">
+  Every bar in a given row has the same contrast, and every bar in a column the same width.
+  Hold a relaxed gaze: the arc where the bars melt into flat grey is not printed on the screen,
+  it is your own contrast sensitivity. Drop the overall contrast and watch the arc shrink;
+  step back and the fine right edge washes out first.
+</p>
+
+<div class="stage">
+  <div class="chartblock">
+    <div class="chartgrid">
+      <div class="leftaxis">
+        <span class="axtitle">Contrast · Michelson</span>
+        <div class="ticks" id="ticksY"></div>
+      </div>
+      <div class="chartcol">
+        <div class="canvaswrap">
+          <canvas id="chart"></canvas>
+          <canvas id="overlay"></canvas>
+        </div>
+      </div>
+      <div class="bottomaxis">
+        <div class="ticks" id="ticksX"></div>
+        <div class="axtitle">Spatial frequency · cycles / degree</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rail">
+    <div class="ctl">
+      <div class="row"><label for="gain">[1] Overall contrast</label><output id="gainOut" for="gain">100%</output></div>
+      <input type="range" id="gain" min="0" max="100" value="100" step="1"
+             aria-label="Overall contrast, percent of full modulation gain">
+      <div class="note">Global gain g on the whole chart. A threshold knob: as g drops, the visible arc contracts.</div>
+    </div>
+
+    <div class="ctl">
+      <div class="clabel">[2] Frequency range · cpd</div>
+      <div class="dual">
+        <div class="ctl">
+          <div class="row"><label for="fmin">min</label><output id="fminOut" for="fmin">0.50</output></div>
+          <input type="range" id="fmin" min="0.25" max="4" value="0.5" step="0.05"
+                 aria-label="min: minimum spatial frequency at reference distance, cycles per degree">
+        </div>
+        <div class="ctl">
+          <div class="row"><label for="fmax">max</label><output id="fmaxOut" for="fmax">16.0</output></div>
+          <input type="range" id="fmax" min="6" max="24" value="16" step="0.5"
+                 aria-label="max: maximum spatial frequency at reference distance, cycles per degree">
+        </div>
+      </div>
+      <div class="note">Remaps the horizontal axis, sweeping the mid-frequency peak into and out of view.</div>
+      <div class="note" id="sampNote" aria-live="polite" style="display:none;opacity:0.85;color:var(--caspian)"></div>
+    </div>
+
+    <div class="ctl">
+      <div class="row"><label for="dist">[3] Viewing distance</label><output id="distOut" for="dist">60 cm</output></div>
+      <input type="range" id="dist" min="30" max="120" value="60" step="1"
+             aria-label="Viewing distance in centimetres">
+      <div class="row"><span class="clabel" style="opacity:0.6">retinal scale</span><span class="readout" id="ppdOut">≈ 40 px/deg</span></div>
+      <div class="note" id="calib">Assumes ~96 CSS px/inch. cpd = on-screen cycles × px/deg; leaning back rescales the retinal frequency, so the labels move and the high-frequency edge climbs past acuity.</div>
+    </div>
+
+    <div class="toggles">
+      <button class="toggle" id="probeBtn" aria-pressed="false" aria-label="Toggle probe row">
+        <span>Probe row</span><span class="state">OFF</span>
+      </button>
+      <div class="probeout" id="probeOut" aria-live="polite"></div>
+      <button class="toggle" id="markBtn" aria-pressed="false" aria-label="Toggle mark my edge">
+        <span>Mark my edge</span><span class="state">OFF</span>
+      </button>
+      <div class="note" id="markNote" style="display:none">Tap the chart to trace the boundary you actually see. These dots are the only curve the program ever draws; they are yours, not a computed CSF. Toggle off to clear. (Placing marks is pointer-only; the probe row below is keyboard-operable.)</div>
+    </div>
+  </div>
+</div>
+
+<p class="colophon">
+  Rendered physically: a luminance field L(x,y) = L0·[1 + g·C(y)·sin φ(x)], synthesized in
+  linear light between register ink #0c0b09 and cream #e8e0d0, then sRGB-encoded. Contrast
+  C(y) depends on the row only; frequency f(x) on the column only. The contrast axis is
+  labelled by nominal commanded C; the full swing at the top (100%) renders as ~99% Michelson
+  because register ink #0c0b09 has a nonzero linear black level. The inverted-U envelope
+  is contributed by your visual system, not the image; nothing draws it. Palmer,
+  <em>Vision Science: Photons to Phenomenology</em> (MIT Press, 1999), ch. 4 §4.2.
+</p>
+
+<script src="chrome_app.js"></script>
+<script>
+"use strict";
+(function(){
+  // ---- register colours, decoded to linear light ----
+  function srgbToLin(c){ c/=255; return c<=0.04045 ? c/12.92 : Math.pow((c+0.055)/1.055,2.4); }
+  function linToSrgb(c){ c=Math.min(1,Math.max(0,c)); return c<=0.0031308 ? 12.92*c : 1.055*Math.pow(c,1/2.4)-0.055; }
+  const INK  = [0x0c,0x0b,0x09].map(srgbToLin);
+  const CREAM= [0xe8,0xe0,0xd0].map(srgbToLin);
+  const MID  = INK.map((v,i)=>(v+CREAM[i])/2);
+  const HALF = INK.map((v,i)=>(CREAM[i]-v)/2);
+  // linear luminance (Rec.709) at a given signed modulation factor m in [-1,1]
+  function lumAt(m){
+    let Y=0; const w=[0.2126,0.7152,0.0722];
+    for(let i=0;i<3;i++) Y += w[i]*(MID[i]+m*HALF[i]);
+    return Y;
+  }
+
+  // ---- LUT: signed factor [-1,1] -> packed sRGB bytes ----
+  const N=1024, LUT=new Uint8ClampedArray(N*3);
+  for(let i=0;i<N;i++){
+    const f=(i/(N-1))*2-1;
+    for(let c=0;c<3;c++){
+      LUT[i*3+c] = Math.round(linToSrgb(MID[c]+f*HALF[c])*255);
+    }
+  }
+
+  // ---- state ----
+  const S={ gain:1.0, fmin:0.5, fmax:16, dist:60 };
+  const D0=60;                     // reference distance (cm)
+  const CSS_PPI=96;                // stated display-density assumption
+  const CMIN=0.002, CMAX=1.0;      // Michelson contrast range, bottom->top
+  const pxPerDeg=(d)=> d*(Math.PI/180)*(CSS_PPI/2.54);
+  const PPD0=pxPerDeg(D0);
+  // Sampling honesty: the rightmost columns must be point-sampled at FULL
+  // amplitude on every device, or a horizontal row's Michelson would decline
+  // toward the high-frequency edge (display-MTF attenuation baked into pixels).
+  // Cap the reference cpd so the on-screen frequency never exceeds SAMP_LIMIT
+  // cycles per device pixel (just below the 0.35 supersample seam). On a retina
+  // display (DPR=2) the cap is ~26 cpd so the default never clamps; on a
+  // non-retina display it clamps the fine edge instead of attenuating it.
+  const SAMP_LIMIT=0.33;                         // cyc / device px
+  const fmaxCap=()=> SAMP_LIMIT*PPD0*DPR;        // max reference cpd this backing store can render cleanly
+  const fmaxEff=()=> Math.min(S.fmax, fmaxCap());// effective reference cpd actually rendered
+
+  const chart=document.getElementById('chart');
+  const overlay=document.getElementById('overlay');
+  const cx=chart.getContext('2d',{willReadFrequently:true});
+  const ox=overlay.getContext('2d');
+  const wrap=chart.parentElement;
+
+  let W=0,H=0,DPR=1;               // backing-store pixels
+  let sinArr=null;                 // per-device-column sin(phase)
+  let geomKey='';                  // detects when phase array must rebuild
+  // No auto-animation in this piece: all motion is user-driven (draw() is
+  // event-only, no rAF/timers), so Article V.4 reduced-motion is a no-op.
+
+  function resize(){
+    const r=wrap.getBoundingClientRect();
+    DPR=Math.min(2, window.devicePixelRatio||1);
+    W=Math.max(2,Math.round(r.width*DPR));
+    H=Math.max(2,Math.round(r.height*DPR));
+    chart.width=W; chart.height=H;
+    overlay.width=W; overlay.height=H;
+    sinArr=null;
+    draw();
+  }
+
+  function buildPhase(){
+    const Wcss=W/DPR;
+    const fmin=S.fmin, fmax=fmaxEff();   // clamp to the display sampling limit
+    const R=fmax/fmin;
+    // On-screen grating is distance-INDEPENDENT: fixed cycles/CSS px.
+    // Physically leaning back then literally rescales the RETINAL frequency,
+    // so the cpd labels (fmin*(dist/D0)*R^u = f_screen * pxPerDeg(dist)) are
+    // exactly what a viewer at that distance sees. dist is not in key().
+    const scale=1/PPD0;                    // reference px/deg, constant
+    sinArr=new Float32Array(W);
+    const lnR=Math.log(R);
+    const lin=Math.abs(lnR)<1e-6;
+    function phaseAt(xCss){
+      const u=xCss/Wcss;
+      return lin ? 2*Math.PI*scale*fmin*xCss
+                 : 2*Math.PI*scale*fmin*Wcss*(Math.pow(R,u)-1)/lnR;
+    }
+    for(let xi=0;xi<W;xi++){
+      const xCss=xi/DPR;
+      // local frequency in cycles per device pixel; supersample (box-average
+      // over the pixel span) only where it approaches Nyquist, so the
+      // well-sampled bulk stays point-sampled (no MTF rolloff) while the fine
+      // edge stops aliasing/moire instead of leaking measured contrast.
+      const u=xCss/Wcss;
+      const cycPerDev=scale*fmin*(lin?1:Math.pow(R,u))/DPR;
+      if(cycPerDev<=0.35){
+        sinArr[xi]=Math.sin(phaseAt(xCss));
+      }else{
+        const ns=Math.min(16, Math.ceil(cycPerDev/0.35)*2);
+        let s=0;
+        for(let j=0;j<ns;j++){
+          const frac=(j+0.5)/ns-0.5;       // sub-position within the device px
+          s+=Math.sin(phaseAt((xi+frac)/DPR));
+        }
+        sinArr[xi]=s/ns;
+      }
+    }
+    geomKey=key();
+  }
+  const key=()=> S.fmin+'|'+S.fmax+'|'+W+'|'+H;
+
+  function contrastAtRow(yi){
+    // yi in device px, 0 at top => CMAX; bottom => CMIN (log-spaced)
+    const v=(yi/DPR)/(H/DPR);
+    return CMAX*Math.pow(CMIN/CMAX, v);
+  }
+
+  function draw(){
+    if(!sinArr || geomKey!==key()) buildPhase();
+    const img=cx.createImageData(W,H);
+    const data=img.data;
+    const g=S.gain;
+    const half=(N-1)*0.5;
+    for(let yi=0;yi<H;yi++){
+      const gC=g*contrastAtRow(yi);
+      const rowoff=yi*W*4;
+      for(let xi=0;xi<W;xi++){
+        let f=gC*sinArr[xi];              // signed modulation factor in [-1,1]
+        let idx=((f+1)*half+0.5)|0;
+        if(idx<0) idx=0; else if(idx>=N) idx=N-1;
+        const li=idx*3, di=rowoff+xi*4;
+        data[di]=LUT[li]; data[di+1]=LUT[li+1]; data[di+2]=LUT[li+2]; data[di+3]=255;
+      }
+    }
+    cx.putImageData(img,0,0);
+    layoutAxes();
+    updateSampNote();
+    drawOverlay();
+  }
+
+  function updateSampNote(){
+    const el=document.getElementById('sampNote');
+    if(!el) return;
+    const cap=fmaxCap();
+    if(S.fmax>cap+1e-3){
+      const capLabel=(cap*(S.dist/D0)).toFixed(1);
+      el.style.display='block';
+      el.textContent='Display sampling limit reached: this screen renders at most ≈'+capLabel+
+        ' cpd cleanly. Higher settings are clamped so every column stays point-sampled and the'+
+        ' row contrast is exact across x (nothing baked in). Increase viewing distance to push'+
+        ' finer detail onto the retina.';
+    }else{
+      el.style.display='none';
+      el.textContent='';
+    }
+  }
+
+  // ---- axes (HTML text, OUTSIDE the chart) ----
+  function fmtCpd(v){ return v>=10 ? v.toFixed(0) : (v>=1? v.toFixed(1) : v.toFixed(2)); }
+  function layoutAxes(){
+    const distScale=S.dist/D0;
+    const fminE=S.fmin*distScale, fmaxE=fmaxEff()*distScale;   // rendered cpd at current distance (clamped to sampling limit)
+    // X ticks: powers of two within [fminE,fmaxE]
+    const tx=document.getElementById('ticksX'); tx.innerHTML='';
+    const lnR=Math.log(fmaxE/fminE);
+    const cand=[0.25,0.5,1,2,4,8,16,32,64];
+    cand.forEach(v=>{
+      if(v<fminE*0.999||v>fmaxE*1.001) return;
+      const u=Math.log(v/fminE)/lnR;               // 0..1 left->right
+      const d=document.createElement('div');
+      d.className='tick'; d.style.left=(u*100)+'%'; d.textContent=fmtCpd(v);
+      tx.appendChild(d);
+    });
+    // Y ticks: fixed Michelson contrast labels
+    const ty=document.getElementById('ticksY'); ty.innerHTML='';
+    // All ticks are the NOMINAL commanded Michelson C. The full ink<->cream
+    // swing renders at ~99.1% (ink #0c0b09 has a nonzero linear black level
+    // ~0.0034), stated once in the colophon; every tick carries the same
+    // implicit 0.991 ceiling, so the labels stay one consistent convention.
+    const yc=[[1.0,'100%'],[0.2,'20%'],[0.05,'5%'],[0.01,'1%'],[0.002,'0.2%']];
+    const lnC=Math.log(CMIN/CMAX);
+    yc.forEach(([v,lab])=>{
+      const t=Math.log(v/CMAX)/lnC;                // 0 top .. 1 bottom
+      const d=document.createElement('div');
+      d.className='tick'; d.style.top=(t*100)+'%'; d.textContent=lab;
+      ty.appendChild(d);
+    });
+  }
+
+  // ---- overlay: probe row + user edge marks ----
+  let probeOn=false, markOn=false;
+  let probeY=0.5;                 // fraction of height
+  const marks=[];                 // {u,v} fractions
+
+  function drawOverlay(){
+    ox.clearRect(0,0,W,H);
+    if(probeOn){
+      const y=probeY*H;
+      ox.strokeStyle='#4d7fe0'; ox.lineWidth=Math.max(1,DPR);
+      ox.beginPath(); ox.moveTo(0,y); ox.lineTo(W,y); ox.stroke();
+      // small end ticks
+      ox.fillStyle='#4d7fe0';
+      ox.fillRect(0,y-3*DPR,2*DPR,6*DPR);
+      ox.fillRect(W-2*DPR,y-3*DPR,2*DPR,6*DPR);
+      measureProbe();
+    }
+    if(markOn){
+      ox.fillStyle='#4d7fe0';   // --caspian; #78b4ff (--focus) reserved for hover/focus
+      for(const m of marks){
+        ox.beginPath();
+        ox.arc(m.u*W, m.v*H, 3.2*DPR, 0, Math.PI*2);
+        ox.fill();
+      }
+      if(marks.length>1){
+        ox.strokeStyle='#4d7fe0'; ox.lineWidth=Math.max(1,DPR); ox.globalAlpha=0.7;
+        ox.beginPath();
+        marks.forEach((m,i)=> i? ox.lineTo(m.u*W,m.v*H): ox.moveTo(m.u*W,m.v*H));
+        ox.stroke(); ox.globalAlpha=1;
+      }
+    }
+  }
+
+  function measureProbe(){
+    // sample the RENDERED grating along the probe row, decode to linear luminance,
+    // and compute local-window Michelson at several x to prove the row is uniform.
+    const yi=Math.min(H-1,Math.max(0,Math.round(probeY*H)));
+    let rowImg;
+    try{ rowImg=cx.getImageData(0,yi,W,1).data; }catch(e){ return; }
+    const Ys=new Float64Array(W);
+    for(let xi=0;xi<W;xi++){
+      const di=xi*4;
+      const rl=srgbToLin(rowImg[di]), gl=srgbToLin(rowImg[di+1]), bl=srgbToLin(rowImg[di+2]);
+      Ys[xi]=0.2126*rl+0.7152*gl+0.0722*bl;
+    }
+    // window Michelson at several x, window sized to the LOCAL period so each
+    // sample spans >=1.5 cycles -> proves the row contrast is constant across x.
+    const scale=1/PPD0;                                   // device: cyc/CSSpx = scale*fmin*R^u (distance-independent)
+    const fmin=S.fmin, R=fmaxEff()/S.fmin;   // match the clamped grating actually rendered
+    function localWin(u){                                  // half-window in device px, >=1.5 cycles
+      const cycCss=scale*fmin*Math.pow(R,u);              // cycles per CSS px at fraction u
+      const periodDev=DPR/Math.max(cycCss,1e-6);          // device px per cycle
+      return Math.min(Math.floor(W/2), Math.max(6, Math.ceil(1.5*periodDev)));
+    }
+    const xs=[]; for(let k=0;k<6;k++) xs.push(Math.round((k+0.5)/6*W));
+    const vals=[];
+    for(const xc of xs){
+      const win=localWin(xc/W);
+      let a=Math.max(0,xc-win), b=Math.min(W-1,xc+win);
+      let mn=Infinity,mx=-Infinity;
+      for(let x=a;x<=b;x++){ const y=Ys[x]; if(y<mn)mn=y; if(y>mx)mx=y; }
+      const mich=(mx+mn>1e-9)?(mx-mn)/(mx+mn):0;
+      vals.push(mich);
+    }
+    const mean=vals.reduce((s,v)=>s+v,0)/vals.length;
+    const spread=Math.max(...vals)-Math.min(...vals);
+    const rel=mean>1e-6? (spread/mean*100):0;
+    const commanded=S.gain*contrastAtRow(yi);
+    const out=document.getElementById('probeOut');
+    out.innerHTML=
+      'measured Michelson across this row: <b>'+(mean*100).toFixed(1)+'%</b><br>'+
+      '<span class="samples">6 samples: '+vals.map(v=>(v*100).toFixed(1)).join(' · ')+
+      ' &nbsp;|&nbsp; spread '+rel.toFixed(1)+'% of mean</span><br>'+
+      '<span class="samples">commanded g·C(row) = '+(commanded*100).toFixed(1)+'%, constant across x</span>';
+  }
+
+  // ---- pointer handling on overlay ----
+  function relPos(ev){
+    const r=overlay.getBoundingClientRect();
+    const cxp=(ev.touches?ev.touches[0].clientX:ev.clientX);
+    const cyp=(ev.touches?ev.touches[0].clientY:ev.clientY);
+    return { u:Math.min(1,Math.max(0,(cxp-r.left)/r.width)),
+             v:Math.min(1,Math.max(0,(cyp-r.top)/r.height)) };
+  }
+  let dragging=false;
+  function onDown(ev){
+    if(markOn){ const p=relPos(ev); marks.push(p); drawOverlay(); ev.preventDefault(); return; }
+    if(probeOn){ dragging=true; const p=relPos(ev); probeY=p.v; drawOverlay(); ev.preventDefault(); }
+  }
+  function onMove(ev){ if(dragging&&probeOn){ probeY=relPos(ev).v; drawOverlay(); ev.preventDefault(); } }
+  function onUp(){ dragging=false; }
+  overlay.addEventListener('mousedown',onDown);
+  overlay.addEventListener('mousemove',onMove);
+  window.addEventListener('mouseup',onUp);
+  overlay.addEventListener('touchstart',onDown,{passive:false});
+  overlay.addEventListener('touchmove',onMove,{passive:false});
+  window.addEventListener('touchend',onUp);
+
+  // keyboard: when the probe is active the overlay is focusable and Arrow/Page
+  // keys nudge the probe row (pointer-free operation). Mark placement stays
+  // pointer-only by design.
+  overlay.addEventListener('keydown',ev=>{
+    if(!probeOn) return;
+    let step=0;
+    if(ev.key==='ArrowUp') step=-0.01;
+    else if(ev.key==='ArrowDown') step=0.01;
+    else if(ev.key==='PageUp') step=-0.1;
+    else if(ev.key==='PageDown') step=0.1;
+    else if(ev.key==='Home'){ probeY=0; drawOverlay(); ev.preventDefault(); return; }
+    else if(ev.key==='End'){ probeY=1; drawOverlay(); ev.preventDefault(); return; }
+    else return;
+    probeY=Math.min(1,Math.max(0,probeY+step));
+    drawOverlay(); ev.preventDefault();
+  });
+
+  function syncOverlayMode(){
+    const active=probeOn && !markOn;
+    overlay.classList.toggle('interactive', active);
+    overlay.classList.toggle('marking', markOn);
+    if(active){ overlay.tabIndex=0; overlay.setAttribute('aria-label','Probe row: Arrow keys move the sampled row up and down'); }
+    else{ overlay.removeAttribute('tabindex'); overlay.removeAttribute('aria-label'); }
+  }
+
+  // ---- controls ----
+  const gain=document.getElementById('gain'), gainOut=document.getElementById('gainOut');
+  const fmin=document.getElementById('fmin'), fminOut=document.getElementById('fminOut');
+  const fmax=document.getElementById('fmax'), fmaxOut=document.getElementById('fmaxOut');
+  const dist=document.getElementById('dist'), distOut=document.getElementById('distOut');
+  const ppdOut=document.getElementById('ppdOut');
+
+  function refreshReadouts(){
+    gainOut.textContent=Math.round(S.gain*100)+'%';
+    const distScale=S.dist/D0;
+    fminOut.textContent=(S.fmin*distScale).toFixed(2);
+    fmaxOut.textContent=(S.fmax*distScale).toFixed(1);
+    distOut.textContent=S.dist+' cm';
+    ppdOut.textContent='≈ '+pxPerDeg(S.dist).toFixed(0)+' px/deg';
+  }
+
+  gain.addEventListener('input',()=>{ S.gain=+gain.value/100; refreshReadouts(); draw(); });
+  function onFreq(){
+    S.fmin=+fmin.value; S.fmax=+fmax.value;
+    if(S.fmax<=S.fmin+0.1){ S.fmax=S.fmin+0.1; fmax.value=S.fmax; }
+    refreshReadouts(); draw();
+  }
+  fmin.addEventListener('input',onFreq);
+  fmax.addEventListener('input',onFreq);
+  dist.addEventListener('input',()=>{ S.dist=+dist.value; refreshReadouts(); draw(); });
+
+  const probeBtn=document.getElementById('probeBtn');
+  const markBtn=document.getElementById('markBtn');
+  const markNote=document.getElementById('markNote');
+  const probeOut=document.getElementById('probeOut');
+  function setState(btn,on){ btn.setAttribute('aria-pressed',on); btn.querySelector('.state').textContent=on?'ON':'OFF'; }
+  probeBtn.addEventListener('click',()=>{
+    probeOn=!probeOn; setState(probeBtn,probeOn);
+    if(!probeOn) probeOut.innerHTML='';
+    syncOverlayMode(); drawOverlay();
+  });
+  markBtn.addEventListener('click',()=>{
+    markOn=!markOn; setState(markBtn,markOn);
+    markNote.style.display=markOn?'block':'none';
+    if(!markOn) marks.length=0;               // clears on toggle-off
+    syncOverlayMode(); drawOverlay();
+  });
+
+  // ---- init ----
+  refreshReadouts();
+  if('ResizeObserver' in window){ new ResizeObserver(resize).observe(wrap); }
+  window.addEventListener('resize',resize);
+  resize();
+})();
+</script>
+</html>

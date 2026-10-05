@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>The Cornsweet edge · Photon to Phenomenology</title>
+<link rel="stylesheet" href="chrome_app.css">
+<style>
+  :root{ --ink:#0c0b09; --cream:#e8e0d0; --dim:rgba(232,224,208,0.40); --faint:rgba(232,224,208,0.15); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:var(--ink);overflow:hidden}
+  body{
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--cream);
+    -webkit-font-smoothing:antialiased;touch-action:none;cursor:ew-resize;
+  }
+  canvas{display:block;width:100%;height:100%;position:fixed;inset:0}
+  .chrome{position:fixed;pointer-events:none;user-select:none}
+  #chapter{top:var(--shell-top);left:var(--shell-side);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--dim)}
+  #title{top:calc(var(--shell-top) + 18px);left:var(--shell-side);font-size:15px;letter-spacing:0.04em;color:var(--cream);font-weight:400}
+  #readout{
+    top:calc(var(--shell-top) - 2px);right:var(--shell-side);text-align:right;
+    font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:11px;color:var(--dim);line-height:1.7;
+  }
+  #readout .lab{font-size:9.5px;text-transform:uppercase;letter-spacing:0.12em;color:var(--faint);margin-right:.6em}
+  #verdict{margin-top:8px;font-size:11px;letter-spacing:0.04em;color:var(--cream)}
+  #thesis{
+    bottom:calc(var(--shell-bottom) + 62px);right:var(--shell-side);text-align:right;max-width:min(48ch,72vw);
+    font-size:14px;line-height:1.55;color:var(--cream);opacity:0;transition:opacity 1.6s ease;
+  }
+  #thesis .lead{color:var(--dim);font-size:12.5px;display:block;margin-bottom:.5em}
+  @media (max-width:680px){ #thesis{left:var(--shell-side);text-align:left;max-width:none} #readout{top:calc(var(--shell-top) + 46px);left:var(--shell-side);right:auto;text-align:left} }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div class="chrome" id="chapter">Gallery · the Cornsweet edge</div>
+<div class="chrome" id="title">Two halves, one grey</div>
+<div class="chrome" id="readout">
+  <div><span class="lab">left</span><span id="rL">·</span></div>
+  <div><span class="lab">right</span><span id="rR">·</span></div>
+  <div id="verdict">the left looks lighter</div>
+</div>
+<div class="chrome" id="thesis">
+  <span class="lead">The two halves are the same grey everywhere except at the seam. Cover the seam and they fuse into one flat field.</span>
+  Your visual system read the little cusp at the edge and painted the whole surface to match. The difference was never in the light. Vision is not recording, it is construction.
+</div>
+
+<script src="chrome_app.js"></script>
+<script>
+(() => {
+  "use strict";
+  const cv=document.getElementById('c'); const ctx=cv.getContext('2d');
+  const rL=document.getElementById('rL'), rR=document.getElementById('rR'), verdict=document.getElementById('verdict');
+
+  let W=0,H=0,DPR=1,cx=0,cw=160;
+  const BASE=0.46, AMP=0.34;                    // identical base grey; cusp amplitude
+  let occ={cur:0,tgt:0};                        // occluder half-width over the seam (px)
+  let wasCovered=false;                         // reveal state, for the shell haptic
+
+  function resize(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    {const B=PhotonApp.fit(cv,{reserveGuide:true}); W=B.w; H=B.h;}
+    cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    cx=W/2; cw=Math.min(W*0.22, 240);           // cusp half-width each side
+  }
+  function lerp(a,b,t){return a+(b-a)*t;}
+  function chan(v,d,l){ return Math.round(d+(l-d)*v); }
+  function grey(v){ return 'rgb('+chan(v,20,232)+','+chan(v,17,224)+','+chan(v,12,208)+')'; }
+
+  // Cornsweet luminance profile across x. Equal to BASE everywhere except within
+  // cw of the seam, where left ramps up to a light cusp and right down to a dark
+  // cusp. Away from the seam both sides are identical.
+  function lumAt(x){
+    const d=x-cx;
+    if(Math.abs(d)>cw) return BASE;
+    const t=1-Math.abs(d)/cw;                   // 0 at edge of cusp .. 1 at seam
+    const f=Math.pow(t,1.7);
+    return d<0 ? BASE+AMP*f : BASE-AMP*f;
+  }
+
+  function draw(){
+    occ.cur=lerp(occ.cur,occ.tgt,0.16);
+    // vertical strips
+    for(let x=0;x<W;x+=2){ ctx.fillStyle=grey(lumAt(x+1)); ctx.fillRect(x,0,3,H); }
+
+    // occluder: an ink bar over the seam. Once it covers the cusp, only the two
+    // identical BASE fields remain visible and the illusion collapses.
+    if(occ.cur>1){ ctx.fillStyle='#0c0b09'; ctx.fillRect(cx-occ.cur, 0, occ.cur*2, H); }
+
+    rL.textContent=Math.round(BASE*100); rR.textContent=Math.round(BASE*100);
+    const covered=occ.cur>=cw*0.96;
+    if(covered!==wasCovered){ wasCovered=covered; if(covered) PhotonApp.haptic('reveal'); }
+    verdict.textContent = covered ? 'now: one flat grey' : 'the left looks lighter';
+    verdict.style.color = covered ? 'var(--cream)' : 'var(--cream)';
+    requestAnimationFrame(draw);
+  }
+
+  function cX(e){return (e.touches?e.touches[0]:e).clientX;}
+  let dragging=false,lastX=0;
+  function onDown(e){ e.preventDefault(); dragging=true; lastX=cX(e); }
+  function onMove(e){ if(!dragging)return; e.preventDefault();
+    const x=cX(e); occ.tgt=Math.max(0, Math.min(cw*1.15, occ.tgt+(x-lastX))); lastX=x; }
+  function onUp(){ dragging=false; }
+
+  cv.addEventListener('mousedown',onDown);
+  window.addEventListener('mousemove',onMove);
+  window.addEventListener('mouseup',onUp);
+  cv.addEventListener('touchstart',onDown,{passive:false});
+  window.addEventListener('touchmove',onMove,{passive:false});
+  window.addEventListener('touchend',onUp);
+  window.addEventListener('resize',resize);
+
+  // ---- guided walkthrough (per-instrument script) ----
+  const WALK=[
+    {t:"One field, split down the middle. The left half <b>plainly looks a touch lighter</b> than the right. Trust your eyes for a moment.", act(){occ.tgt=0;}},
+    {t:"There is nothing between the two halves but a thin seam. Watch only that seam: a soft cusp <b>ramps light on the left and dark on the right</b>.", act(){occ.tgt=0;}},
+    {t:"Now slide an ink bar across the seam to hide the cusp. <b>The far surfaces never changed.</b>", act(){occ.tgt=cw*1.1;}},
+    {t:"Covered, the two halves snap into one flat grey. They were always the same. You read the little edge and repainted the whole surface to match. <b>Vision is construction, not a recording.</b>", act(){occ.tgt=cw*1.1;}},
+  ];
+  PhotonChrome.init({here:'cornsweet', walk:WALK});
+
+  resize();
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

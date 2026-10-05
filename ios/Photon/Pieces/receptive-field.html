@@ -1,0 +1,944 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<link rel="stylesheet" href="chrome_app.css">
+<title>Center-surround receptive field response · Photon to Phenomenology</title>
+<style>
+  :root{
+    --ink:#0c0b09;
+    --cream:#e8e0d0;
+    --cream-dim:#9a948a;
+    --caspian:#4d7fe0;
+    --caspian-focus:#78b4ff;
+    --face-sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --face-mono:"SF Mono","SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--ink);color:var(--cream);}
+  body{
+    font-family:var(--face-sans);
+    font-weight:300;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    padding:var(--shell-top) max(var(--shell-side),clamp(14px,4vw,40px)) calc(var(--shell-bottom) + 56px);
+    max-width:1120px;
+    margin:0 auto;
+  }
+  .eyebrow{
+    font-family:var(--face-mono);
+    text-transform:uppercase;
+    letter-spacing:.22em;
+    font-size:11px;
+    color:var(--cream-dim);
+    margin:0 0 14px;
+  }
+  .instruction{
+    font-weight:300;
+    font-size:clamp(15px,1.9vw,18px);
+    max-width:66ch;
+    margin:0 0 22px;
+    color:var(--cream);
+  }
+  .layout{
+    display:grid;
+    grid-template-columns:minmax(0,1.15fr) minmax(220px,.85fr);
+    gap:clamp(16px,2.5vw,30px);
+    align-items:start;
+  }
+  @media (max-width:720px){
+    .layout{grid-template-columns:1fr;}
+  }
+  .fieldwrap{position:relative;}
+  .field-panel{
+    position:relative;
+    width:100%;
+    aspect-ratio:1/1;
+    max-width:520px;
+    margin:0 auto;
+  }
+  canvas{display:block;width:100%;height:100%;}
+  #field{
+    background:var(--ink);
+    border:1px solid #1d1d20;
+    outline:none;
+    touch-action:none;
+    cursor:grab;
+  }
+  #field:focus-visible{
+    outline:2px solid var(--caspian-focus);
+    outline-offset:3px;
+  }
+  #field.dragging{cursor:grabbing;}
+  .right{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+  .panel-label{
+    font-family:var(--face-mono);
+    text-transform:uppercase;
+    letter-spacing:.2em;
+    font-size:10.5px;
+    color:var(--cream-dim);
+    margin:0 0 18px;   /* app: clears the meter's top cap, which sits 16px above the meter */
+  }
+  /* meter */
+  .meter-row{display:flex;gap:16px;align-items:stretch;margin-top:10px;}
+  .meter-track{
+    position:relative;
+    width:52px;
+    min-height:300px;
+    flex:0 0 auto;
+    border:1px solid #1d1d20;
+    background:var(--ink);
+  }
+  .meter-fill{
+    position:absolute;
+    left:0;right:0;
+    background:var(--cream);
+    transition:height .12s linear, top .12s linear, bottom .12s linear;
+  }
+  .reduce-motion .meter-fill{transition:none;}
+  .meter-baseline{
+    position:absolute;
+    left:-5px;right:-5px;
+    top:50%;
+    height:1px;
+    background:var(--cream);
+  }
+  .meter-baseline::after{
+    content:"BASELINE";
+    position:absolute;
+    left:calc(100% + 8px);
+    top:50%;
+    transform:translateY(-50%);
+    font-family:var(--face-mono);
+    font-size:9.5px;
+    letter-spacing:.16em;
+    color:var(--cream-dim);
+    white-space:nowrap;
+  }
+  .meter-cap{
+    font-family:var(--face-mono);
+    font-size:9px;
+    letter-spacing:.16em;
+    color:var(--cream-dim);
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    white-space:nowrap;
+    text-align:center;
+  }
+  .meter-cap.top{top:-16px;}
+  .meter-cap.bot{bottom:-16px;}
+  .readout{flex:1 1 auto;min-width:0;}
+  .readout .word{
+    font-family:var(--face-mono);
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    font-size:13px;
+    color:var(--cream);
+    margin:0 0 12px;
+  }
+  .stat{margin:0 0 12px;}
+  .stat .k{
+    font-family:var(--face-mono);
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    font-size:9.5px;
+    color:var(--cream-dim);
+    display:block;
+    margin-bottom:2px;
+  }
+  .stat .v{
+    font-family:var(--face-mono);
+    font-size:26px;
+    color:var(--cream);
+    line-height:1;
+  }
+  .state-sentence{
+    font-weight:300;
+    font-size:14px;
+    color:var(--cream);
+    margin:14px 0 0;
+    max-width:34ch;
+  }
+  /* cross-section */
+  .xsec-panel{width:100%;}
+  #xsec{
+    width:100%;
+    aspect-ratio:16/7;
+    border:1px solid #1d1d20;
+    background:var(--ink);
+  }
+  .xsec-cap{
+    font-family:var(--face-mono);
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    font-size:9.5px;
+    color:var(--cream-dim);
+    margin:8px 0 0;
+  }
+  .xsec-note{
+    font-weight:300;
+    font-size:12px;
+    color:var(--cream-dim);
+    margin:4px 0 0;
+  }
+  /* controls */
+  .controls{
+    margin-top:30px;
+    border-top:1px solid #1d1d20;
+    padding-top:22px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:20px 26px;
+  }
+  .ctl{min-width:0;}
+  .ctl > .lab{
+    font-weight:300;
+    font-size:13px;
+    color:var(--cream);
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:8px;
+  }
+  .ctl > .lab .val{
+    font-family:var(--face-mono);
+    font-size:11px;
+    letter-spacing:.08em;
+    color:var(--cream);
+  }
+  .ctl.disabled{opacity:.4;}
+  .seg{display:flex;border:1px solid var(--caspian);}
+  .seg button{
+    flex:1 1 auto;
+    appearance:none;
+    background:transparent;
+    color:var(--cream);
+    border:none;
+    border-right:1px solid #1d1d20;
+    font-family:var(--face-mono);
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    font-size:10px;
+    padding:9px 6px;
+    min-height:44px;min-width:44px;font-weight:400;
+    cursor:pointer;
+  }
+  .seg button:last-child{border-right:none;}
+  .seg button[aria-pressed="true"]{
+    background:var(--caspian);
+    color:var(--ink);
+  }
+  .seg button:focus-visible{
+    outline:2px solid var(--caspian-focus);
+    outline-offset:3px;
+  }
+  input[type=range]{
+    -webkit-appearance:none;
+    appearance:none;
+    width:100%;
+    height:22px;
+    min-height:44px;
+    background:transparent;
+    cursor:pointer;
+  }
+  input[type=range]:focus-visible{
+    outline:2px solid var(--caspian-focus);
+    outline-offset:3px;
+  }
+  input[type=range]::-webkit-slider-runnable-track{
+    height:2px;background:#1d1d20;
+  }
+  input[type=range]::-moz-range-track{height:2px;background:#1d1d20;}
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:14px;height:14px;margin-top:-6px;
+    background:var(--caspian);border-radius:50%;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:14px;height:14px;border:none;
+    background:var(--caspian);border-radius:50%;
+  }
+  input[type=range]:disabled{cursor:not-allowed;}
+  .btn{
+    appearance:none;
+    width:100%;
+    background:transparent;
+    color:var(--caspian);
+    border:1px solid var(--caspian);
+    font-family:var(--face-mono);
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-size:11px;
+    padding:11px 8px;
+    min-height:44px;font-weight:400;
+    cursor:pointer;
+  }
+  .btn:hover{border-color:var(--caspian-focus);color:var(--caspian-focus);}
+  .btn:active{background:var(--caspian);color:var(--ink);}
+  .btn:focus-visible{outline:2px solid var(--caspian-focus);outline-offset:3px;}
+  .btn:disabled{opacity:.35;cursor:not-allowed;}
+  .btn.pressed{background:var(--caspian);color:var(--ink);}
+  .sr-only{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+  }
+  .footer-note{
+    margin-top:34px;
+    font-size:12px;
+    color:var(--cream-dim);
+    max-width:70ch;
+    font-weight:300;
+  }
+  a{color:var(--caspian);}
+</style>
+</head>
+<body>
+  <p class="eyebrow">Photon to Phenomenology · Palmer §4.1–4.3</p>
+  <p class="instruction">
+    Drag the light across the cell's field: it fires above baseline over the center,
+    drops below over the surround, and goes silent under full-field light.
+    The cell reports <em>contrast, not brightness</em>.
+  </p>
+
+  <div class="layout">
+    <div class="fieldwrap">
+      <div class="field-panel">
+        <canvas id="field"
+          tabindex="0"
+          role="application"
+          aria-label="Receptive field. Drag the light stimulus with the pointer, or move it with the arrow keys. Hold Shift for a larger step.">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="right">
+      <div>
+        <p class="panel-label">Response meter</p>
+        <div class="meter-row">
+          <div class="meter-track" aria-hidden="true">
+            <div class="meter-cap top">EXCITED ▲</div>
+            <div class="meter-fill" id="meterFill"></div>
+            <div class="meter-baseline"></div>
+            <div class="meter-cap bot">SUPPRESSED ▼</div>
+          </div>
+          <div class="readout">
+            <p class="word" id="stateWord">SILENT AT BASELINE</p>
+            <div class="stat">
+              <span class="k">Response · rel. drive</span>
+              <span class="v" id="respVal">0.00</span>
+            </div>
+            <div class="stat">
+              <span class="k">Firing rate</span>
+              <span class="v" id="rateVal">22 <span style="font-size:12px">sp/s</span></span>
+            </div>
+          </div>
+        </div>
+        <p class="state-sentence" id="stateSentence">
+          Move the light onto the center to excite the cell.
+        </p>
+      </div>
+
+      <div class="xsec-panel">
+        <p class="panel-label">Sensitivity cross-section</p>
+        <canvas id="xsec" aria-hidden="true"></canvas>
+        <p class="xsec-cap">Response = net shaded area</p>
+        <p class="xsec-note">The field × the light, summed across the strip. Its signed area is the cell's full 2-D response, the same number the meter reads.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="ctl">
+      <div class="lab"><span>Cell type</span></div>
+      <div class="seg" role="group" aria-label="Cell type">
+        <button type="button" id="cellOn"     aria-pressed="true"  aria-label="ON-center concentric cell">ON-Center</button>
+        <button type="button" id="cellOff"    aria-pressed="false" aria-label="OFF-center concentric cell">OFF-Center</button>
+        <button type="button" id="cellSimple" aria-pressed="false" aria-label="Cortical simple cell, oriented">Simple Cell</button>
+      </div>
+    </div>
+
+    <div class="ctl">
+      <div class="lab"><span>Stimulus</span></div>
+      <div class="seg" role="group" aria-label="Stimulus type">
+        <button type="button" id="stimSpot" aria-pressed="true"  aria-label="Spot of light">Spot</button>
+        <button type="button" id="stimBar"  aria-pressed="false" aria-label="Bar of light">Bar</button>
+      </div>
+    </div>
+
+    <div class="ctl">
+      <label class="lab" for="sizeSlider"><span>Size</span><span class="val" id="sizeVal">0.32</span></label>
+      <input type="range" id="sizeSlider" min="0" max="1" step="0.01" value="0.18"
+        aria-label="Stimulus size">
+    </div>
+
+    <div class="ctl">
+      <label class="lab" for="intSlider"><span>Intensity</span><span class="val" id="intVal">0.90</span></label>
+      <input type="range" id="intSlider" min="0" max="1" step="0.01" value="0.90"
+        aria-label="Stimulus light intensity">
+    </div>
+
+    <div class="ctl disabled" id="orientCtl">
+      <label class="lab" for="orientSlider"><span>Orientation</span><span class="val" id="orientVal">0°</span></label>
+      <input type="range" id="orientSlider" min="-90" max="90" step="1" value="0" disabled
+        aria-label="Bar orientation in degrees">
+    </div>
+
+    <div class="ctl">
+      <div class="lab"><span>Uniform light</span></div>
+      <button type="button" class="btn" id="fullBtn"
+        aria-label="Flood the whole field with uniform light. Press and hold, or toggle.">Full Field</button>
+    </div>
+
+    <div class="ctl">
+      <div class="lab"><span>Auto sweep</span></div>
+      <button type="button" class="btn" id="sweepBtn"
+        aria-label="Automatically sweep the spot across the field">Sweep ▸</button>
+    </div>
+  </div>
+
+  <p class="footer-note">
+    The stimulus is drawn only as real luminance; the field anatomy (rings, labels, curve) is the cell's fixed
+    wiring and never lights up with the stimulus. The meter is one integral of the on-screen light against the
+    fixed difference-of-Gaussians weight map: center peak, surround dip, and full-field null all fall out of that
+    single sum. Palmer, <em>Vision Science: Photons to Phenomenology</em> (MIT Press, 1999), Ch. 4, §4.1.1 (Kuffler),
+    §4.1.3 (Hubel &amp; Wiesel), §4.3 (Enroth-Cugell &amp; Robson, Marr-Hildreth).
+  </p>
+
+  <div class="sr-only" aria-live="polite" id="ariaLive"></div>
+
+<script src="chrome_app.js"></script>
+<script>
+"use strict";
+(function(){
+  var INK=[12,11,9], CREAM=[232,224,208];
+  var CASPIAN="#4d7fe0", CASPIAN_FOCUS="#78b4ff", CREAMHEX="#e8e0d0", CREAMDIM="#9a948a";
+  var N=120;                       // computational grid
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduceMotion) document.body.classList.add("reduce-motion");
+
+  // ---- state ----
+  var state = {
+    cellType:"on",     // on | off | simple
+    stimulus:"spot",   // spot | bar
+    size:0.18,         // slider 0..1 (default: spot ~ center-matched)
+    intensity:0.90,
+    orientDeg:0,
+    cx:0.0, cy:0.0,    // stimulus center, normalized (-0.5..0.5)
+    fullField:false
+  };
+
+  // ---- receptive field (built once per cell type) ----
+  var RF = new Float32Array(N*N);
+  var posSum = 1;                  // sum of positive weights, for meter normalization
+  var centerR = 0.15, surroundR = 0.48;   // ring radii (normalized) for concentric anatomy
+  var prefOrientDeg = 0;
+
+  function gcoord(i){ return (i+0.5)/N - 0.5; }
+
+  function buildConcentric(sign){
+    var sc=0.075, ss=0.19;
+    var c=new Float32Array(N*N), s=new Float32Array(N*N), Sc=0, Ss=0, k, i, j;
+    for(j=0;j<N;j++){ var y=gcoord(j);
+      for(i=0;i<N;i++){ var x=gcoord(i); k=j*N+i;
+        var d2=x*x+y*y;
+        var cv=Math.exp(-d2/(2*sc*sc));
+        var sv=Math.exp(-d2/(2*ss*ss));
+        c[k]=cv; s[k]=sv; Sc+=cv; Ss+=sv;
+      }
+    }
+    var kk=Sc/Ss;                  // equal-volume balance => sum(RF)=0 exactly
+    var ps=0;
+    for(k=0;k<N*N;k++){
+      var v=(c[k]-kk*s[k])*sign;
+      RF[k]=v;
+      if(v>0) ps+=v;
+    }
+    posSum=ps;
+    // zero-crossing radius of the balanced DoG
+    centerR = Math.sqrt(4*Math.log(ss/sc)/(1/(sc*sc)-1/(ss*ss)));
+    surroundR = Math.min(2.6*ss, 0.49);
+  }
+
+  function buildSimple(sign){
+    // oriented (Gabor) profile: elongated along x, ON/OFF bands alternate along y.
+    var su=0.24, sv=0.11, f=1.5, k, i, j, sum=0;
+    var g=new Float32Array(N*N);
+    for(j=0;j<N;j++){ var v=gcoord(j);
+      for(i=0;i<N;i++){ var u=gcoord(i); k=j*N+i;
+        g[k]=Math.exp(-(u*u/(2*su*su)+v*v/(2*sv*sv)))*Math.cos(2*Math.PI*f*v);
+        sum+=g[k];
+      }
+    }
+    var mean=sum/(N*N);            // zero the DC term => uniform light nets ~0
+    var ps=0;
+    for(k=0;k<N*N;k++){
+      var val=(g[k]-mean)*sign;
+      RF[k]=val;
+      if(val>0) ps+=val;
+    }
+    posSum=ps;
+    prefOrientDeg=0;
+  }
+
+  function buildRF(){
+    if(state.cellType==="on")       buildConcentric(+1);
+    else if(state.cellType==="off") buildConcentric(-1);
+    else                            buildSimple(+1);
+  }
+
+  // ---- stimulus luminance array ----
+  function sizeToSpotRadius(sz){ return 0.03 + sz*0.72; }   // up to >field, gives structural null
+  function sizeToBarLen(sz){ return 0.16 + sz*0.74; }
+  var BAR_W = 0.13;
+
+  function computeL(){
+    var L=new Float32Array(N*N), I=state.intensity, k, i, j;
+    if(state.fullField){ for(k=0;k<N*N;k++) L[k]=I; return L; }
+    if(state.stimulus==="spot"){
+      var r=sizeToSpotRadius(state.size), r2=r*r;
+      for(j=0;j<N;j++){ var dy=gcoord(j)-state.cy;
+        for(i=0;i<N;i++){ var dx=gcoord(i)-state.cx; k=j*N+i;
+          if(dx*dx+dy*dy<=r2) L[k]=I;
+        }
+      }
+    } else {
+      var len=sizeToBarLen(state.size), w=BAR_W;
+      var ang=state.orientDeg*Math.PI/180, ca=Math.cos(ang), sa=Math.sin(ang);
+      for(j=0;j<N;j++){ var Y=gcoord(j)-state.cy;
+        for(i=0;i<N;i++){ var X=gcoord(i)-state.cx; k=j*N+i;
+          var bx=X*ca+Y*sa, by=-X*sa+Y*ca;
+          if(Math.abs(bx)<=len/2 && Math.abs(by)<=w/2) L[k]=I;
+        }
+      }
+    }
+    return L;
+  }
+
+  // ---- the ONE integration function (no special-casing anywhere) ----
+  function integrate(L, rf){
+    var s=0;
+    for(var k=0;k<L.length;k++) s+=L[k]*rf[k];
+    return s;
+  }
+
+  // ---- rendering helpers ----
+  function lerpColor(a,b,t){
+    return "rgb("+Math.round(a[0]+(b[0]-a[0])*t)+","+
+                  Math.round(a[1]+(b[1]-a[1])*t)+","+
+                  Math.round(a[2]+(b[2]-a[2])*t)+")";
+  }
+  function clamp(v,a,b){ return v<a?a:(v>b?b:v); }
+
+  var field=document.getElementById("field");
+  var fctx=field.getContext("2d");
+  var xsec=document.getElementById("xsec");
+  var xctx=xsec.getContext("2d");
+  var dpr=Math.max(1, window.devicePixelRatio||1);
+  var fieldFocused=false;
+
+  function fitCanvas(canvas, ctx){
+    var rect=canvas.getBoundingClientRect();
+    var w=Math.max(1,Math.round(rect.width)), h=Math.max(1,Math.round(rect.height));
+    canvas.width=Math.round(w*dpr);
+    canvas.height=Math.round(h*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    return {w:w,h:h};
+  }
+
+  function n2p(coord, size){ return (coord+0.5)*size; }
+
+  function drawField(L){
+    var d=fitCanvas(field,fctx), S=d.w; // square
+    fctx.clearRect(0,0,S,S);
+    // 1. field background
+    fctx.fillStyle=lerpColor(INK,INK,0); fctx.fillRect(0,0,S,S);
+
+    // 2. stimulus, drawn as REAL luminance (light on ink)
+    var stimColor=lerpColor(INK,CREAM,state.intensity);
+    if(state.fullField){
+      fctx.fillStyle=stimColor; fctx.fillRect(0,0,S,S);
+    } else if(state.stimulus==="spot"){
+      var r=sizeToSpotRadius(state.size)*S;
+      fctx.fillStyle=stimColor;
+      fctx.beginPath();
+      fctx.arc(n2p(state.cx,S), n2p(state.cy,S), r, 0, Math.PI*2);
+      fctx.fill();
+    } else {
+      var len=sizeToBarLen(state.size)*S, w=BAR_W*S;
+      fctx.save();
+      fctx.translate(n2p(state.cx,S), n2p(state.cy,S));
+      fctx.rotate(state.orientDeg*Math.PI/180);
+      fctx.fillStyle=stimColor;
+      fctx.fillRect(-len/2,-w/2,len,w);
+      fctx.restore();
+    }
+
+    // 3. fixed anatomy — INERT (identical regardless of stimulus position)
+    fctx.lineWidth=1;
+    fctx.strokeStyle=CREAMHEX;
+    if(state.cellType==="simple"){
+      // oriented subregions: central excitatory band + dashed flanks
+      var envL=0.72*S, bandH=0.13*S, flankH=0.17*S;
+      var cxp=S/2, cyp=S/2;
+      fctx.setLineDash([]);
+      fctx.strokeRect(cxp-envL/2, cyp-bandH, envL, bandH*2);
+      fctx.setLineDash([4,4]);
+      fctx.strokeRect(cxp-envL/2, cyp-bandH-flankH, envL, flankH);
+      fctx.strokeRect(cxp-envL/2, cyp+bandH,        envL, flankH);
+      fctx.setLineDash([]);
+      drawLabel(fctx, "+ CENTER", cxp, cyp-bandH*0.35, "center");
+      drawLabel(fctx, "− FLANK",  cxp, cyp-bandH-flankH*0.55, "center");
+      drawLabel(fctx, "− FLANK",  cxp, cyp+bandH+flankH*0.55, "center");
+    } else {
+      var cx0=S/2, cy0=S/2;
+      // center ring (solid)
+      fctx.setLineDash([]);
+      fctx.beginPath(); fctx.arc(cx0,cy0,centerR*S,0,Math.PI*2); fctx.stroke();
+      // surround ring (dashed)
+      fctx.setLineDash([4,5]);
+      fctx.beginPath(); fctx.arc(cx0,cy0,surroundR*S,0,Math.PI*2); fctx.stroke();
+      fctx.setLineDash([]);
+      var sign = (state.cellType==="on")? "+" : "−";
+      var isign= (state.cellType==="on")? "−" : "+";
+      drawLabel(fctx, sign+" CENTER", cx0, cy0, "center");
+      drawLabel(fctx, isign+" SURROUND", cx0, cy0 - (surroundR*S) + 15, "center");
+    }
+
+    // 4. drag/focus handle — the ONLY interactive-colored element
+    fctx.strokeStyle = fieldFocused ? CASPIAN_FOCUS : CASPIAN;
+    fctx.lineWidth = 2;
+    fctx.setLineDash([]);
+    var hx=n2p(state.cx,S), hy=n2p(state.cy,S);
+    if(!state.fullField){
+      if(state.stimulus==="spot"){
+        var hr=sizeToSpotRadius(state.size)*S;
+        fctx.beginPath(); fctx.arc(hx,hy,hr,0,Math.PI*2); fctx.stroke();
+      } else {
+        var len2=sizeToBarLen(state.size)*S, w2=BAR_W*S;
+        fctx.save(); fctx.translate(hx,hy); fctx.rotate(state.orientDeg*Math.PI/180);
+        fctx.strokeRect(-len2/2,-w2/2,len2,w2); fctx.restore();
+      }
+      // small center crosshair on the handle
+      fctx.beginPath();
+      fctx.moveTo(hx-6,hy); fctx.lineTo(hx+6,hy);
+      fctx.moveTo(hx,hy-6); fctx.lineTo(hx,hy+6);
+      fctx.stroke();
+    }
+  }
+
+  function drawLabel(ctx, text, x, y, mode){
+    ctx.save();
+    ctx.font='9px '+ "'SF Mono','SFMono-Regular',Menlo,Consolas,monospace";
+    ctx.fillStyle=CREAMDIM;
+    ctx.textAlign="center";
+    var spaced=text.split("").join(" ");
+    if(mode==="center-below"){ ctx.textBaseline="bottom"; }
+    else { ctx.textBaseline="middle"; }
+    // letter-spacing emulation
+    ctx.save();
+    ctx.textAlign="left";
+    var total=0, chars=text.split("");
+    var widths=chars.map(function(ch){ return ctx.measureText(ch).width; });
+    var ls=1.6;
+    for(var q=0;q<chars.length;q++) total+=widths[q]+ls;
+    total-=ls;
+    var startX=x-total/2;
+    for(var q2=0;q2<chars.length;q2++){
+      ctx.fillText(chars[q2], startX, y);
+      startX+=widths[q2]+ls;
+    }
+    ctx.restore();
+    ctx.restore();
+  }
+
+  function drawXsec(L){
+    var d=fitCanvas(xsec,xctx), W=d.w, H=d.h;
+    xctx.clearRect(0,0,W,H);
+    var midY=H*0.52, amp=H*0.36;
+    // MARGINAL, not a slice: project the 2-D field onto one axis by summing over the
+    // perpendicular direction. Concentric cells project onto the horizontal axis (sum
+    // over rows); the oriented simple cell projects onto the vertical axis (sum over
+    // columns) so its band/flank structure stays visible. Marginalising instead of
+    // slicing is what makes the shaded 1-D area genuinely equal the full 2-D integral:
+    //   sum_t prodMarg[t] = sum_t sum_u RF*L = sum over every pixel RF*L = the meter.
+    // So the full-field null shows as equal positive/negative areas that cancel, and an
+    // off-centre spot can no longer be "missed" by a single line.
+    var vertical = (state.cellType==="simple");
+    var rfMarg=new Float32Array(N), prodMarg=new Float32Array(N), lMarg=new Float32Array(N);
+    var maxabs=1e-6, m;
+    for(var t=0;t<N;t++){
+      var rsum=0, psum=0, lsum=0;
+      for(var u=0;u<N;u++){
+        var idx = vertical ? (t*N+u) : (u*N+t);
+        var rf=RF[idx], li=L[idx];
+        rsum+=rf; psum+=rf*li; lsum+=li;
+      }
+      rfMarg[t]=rsum; prodMarg[t]=psum; lMarg[t]=lsum;
+      m=Math.abs(rsum); if(m>maxabs) maxabs=m;
+    }
+    var sc=amp/maxabs;   // fixed scale from the position-independent RF marginal
+
+    // zero baseline
+    xctx.strokeStyle="#1d1d20"; xctx.lineWidth=1;
+    xctx.beginPath(); xctx.moveTo(0,midY); xctx.lineTo(W,midY); xctx.stroke();
+
+    // shaded integrand: sum_perp(RF*L) per strip. Its signed area over the whole strip
+    // equals the 2-D response, so lowering INTENSITY shrinks it in lockstep with the meter.
+    for(var t2=0;t2<N;t2++){
+      var prod=prodMarg[t2];
+      if(prod===0) continue;
+      var x0=(t2/N)*W, x1=((t2+1)/N)*W;
+      var yv=midY - prod*sc;
+      xctx.fillStyle = prod>0 ? "rgba(232,224,208,0.55)" : "rgba(232,224,208,0.20)";
+      xctx.fillRect(x0, Math.min(midY,yv), x1-x0, Math.abs(midY-yv));
+    }
+
+    // RF weight curve (cream line) — the fixed RF marginal, independent of stimulus position
+    xctx.strokeStyle=CREAMHEX; xctx.lineWidth=1.4;
+    xctx.beginPath();
+    for(var t3=0;t3<N;t3++){
+      var xx=(t3+0.5)/N*W, yy=midY - rfMarg[t3]*sc;
+      if(t3===0) xctx.moveTo(xx,yy); else xctx.lineTo(xx,yy);
+    }
+    xctx.stroke();
+
+    // stimulus footprint (faint bracket where the light projects onto the strip)
+    xctx.strokeStyle=CASPIAN; xctx.lineWidth=2;
+    var inSeg=false, segStart=0;
+    for(var t4=0;t4<=N;t4++){
+      var on = (t4<N) && lMarg[t4]>0;
+      if(on && !inSeg){ inSeg=true; segStart=t4; }
+      else if(!on && inSeg){
+        inSeg=false;
+        var xa=(segStart/N)*W, xb=(t4/N)*W, yb=H-6;
+        xctx.beginPath(); xctx.moveTo(xa,yb); xctx.lineTo(xb,yb); xctx.stroke();
+      }
+    }
+  }
+
+  // ---- meter + readouts ----
+  var meterFill=document.getElementById("meterFill");
+  var stateWord=document.getElementById("stateWord");
+  var respVal=document.getElementById("respVal");
+  var rateVal=document.getElementById("rateVal");
+  var stateSentence=document.getElementById("stateSentence");
+  var ariaLive=document.getElementById("ariaLive");
+
+  var BASE_HZ=22, GAIN_HZ=46;
+  var wasSeen=false, armed=false;   // reveal state, for the shell haptic
+
+  function updateMeter(meter, rate){
+    var pct=clamp(Math.abs(meter),0,1)*50;
+    if(meter>=0){ meterFill.style.top="auto"; meterFill.style.bottom="50%"; meterFill.style.height=pct+"%"; }
+    else        { meterFill.style.bottom="auto"; meterFill.style.top="50%"; meterFill.style.height=pct+"%"; }
+    respVal.textContent=(Math.abs(meter)<0.005?" ":(meter>=0?"+":"−"))+Math.abs(meter).toFixed(2);
+    rateVal.innerHTML=Math.round(rate)+' <span style="font-size:12px">sp/s</span>';
+  }
+
+  function draw(announce){
+    var L=computeL();
+    var resp=integrate(L, RF);
+    var meter=clamp(resp/posSum, -1, 1);       // 1 => all positive weight fully lit at I=1
+    var rate=clamp(BASE_HZ + GAIN_HZ*meter, 0, 120);
+
+    drawField(L);
+    drawXsec(L);
+    updateMeter(meter, rate);
+
+    var word, sentence;
+    var eps=0.005;   // match respVal's numeric cutoff so word and number never disagree
+    if(Math.abs(meter)<eps){
+      word="SILENT AT BASELINE";
+      sentence="Center and surround cancel. The cell ignores uniform light; it measures contrast, not brightness.";
+    } else if(meter>0){
+      word="EXCITED";
+      sentence = state.cellType==="simple"
+        ? "The bar matches the excitatory band. The cell fires above its baseline."
+        : "Light sits over the excitatory region. The cell fires above its baseline.";
+    } else {
+      word="SUPPRESSED";
+      sentence = state.cellType==="simple"
+        ? "The bar falls on the inhibitory flanks. The cell is driven below baseline toward silence."
+        : "Light sits over the antagonistic region. The cell is driven below baseline toward silence.";
+    }
+    var seen=!(Math.abs(meter)<eps); if(seen!==wasSeen){ wasSeen=seen; if(armed) PhotonApp.haptic('reveal'); } armed=true;
+    stateWord.textContent=word;
+    stateSentence.textContent=sentence;
+
+    // aria-live: position + response — only on discrete steps, never per pointermove/rAF frame
+    if(announce){
+      var posTxt="x "+state.cx.toFixed(2)+", y "+(-state.cy).toFixed(2);
+      ariaLive.textContent="Stimulus at "+posTxt+". Response "+(meter>=0?"+":"−")+
+        Math.abs(meter).toFixed(2)+", "+word.toLowerCase()+", "+Math.round(rate)+" spikes per second.";
+    }
+  }
+
+  // ---- interaction: pointer drag ----
+  function eventToNorm(ev){
+    var rect=field.getBoundingClientRect();
+    var px=(ev.clientX-rect.left)/rect.width - 0.5;
+    var py=(ev.clientY-rect.top)/rect.height - 0.5;
+    return {x:clamp(px,-0.48,0.48), y:clamp(py,-0.48,0.48)};
+  }
+  var dragging=false;
+  field.addEventListener("pointerdown", function(ev){
+    if(state.fullField) return;
+    dragging=true; field.classList.add("dragging");
+    field.setPointerCapture(ev.pointerId);
+    var p=eventToNorm(ev); state.cx=p.x; state.cy=p.y; draw();
+  });
+  field.addEventListener("pointermove", function(ev){
+    if(!dragging) return;
+    var p=eventToNorm(ev); state.cx=p.x; state.cy=p.y; draw();
+  });
+  function endDrag(ev){ if(!dragging) return; dragging=false; field.classList.remove("dragging"); draw(true); }
+  field.addEventListener("pointerup", endDrag);
+  field.addEventListener("pointercancel", endDrag);
+
+  field.addEventListener("focus", function(){ fieldFocused=true; draw(); });
+  field.addEventListener("blur",  function(){ fieldFocused=false; draw(); });
+
+  field.addEventListener("keydown", function(ev){
+    var step = ev.shiftKey ? 0.06 : 0.02, used=true;
+    switch(ev.key){
+      case "ArrowLeft":  state.cx=clamp(state.cx-step,-0.48,0.48); break;
+      case "ArrowRight": state.cx=clamp(state.cx+step,-0.48,0.48); break;
+      case "ArrowUp":    state.cy=clamp(state.cy-step,-0.48,0.48); break;
+      case "ArrowDown":  state.cy=clamp(state.cy+step,-0.48,0.48); break;
+      default: used=false;
+    }
+    if(used){ ev.preventDefault(); state.fullField=false; syncFullBtn(); draw(true); }
+  });
+
+  // ---- controls ----
+  function seg(ids, onPick){
+    ids.forEach(function(id){
+      document.getElementById(id).addEventListener("click", function(){
+        ids.forEach(function(o){ document.getElementById(o).setAttribute("aria-pressed", o===id ? "true":"false"); });
+        onPick(id);
+      });
+    });
+  }
+
+  seg(["cellOn","cellOff","cellSimple"], function(id){
+    state.cellType = id==="cellOn"?"on":(id==="cellOff"?"off":"simple");
+    if(state.cellType==="simple"){
+      // simple cells are found with an oriented bar
+      setStimulus("bar");
+    }
+    updateOrientEnabled();
+    buildRF();
+    draw(true);
+  });
+
+  seg(["stimSpot","stimBar"], function(id){
+    setStimulus(id==="stimSpot"?"spot":"bar");
+  });
+  function setStimulus(s){
+    state.stimulus=s;
+    document.getElementById("stimSpot").setAttribute("aria-pressed", s==="spot"?"true":"false");
+    document.getElementById("stimBar").setAttribute("aria-pressed", s==="bar"?"true":"false");
+    updateOrientEnabled();
+    draw(true);
+  }
+
+  var orientCtl=document.getElementById("orientCtl");
+  var orientSlider=document.getElementById("orientSlider");
+  function updateOrientEnabled(){
+    var on = (state.cellType==="simple" && state.stimulus==="bar");
+    orientSlider.disabled=!on;
+    orientCtl.classList.toggle("disabled", !on);
+  }
+
+  var sizeSlider=document.getElementById("sizeSlider"), sizeVal=document.getElementById("sizeVal");
+  sizeSlider.addEventListener("input", function(){
+    state.size=parseFloat(this.value);
+    var shown = state.stimulus==="spot" ? sizeToSpotRadius(state.size)*2 : sizeToBarLen(state.size);
+    sizeVal.textContent=shown.toFixed(2);
+    sizeSlider.setAttribute("aria-valuetext", shown.toFixed(2));
+    draw(true);
+  });
+
+  var intSlider=document.getElementById("intSlider"), intVal=document.getElementById("intVal");
+  intSlider.addEventListener("input", function(){
+    state.intensity=parseFloat(this.value);
+    intVal.textContent=state.intensity.toFixed(2);
+    draw(true);
+  });
+
+  orientSlider.addEventListener("input", function(){
+    state.orientDeg=parseFloat(this.value);
+    document.getElementById("orientVal").textContent=state.orientDeg+"°";
+    draw(true);
+  });
+
+  var fullBtn=document.getElementById("fullBtn");
+  function syncFullBtn(){ fullBtn.classList.toggle("pressed", state.fullField); fullBtn.setAttribute("aria-pressed", state.fullField?"true":"false"); }
+  fullBtn.setAttribute("aria-pressed","false");
+  fullBtn.addEventListener("click", function(){
+    state.fullField=!state.fullField; syncFullBtn(); draw(true);
+  });
+
+  // ---- sweep ----
+  var sweepBtn=document.getElementById("sweepBtn");
+  var sweeping=false, sweepRAF=null, sweepT=0;
+  if(reduceMotion){ sweepBtn.disabled=true; sweepBtn.textContent="Sweep (motion off)"; }
+  sweepBtn.addEventListener("click", function(){
+    if(reduceMotion) return;
+    if(sweeping){ stopSweep(); return; }
+    sweeping=true; sweepBtn.classList.add("pressed"); sweepBtn.textContent="Stop ▪";
+    state.fullField=false; syncFullBtn();
+    sweepT=0; sweepStart=null; sweepRAF=requestAnimationFrame(sweepStep);
+  });
+  var sweepStart=null;
+  function sweepStep(ts){
+    if(!sweeping) return;
+    if(sweepStart===null) sweepStart=ts;
+    var el=(ts-sweepStart)/4200;      // ~4.2s across
+    var phase=el%1;
+    state.cx = -0.42 + 0.84*phase;
+    state.cy = 0.0;
+    draw();
+    if(el>=2){ stopSweep(); return; }  // two passes then stop
+    sweepRAF=requestAnimationFrame(sweepStep);
+  }
+  function stopSweep(){
+    sweeping=false; if(sweepRAF) cancelAnimationFrame(sweepRAF);
+    sweepBtn.classList.remove("pressed"); sweepBtn.textContent="Sweep ▸";
+  }
+
+  // ---- init ----
+  function init(){
+    buildRF();
+    updateOrientEnabled();
+    syncFullBtn();
+    var shown0=(sizeToSpotRadius(state.size)*2).toFixed(2);
+    sizeVal.textContent=shown0;
+    sizeSlider.setAttribute("aria-valuetext", shown0);
+    intVal.textContent=state.intensity.toFixed(2);
+    draw(true);
+  }
+  window.addEventListener("resize", function(){ dpr=Math.max(1,window.devicePixelRatio||1); draw(); });
+  init();
+
+  // expose for automated acceptance checks (read-only probes; not used by UI)
+  window.__rf = {
+    integrate:integrate,
+    computeL:computeL,
+    getRF:function(){ return RF; },
+    getPosSum:function(){ return posSum; },
+    sumRF:function(){ var s=0; for(var k=0;k<RF.length;k++) s+=RF[k]; return s; },
+    sumCenterLobe:function(){ var s=0; for(var k=0;k<RF.length;k++){ if(RF[k]>0) s+=RF[k]; } return s; },
+    state:state, buildRF:buildRF
+  };
+})();
+</script>
+</body>
+</html>
