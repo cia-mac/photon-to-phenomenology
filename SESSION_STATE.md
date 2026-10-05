@@ -7,6 +7,25 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## IN FLIGHT 2026-10-04 (9) - pushed and deployed; the index link fix is live (see the decision entry just appended)
+
+### Done
+- [observed] Pushed main to origin (036fc60 iOS app, 9775a14 .vercelignore). Deployed production with `vercel deploy --prod --yes`: new production deployment photon-to-phenomenology-hpvpf6wlt-ciamacparhizi-9083s-projects.vercel.app. Live check: 17 of 17 index links return 200; /photon, /photon/book, /shorts, /photon/kanizsa, /photon/book/troxler-fading return 200; / is 307 to /photon.
+- [observed] CORRECTION to the 2026-10-01 runbook above: a git push does NOT deploy this site (no git integration; GitHub shows no deployment or status). Deploy is the CLI only. The earlier "git push ... auto-deploys" lines are wrong.
+- [observed] ROLLBACK now: `vercel rollback photon-to-phenomenology-33chpn7xl-ciamacparhizi-9083s-projects.vercel.app` (the 2026-09-04 production deployment), or `vercel promote` of it.
+
+### Previous pending
+- done: live deploy of the index link fix (needed Cia's go; given 2026-10-04 in chat).
+- carried: real-device check; Cia's name, price, icon pick, listing sign-off; privacy policy page and App Store Connect steps (signing, archive, TestFlight, upload, submit) need Cia's go; the other session's shorts work is uncommitted in this checkout.
+
+### Pending / open
+- On this Mac: signing identities exist for team 3AUT8DTWP3 (Apple Development, Apple Distribution) and Cia's iPhone is connected; the unsigned Release archive for arm64 builds (ios/build/Photon.xcarchive).
+
+### Durable thought
+none, reason: the correction is recorded in the decision log.
+
+---
+
 ## IN FLIGHT 2026-10-04 (8) - about to push main (Cia said "push commit, do whatever you need")
 
 ### Done
