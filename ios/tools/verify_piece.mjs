@@ -1,5 +1,5 @@
 // Photon app piece verifier. Usage: node ios/tools/verify_piece.mjs <slug> [--json]
-// Measures CONSTITUTION_APP_v9 Articles B, C, D from file://. Exit 0 = pass.
+// Measures CONSTITUTION_APP_v10 Articles B, C, D from file://. Exit 0 = pass.
 import { createRequire } from 'node:module';
 import { readFileSync, existsSync, mkdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
@@ -38,7 +38,10 @@ if (FIXATION.includes(slug) && !((/PhotonApp\.hold\(\s*true\s*\)/.test(code) && 
   add('major', 'fixation piece without paired PhotonApp.hold(true)/hold(false)', 'hold during fixation, release after (D2)');
 
 // ---- runtime at both sizes (Articles B, C, D) ----
-const SIZES = [{ key: 'phone', width: 402, height: 874 }, { key: 'pad', width: 1032, height: 1376 }, { key: 'padL', width: 1376, height: 1032 }];   // iPad portrait and landscape
+const ALL_SIZES = [{ key: 'phone', width: 402, height: 874 }, { key: 'pad', width: 1032, height: 1376 }, { key: 'padL', width: 1376, height: 1032 },   // iPhone 16 Pro, iPad portrait and landscape
+  { key: 'phone15', width: 393, height: 852 }, { key: 'phoneSE', width: 375, height: 667 }, { key: 'phoneMax', width: 440, height: 956 }];   // iPhone 15 (Cia's), SE class, Pro Max
+const ONLY = (process.env.ONLY_SIZES || '').split(',').filter(Boolean);
+const SIZES = ONLY.length ? ALL_SIZES.filter(z => ONLY.includes(z.key)) : ALL_SIZES.slice(0, 3);
 const shots = join(IOS, 'build', 'verify'); mkdirSync(shots, { recursive: true });
 const browser = await chromium.launch({ executablePath: EXEC, headless: true });
 let haptics = 0;
@@ -153,16 +156,43 @@ for (const size of SIZES) {
   await page.screenshot({ path: join(shots, `${slug}_${size.key}_guide.png`) });
   await walkCheck(tag('guide open'));
   await page.reload(); await page.waitForTimeout(1800);
+  // Narration: with the voice on, each guide step must produce one clean spoken line, and a page with no
+  // guide must offer its introduction. Native speech is simulated by answering each line with _done.
+  if (size.key === 'phone') {
+    await page.reload(); await page.waitForTimeout(400);
+    const nar = await page.evaluate(async () => {
+      const wait = ms => new Promise(r => setTimeout(r, ms));
+      window.__photonLog = []; PhotonApp._voice(true);
+      await wait(1700);
+      const dots = document.querySelectorAll('#wdots .dot').length, seen = [];
+      const say = () => (window.__photonLog || []).filter(m => m.t === 'say');
+      for (let k = 0; k < Math.max(dots, 1) + 1; k++) {
+        const last = say().slice(-1)[0];
+        if (last && !seen.find(x => x.id === last.id)) seen.push(last);
+        if (!last || dots === 0) break;
+        PhotonApp._done(last.id); await wait(1100);
+      }
+      return { dots, seen: seen.map(x => ({ id: x.id, len: (x.text || '').length, markup: /[<>]/.test(x.text || '') })) };
+    });
+    if (nar.dots > 0) {
+      if (nar.seen.length !== nar.dots) add('major', `narration: ${nar.seen.length} of ${nar.dots} guide steps were spoken`, 'every guide step must call PhotonApp.say (chrome_app.js speakStep) and the guide must advance on _done');
+    } else if (!nar.seen.length || nar.seen[0].len < 60) add('major', 'narration: a page with no guide has no introduction to read (p.instruction)', 'give the page a p.instruction paragraph');
+    for (const x of nar.seen) { if (x.markup) add('major', `narration: line ${x.id} still contains markup`, 'speak plain text'); if (x.len < 20) add('major', `narration: line ${x.id} is nearly empty`, 'speak the whole step'); }
+    await page.reload(); await page.waitForTimeout(1800);
+  }
   if (await page.$('#walk.on')) await page.tap('#wskip');   // lab pieces have no guide: nothing to close
   await page.waitForTimeout(2400);
   for (const [sev, d, f] of await measure(tag('guide closed'))) add(sev, d, f);
   await figCheck(tag('guide closed'));
   // iOS applies the top safe-area inset after the page script has run. Simulate it arriving late.
-  await page.addStyleTag({ content: ':root{--shell-top:121px !important;--shell-bottom:52px !important}' });
-  await page.waitForTimeout(500);
-  await figCheck(tag('inset applied late'));
+  if (size.height >= 800) {   // a phone with no notch (SE class) has no large inset to arrive late
+    await page.addStyleTag({ content: ':root{--shell-top:121px !important;--shell-bottom:52px !important}' });
+    await page.waitForTimeout(500);
+    await figCheck(tag('inset applied late'));
+  }
   // exercise by touch: drag across the figure, sweep every slider, tap every piece button
   const y0 = await page.evaluate(() => scrollY);
+  const scrollsByDesign = await page.evaluate(() => document.documentElement.scrollHeight > innerHeight + 1);
   const cx = size.width / 2, cy = size.height / 2;
   const cdp = await ctx.newCDPSession(page);
   const touch = (type, x, y) => cdp.send('Input.dispatchTouchEvent', { type, touchPoints: type === 'touchEnd' ? [] : [{ x, y }] });
@@ -181,7 +211,7 @@ for (const size of SIZES) {
   });
   await page.waitForTimeout(1200);
   await figCheck(tag('after touch'));
-  if (await page.evaluate(() => scrollY) !== y0 || await page.evaluate(() => window.visualViewport ? visualViewport.scale : 1) !== 1)
+  if ((!scrollsByDesign && await page.evaluate(() => scrollY) !== y0) || await page.evaluate(() => window.visualViewport ? visualViewport.scale : 1) !== 1)
     add('major', `${tag('after touch')}: a drag on the figure scrolled or zoomed the page`, 'set touch-action:none on the figure and preventDefault in non-passive touch handlers (C4)');
   const log = await page.evaluate(() => window.__photonLog || []);
   haptics += log.filter(m => m.t === 'haptic').length;

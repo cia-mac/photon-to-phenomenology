@@ -59,7 +59,7 @@
 
   function resize(){
     DPR=Math.min(window.devicePixelRatio||1,2);
-    {const B=PhotonApp.fit(cv); W=B.w; H=B.h;}
+    {const B=PhotonApp.fit(cv,{reserveGuide:true}); W=B.w; H=B.h;}
     cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
     ctx.setTransform(DPR,0,0,DPR,0,0);
     cx=W/2; cy=H/2;

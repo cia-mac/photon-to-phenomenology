@@ -7,6 +7,7 @@ import WebKit
 struct PieceScreen: View {
     let piece: Piece
     @Binding var path: [Piece]
+    @ObservedObject private var narrator = Narrator.shared
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -32,6 +33,8 @@ struct PieceScreen: View {
             HStack(spacing: 10) {
                 ShellButton(symbol: "chevron.left", label: "All phenomena") { path.removeAll() }
                 Spacer()
+                ShellButton(symbol: narrator.muted ? "speaker.slash" : "speaker.wave.2",
+                            label: narrator.muted ? "Turn narration on" : "Mute narration") { narrator.toggleMute() }
                 if let prev = Catalog.neighbour(of: piece, offset: -1), prev != piece {
                     ShellButton(symbol: "arrow.left", label: "Previous: \(prev.title)") { path = [prev] }
                 }
@@ -90,6 +93,7 @@ struct PieceWebView: UIViewRepresentable {
         web.scrollView.contentInsetAdjustmentBehavior = .never
         web.scrollView.bounces = false
         web.allowsLinkPreview = false
+        Narrator.shared.web = web
         #if DEBUG
         web.isInspectable = true
         #endif
@@ -102,6 +106,8 @@ struct PieceWebView: UIViewRepresentable {
     static func dismantleUIView(_ web: WKWebView, coordinator: Bridge) {
         web.configuration.userContentController.removeScriptMessageHandler(forName: "photon")
         UIApplication.shared.isIdleTimerDisabled = false
+        Narrator.shared.stop()
+        if Narrator.shared.web === web { Narrator.shared.web = nil }
     }
 
     /// Messages from a piece: {t:"haptic", k:"reveal"|"tick"} and {t:"hold", on:Bool}.
@@ -119,20 +125,28 @@ struct PieceWebView: UIViewRepresentable {
                 if (body["k"] as? String) == "tick" { tick.impactOccurred() } else { reveal.notificationOccurred(.success) }
             case "hold":
                 UIApplication.shared.isIdleTimerDisabled = (body["on"] as? Bool) ?? false
+            case "say":
+                if let id = body["id"] as? String, let text = body["text"] as? String,
+                   id.range(of: "^[a-z0-9-]+$", options: .regularExpression) != nil {
+                    Task { @MainActor in Narrator.shared.say(id: id, text: text) }
+                }
+            case "stopsay":
+                Task { @MainActor in Narrator.shared.stop() }
             default:
                 break
             }
         }
 
-        #if DEBUG
-        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {   // test hook: -skipGuide YES
-            guard UserDefaults.standard.bool(forKey: "skipGuide") else { return }
-            let after = UserDefaults.standard.double(forKey: "skipGuideAfter")   // test hook: let the guide play out first
+        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            Task { @MainActor in Narrator.shared.pushState() }
+            #if DEBUG
+            guard UserDefaults.standard.bool(forKey: "skipGuide") else { return }   // test hook: -skipGuide YES
+            let after = UserDefaults.standard.double(forKey: "skipGuideAfter")      // test hook: let the guide play out first
             DispatchQueue.main.asyncAfter(deadline: .now() + (after > 0 ? after : 3.5)) {
                 webView.evaluateJavaScript("var w=document.getElementById('walk'), b=document.getElementById('wskip'); if(w && b && w.classList.contains('on')) b.click();")
             }
+            #endif
         }
-        #endif
 
         /// The bundle is the whole world: a piece may load itself and nothing else.
         func webView(_ webView: WKWebView, decidePolicyFor action: WKNavigationAction,

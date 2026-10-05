@@ -7,6 +7,44 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## IN FLIGHT 2026-10-04 (11) - Photon app: narration with a mute button; small-phone guide card fixes; on Cia's iPhone
+
+### Done
+- [observed] Cia (after trying it on his phone): "is good the guidebox overlaps the illusion" (a negation looks missing; read as the card still covering the figure) and "add a voice to each that can be muted". Measured the guide card at his iPhone 15 size (393 by 852) and Pro Max (440 by 956): no overlap on any piece. The SE class (375 by 667) failed on kanizsa, muller-lyer and checker-shadow; fixed (those pieces and ponzo, ebbinghaus now reserve the card; the card is smaller on short screens).
+- [observed] Narration: ios/Photon/Narrator.swift (AVSpeechSynthesizer, best installed English voice, duckOthers, mute kept in UserDefaults, starts muted if VoiceOver is on, a recorded Pieces/audio/<id>.m4a overrides the voice); page side in chrome_app.js (say, _voice, _done; the guide waits for each line, 45 s rescue); speaker button in PieceScreen. Simulator log shows kanizsa speaking steps 0 to 3 in turn (say, done, advance), mute stopping speech and persisting across launch, unmute speaking the current step, and the two lab pages reading their p.instruction intro.
+- [observed] Verifier: narration check (one clean line per guide step; lab pages offer an introduction; negative control fails as it should), scroll-by-design exception, late-inset test only for notch phones, new sizes phone15, phoneSE, phoneMax. tools/verify_all.sh with ONLY_SIZES=phone,pad,padL,phone15,phoneSE,phoneMax: failures 0 of 21.
+- [observed] PrivacyInfo.xcprivacy now declares UserDefaults (CA92.1) for the mute choice. ios/CONSTITUTION_APP_v10.md and ios/APP_STORE_LISTING_DRAFT_v2.md written (v1 files kept).
+- [observed] Release build with narration installed and launched on Cia's iPhone 15 (devicectl); release binary has no debug hook strings. Not committed or pushed: these changes are local only.
+
+### Previous pending
+- carried: whether the on-device voice sounds right and the screen stays awake in stare pieces (Cia to report); name, price, icon pick; privacy policy page; App Store Connect steps need Cia's go; the shorts re-voicing session may choose a voice that the app could reuse.
+
+### Pending / open
+- The voice is the iOS system voice. Pronunciation of names (Muller-Lyer, Ebbinghaus, Kanizsa, Cornsweet) is untested on device.
+- If Cia still sees the card over a figure on his phone: need the piece name or a screenshot; my measurements say none at 393 by 852.
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
+## IN FLIGHT 2026-10-04 (10) - Photon app installed on Cia's iPhone (development signing)
+
+### Done
+- [observed] Cia asked to check it on his phone. Built Release for the iPhone 15 (iOS 27.2, Developer Mode on, paired) with automatic signing: identity Apple Development ciamacparhizi@gmail.com, profile "iOS Team Provisioning Profile: *" (a team wildcard profile, no explicit app id was created). Installed com.ciamac.photon with devicectl; install succeeded.
+- [observed] Launch from the Mac failed because the phone was locked (FBSOpenApplicationErrorDomain 7, Locked). Cia opens it by hand. If iOS says untrusted developer: Settings, General, VPN and Device Management, trust the Apple Development profile.
+
+### Previous pending
+- carried: what Cia sees on the phone (haptics, screen staying awake during stare-and-wait pieces); name, price, icon pick; privacy policy page; App Store Connect steps need Cia's go.
+
+### Pending / open
+- Release build for device lives in ios/build-device (gitignored, uncommitted .gitignore line).
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
 ## IN FLIGHT 2026-10-04 (9) - pushed and deployed; the index link fix is live (see the decision entry just appended)
 
 ### Done

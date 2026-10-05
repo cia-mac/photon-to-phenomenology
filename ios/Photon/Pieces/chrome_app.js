@@ -77,28 +77,41 @@
         wdots=document.getElementById('wdots'), wnext=document.getElementById('wnext'),
         replay=document.getElementById('replay');
 
-  let WALK=[], onEnd=null, wstep=-1, autoT=null, introDone=false;
+  let WALK=[], onEnd=null, wstep=-1, autoT=null, introDone=false, voiceOn=false, userDriven=false;
+  const HERE=location.pathname.split('/').pop().replace(/\.html.*$/,'');
+
+  /* Narration. The page says what the guide card says; the native shell speaks it unless muted and
+     tells the page when a line has finished. The guide waits for the voice, then moves on. */
+  function plain(h){ const d=document.createElement('div'); d.innerHTML=h; return (d.textContent||'').replace(/\s+/g,' ').trim(); }
+  function say(id,text){ send({t:'say',id:id,text:text}); }
+  function stopSay(){ send({t:'stopsay'}); }
+  function stepId(i){ return HERE+'-'+i; }
+  function speakStep(){ if(wstep>=0 && WALK[wstep]) say(stepId(wstep), plain(WALK[wstep].t)); }
+  function speakIntro(){ const p=document.querySelector('p.instruction'); if(p) say(HERE+'-intro', plain(p.innerHTML)); }
 
   function showStep(i){
     wstep=i; wt.innerHTML=WALK[i].t;
     if(typeof WALK[i].act==='function') WALK[i].act();
     [...wdots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
     wnext.textContent = i===WALK.length-1 ? 'done' : 'next →';
+    if(voiceOn) speakStep();
   }
   function clearAuto(){ if(autoT){ clearTimeout(autoT); autoT=null; } }
   function scheduleAuto(){
     clearAuto();
     if(reduceMotion) return;
-    if(wstep < WALK.length-1) autoT=setTimeout(()=>{ showStep(wstep+1); scheduleAuto(); }, 5400);
+    if(wstep >= WALK.length-1) return;
+    // with a voice, the voice sets the pace (see _done); this only rescues a stalled one
+    autoT=setTimeout(()=>{ showStep(wstep+1); scheduleAuto(); }, voiceOn ? 45000 : 5400);
   }
   function startIntro(){
     if(!WALK.length) return;
     document.body.classList.add('guiding');
     replay.classList.remove('on'); walk.classList.add('on');
-    showStep(0); scheduleAuto();
+    userDriven=false; showStep(0); scheduleAuto();
   }
   function endIntro(){
-    clearAuto(); document.body.classList.remove('guiding');
+    stopSay(); clearAuto(); document.body.classList.remove('guiding');
     walk.classList.remove('on'); replay.classList.add('on');
     if(!introDone){
       introDone=true;
@@ -112,6 +125,18 @@
   document.getElementById('wclose').addEventListener('click',endIntro);
   replay.addEventListener('click',startIntro);
 
+  window.PhotonApp._voice=function(on){          // native: narration turned on or off (also sent once the page has loaded)
+    voiceOn=!!on;
+    if(walk.classList.contains('on')){ clearAuto(); if(voiceOn) speakStep(); else stopSay(); if(!userDriven) scheduleAuto(); }
+    else if(!WALK.length){ if(voiceOn) speakIntro(); else stopSay(); }       // a page with no guide reads its introduction
+    else if(!voiceOn) stopSay();
+  };
+  window.PhotonApp._done=function(id){           // native: the line for this step has been spoken
+    if(!voiceOn||userDriven||reduceMotion||!walk.classList.contains('on')||id!==stepId(wstep)||wstep>=WALK.length-1) return;
+    clearAuto(); autoT=setTimeout(()=>{ showStep(wstep+1); scheduleAuto(); },700);
+  };
+  window.addEventListener('pagehide',stopSay);
+
   window.PhotonChrome={
     init(cfg){
       WALK=cfg.walk||[]; onEnd=cfg.onEnd||null;
@@ -123,8 +148,8 @@
       }
       const cv=document.querySelector('canvas');
       if(cv){
-        cv.addEventListener('pointerdown',()=>{ if(walk.classList.contains('on')) clearAuto(); },{passive:true});
-        cv.addEventListener('touchstart',()=>{ if(walk.classList.contains('on')) clearAuto(); },{passive:true});
+        cv.addEventListener('pointerdown',()=>{ if(walk.classList.contains('on')){ userDriven=true; clearAuto(); } },{passive:true});
+        cv.addEventListener('touchstart',()=>{ if(walk.classList.contains('on')){ userDriven=true; clearAuto(); } },{passive:true});
       }
       setTimeout(startIntro, 1100);
     }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		204AEB9359A980FB42FBA26F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 521EBA109BCD1A5AAF499D66 /* PrivacyInfo.xcprivacy */; };
 		22863625C9197E10EBE234DC /* Pieces in Resources */ = {isa = PBXBuildFile; fileRef = 4FA7B72FD6329827F13EC5C8 /* Pieces */; };
+		313C5CA8742C6F39534E2D7F /* Narrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181BABDB268DBE01D9D25D98 /* Narrator.swift */; };
 		3B96FD0FBDC804025C33B629 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB79EE6B83CFAE05BB8A3BF /* Catalog.swift */; };
 		40EA3815C8D383D7D6AD9312 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F2265C675F4BB6D192E5CB /* LibraryView.swift */; };
 		62F4E7F658609CEB92198432 /* PieceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC18452A9575536A2296F14 /* PieceScreen.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		181BABDB268DBE01D9D25D98 /* Narrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Narrator.swift; sourceTree = "<group>"; };
 		2501AE2D880FE5BE55DD2FED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CB79EE6B83CFAE05BB8A3BF /* Catalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
 		2EC18452A9575536A2296F14 /* PieceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceScreen.swift; sourceTree = "<group>"; };
@@ -42,6 +44,7 @@
 				2501AE2D880FE5BE55DD2FED /* Assets.xcassets */,
 				2CB79EE6B83CFAE05BB8A3BF /* Catalog.swift */,
 				B9F2265C675F4BB6D192E5CB /* LibraryView.swift */,
+				181BABDB268DBE01D9D25D98 /* Narrator.swift */,
 				C3592CA4C9B82AC9CA6C7445 /* PhotonApp.swift */,
 				4FA7B72FD6329827F13EC5C8 /* Pieces */,
 				2EC18452A9575536A2296F14 /* PieceScreen.swift */,
@@ -133,6 +136,7 @@
 			files = (
 				3B96FD0FBDC804025C33B629 /* Catalog.swift in Sources */,
 				40EA3815C8D383D7D6AD9312 /* LibraryView.swift in Sources */,
+				313C5CA8742C6F39534E2D7F /* Narrator.swift in Sources */,
 				BF217D17F059B912B66A5C95 /* PhotonApp.swift in Sources */,
 				62F4E7F658609CEB92198432 /* PieceScreen.swift in Sources */,
 			);

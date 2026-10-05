@@ -31,6 +31,7 @@ html,body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-
   font-size:12px;letter-spacing:0.13em;text-transform:uppercase;color:rgba(232,224,208,0.62);pointer-events:auto}
 #replay.on{display:inline-flex}
 @media (max-width:680px){ #walk{padding:22px 22px 16px} #walk .wt{font-size:17px} }
+@media (max-height:760px){ #walk{padding:16px 20px 12px} #walk .wk{margin-bottom:8px} #walk .wt{font-size:15px;line-height:1.5;min-height:0} #walk .wb{margin-top:12px} }   /* short phones: a smaller card leaves the figure room */
 body.guiding #thesis{opacity:0 !important}
 :where(#walk .wnext,#walk .wskip,#walk .wclose,#replay):focus-visible{outline:2px solid #78b4ff;outline-offset:3px}
 button{font:inherit;background:none;border:none;color:inherit;letter-spacing:inherit;text-transform:inherit}
