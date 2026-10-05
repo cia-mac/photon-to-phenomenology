@@ -28,7 +28,7 @@ targets:
     info:
       path: Photon/Info.plist
       properties:
-        CFBundleDisplayName: Photon
+        CFBundleDisplayName: Illusions
         UILaunchScreen:
           UIColorName: ""
         UISupportedInterfaceOrientations:
@@ -43,7 +43,7 @@ targets:
         ITSAppUsesNonExemptEncryption: false
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.ciamac.photon
+        PRODUCT_BUNDLE_IDENTIFIER: com.ciamac.illusions
         TARGETED_DEVICE_FAMILY: "1,2"
         GENERATE_INFOPLIST_FILE: NO
         CODE_SIGN_STYLE: Automatic

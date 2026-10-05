@@ -7,6 +7,25 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## IN FLIGHT 2026-10-05 - app renamed Ciamac's Book of Illusions (D-0644)
+
+### Done
+- [observed] Cia confirmed the app is about optical illusions and said "go" to the proposed rename. Display name Illusions, App Store name Ciamac's Book of Illusions, subtitle Illusions you can touch, bundle id com.ciamac.illusions. Changed in ios/project.yml, ios/Photon/LibraryView.swift (header), tools/shoot_*.sh (bundle id). New ios/APP_STORE_LISTING_DRAFT_v3.md (v1, v2 kept).
+- [observed] Release build for the iPhone installed as com.ciamac.illusions and launched; the old com.ciamac.photon was uninstalled from the phone (its saved mute choice went with it). Library header fits in the simulator.
+
+### Previous pending
+- carried: how the voice sounds on the phone and the screen staying awake (Cia); price, icon pick; privacy policy page; App Store Connect steps (sign, archive, TestFlight, upload, submit) need Cia's go.
+- Uncommitted and unpushed: the rename and listing v3 (Cia has not asked for a commit).
+
+### Pending / open
+- The App Store name is not confirmed available until App Store Connect.
+- photon.ciamac.com and the pieces still say Photon to Phenomenology on purpose (the series name).
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
 ## IN FLIGHT 2026-10-04 (11) - Photon app: narration with a mute button; small-phone guide card fixes; on Cia's iPhone
 
 ### Done

@@ -157,7 +157,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ciamac.photon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ciamac.illusions;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -175,7 +175,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ciamac.photon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ciamac.illusions;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

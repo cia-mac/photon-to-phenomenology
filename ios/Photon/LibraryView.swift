@@ -9,7 +9,7 @@ struct LibraryView: View {
         NavigationStack(path: $path) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
-                    Text("PHOTON TO PHENOMENOLOGY")
+                    Text("CIAMAC’S BOOK OF ILLUSIONS")
                         .font(.system(size: 11, design: .monospaced))
                         .tracking(2.6)
                         .foregroundStyle(Register.dim)
