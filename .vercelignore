@@ -9,3 +9,6 @@ tools/
 
 # public/shorts IS deployed: it is the review sheet. Only the root-level
 # shorts/ render pipeline is excluded, hence the leading slash above.
+
+# The iOS app lives here but is not part of the site.
+/ios/
