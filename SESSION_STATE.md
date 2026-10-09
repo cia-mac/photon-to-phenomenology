@@ -7,6 +7,52 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-09 EXIT - committed and pushed 902b5a5 (rename, Heart narration, audit records) (OPEN)
+
+Snapshot before this block: none (append only).
+Cia: "go, commit and push". One commit of this lane's work, pushed; the canon repo was already level with its remote.
+
+### Done
+- [observed] Commit 902b5a5 on main, pushed to origin (push output fc8d927..902b5a5). 173 files: ios/Photon (header, 79 audio files, 21 previews, Swift edits), ios/tools/narrate_heart.py and manifest, listing drafts v3 to v7, ExportOptions_AppStore.plist, release-audit-2026-10-06 write-ups, store-v3 and scripts, redesign-v1 and -v2, ios/.gitignore, public/privacy.html, SESSION_STATE.md.
+- [observed] ios/.gitignore now keeps DerivedData, archives, claude-final*, logs, store/ and store-v2/ and verify scratch out of git; they remain on disk.
+- [observed] Staged diff scanned for the signing email and identity id: none.
+- [observed] Canon repo: git status after fetch shows main level with origin/main; D-0694, D-0695 and D-0696 are on origin.
+- [observed] A push does not deploy this site; the live site was already deployed by CLI earlier today.
+
+### Previous pending
+- carried: Cia listens to the Heart voice on the phone.
+- carried: Organizer export of claude-final-3/Illusions.xcarchive, then verify_ipa.sh. No IPA exists on disk.
+- done: commit and push of this work and the canon repo.
+- carried: hands-on haptics and screen-awake; name availability in App Store Connect.
+
+### Pending / open
+- Left uncommitted on purpose: the other session's shorts work (shorts/engine edits, shorts/audio, build_v5, galleries and the rest) and SESSION_STATE.md.lock.
+- The archives are not in git (ignored); claude-final-3 exists only on this Mac. It is rebuildable from 902b5a5.
+
+### Operational notes
+- none new
+
+### Durable thought
+none, reason: routine commit.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-09T09:29:21-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `902b5a5 Rename the app to Ciamac's Optical Illusions; narrate it in the Heart voice` (committed 2026-10-09)
+- tree: **18 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished; blocked on Cia for listening and the Organizer export.
+
+---
+
 ## 2026-10-09 EXIT - privacy page live with the narration sentence; Heart build on the iPhone (OPEN)
 
 Snapshot before this block: none (append only).
