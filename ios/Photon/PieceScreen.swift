@@ -31,7 +31,7 @@ struct PieceScreen: View {
                 .allowsHitTesting(false)
             }
             HStack(spacing: 10) {
-                ShellButton(symbol: "chevron.left", label: "All phenomena") { path.removeAll() }
+                ShellButton(symbol: "chevron.left", label: "All experiments") { path.removeAll() }
                 Spacer()
                 ShellButton(symbol: narrator.muted ? "speaker.slash" : "speaker.wave.2",
                             label: narrator.muted ? "Turn narration on" : "Mute narration") { narrator.toggleMute() }

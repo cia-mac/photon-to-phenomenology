@@ -1,0 +1,128 @@
+[
+  {
+    "slug": "kanizsa",
+    "sourceSHA256": "bed29b32e87c4f41bdfd4e96bbb3dde1a3b2480bb30ce9bffcdcb7c9cf3575c3",
+    "guideStep": 2,
+    "errors": []
+  },
+  {
+    "slug": "motion-aftereffect",
+    "sourceSHA256": "3285bbd85d785665fe3de6217287dedb50ebb5e39086822f8b8f007fad4ce5d0",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "afterimage",
+    "sourceSHA256": "7c7f49cf574313f2a2609dfee826f746e13717ced4620ccb8b7507f44695202e",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "scintillating-grid",
+    "sourceSHA256": "a17e342a7be0d413ec572a96f082d3ec55d33482b368df248162e89be07b6cbe",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "ebbinghaus",
+    "sourceSHA256": "00e9a7655bbfe3c16dff4ed384808de2ded28eaf860e54978e36a4ed87ce59f8",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "cornsweet",
+    "sourceSHA256": "22cb87af5b37cac89beb193feb9865651bfb9a9db3760bb838e108a354c8b1df",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "cafe-wall",
+    "sourceSHA256": "82eaef55fbd25e5c10db6f7443535afbc1d7dd64f05990bf0a9f56ce09c312e0",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "ponzo",
+    "sourceSHA256": "2904f1dd2abc91ac37b1f18cf44904234fedc052249d06ff7f4c9821263dd095",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "muller-lyer",
+    "sourceSHA256": "8a33d1cb5671693d94f7c41e73d00c1bc96fd60b5ebd24bc388f57f2da63eee7",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "inverse-problem",
+    "sourceSHA256": "dac06d83ff5604ad6218e54d5156874878ef1f29cc8134ca018957f965db0f1c",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "checker-shadow",
+    "sourceSHA256": "0bf90733f285c4bc6f996ec3b4071c8d5555d9791817c2a1c31152589ffcb509",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "aperture-problem",
+    "sourceSHA256": "1786be4a48eaffeca4b1f85043be430e9563ae6c69ee37393af77234a67785f3",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "apparent-motion",
+    "sourceSHA256": "c8c6bf755215d518c033d856825021f5d517ee8cd26c105fcc33bdebc22373ec",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "troxler-fading",
+    "sourceSHA256": "ccc5a5c766487adb458042f0bfb849cd77727b098d3539f227a06f63e03e1772",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "motion-induced-blindness",
+    "sourceSHA256": "a581b0432ffa6e687b0f6c2db55677b68de8d12e6cd9802b7e92b8716d87bc04",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "change-blindness",
+    "sourceSHA256": "53f9caa4907de74353a777d16e86141afbae5ba31e127dbcf431d15060d9106e",
+    "guideStep": 2,
+    "errors": []
+  },
+  {
+    "slug": "contrast-sensitivity",
+    "sourceSHA256": "83365300e39eb20b5b0928aea4f94e38e984499d65be52eed181193279094f44",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "gestalt-grouping",
+    "sourceSHA256": "1d76c65e5e762bc11fa4f8fa8b354c6a34788bee07776d887a380cc57cc3a1f6",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "opponent-afterimage",
+    "sourceSHA256": "b08b671685e231cb6af63aaf0d570dc232543d9daab13b781a9e5344ae88bc8f",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "receptive-field",
+    "sourceSHA256": "6f694c595a7952e07dfec7033f119d5806c25a275a5fdaa8310fff6ce1641ce5",
+    "guideStep": 0,
+    "errors": []
+  },
+  {
+    "slug": "trichromatic-mixing",
+    "sourceSHA256": "3853ebd83aa27f4042ee337cefce9aa05ae9484f2bbfbb13032813622ac46740",
+    "guideStep": 0,
+    "errors": []
+  }
+]

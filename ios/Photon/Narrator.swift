@@ -43,6 +43,10 @@ final class Narrator: NSObject, ObservableObject, AVSpeechSynthesizerDelegate, A
            let p = try? AVAudioPlayer(contentsOf: url) {
             player = p
             p.delegate = self
+            #if DEBUG
+            if UserDefaults.standard.bool(forKey: "silentVoice") { p.volume = 0 }   // test hook, as for the system voice below
+            NSLog("NARRATOR file %@", id)
+            #endif
             p.play()
             return
         }
@@ -50,6 +54,9 @@ final class Narrator: NSObject, ObservableObject, AVSpeechSynthesizerDelegate, A
         u.voice = voice
         u.rate = AVSpeechUtteranceDefaultSpeechRate * 0.94
         u.pitchMultiplier = 1.04
+        #if DEBUG
+        if UserDefaults.standard.bool(forKey: "silentVoice") { u.volume = 0 }   // test hook: -silentVoice YES keeps the timing, makes no sound
+        #endif
         synth.speak(u)
     }
 

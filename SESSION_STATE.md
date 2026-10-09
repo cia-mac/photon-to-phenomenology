@@ -7,6 +7,311 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-09 EXIT - privacy page live with the narration sentence; Heart build on the iPhone (OPEN)
+
+Snapshot before this block: none (append only).
+Deployed public/privacy.html on Cia's "go, deploy the privacy page".
+
+### Done
+- [observed] vercel deploy --prod --yes; production is now photon-to-phenomenology-mx366xfo2-ciamacparhizi-9083s-projects.vercel.app (vercel ls --prod).
+- [observed] Live https://photon.ciamac.com/privacy carries "recordings stored inside the app", h1 "Ciamac's Optical Illusions", no a.ciamac.com tag. /privacy, /photon, /photon/book, /shorts, /photon/kanizsa answer 200; / answers 307.
+- [observed] ROLLBACK: vercel rollback photon-to-phenomenology-7sqme0r2e-ciamacparhizi-9083s-projects.vercel.app.
+- [observed] claude-final-3 (Heart voice) installed on the iPhone 15 on 2026-10-09 (devicectl "App installed").
+- [observed] Narration speeds from tools/narration_manifest.json: 77 lines at 0.88, change-blindness-2 at 0.92, muller-lyer-1 at 0.90. An earlier chat message naming checker-shadow-3 at 0.94 was wrong.
+
+### Previous pending
+- done: live check after the deploy (lines above).
+- done: install claude-final-3 on the iPhone.
+- done: deploy of the privacy page's narration sentence.
+
+### Pending / open
+- Cia listens to the Heart voice on the phone; nothing about how it sounds is verified.
+- Cia: Organizer export of ios/release-audit-2026-10-06/claude-final-3/Illusions.xcarchive, then verify_ipa.sh. No IPA exists on disk.
+- Uncommitted: all of this work, including public/privacy.html (live, ahead of git). Canon repo push held: D-0694, D-0695, D-0696.
+- Hands-on: haptics and screen staying awake; name availability in App Store Connect.
+
+### Operational notes
+- none new
+
+### Durable thought
+none, reason: routine deploy.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-09T09:27:25-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `fc8d927 Rename the app to Ciamac's Book of Illusions; add the privacy policy page` (committed 2026-10-05)
+- tree: **58 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished the deploy; blocked on Cia for listening and the Organizer export.
+
+---
+
+## IN FLIGHT 2026-10-09 - about to deploy public/privacy.html (narration sentence) to production
+
+### Done
+- [observed] Cia, in chat: "go, deploy the privacy page". Inside public/ only privacy.html differs from HEAD. Change since the last deploy: one sentence, narration is recordings stored in the app with the system voice as fallback (D-0696).
+- [proposed] Next command: vercel deploy --prod --yes from the repo root. No git operation.
+- [observed] Production before the deploy: https://photon-to-phenomenology-7sqme0r2e-ciamacparhizi-9083s-projects.vercel.app. ROLLBACK: vercel rollback <that URL>.
+
+### Previous pending
+- carried: all items of the 2026-10-08 narration EXIT block below stand unchanged.
+
+### Pending / open
+- Live check after the deploy.
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
+## 2026-10-08 EXIT - App narration re-voiced in Kokoro Heart (D-0696); archive claude-final-3; waiting on Cia's ear and an Organizer export (OPEN)
+
+Snapshot before this block: none (append only).
+Cia: "still the same audio", then "yes, use the Heart voice". All 79 narration lines are now bundled recordings in the shorts voice.
+
+### Done
+- [observed] D-0696 appended (canon-append printed the ID).
+- [observed] 79 lines collected from the pages themselves (ios/release-audit-2026-10-06/claude-verify/extract_lines.mjs to narration_lines.json: 74 guide steps, 5 lab introductions, 1981 words).
+- [observed] ios/tools/narrate_heart.py rendered 79 of 79 to ios/Photon/Pieces/audio/<id>.m4a (AAC mono 24 kHz, 5.4 MB, 11.8 min; 77 at speed 0.88, one each at 0.90 and 0.92). Manifest with duration, gate result and phonemes: ios/tools/narration_manifest.json. Gate failures: none on the final run.
+- [observed] Found and fixed a real mispronunciation: mid-sentence "A" (the square's name in checker-shadow) was phonemised as the article; the script now forces the letter, phonemes read back as the letter in checker-shadow-0, -2, -3. "hold time" respelled "hold-time" (phonemes unchanged in substance, transcriber stops hearing "whole time"). motion-aftereffect-1 accepted on phonemes; the transcriber hears "reads a steady" for "reads as steady".
+- [observed] Simulator log (claude-verify/heart-checker-shadow.txt, heart-receptive-field.txt): every line goes say, file, done, and the guide advances through all five steps; the lab page plays its introduction file.
+- [observed] Release archive ios/release-audit-2026-10-06/claude-final-3/Illusions.xcarchive: 21 pages and 79 audio files byte-identical to source, no missing or extra audio ids, new header, no debug hooks, codesign verify passes, app 6.4 MB. Apple Development signed.
+- [observed] ios/Photon/Narrator.swift: debug-only silent flag now covers recorded audio and logs "NARRATOR file". ios/APP_STORE_LISTING_DRAFT_v7.md written. public/privacy.html narration sentence changed locally, NOT deployed.
+- [observed] iPhone install of claude-final-3 failed twice (device "unavailable", CoreDevice error 4016). The phone still has the claude-final-2 build: new name, system voice.
+- [observed] Audition page for Cia: ios/release-audit-2026-10-06/claude-verify/audition_heart.html (79 players).
+
+### Previous pending
+- done: live check after the privacy deploy (closed in the block below).
+- carried: public/privacy.html is ahead of git; now also ahead of the live site by one sentence about narration.
+- carried: Organizer export, now of claude-final-3; hands-on iPhone pass; name availability; canon repo push held (D-0694, D-0695, D-0696 committed locally).
+
+### Pending / open
+- Cia listens: the assistant cannot hear. Nothing about how the voice sounds is verified, only the words and phonemes.
+- Install claude-final-3 on the iPhone when it is reachable.
+- Deploy of the privacy page's narration sentence needs Cia's go; the live page still says narration uses the built-in voice, which is no longer true of this build.
+- Guide text and audio are now coupled: changing a guide line means re-rendering its file.
+
+### Operational notes
+- Kokoro venv is in the session scratchpad and will be gone. Rebuild: uv venv -p 3.11; uv pip install "kokoro>=0.9" "transformers>=4.44" "tokenizers>=0.19" soundfile numpy; run with VIRTUAL_ENV set to that venv and its bin first on PATH (kokoro shells out to uv to fetch a spaCy model and dies without it), HF_HUB_DISABLE_XET=1, sandbox off.
+- The shorts gate compares exact words, and whisper writes American spellings; narrate_heart.py carries a British-to-American map. It cannot tell the letter A from the article.
+
+### Durable thought
+none, reason: the reusable facts are in Operational notes and in the script's comments.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-08T14:18:14-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `fc8d927 Rename the app to Ciamac's Book of Illusions; add the privacy policy page` (committed 2026-10-05)
+- tree: **58 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+blocked on Cia: his ear on the voice, then the Organizer export.
+
+---
+
+## 2026-10-08 EXIT - privacy page live with the new app name (OPEN)
+
+Snapshot before this block: none (append only).
+Deployed public/privacy.html on Cia's "go, deploy the privacy page".
+
+### Done
+- [observed] vercel deploy --prod --yes; production is now photon-to-phenomenology-7sqme0r2e-ciamacparhizi-9083s-projects.vercel.app (vercel ls --prod).
+- [observed] Live https://photon.ciamac.com/privacy: h1 and title read "Ciamac's Optical Illusions", no a.ciamac.com tag. /privacy, /photon, /photon/book, /shorts, /photon/kanizsa, /photon/book/troxler-fading answer 200; / answers 307.
+- [observed] ROLLBACK: vercel rollback photon-to-phenomenology-op3t6hisg-ciamacparhizi-9083s-projects.vercel.app (production read just before this deploy).
+
+### Previous pending
+- done: live check of /privacy and the other routes after the deploy (lines above).
+
+### Pending / open
+- public/privacy.html is live but uncommitted: the site is ahead of git. Commit on Cia's word.
+- Everything in the 2026-10-08 rename EXIT block below still stands (Organizer export, hands-on iPhone pass, name availability, canon repo push held).
+
+### Operational notes
+- none
+
+### Durable thought
+none, reason: routine deploy.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-08T13:52:37-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `fc8d927 Rename the app to Ciamac's Book of Illusions; add the privacy policy page` (committed 2026-10-05)
+- tree: **54 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished the deploy; blocked on Cia for the Organizer export.
+
+---
+
+## IN FLIGHT 2026-10-08 - about to deploy public/privacy.html (new app name) to production
+
+### Done
+- [observed] Cia, in chat: "go, deploy the privacy page". Only public/privacy.html differs from HEAD inside public/ (git diff --stat: 1 file, 3 lines: title, description, h1 now "Ciamac's Optical Illusions"). .vercelignore keeps ios/, /shorts/, scripts, tools and *.md out of the upload.
+- [proposed] Next command: vercel deploy --prod --yes from the repo root. The file is uncommitted; no git operation is part of this.
+- [observed] Production before the deploy: https://photon-to-phenomenology-op3t6hisg-ciamacparhizi-9083s-projects.vercel.app. ROLLBACK: vercel rollback <that URL>.
+
+### Previous pending
+- carried: all items of the 2026-10-08 EXIT block above this one stand unchanged.
+
+### Pending / open
+- Live check of /privacy and the other routes after the deploy.
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
+## 2026-10-08 EXIT - App renamed Ciamac's Optical Illusions (D-0695); new archive; App Store export still not verified (OPEN)
+
+Snapshot before this block: none (append only).
+Cia renamed the app twice in one day: App of Illusions (D-0694), then, after a Codex consult, Ciamac's Optical Illusions (D-0695, which stands). Source, listing, library screenshots and archive follow the final name. No App Store IPA has ever been seen by this session.
+
+### Done
+- [observed] D-0694 and D-0695 appended via canon-append (it printed both IDs). Consult log: ~/Developer/agent-notes/consults/20261008_134713.md.
+- [observed] ios/Photon/LibraryView.swift header reads "CIAMAC'S" over "Optical Illusions"; seen on the iPhone 17e simulator at normal and accessibility-extra-large text (ios/release-audit-2026-10-06/claude-verify/name2_sheet.png).
+- [observed] New Release archive ios/release-audit-2026-10-06/claude-final-2/Illusions.xcarchive: 21 pages byte-identical to source, 21 previews, "Optical Illusions" in the binary, no old name, no debug hooks, codesign verify passes, Apple Development signed. Installed on the iPhone 15 (devicectl "App installed").
+- [observed] ios/release-audit-2026-10-06/store-v3/: 16 screenshots; 14 experiment shots copied from store-v2, both library shots retaken with the new header.
+- [observed] ios/APP_STORE_LISTING_DRAFT_v5.md (App of Illusions, superseded) and v6 (final name). public/privacy.html title, description and h1 changed locally; NOT deployed, so the live page still says Ciamac's Book of Illusions.
+- [observed] xcodebuild -exportArchive from this app failed four times in all with "No Accounts" (claude-final/export.log, export-2, -3, -4), including after Cia added the Apple ID, restarted Xcode and accepted agreements. Cia reported Organizer exports three times; no IPA was ever found on disk by ls, find or Spotlight.
+- [observed] ios/release-audit-2026-10-06/claude-verify/verify_ipa.sh written: read-only IPA check Cia can run himself.
+
+### Previous pending
+- carried: hands-on iPhone pass (voice, haptics, screen stays awake) with the phone unlocked.
+- carried: uncommitted work, now also the rename edits, listing v5 and v6, store-v3, claude-final-2, public/privacy.html. Commit only on Cia's word.
+- carried: screenshots are RGBA PNGs with an opaque alpha channel; flatten if App Store Connect refuses them.
+- carried: Ebbinghaus, iPad portrait, right ring group runs off the edge in the guide's "equal" step.
+- carried: project.yml MARKETING_VERSION 0.1.0 disagrees with Info.plist 1.0.
+
+### Pending / open
+- Cia: Organizer export of claude-final-2/Illusions.xcarchive (Distribute App, App Store Connect, Export), then run verify_ipa.sh on the result and paste the output. Any earlier export is stale (old header).
+- Deploy of public/privacy.html needs Cia's go; until then the live privacy page shows the old name.
+- Name availability is unknown until typed into App Store Connect. Fallback: Ciamac's Book of Illusions.
+- Listing v6 keyword "optical illusion" now repeats the name; a swap is Cia's call.
+- BOOK_OF_ILLUSIONS_TOC_v1.md and the 40-piece plan still say Book of Illusions; not touched.
+
+### Operational notes
+- xcodebuild launched from the Claude app cannot see the Xcode account; do not retry the command-line export, use Organizer.
+- zsh does not word-split "set -- $pair"; use a function for per-device loops.
+- Portrait iPad Pro 13 simulator is B3C4DCC2 (shut down after use).
+
+### Durable thought
+none, reason: the naming outcome is in D-0695; nothing else generalises.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-08T13:50:58-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `fc8d927 Rename the app to Ciamac's Book of Illusions; add the privacy policy page` (committed 2026-10-05)
+- tree: **54 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+blocked on Cia: Organizer export of the new archive.
+
+---
+
+## 2026-10-06 EXIT - Book of Illusions: Codex release handoff audited; screenshots retaken; export still blocked on the Apple ID (OPEN)
+
+Snapshot before this block: none (append only).
+Independent audit of ios/release-audit-2026-10-06/RELEASE_STATUS.md (Codex). The app and archive check out; the staged experiment screenshots were stale and were retaken; two small app fixes; the App Store export stops at "No Accounts" as before. Full write-up: ios/release-audit-2026-10-06/RELEASE_STATUS_v2.md.
+
+### Done
+- [observed] New Release archive ios/release-audit-2026-10-06/claude-final/Illusions.xcarchive (com.ciamac.illusions, 1.0 (1), Apple Development signed, codesign verify passes). Pieces/ byte-identical to ios/Photon/Pieces (21 pages); Assets.car has 21 preview images; binary has the privacy URL and zero debug-hook strings. Log: claude-final/archive.log.
+- [observed] xcodebuild -exportArchive failed: "No Accounts", "No profiles for 'com.ciamac.illusions'" (claude-final/export.log). Not worked around.
+- [observed] tools/verify_all.sh, six sizes: failures 0 of 21 (ios/build/verify/).
+- [observed] Simulator (iPhone 17e, taps): Lab filter shows 5, card opens, next, mute toggles, back. Library reflows at accessibility-extra-large text. Troxler log shows hold on, four say/done pairs, a haptic per step (claude-verify/phone-log.txt).
+- [observed] The 14 experiment screenshots in release-audit-2026-10-06/store/ had no narration button, so they did not match the app. Retaken from the current build into store-v2/ (16 files, 1320x2868 and 2064x2752), each viewed.
+- [observed] Edits: ios/Photon/LibraryView.swift (cover over the top safe area; scrolled content was showing behind the clock), ios/Photon/PieceScreen.swift (back button label "All experiments"), ios/Photon/Narrator.swift (debug-only -silentVoice flag). New: ios/APP_STORE_LISTING_DRAFT_v4.md, release-audit-2026-10-06/RELEASE_STATUS_v2.md, claude-verify/shoot_store_v2.sh.
+- [observed] iPhone 15 was locked all session: launch refused ("Locked"). A debug build was installed for a console test that could not run, then replaced; the final Release build from claude-final is installed (devicectl "App installed").
+- [observed] https://photon.ciamac.com/privacy answers 200.
+
+### Previous pending
+- carried: BLOCKED on Cia: Xcode, Settings, Accounts, add the Apple ID that owns team 3AUT8DTWP3; then rerun the export against claude-final/Illusions.xcarchive.
+- carried: Cia in App Store Connect: new app record, listing (now from ios/APP_STORE_LISTING_DRAFT_v4.md, screenshots from ios/release-audit-2026-10-06/store-v2), upload, submit; each step his go.
+- carried: ios/ExportOptions_AppStore.plist is uncommitted (Cia asked for no git operations this session).
+
+### Pending / open
+- Hands-on iPhone pass (voice, haptics, screen stays awake) with the phone unlocked. Still never done on hardware.
+- Uncommitted: the three Swift edits, 21 preview imagesets, listing v3 and v4, release-audit-2026-10-06/, redesign-v1, redesign-v2. Commit only on Cia's word.
+- Screenshots are RGBA PNGs with a fully opaque alpha channel; flatten to RGB if App Store Connect refuses them.
+- Ebbinghaus, iPad portrait: in the guide's "equal" step the right ring group runs off the right edge. Cosmetic, not fixed.
+- project.yml MARKETING_VERSION 0.1.0 disagrees with Info.plist 1.0 (plist wins).
+
+### Operational notes
+- Screenshot timing: with the voice on, the guide waits for each line, so the old 33 s skip lands mid-guide on some pieces. Good states: skip after 4 s for cornsweet, cafe-wall, receptive-field and iPad ebbinghaus; after 33 s for kanizsa, ebbinghaus (iPhone), checker-shadow, motion-induced-blindness. Launch with -silentVoice YES.
+- The booted iPad Pro 13 simulator 6246D73A is in landscape; B3C4DCC2 is portrait (shut down again after use).
+- devicectl launch arguments for the app go after "--".
+- Narration uses the playback category: it speaks with the ringer switch silent.
+
+### Durable thought
+none, reason: findings are specific to this release and recorded in RELEASE_STATUS_v2.md.
+
+### Repo state
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-06T22:44:21-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `fc8d927 Rename the app to Ciamac's Book of Illusions; add the privacy policy page` (committed 2026-10-05)
+- tree: **51 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+blocked on Cia: Apple ID in Xcode for the App Store export, and an unlocked iPhone for the hands-on pass.
+
+---
+
+## IN FLIGHT 2026-10-05 (2) - privacy page live; App Store archive built; export blocked on an Apple ID in Xcode
+
+### Done
+- [observed] Cia said "Go" to the listed next steps. Committed and pushed fc8d927 (rename, listing v3, public/privacy.html). Deployed production photon-to-phenomenology-op3t6hisg-ciamacparhizi-9083s-projects.vercel.app (CLI). Live: https://photon.ciamac.com/privacy answers 200 with no analytics tag; /photon, /photon/book, /shorts, /photon/kanizsa 200; all 17 index links 200. ROLLBACK: `vercel rollback photon-to-phenomenology-hpvpf6wlt-ciamacparhizi-9083s-projects.vercel.app` (previous production, 2026-10-04).
+- [observed] Release archive for iOS built: ios/build/Illusions.xcarchive (signed with the Apple Development identity), bundle id com.ciamac.illusions.
+- [observed] `xcodebuild -exportArchive` (method app-store-connect, destination export, ios/ExportOptions_AppStore.plist) FAILED: "No Accounts" and "No profiles for com.ciamac.illusions". Xcode has no Apple ID signed in, so it cannot create the App ID or the App Store provisioning profile. Not worked around: entering Apple credentials is Cia's.
+
+### Previous pending
+- carried: how the voice sounds on the phone; price (free) and icon (A) sign-off.
+
+### Pending / open
+- BLOCKED on Cia: Xcode, Settings, Accounts, add the Apple ID that owns team 3AUT8DTWP3. Then rerun the export (and the upload).
+- Cia, in App Store Connect (needs his login and agreements): My Apps, New App: name "Ciamac's Book of Illusions", bundle id com.ciamac.illusions, subtitle "Illusions you can touch", privacy URL https://photon.ciamac.com/privacy, price free, App Privacy "Data Not Collected", age rating 4+, screenshots from ios/build/store/final, text from ios/APP_STORE_LISTING_DRAFT_v3.md. Upload the build, then submit for review (each step Cia's go).
+- ios/ExportOptions_AppStore.plist is new and uncommitted.
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
 ## IN FLIGHT 2026-10-05 - app renamed Ciamac's Book of Illusions (D-0644)
 
 ### Done

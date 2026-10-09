@@ -3,3 +3,21 @@ build/
 build-release/
 CONTACT_SHEET_*.png
 build-device/
+build-redesign/
+build-redesign-device/
+# release audits: keep the write-ups, final screenshots and scripts; leave build output and scratch on disk
+release-audit-*/DerivedData*/
+release-audit-*/DeviceBuild/
+release-audit-*/*.xcarchive/
+release-audit-*/*.log
+release-audit-*/claude-final*/
+release-audit-*/store/
+release-audit-*/store-v2/
+release-audit-*/claude-verify/DerivedData*/
+release-audit-*/claude-verify/DeviceDebug/
+release-audit-*/claude-verify/try/
+release-audit-*/claude-verify/pid
+release-audit-*/claude-verify/*.png
+release-audit-*/claude-verify/*.log
+release-audit-*/claude-verify/phone-log.txt
+release-audit-*/claude-verify/device-console-*.txt

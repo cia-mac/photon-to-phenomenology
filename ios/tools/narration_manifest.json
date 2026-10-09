@@ -1,0 +1,718 @@
+{
+ "afterimage-0": {
+  "dur": 8.9,
+  "gate": "base.en exact",
+  "heard": "",
+  "phonemes": "ɐ sˈæʧəɹˌATᵻd tˈil dˈɪsk sˈɪts ˌɔn ɐ nˈutɹᵊl ɡɹˈA fˈild, wɪð ɐ smˈɔl dˈɑɹk dˈɑt æt ɪts sˈɛntəɹ. ðə ɹˈɪŋ əɹˈWnd ɪt kˈWnts ˈWt ðə hˈOldtˌIm.",
+  "speed": 0.88,
+  "spoken": "A saturated teal disc sits on a neutral grey field, with a small dark dot at its centre. The ring around it counts out the hold-time.",
+  "text": "A saturated teal disc sits on a neutral grey field, with a small dark dot at its centre. The ring around it counts out the hold time.",
+  "voice": "af_heart"
+ },
+ "afterimage-1": {
+  "dur": 8.85,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Lock your gaze on the centre dot. Do not let your eyes wander. Hold for about fifteen seconds while the cones that drink teal slowly tire.",
+  "text": "Lock your gaze on the centre dot. Do not let your eyes wander. Hold for about fifteen seconds while the cones that drink teal slowly tire.",
+  "voice": "af_heart"
+ },
+ "afterimage-2": {
+  "dur": 7.58,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Now the teal is gone and only the empty grey remains. Keep your eyes pinned to where the dot was, and do not blink hard.",
+  "text": "Now the teal is gone and only the empty grey remains. Keep your eyes pinned to where the dot was, and do not blink hard.",
+  "voice": "af_heart"
+ },
+ "afterimage-3": {
+  "dur": 8.91,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "A soft rose disc blooms where the teal used to be. Nothing rose is on the screen. The tired cones tip the grey toward teal's opposite.",
+  "text": "A soft rose disc blooms where the teal used to be. Nothing rose is on the screen. The tired cones tip the grey toward teal's opposite.",
+  "voice": "af_heart"
+ },
+ "afterimage-4": {
+  "dur": 5.62,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "You are seeing fatigue, rendered as colour. Vision is not recording, it is construction.",
+  "text": "You are seeing fatigue, rendered as colour. Vision is not recording, it is construction.",
+  "voice": "af_heart"
+ },
+ "aperture-problem-0": {
+  "dur": 7.71,
+  "gate": "large-v3-turbo exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "A field of slanted bars is drifting. Through this small porthole you only catch the middles of the bars, never their ends.",
+  "text": "A field of slanted bars is drifting. Through this small porthole you only catch the middles of the bars, never their ends.",
+  "voice": "af_heart"
+ },
+ "aperture-problem-1": {
+  "dur": 8.33,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Watch the drift. It reads as motion straight across the bars, square to their slant. The dim arrow marks that perceived direction.",
+  "text": "Watch the drift. It reads as motion straight across the bars, square to their slant. The dim arrow marks that perceived direction.",
+  "voice": "af_heart"
+ },
+ "aperture-problem-2": {
+  "dur": 8.27,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "But that is a guess. The same across-the-bars slide is consistent with countless true directions. The slot cannot tell them apart.",
+  "text": "But that is a guess. The same across-the-bars slide is consistent with countless true directions. The slot cannot tell them apart.",
+  "voice": "af_heart"
+ },
+ "aperture-problem-3": {
+  "dur": 8.53,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Now pull the rim wide. The bar ends come into view, and the bright arrow swings to the real heading. It was moving that way all along.",
+  "text": "Now pull the rim wide. The bar ends come into view, and the bright arrow swings to the real heading. It was moving that way all along.",
+  "voice": "af_heart"
+ },
+ "aperture-problem-4": {
+  "dur": 5.85,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Through the slot, every direction looked the same. Vision is not recording, it is construction.",
+  "text": "Through the slot, every direction looked the same. Vision is not recording, it is construction.",
+  "voice": "af_heart"
+ },
+ "apparent-motion-0": {
+  "dur": 12.23,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Two pale dots, side by side, with a dark gap between them. Slow first. One lights, then the other, then back. At this rhythm you see exactly what is there: two lamps blinking in turn.",
+  "text": "Two pale dots, side by side, with a dark gap between them. Slow first. One lights, then the other, then back. At this rhythm you see exactly what is there: two lamps blinking in turn.",
+  "voice": "af_heart"
+ },
+ "apparent-motion-1": {
+  "dur": 3.22,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Now speed the rhythm up. Watch the gap, not the dots.",
+  "text": "Now speed the rhythm up. Watch the gap, not the dots.",
+  "voice": "af_heart"
+ },
+ "apparent-motion-2": {
+  "dur": 12.62,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "There. The two blinks have fused into one object sliding across the gap and back. But look closely: nothing ever travels the space between. Both sites only ever switch on and off in place.",
+  "text": "There. The two blinks have fused into one object sliding across the gap and back. But look closely: nothing ever travels the space between. Both sites only ever switch on and off in place.",
+  "voice": "af_heart"
+ },
+ "apparent-motion-3": {
+  "dur": 9.8,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Two lamps, two still flashes, and a gap nothing crosses. The motion was yours, built from stillness. Vision is not recording, it is construction.",
+  "text": "Two lamps, two still flashes, and a gap nothing crosses. The motion was yours, built from stillness. Vision is not recording, it is construction.",
+  "voice": "af_heart"
+ },
+ "cafe-wall-0": {
+  "dur": 12.42,
+  "gate": "large-v3-turbo exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Rows of light and dark tiles, stacked with thin grey mortar between them. The rows are shifted, each one nudged against the one above. The lines look like they slope and pinch into wedges.",
+  "text": "Rows of light and dark tiles, stacked with thin grey mortar between them. The rows are shifted, each one nudged against the one above. The lines look like they slope and pinch into wedges.",
+  "voice": "af_heart"
+ },
+ "cafe-wall-1": {
+  "dur": 7.67,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Push the shift further. The slopes steepen, the rows seem to taper and tilt even harder. Every grey line looks bent.",
+  "text": "Push the shift further. The slopes steepen, the rows seem to taper and tilt even harder. Every grey line looks bent.",
+  "voice": "af_heart"
+ },
+ "cafe-wall-2": {
+  "dur": 5.35,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Now slide the offset back toward zero. Watch the mortar lines as the tiles line up.",
+  "text": "Now slide the offset back toward zero. Watch the mortar lines as the tiles line up.",
+  "voice": "af_heart"
+ },
+ "cafe-wall-3": {
+  "dur": 6.12,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Zero shift. Every row snaps flat. The lines were dead level and parallel the whole time.",
+  "text": "Zero shift. Every row snaps flat. The lines were dead level and parallel the whole time.",
+  "voice": "af_heart"
+ },
+ "cafe-wall-4": {
+  "dur": 10.93,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Nothing tilted but your read of it. Offset tiles and grey mortar made you bend straight lines. The slope was added by you. Vision is construction, not a recording.",
+  "text": "Nothing tilted but your read of it. Offset tiles and grey mortar made you bend straight lines. The slope was added by you. Vision is construction, not a recording.",
+  "voice": "af_heart"
+ },
+ "change-blindness-0": {
+  "dur": 11.1,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Fifteen warm-grey tiles flash on, then off, then on again. One of them is silently switching shades every cycle. Study the grid and try to catch which tile it is.",
+  "text": "Fifteen warm-grey tiles flash on, then off, then on again. One of them is silently switching shades every cycle. Study the grid and try to catch which tile it is.",
+  "voice": "af_heart"
+ },
+ "change-blindness-1": {
+  "dur": 12.26,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "A blank flash sits between every frame. That gap wipes the transient that would normally yank your eye to the change. The switch is large, yet with the blank in the way you probably cannot find it.",
+  "text": "A blank flash sits between every frame. That gap wipes the transient that would normally yank your eye to the change. The switch is large, yet with the blank in the way you probably cannot find it.",
+  "voice": "af_heart"
+ },
+ "change-blindness-2": {
+  "dur": 9.32,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.92,
+  "spoken": "Now close the blank. With the two frames butting straight together, the changing tile flickers and pops out at once. Same change, no gap to hide it.",
+  "text": "Now close the blank. With the two frames butting straight together, the changing tile flickers and pops out at once. Same change, no gap to hide it.",
+  "voice": "af_heart"
+ },
+ "change-blindness-3": {
+  "dur": 13.23,
+  "gate": "large-v3-turbo exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "There it is, marked. You never stored the scene to compare. Without a transient to point your attention, even a whole tile changing in plain sight goes unseen. Vision is construction, not a recording.",
+  "text": "There it is, marked. You never stored the scene to compare. Without a transient to point your attention, even a whole tile changing in plain sight goes unseen. Vision is construction, not a recording.",
+  "voice": "af_heart"
+ },
+ "checker-shadow-0": {
+  "dur": 5.04,
+  "gate": "base.en exact",
+  "heard": "",
+  "phonemes": "skwˈɛɹ ˈA ɪz dˈɑɹk. ˌɪt sˈɪts ˌɔn ðə lˈɪt hˈæf ʌv ðə bˈɔɹd ænd ɹˈidz æz ɐ dˈip ɡɹˈA.",
+  "speed": 0.88,
+  "spoken": "Square [A](/ˈA/) is dark. It sits on the lit half of the board and reads as a deep grey.",
+  "text": "Square A is dark. It sits on the lit half of the board and reads as a deep grey.",
+  "voice": "af_heart"
+ },
+ "checker-shadow-1": {
+  "dur": 5.47,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Square B looks much lighter. It sits in the cast shadow, and your eye calls it a pale tile.",
+  "text": "Square B looks much lighter. It sits in the cast shadow, and your eye calls it a pale tile.",
+  "voice": "af_heart"
+ },
+ "checker-shadow-2": {
+  "dur": 9.4,
+  "gate": "base.en exact",
+  "heard": "",
+  "phonemes": "sˈAm ɡɹˈA. ɪn ʃˈædO, bˈi sˈɛndz jʊɹ ˈI ɪɡzˈæktli ðə lˈIt ˈA dˈʌz. ðə ɹˈidˌWt ˌɔlɹˈɛdi sˈɛz Idˈɛntəkᵊl lˈIt, jˈɛt ðA ɹəfjˈuz tə lˈʊk əlˈIk.",
+  "speed": 0.88,
+  "spoken": "Same grey. In shadow, B sends your eye exactly the light [A](/ˈA/) does. The readout already says identical light, yet they refuse to look alike.",
+  "text": "Same grey. In shadow, B sends your eye exactly the light A does. The readout already says identical light, yet they refuse to look alike.",
+  "voice": "af_heart"
+ },
+ "checker-shadow-3": {
+  "dur": 6.37,
+  "gate": "large-v3-turbo exact",
+  "heard": "",
+  "phonemes": "nˈW dɹˈæɡ ðə ʃˈædO ˈɔf bˈi ði ɪlˈuʒᵊn dɹˈɑps, ænd bˈiz vˈælju ʤˈʌmps fˈɑɹ əpˈɑɹt fɹʌm ˈA ɪn ðə ɹˈidˌWt.",
+  "speed": 0.88,
+  "spoken": "Now drag the shadow off B. The illusion drops, and B's value jumps far apart from [A](/ˈA/) in the readout.",
+  "text": "Now drag the shadow off B. The illusion drops, and B's value jumps far apart from A in the readout.",
+  "voice": "af_heart"
+ },
+ "checker-shadow-4": {
+  "dur": 10.14,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "They were always the same grey. Your visual system discounted the shadow and reported the surface, not the light. Vision is construction, not a recording.",
+  "text": "They were always the same grey. Your visual system discounted the shadow and reported the surface, not the light. Vision is construction, not a recording.",
+  "voice": "af_heart"
+ },
+ "contrast-sensitivity-intro": {
+  "dur": 22.04,
+  "gate": "large-v3-turbo exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Every bar in a given row has the same contrast, and every bar in a column the same width. Hold a relaxed gaze: the arc where the bars melt into flat grey is not printed on the screen, it is your own contrast sensitivity. Drop the overall contrast and watch the arc shrink; step back and the fine right edge washes out first.",
+  "text": "Every bar in a given row has the same contrast, and every bar in a column the same width. Hold a relaxed gaze: the arc where the bars melt into flat grey is not printed on the screen, it is your own contrast sensitivity. Drop the overall contrast and watch the arc shrink; step back and the fine right edge washes out first.",
+  "voice": "af_heart"
+ },
+ "cornsweet-0": {
+  "dur": 7.18,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "One field, split down the middle. The left half plainly looks a touch lighter than the right. Trust your eyes for a moment.",
+  "text": "One field, split down the middle. The left half plainly looks a touch lighter than the right. Trust your eyes for a moment.",
+  "voice": "af_heart"
+ },
+ "cornsweet-1": {
+  "dur": 8.6,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "There is nothing between the two halves but a thin seam. Watch only that seam: a soft cusp ramps light on the left and dark on the right.",
+  "text": "There is nothing between the two halves but a thin seam. Watch only that seam: a soft cusp ramps light on the left and dark on the right.",
+  "voice": "af_heart"
+ },
+ "cornsweet-2": {
+  "dur": 5.73,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Now slide an ink bar across the seam to hide the cusp. The far surfaces never changed.",
+  "text": "Now slide an ink bar across the seam to hide the cusp. The far surfaces never changed.",
+  "voice": "af_heart"
+ },
+ "cornsweet-3": {
+  "dur": 11.81,
+  "gate": "large-v3-turbo exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Covered, the two halves snap into one flat grey. They were always the same. You read the little edge and repainted the whole surface to match. Vision is construction, not a recording.",
+  "text": "Covered, the two halves snap into one flat grey. They were always the same. You read the little edge and repainted the whole surface to match. Vision is construction, not a recording.",
+  "voice": "af_heart"
+ },
+ "ebbinghaus-0": {
+  "dur": 9.47,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Two pale discs, one on the left, one on the right. The left looks distinctly smaller. Trust your eyes for a moment: they are clearly different sizes.",
+  "text": "Two pale discs, one on the left, one on the right. The left looks distinctly smaller. Trust your eyes for a moment: they are clearly different sizes.",
+  "voice": "af_heart"
+ },
+ "ebbinghaus-1": {
+  "dur": 10.45,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Now look at their neighbours. The left disc sits inside a ring of giants; the right one inside a ring of dwarves. Your eye sized each centre against its company.",
+  "text": "Now look at their neighbours. The left disc sits inside a ring of giants; the right one inside a ring of dwarves. Your eye sized each centre against its company.",
+  "voice": "af_heart"
+ },
+ "ebbinghaus-2": {
+  "dur": 7.63,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Watch the centres as the surrounding rings even out. Nothing about the two discs is changing. Only their context is.",
+  "text": "Watch the centres as the surrounding rings even out. Nothing about the two discs is changing. Only their context is.",
+  "voice": "af_heart"
+ },
+ "ebbinghaus-3": {
+  "dur": 8.15,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Rings matched. The two centres are plainly, undeniably the same size. They always were. The readout said so the whole time.",
+  "text": "Rings matched. The two centres are plainly, undeniably the same size. They always were. The readout said so the whole time.",
+  "voice": "af_heart"
+ },
+ "ebbinghaus-4": {
+  "dur": 10.28,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Size is judged against the neighbours, not measured. The same disc shrinks beside giants and swells beside dwarves. Vision is construction, not a recording.",
+  "text": "Size is judged against the neighbours, not measured. The same disc shrinks beside giants and swells beside dwarves. Vision is construction, not a recording.",
+  "voice": "af_heart"
+ },
+ "gestalt-grouping-intro": {
+  "dur": 7.88,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Drag the sliders. The dots never change which dot they are; your visual system decides whether they are rows or columns.",
+  "text": "Drag the sliders. The dots never change which dot they are; your visual system decides whether they are rows or columns.",
+  "voice": "af_heart"
+ },
+ "inverse-problem-0": {
+  "dur": 7.57,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Right now you are looking at a cube, square on. Eight points, twelve edges, one solid box. Hold that reading for a moment.",
+  "text": "Right now you are looking at a cube, square on. Eight points, twelve edges, one solid box. Hold that reading for a moment.",
+  "voice": "af_heart"
+ },
+ "inverse-problem-1": {
+  "dur": 8.79,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Now turn it. The box comes apart. The eight points were never a cube. They hang at unrelated depths and only lined up from where you stood.",
+  "text": "Now turn it. The box comes apart. The eight points were never a cube. They hang at unrelated depths and only lined up from where you stood.",
+  "voice": "af_heart"
+ },
+ "inverse-problem-2": {
+  "dur": 9.96,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "This loose cloud of points is one scene that fits the flat image. Endless other arrangements fit it just as well. The picture alone cannot tell them apart.",
+  "text": "This loose cloud of points is one scene that fits the flat image. Endless other arrangements fit it just as well. The picture alone cannot tell them apart.",
+  "voice": "af_heart"
+ },
+ "inverse-problem-3": {
+  "dur": 7.33,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Return to the one viewpoint where they align, and your visual system commits instantly to the simplest cause: a cube.",
+  "text": "Return to the one viewpoint where they align, and your visual system commits instantly to the simplest cause: a cube.",
+  "voice": "af_heart"
+ },
+ "inverse-problem-4": {
+  "dur": 8.42,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "There was never a cube. The flat image fit endless scenes; you saw the simplest. Vision is not recording, it is construction.",
+  "text": "There was never a cube. The flat image fit endless scenes; you saw the simplest. Vision is not recording, it is construction.",
+  "voice": "af_heart"
+ },
+ "kanizsa-0": {
+  "dur": 9.87,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Three pale discs, each with a wedge bitten out of its rim. Right now the bites face outward, so you see three separate shapes and nothing in the space between them.",
+  "text": "Three pale discs, each with a wedge bitten out of its rim. Right now the bites face outward, so you see three separate shapes and nothing in the space between them.",
+  "voice": "af_heart"
+ },
+ "kanizsa-1": {
+  "dur": 4.03,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Watch the empty middle as the wedges swing around to face the centre.",
+  "text": "Watch the empty middle as the wedges swing around to face the centre.",
+  "voice": "af_heart"
+ },
+ "kanizsa-2": {
+  "dur": 9.9,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Aligned. A triangle snaps into view, a touch brighter than the page, with three crisp straight edges. Lean in: that edge is not painted on the screen.",
+  "text": "Aligned. A triangle snaps into view, a touch brighter than the page, with three crisp straight edges. Lean in: that edge is not painted on the screen.",
+  "voice": "af_heart"
+ },
+ "kanizsa-3": {
+  "dur": 11.08,
+  "gate": "large-v3-turbo exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "No triangle was ever drawn. Only three notched discs exist. The surface, the brightness, the edges, you supplied them all. Vision is construction, not a recording.",
+  "text": "No triangle was ever drawn. Only three notched discs exist. The surface, the brightness, the edges, you supplied them all. Vision is construction, not a recording.",
+  "voice": "af_heart"
+ },
+ "motion-aftereffect-0": {
+  "dur": 7.77,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "A spiral of cream arms on a dark field, with a small dot at the centre. Keep your eyes locked on that dot for the whole walk.",
+  "text": "A spiral of cream arms on a dark field, with a small dot at the centre. Keep your eyes locked on that dot for the whole walk.",
+  "voice": "af_heart"
+ },
+ "motion-aftereffect-1": {
+  "dur": 8.61,
+  "gate": "accepted: phonemes \"ɹˈidz æz stˈɛdi\" are correct; whisper merges \"reads as steady\" into \"reads a steady\"",
+  "heard": "",
+  "phonemes": "nˈW ɪt spˈɪnz. ðə tˈɜɹnɪŋ spˈIɹəl ɹˈidz æz stˈɛdi flˈO, dɹˈɔn ˈWtwəɹd, ɛkspˈændɪŋ. hˈOld jʊɹ ɡˈAz ˌɔn ðə sˈɛntəɹ ænd lˈɛt ɪt ɹˈʌn.",
+  "speed": 0.88,
+  "spoken": "Now it spins. The turning spiral reads as steady flow, drawn outward, expanding. Hold your gaze on the centre and let it run.",
+  "text": "Now it spins. The turning spiral reads as steady flow, drawn outward, expanding. Hold your gaze on the centre and let it run.",
+  "voice": "af_heart"
+ },
+ "motion-aftereffect-2": {
+  "dur": 7.86,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Stay fixed. The longer it turns, the more your outward-motion detectors adapt and tire. Give it a slow count of twenty.",
+  "text": "Stay fixed. The longer it turns, the more your outward-motion detectors adapt and tire. Give it a slow count of twenty.",
+  "voice": "af_heart"
+ },
+ "motion-aftereffect-3": {
+  "dur": 7.95,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Stopped. The spiral is dead still, yet it appears to drift the other way, contracting inward. Nothing on screen is moving.",
+  "text": "Stopped. The spiral is dead still, yet it appears to drift the other way, contracting inward. Nothing on screen is moving.",
+  "voice": "af_heart"
+ },
+ "motion-aftereffect-4": {
+  "dur": 11.41,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "The page is frozen. The reverse drift is your tired detectors falling silent, and that silence reads as motion. Vision is not recording, it is construction.",
+  "text": "The page is frozen. The reverse drift is your tired detectors falling silent, and that silence reads as motion. Vision is not recording, it is construction.",
+  "voice": "af_heart"
+ },
+ "motion-induced-blindness-0": {
+  "dur": 10.04,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Three amber dots sit out toward the edges, bright and obvious. The mask is still, so you see every one of them, plainly. Keep your eyes on the centre cross.",
+  "text": "Three amber dots sit out toward the edges, bright and obvious. The mask is still, so you see every one of them, plainly. Keep your eyes on the centre cross.",
+  "voice": "af_heart"
+ },
+ "motion-induced-blindness-1": {
+  "dur": 7.08,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Now the mask begins to turn. Hold your gaze on the cross. Do not chase the dots, just keep fixating the centre.",
+  "text": "Now the mask begins to turn. Hold your gaze on the cross. Do not chase the dots, just keep fixating the centre.",
+  "voice": "af_heart"
+ },
+ "motion-induced-blindness-2": {
+  "dur": 10.35,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Wait. One amber dot, then another, quietly drops out of awareness. The dots have not dimmed and have not moved. Your system has simply stopped reporting them.",
+  "text": "Wait. One amber dot, then another, quietly drops out of awareness. The dots have not dimmed and have not moved. Your system has simply stopped reporting them.",
+  "voice": "af_heart"
+ },
+ "motion-induced-blindness-3": {
+  "dur": 7.1,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Stop the mask and they all return at once, exactly where they always were. Nothing about the dots ever changed.",
+  "text": "Stop the mask and they all return at once, exactly where they always were. Nothing about the dots ever changed.",
+  "voice": "af_heart"
+ },
+ "motion-induced-blindness-4": {
+  "dur": 9.47,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Salience is no guarantee of being seen. Motion captured the system and the rest dropped out. Vision is not a recording, it is construction.",
+  "text": "Salience is no guarantee of being seen. Motion captured the system and the rest dropped out. Vision is not a recording, it is construction.",
+  "voice": "af_heart"
+ },
+ "muller-lyer-0": {
+  "dur": 8.03,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Two horizontal shafts, one above the other. The fins are splayed out. The top shaft looks plainly longer than the bottom one.",
+  "text": "Two horizontal shafts, one above the other. The fins are splayed out. The top shaft looks plainly longer than the bottom one.",
+  "voice": "af_heart"
+ },
+ "muller-lyer-1": {
+  "dur": 9.02,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.9,
+  "spoken": "Same line, same pixels. The outward fins read as a near corner and stretch the line; the inward fins read as a far corner and shrink it.",
+  "text": "Same line, same pixels. The outward fins read as a near corner and stretch the line; the inward fins read as a far corner and shrink it.",
+  "voice": "af_heart"
+ },
+ "muller-lyer-2": {
+  "dur": 2.97,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Now drag the fins flat. Watch the two shafts.",
+  "text": "Now drag the fins flat. Watch the two shafts.",
+  "voice": "af_heart"
+ },
+ "muller-lyer-3": {
+  "dur": 9.15,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Flat. The shafts line up exactly, because they were always the same length. The fins were never measuring anything, your visual system was.",
+  "text": "Flat. The shafts line up exactly, because they were always the same length. The fins were never measuring anything, your visual system was.",
+  "voice": "af_heart"
+ },
+ "muller-lyer-4": {
+  "dur": 7.03,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Nothing on the screen changed length. Only the corners you inferred. Vision is construction, not a recording.",
+  "text": "Nothing on the screen changed length. Only the corners you inferred. Vision is construction, not a recording.",
+  "voice": "af_heart"
+ },
+ "opponent-afterimage-intro": {
+  "dur": 18.88,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Pick an adapting color and press Start. Keep your eyes locked on the small cross, do not move them, until the field goes neutral gray, then keep staring: you will see the shape return as a ghost in its opposite color, painted by your own visual system in a field where no such color exists.",
+  "text": "Pick an adapting color and press Start. Keep your eyes locked on the small cross, do not move them, until the field goes neutral gray, then keep staring: you will see the shape return as a ghost in its opposite color, painted by your own visual system in a field where no such color exists.",
+  "voice": "af_heart"
+ },
+ "ponzo-0": {
+  "dur": 8.97,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Two pale horizontal bars, upper and lower, framed by a pair of rails that converge toward the top like a road running into the distance.",
+  "text": "Two pale horizontal bars, upper and lower, framed by a pair of rails that converge toward the top like a road running into the distance.",
+  "voice": "af_heart"
+ },
+ "ponzo-1": {
+  "dur": 8.66,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Look at the upper bar. It sits where the rails pinch together, and it reads as plainly longer than the lower one. Trust your eyes for a moment.",
+  "text": "Look at the upper bar. It sits where the rails pinch together, and it reads as plainly longer than the lower one. Trust your eyes for a moment.",
+  "voice": "af_heart"
+ },
+ "ponzo-2": {
+  "dur": 4.63,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Now watch the bars as the rails straighten out. The depth cue drains away.",
+  "text": "Now watch the bars as the rails straighten out. The depth cue drains away.",
+  "voice": "af_heart"
+ },
+ "ponzo-3": {
+  "dur": 8.17,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Rails gone, the two bars are flatly, obviously equal. Check the readout: both have measured the same width the entire time.",
+  "text": "Rails gone, the two bars are flatly, obviously equal. Check the readout: both have measured the same width the entire time.",
+  "voice": "af_heart"
+ },
+ "ponzo-4": {
+  "dur": 11.62,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "The converging lines read as depth, so the upper bar must be farther, so your visual system enlarged it to keep the world constant. Vision is construction, not a recording.",
+  "text": "The converging lines read as depth, so the upper bar must be farther, so your visual system enlarged it to keep the world constant. Vision is construction, not a recording.",
+  "voice": "af_heart"
+ },
+ "receptive-field-intro": {
+  "dur": 13.24,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Drag the light across the cell's field: it fires above baseline over the center, drops below over the surround, and goes silent under full-field light. The cell reports contrast, not brightness.",
+  "text": "Drag the light across the cell's field: it fires above baseline over the center, drops below over the surround, and goes silent under full-field light. The cell reports contrast, not brightness.",
+  "voice": "af_heart"
+ },
+ "scintillating-grid-0": {
+  "dur": 10.77,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "A regular lattice of grey bars with a pale disc at every crossing. Every disc is the same flat grey. Hold still and let the whole field sit in front of you.",
+  "text": "A regular lattice of grey bars with a pale disc at every crossing. Every disc is the same flat grey. Hold still and let the whole field sit in front of you.",
+  "voice": "af_heart"
+ },
+ "scintillating-grid-1": {
+  "dur": 9.11,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Now let your eyes drift around the grid. Dark dots shimmer at the crossings, blinking on and off, always just off to the side of wherever you look.",
+  "text": "Now let your eyes drift around the grid. Dark dots shimmer at the crossings, blinking on and off, always just off to the side of wherever you look.",
+  "voice": "af_heart"
+ },
+ "scintillating-grid-2": {
+  "dur": 9.11,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Fix on one single crossing and stare. The dot there vanishes. The darkness only lives in your periphery, never on the spot you aim at.",
+  "text": "Fix on one single crossing and stare. The dot there vanishes. The darkness only lives in your periphery, never on the spot you aim at.",
+  "voice": "af_heart"
+ },
+ "scintillating-grid-3": {
+  "dur": 10.07,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "The dots are not on the page. Your retina overshoots into phantom darkness where bright neighbours crowd a crossing. Vision is construction, not a recording.",
+  "text": "The dots are not on the page. Your retina overshoots into phantom darkness where bright neighbours crowd a crossing. Vision is construction, not a recording.",
+  "voice": "af_heart"
+ },
+ "trichromatic-mixing-intro": {
+  "dur": 8.02,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Raise each light. Where two overlap, a new color appears; where all three meet, white. None of it is in the light. Your eye makes it.",
+  "text": "Raise each light. Where two overlap, a new color appears; where all three meet, white. None of it is in the light. Your eye makes it.",
+  "voice": "af_heart"
+ },
+ "troxler-fading-0": {
+  "dur": 8.55,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "A soft ring sits out in your periphery and a small cross marks the centre. Fix your gaze on that cross and do not let your eyes wander.",
+  "text": "A soft ring sits out in your periphery and a small cross marks the centre. Fix your gaze on that cross and do not let your eyes wander.",
+  "voice": "af_heart"
+ },
+ "troxler-fading-1": {
+  "dur": 6.86,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Hold steady. Keep staring straight at the cross and let the ring stay at the corner of your vision. Do not chase it.",
+  "text": "Hold steady. Keep staring straight at the cross and let the ring stay at the corner of your vision. Do not chase it.",
+  "voice": "af_heart"
+ },
+ "troxler-fading-2": {
+  "dur": 8.89,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Wait a few seconds without moving. The ring softens, thins, and slips out of awareness, even though it is still on the screen at full strength.",
+  "text": "Wait a few seconds without moving. The ring softens, thins, and slips out of awareness, even though it is still on the screen at full strength.",
+  "voice": "af_heart"
+ },
+ "troxler-fading-3": {
+  "dur": 9.21,
+  "gate": "base.en exact",
+  "heard": "",
+  "speed": 0.88,
+  "spoken": "Now flick your eyes and it snaps back. Steady, unchanging input stops being reported. Vision is not recording, it is construction.",
+  "text": "Now flick your eyes and it snaps back. Steady, unchanging input stops being reported. Vision is not recording, it is construction.",
+  "voice": "af_heart"
+ }
+}

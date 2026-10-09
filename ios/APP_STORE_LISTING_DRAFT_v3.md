@@ -9,7 +9,7 @@ Written 2026-10-05 (v3; v1 and v2 kept). v3 is the renamed app: the name, subtit
 | App Store name (30 max) | Ciamac's Book of Illusions | 26 characters. Availability can only be confirmed in App Store Connect. |
 | Home screen name | Illusions | The full name is too long to fit under an icon. |
 | Subtitle (30 max) | Illusions you can touch | 23 characters. |
-| Bundle id | com.ciamac.illusions | Not registered anywhere yet. Permanent once created in App Store Connect. |
+| Bundle id | com.ciamac.illusions | Registration in App Store Connect has not been verified. Permanent once created there. |
 
 ## Still open
 
@@ -44,18 +44,18 @@ Concepts follow Stephen Palmer's "Vision Science: Photons to Phenomenology" (MIT
 
 **Primary category:** Education. **Secondary:** Entertainment (or Reference).
 
-**Age rating:** 4+. No objectionable content, no web access, no user content.
+**Proposed age rating:** 4+, subject to the App Store Connect questionnaire. No user-generated content or in-app browsing; the privacy and support link opens the system browser.
 
-**Support URL / Marketing URL:** needs an address. photon.ciamac.com exists; a privacy policy page does not (see below).
+**Support URL:** https://photon.ciamac.com/privacy (includes the support email). **Marketing URL:** https://photon.ciamac.com/photon.
 
 **Copyright:** 2026 Ciamac Parhizi
 
 ## Privacy
 
 - App Privacy answers: Data Not Collected; no tracking.
-- The app contains no network code. The page bundle has no external URL, which the measuring script checks on every piece.
+- The 21 experiment pages are bundled and work offline. They have no external URL, which the measuring script checks on every piece. The native privacy and support link opens the published page in the system browser.
 - A privacy manifest (`Photon/PrivacyInfo.xcprivacy`) is bundled: no tracking, no collected data. It declares one restricted API, UserDefaults (reason CA92.1), used only to remember whether narration is muted.
-- **Needs doing, outward-facing:** App Store Connect requires a privacy policy URL. A one-page policy on photon.ciamac.com would be a deploy, so it waits for Cia's go.
+- **Privacy policy URL:** https://photon.ciamac.com/privacy. The page is published; the native library now has a "Privacy & support" link to it.
 
 ## Notes for App Review
 
@@ -66,5 +66,5 @@ This app is not a web wrapper around a website. All 21 interactive pieces are bu
 - **Flashing content:** the apparent-motion piece blinks two small dots, adjustable from about 4 to 14 flashes per second, and change blindness flashes a grid of tiles. The flashing area in each is small, well under the general flash-safety area threshold, but a short line in the description or on first launch is a reasonable precaution. Cia's call.
 - **Stare-and-wait pieces** (afterimage, motion aftereffect, Troxler fading, motion-induced blindness) rely on holding the screen awake. The message reaches the native side (checked); the effect itself needs a real iPhone to confirm.
 - **Real device:** haptics and screen-hold have not been tried on hardware.
-- **Screenshots:** drafts are generated at 1320 by 2868 (iPhone 6.9 inch) and 2064 by 2752 (iPad 13 inch) in `ios/build/store/`. Plain frames, no captions.
+- **Screenshots:** eight per device size are staged in `ios/release-audit-2026-10-06/store/` at 1320 by 2868 (iPhone 6.9 inch) and 2064 by 2752 (iPad 13 inch). The seven experiment shots were captured before the home redesign; the library shots show the redesigned home. Check the status bars and final binary before upload.
 - **The voice is the system speech voice for now.** A recorded voice can replace it line by line: drop `<piece>-<step>.m4a` files into `Pieces/audio/` and the app plays them instead. The shorts re-voicing session is choosing a voice for the videos; the same voice could narrate the app.
