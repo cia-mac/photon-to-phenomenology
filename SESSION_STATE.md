@@ -7,6 +7,117 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-09 EXIT - App Store IPA exported and verified (OPEN)
+
+Snapshot before this block: none (append only).
+After Cia signed in to Xcode (account seen listed in Settings, Apple Accounts), the command-line export succeeded on the first run.
+
+### Done
+- [observed] xcodebuild -exportArchive: "EXPORT SUCCEEDED" (ios/release-audit-2026-10-06/claude-final-3/export.log). IPA: ios/release-audit-2026-10-06/claude-final-3/export/Photon.ipa, 5.6 MB, sha256 b561ebf5adfe7813ad8777da597a9fd7370675e9b45596077f4c2ff14f2eb4fb. Beside it: DistributionSummary.plist, ExportOptions.plist, Packaging.log.
+- [observed] verify_ipa.sh on that file: signed "Apple Distribution: ciamac parhizi (3AUT8DTWP3)", codesign verify passes; profile "iOS Team Store Provisioning Profile: com.ciamac.illusions", get-task-allow false, expires 2027-03-26; bundle id com.ciamac.illusions, version 1.0 (1), minimum iOS 18.0, arm64; 21 pages and 79 audio files, Pieces byte-identical to source; 21 preview images; privacy manifest present; "Optical Illusions" in the binary, no old name, no debug hooks; ITSAppUsesNonExemptEncryption false.
+- [inferred] The export created the App ID com.ciamac.illusions, an Apple Distribution certificate and the store profile on team 3AUT8DTWP3 (from the profile and certificate now present; automatic signing with -allowProvisioningUpdates). The bundle id is now permanent.
+- [observed] verify_ipa.sh compared the binary against the old claude-final archive; path corrected to claude-final-3. The binaries differ by signing in any case.
+- [observed] Nothing uploaded, nothing submitted.
+
+### Previous pending
+- done: Apple ID sign-in in Xcode (Cia), export, IPA verification.
+- carried: Cia listens to the Heart voice on the phone.
+- carried: hands-on haptics and screen-awake; name availability in App Store Connect.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- Cia, each step his go: App Store Connect record named Ciamac's Optical Illusions (listing from ios/APP_STORE_LISTING_DRAFT_v7.md, screenshots from ios/release-audit-2026-10-06/store-v3), upload of this IPA, submission.
+- The IPA and archive are ignored by git and exist only on this Mac.
+- Uncommitted: SESSION_STATE.md, the Xcode screenshot, the verify_ipa.sh path fix.
+
+### Operational notes
+- With an account signed in to Xcode, xcodebuild launched from the Claude app exports normally.
+
+### Durable thought
+Captured to Open Brain on 2026-10-09: when xcodebuild says "No Accounts", look at Xcode's Apple Accounts pane before theorising; the cached team list in Xcode's preferences survives a sign-out.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-09T10:20:20-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `9c6e79b SESSION_STATE: rename and Heart narration committed and pushed` (committed 2026-10-09)
+- tree: **21 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished the export and verification; the upload is Cia's go.
+
+---
+
+## 2026-10-09 EXIT - root cause of the missing IPA: Xcode has no Apple account signed in (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "go, run the export yourself" the session opened Xcode's Organizer by clicks. The export could not start: Xcode shows no Apple account.
+
+### Done
+- [observed] Xcode 27 Organizer, Overview: "Error Downloading App Information. A developer account is required to download app information. Add an account in Xcode Settings." Settings, Apple Accounts shows only "Sign in to your Apple Account" and a Sign In button, no account listed. Screenshot: ios/release-audit-2026-10-06/xcode_no_account_2026-10-09.jpg.
+- [inferred] This is the cause of all four command-line "No Accounts" failures and of every Organizer export that left no file: from the screenshot above plus export.log to export-4.log. The earlier guess that xcodebuild launched from the Claude app could not see the account was wrong.
+- [observed] Stopped at the sign-in step. No credentials typed, no Keychain access. Xcode left open on the Apple Accounts pane. Nothing registered with Apple; no export; no upload.
+- [observed] The archive copy in ~/Library/Developer/Xcode/Archives/2026-10-09/ is in place for the Organizer.
+
+### Previous pending
+- carried: Cia listens to the Heart voice on the phone.
+- carried: App Store export of claude-final-3, now blocked on the sign-in below, then verify_ipa.sh.
+- carried: hands-on haptics and screen-awake; name availability in App Store Connect.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- BLOCKED on Cia: Xcode, Settings, Apple Accounts, Sign In with the Apple ID that owns team 3AUT8DTWP3 (password and two-factor are his). Then the session reruns the export from the command line, which should now work, or by clicks in the Organizer.
+- Uncommitted: SESSION_STATE.md and the screenshot above.
+
+### Operational notes
+- Xcode is granted to computer use at click tier only: app_menu is refused, so menus need full-screen control and plain clicks.
+- defaults read com.apple.dt.Xcode IDEProvisioningTeamByIdentifier still lists team 3AUT8DTWP3 with no account signed in; it is a stale cache and not evidence of a signed-in account.
+
+### Durable thought
+When xcodebuild says "No Accounts", look at Xcode's Settings, Apple Accounts pane before theorising: the cached team list in Xcode's preferences survives a sign-out and falsely suggests an account is present.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-09T10:00:12-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `9c6e79b SESSION_STATE: rename and Heart narration committed and pushed` (committed 2026-10-09)
+- tree: **20 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+blocked on Cia: Apple ID sign-in in Xcode.
+
+---
+
+## IN FLIGHT 2026-10-09 - about to run the App Store export in Xcode's Organizer by clicks
+
+### Done
+- [observed] Cia, in chat: "go, run the export yourself", after being told the export registers bundle id com.ciamac.illusions with Apple (permanent) and creates an Apple Distribution certificate and App Store profile on team 3AUT8DTWP3. No upload, no submission.
+- [observed] Before this: no IPA anywhere on the Mac, Xcode not running, six reported Organizer exports left no file. The archive was copied (byte-identical) to ~/Library/Developer/Xcode/Archives/2026-10-09/Optical Illusions 1.0 (1) Heart.xcarchive so the Organizer lists it under "Photon".
+- [proposed] Next: open Xcode, Window, Organizer, Photon archive of 2026-10-08, Distribute App, App Store Connect, Export, automatic signing. Stop at any password, two-factor or Keychain prompt.
+
+### Previous pending
+- carried: all items of the 2026-10-09 commit EXIT block below stand unchanged.
+
+### Pending / open
+- Verify the IPA with ios/release-audit-2026-10-06/claude-verify/verify_ipa.sh.
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
 ## 2026-10-09 EXIT - committed and pushed 902b5a5 (rename, Heart narration, audit records) (OPEN)
 
 Snapshot before this block: none (append only).
