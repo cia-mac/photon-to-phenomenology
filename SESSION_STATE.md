@@ -7,6 +7,49 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-10 EXIT - description spelling fixed in App Store Connect (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "go, fix the British spelling in the description".
+
+### Done
+- [observed] The description held two British spellings, both "colour" ("A colour shows up that no screen displayed", "additive colour mixing"). Both changed to "color". Read after a reload: description 1230 characters (was 1232), "colour" 0, "color" 2; promotional text 161, keywords 94, review notes 735, release MANUAL; no error shown. Version still in review.
+
+### Previous pending
+- done: British spelling in the description.
+- carried: Apple's review; manual release on Cia's go.
+- carried: Cia's ear on the Heart voice; haptics; screen staying lit.
+- carried: VoiceOver never run against the pieces.
+- carried: build 2 held locally; the other session's shorts work uncommitted.
+
+### Pending / open
+- ios/APP_STORE_LISTING_DRAFT_v9.md and earlier still carry "colour"; this block supersedes them. The app's own pages and narration also use British spellings; only the store description was in scope.
+- Uncommitted: SESSION_STATE.md.
+
+### Operational notes
+- none new
+
+### Durable thought
+none, reason: single text edit.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-10T17:40:24-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `0f3f016 SESSION_STATE: Apple Vision Pro availability switched off` (committed 2026-10-10)
+- tree: **21 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished; waiting on Apple and on Cia.
+
+---
+
 ## 2026-10-10 EXIT - Apple Vision Pro availability switched off (OPEN)
 
 Snapshot before this block: none (append only).
