@@ -7,6 +7,559 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-10 EXIT - build 1 attached to version 1.0; content rights set (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "go, attach build 1 and set content rights". Both saved and re-read after reloads. Nothing submitted.
+
+### Done
+- [observed] App Information, after reload: Content Rights reads "No, this app does not contain, show, or access third-party content."
+- [observed] Version page, after reload: Build section lists build 1, version 1.0, no App Clip, Included Assets: App Icon. Release type still MANUAL. The "Add for Review" button is now enabled; it was not clicked.
+- [observed] Apps list now shows the Kanizsa icon beside "Ciamac's Optical Illusions, iOS 1.0 Prepare for Submission".
+
+### Previous pending
+- done: content rights; attach build 1.
+- carried: App Review contact name, phone and email; submit for review.
+- carried: decide whether to offer the app on Apple silicon Macs (default yes).
+- carried: Cia listens to the Heart voice; hands-on haptics and screen-awake.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- Before submission: App Review contact details (Cia's). Then Add for Review and Submit, each on Cia's go.
+- Uncommitted: SESSION_STATE.md, ios/ExportOptions_AppStore_Upload.plist, listing v8, store-v3-63, store-v3-rgb, App Store Connect screenshots. Canon repo: D-0708 not pushed.
+
+### Operational notes
+- none new
+
+### Durable thought
+none, reason: routine form entry.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-10T09:36:12-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `be97e61 Record the verified App Store export; fix the IPA check's archive path` (committed 2026-10-09)
+- tree: **25 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished; contact details and submission are Cia's go.
+
+---
+
+## 2026-10-10 EXIT - App Privacy answers published (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "go, publish the privacy answers".
+
+### Done
+- [observed] App Store Connect, App Privacy, read after a reload: "Published a few seconds ago by Ciamac Parhizi"; Privacy Policy URL https://photon.ciamac.com/privacy; Product Page Preview "Data Not Collected"; no Publish button remains. The page read "Data Not Collected" immediately before the click.
+- [observed] The publish dialog's attestation (answers accurate, compliant with the guidelines and law, to be updated if practices change) was accepted on Cia's explicit go.
+
+### Previous pending
+- done: publish the privacy answers.
+- carried: content rights answer; App Review contact name, phone and email; attach build 1; submit for review.
+- carried: decide whether to offer the app on Apple silicon Macs (default yes).
+- carried: Cia listens to the Heart voice; hands-on haptics and screen-awake.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- Each on Cia's go: content rights; contact details (his to type or dictate); attach build 1; submit.
+- Uncommitted: SESSION_STATE.md, ios/ExportOptions_AppStore_Upload.plist, listing v8, store-v3-63, store-v3-rgb, two App Store Connect screenshots. Canon repo: D-0708 not pushed.
+
+### Operational notes
+- none new
+
+### Durable thought
+none, reason: single confirmed click.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-10T09:33:38-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `be97e61 Record the verified App Store export; fix the IPA check's archive path` (committed 2026-10-09)
+- tree: **25 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished; the remaining steps are Cia's go.
+
+---
+
+## 2026-10-10 EXIT - age rating and price entered; privacy answers entered but not published (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "go, fill in the privacy, age rating and price", in his signed-in Chrome (he had to sign in again; the session had expired overnight).
+
+### Done
+- [observed] App Privacy: privacy policy URL https://photon.ciamac.com/privacy saved; data collection answered "No, we do not collect data from this app"; the page shows "Data Not Collected". NOT published: the Publish dialog is an attestation ("you agree that your responses are accurate, in compliance with App Store Review Guidelines and applicable law"), so the session cancelled it and left that click for Cia's explicit go.
+- [observed] Age rating: seven-step questionnaire answered No or None on every item (features, mature themes, medical, sexuality, violence, chance-based); override left at "Not Applicable" (not Made for Kids). App Information now shows 4+ in 172 countries or regions, with Brazil ALL, Korea ALL, Vietnam 00+.
+- [observed] Pricing: base United States, price $0.00, confirmed; Price Schedule shows a current price for 175 countries or regions. Availability: all countries or regions, confirmed; page shows "175 Available". Both take effect only when the app is released.
+- [observed] Icon: TestFlight, iOS builds, Version 1.0 shows build 1 with the Kanizsa icon beside it, "Ready to Submit". The app header still shows a blank placeholder because no build is attached to the version.
+- [observed] Left at defaults, not asked for: "Make this app available" on Apple silicon Macs is ticked by default; distribution method Public.
+
+### Previous pending
+- done: age rating; price.
+- carried: App Privacy needs Publish (Cia's go).
+- carried: App Review contact name, phone and email; content rights; attach build 1; submit.
+- carried: Cia listens to the Heart voice; hands-on haptics and screen-awake.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- Cia's go for: Publish the privacy answers; content rights answer (no third-party content); attach build 1; his contact details; submit for review.
+- Decide whether the iPhone app should be offered on Apple silicon Macs (default is yes).
+- Uncommitted: SESSION_STATE.md, ios/ExportOptions_AppStore_Upload.plist, listing v8, store-v3-63, store-v3-rgb. Canon repo: D-0708 not pushed.
+
+### Operational notes
+- App Store Connect signs Chrome out overnight; expect a fresh sign-in each day.
+- The age rating wizard's radios respond to a scripted click per group; the price picker is a custom list, click the option.
+
+### Durable thought
+none, reason: routine form entry.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-10T09:29:35-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `be97e61 Record the verified App Store export; fix the IPA check's archive path` (committed 2026-10-09)
+- tree: **24 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished age rating and price; the privacy Publish click and the rest are Cia's go.
+
+---
+
+## IN FLIGHT 2026-10-10 - about to enter App Privacy, age rating and price in App Store Connect
+
+### Done
+- [observed] Cia, in chat: "go, fill in the privacy, age rating and price".
+- [proposed] Next, app 6821128475 in his signed-in Chrome: App Privacy: privacy policy URL https://photon.ciamac.com/privacy and "Data Not Collected"; age rating questionnaire answered None or No throughout (no user content, no web access inside the app, no gambling, no contests), expected result 4+; price Free in all territories. Publishing the privacy answers and confirming the price are saves, not a submission. Not in scope: content rights, App Review contact, attaching the build, submitting.
+
+### Previous pending
+- carried: all items of the 2026-10-09 listing EXIT block below.
+
+### Pending / open
+- Outcome of the entry.
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
+## 2026-10-09 EXIT - listing text and 16 screenshots entered in App Store Connect (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "go, fill in the listing and screenshots". Entered in his signed-in Chrome, saved, and re-read after a reload. Nothing submitted.
+
+### Done
+- [observed] Version page (app 6821128475, iOS 1.0), read back after reload: promotional text 154 chars, description 1232, keywords 94, support URL, marketing URL, copyright "2026 Ciamac Parhizi", App Review notes 735 chars, Sign-in required unticked, release type MANUAL. All from ios/APP_STORE_LISTING_DRAFT_v7.md.
+- [observed] App Information page showed "Saved": subtitle "Illusions you can touch", primary category Education, secondary Entertainment.
+- [observed] Media Manager after reload: iPhone medium display "8 of 10 App Screenshots", iPad 13 inch "8 of 10 App Screenshots", eight thumbnails each.
+- [observed] App Store Connect's required iPhone slot is the 6.1/6.3 inch display (1206x2622 and similar); the session's 6.9 inch set (1320x2868) fits only an optional slot. A new set was taken on the iPhone 17 simulator from the Heart-voice debug build: ios/release-audit-2026-10-06/store-v3-63/ (8 files, 1206x2622, each viewed; ebbinghaus retaken at the early-skip timing). Upload copies, flattened to RGB: store-v3-rgb/ (24 files).
+- [observed] Release type changed by the session from the default "Automatically release" to "Manually release this version", so approval alone cannot put the app live (Cia's standing rule that release needs an explicit go). Reversible on the same page.
+- [observed] ios/APP_STORE_LISTING_DRAFT_v8.md written with what was entered.
+
+### Previous pending
+- done: listing text and screenshots.
+- carried: Cia listens to the Heart voice; hands-on haptics and screen-awake.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- Before submission, each on Cia's go: App Review contact name, phone and email (his personal data, left empty); App Privacy "Data Not Collected"; age rating questionnaire; content rights; price free; attach build 1; submit.
+- The 6.9 inch set was not uploaded (optional slot).
+- Uncommitted: SESSION_STATE.md, ios/ExportOptions_AppStore_Upload.plist, listing v8, store-v3-63, store-v3-rgb. Canon repo: D-0708 not pushed.
+
+### Operational notes
+- App Store Connect file inputs accept file_upload directly; a one-time info dialog appears after the first upload per device family.
+- Chrome's App Store Connect session persisted between tabs once Cia had signed in.
+
+### Durable thought
+none, reason: the size requirement is recorded in listing v8.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-09T22:40:37-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `be97e61 Record the verified App Store export; fix the IPA check's archive path` (committed 2026-10-09)
+- tree: **24 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished the listing and screenshots; the remaining forms and submission are Cia's go.
+
+---
+
+## IN FLIGHT 2026-10-09 - about to enter the listing text and screenshots in App Store Connect
+
+### Done
+- [observed] Cia, in chat: "go, fill in the listing and screenshots". Scope read as: listing text from ios/APP_STORE_LISTING_DRAFT_v7.md and the 16 screenshots from ios/release-audit-2026-10-06/store-v3. Not in scope: App Privacy answers, age rating, price, attaching the build, submitting.
+- [proposed] Next, in Cia's signed-in Chrome, app 6821128475: subtitle on App Information; promotional text, description, keywords, support URL, marketing URL, copyright and review notes on the iOS 1.0 version page; screenshots for iPhone 6.9 inch and iPad 13 inch; Save. No Submit. Contact name, phone and email for App Review are Cia's personal data and are left for him.
+
+### Previous pending
+- carried: all items of the 2026-10-09 upload EXIT block below.
+
+### Pending / open
+- Outcome of the entry.
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
+## 2026-10-09 EXIT - build 1.0 (1) uploaded to App Store Connect and processed: Ready to Submit (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "go" (option A, the API key) the upload went through on the first run.
+
+### Done
+- [observed] xcodebuild -exportArchive with ios/ExportOptions_AppStore_Upload.plist and the three -authenticationKey arguments: "Upload succeeded", "EXPORT SUCCEEDED" at 18:07 (ios/release-audit-2026-10-06/claude-final-3/upload-9.log; key id and issuer id scrubbed from the log, grep count 0).
+- [observed] App Store Connect, app 6821128475 (Ciamac's Optical Illusions), TestFlight, iOS builds: Version 1.0, Build 1, "Ready to Submit", expires in 90 days. Read at about 18:09; two minutes earlier the Build Uploads list showed it as Processing.
+- [observed] The key file is the single AuthKey in ~/.appstoreconnect/private_keys; the ids were read from pointfield-ios/SESSION_STATE.md into shell variables and never printed. This is the Pointfield iOS lane's documented route.
+- [observed] Not submitted for review. No listing text, screenshots, privacy answers, age rating or price entered.
+
+### Previous pending
+- done: upload of build 1.0 (1).
+- carried: Cia listens to the Heart voice; hands-on haptics and screen-awake.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- Each on Cia's go: enter the listing in App Store Connect from ios/APP_STORE_LISTING_DRAFT_v7.md (name, subtitle, description, keywords, URLs, copyright, review notes), 16 screenshots from ios/release-audit-2026-10-06/store-v3, App Privacy "Data Not Collected", age rating questionnaire, price free, attach build 1, then submit for review.
+- Build 1 is the build with the system-voice fallback and Heart recordings as verified; any change now needs build 2.
+- Uncommitted: SESSION_STATE.md, ios/ExportOptions_AppStore_Upload.plist. Canon repo: D-0708 not pushed.
+
+### Operational notes
+- For this lane, upload with the API key arguments; the Xcode-account route failed eight times at IDEDistributionUploadAccountStep for a reason never established.
+- A new build takes about two minutes to move from Processing to Ready to Submit.
+
+### Durable thought
+none, reason: the API-key route is already documented in the Pointfield lane.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-09T18:09:11-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `be97e61 Record the verified App Store export; fix the IPA check's archive path` (committed 2026-10-09)
+- tree: **21 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished the upload; the listing and submission are Cia's go.
+
+---
+
+## IN FLIGHT 2026-10-09 - about to upload build 1.0 (1) with the App Store Connect API key
+
+### Done
+- [observed] Cia, in chat: "go", in reply to the choice "A: go, use the API key (recommended) / B: upload by hand". Read as A.
+- [observed] The Pointfield iOS lane's documented route (pointfield-ios/SESSION_STATE.md): xcodebuild -exportArchive with -authenticationKeyPath ~/.appstoreconnect/private_keys/AuthKey_<id>.p8, -authenticationKeyID and -authenticationKeyIssuerID, used there for the same "Failed to Use Accounts" failure. Key and issuer ids are taken from that file into shell variables and not printed.
+- [proposed] Next, from ios/: xcodebuild -exportArchive -archivePath release-audit-2026-10-06/claude-final-3/Illusions.xcarchive -exportOptionsPlist ExportOptions_AppStore_Upload.plist -exportPath release-audit-2026-10-06/claude-final-3/upload -allowProvisioningUpdates plus the three key arguments. Uploads build 1.0 (1) of com.ciamac.illusions. Cannot be withdrawn; submits nothing for review.
+
+### Previous pending
+- carried: all items of the 2026-10-09 STOP block below.
+
+### Pending / open
+- Outcome of the upload; then confirm the build in App Store Connect.
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
+## 2026-10-09 EXIT - upload fails at Xcode's account step for the eighth time; an API-key route exists on this Mac (OPEN, STOP 1)
+
+Snapshot before this block: none (append only).
+Two more upload attempts after Cia reported re-signing in to Xcode; both failed identically. Stopped.
+
+### Done
+- [observed] upload-7.log (15:57) and upload-8.log (16:10): 'Failed to Use Accounts. App Store Connect access for "3AUT8DTWP3" is required.' Verbose log: fails at IDEDistributionUploadAccountStep in under a second; DVTITunesSoftwareService.log is empty (0 bytes), so no App Store Connect call is even attempted.
+- [observed] At 15:57 Xcode was not running (quit by the session at 15:48), so the first reported sign-out and sign-in cannot have happened in Xcode on this Mac. A full-screen approval prompt also timed out. At 16:10 Xcode was running (started 15:57 by the session) with only the welcome window open; whether a sign-in happened before upload-8 is unverified.
+- [observed] A plain export still succeeds. The signing side of the Xcode account works; only the App Store Connect account check fails.
+- [observed] At 16:10 another Claude Code session on this Mac was running altool --validate-app on another lane's package with --apiKey and --apiIssuer (values not read, redacted on screen). So an App Store Connect API key is set up on this machine and in use by the Pointfield lane. This session has not read or used it.
+- [observed] Nothing uploaded; build 1.0 (1) unused.
+
+### Previous pending
+- carried: upload of build 1.0 (1).
+- carried: Cia listens to the Heart voice; hands-on haptics and screen-awake.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- Cia decides the upload route: (a) authorise this lane to upload with the existing App Store Connect API key, the way the Pointfield lane does; or (b) fix Xcode's account by hand and upload from the Organizer himself.
+- [inferred] The Xcode-account route is unreliable here for a reason not established; eight failures, six identical.
+- Uncommitted: SESSION_STATE.md, ios/ExportOptions_AppStore_Upload.plist. Canon repo: D-0708 not pushed.
+
+### Operational notes
+- Do not rerun the Xcode-account upload again without new evidence.
+- Xcode at click tier cannot be sent menu commands in the background; opening Settings needs full-screen control, which needs Cia at the Mac to approve.
+
+### Durable thought
+none, reason: cause not established.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-09T16:11:12-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `be97e61 Record the verified App Store export; fix the IPA check's archive path` (committed 2026-10-09)
+- tree: **21 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+STOP condition 1; the next step needs Cia's decision on using the API key.
+
+---
+
+## 2026-10-09 EXIT - icon A confirmed (D-0708); upload still blocked at Xcode's account step (OPEN, STOP 1)
+
+Snapshot before this block: none (append only).
+Cia: "keep A, upload the build". The upload failed again at the account step, after an Xcode restart. STOP condition 1.
+
+### Done
+- [observed] D-0708 appended (icon A; also records the App Store Connect record creation).
+- [observed] upload-6.log (15:51, Xcode quit beforehand): 'Failed to Use Accounts. App Store Connect access for "3AUT8DTWP3" is required.' Detailed log (IDEDistribution.standard.log): "Failed to find an account with App Store Connect access for team ... teamID='3AUT8DTWP3', teamName='(null)'". It fails within the same second, at IDEDistributionUploadAccountStep, before any contact with the app record.
+- [observed] A plain export (no upload) run right after still succeeds, so the signing side of the account works.
+- [observed] Timeline: uploads at about 10:20 and later reached "App record not found" (account step passed); from 15:35 every upload fails at the account step. In between, Cia made several App Store Connect sign-in attempts in browsers, three of which the session saw end in authResult=FAILED.
+- [inferred] Xcode's stored App Store Connect session for this Apple ID is no longer valid and needs the password again, from the timeline above and the Organizer's "Couldn't communicate with a helper application" at 15:48. Not confirmed.
+- [observed] Nothing uploaded; build 1.0 (1) unused; app record exists in App Store Connect.
+
+### Previous pending
+- done: icon pick (A, D-0708).
+- carried: upload of build 1.0 (1).
+- carried: Cia listens to the Heart voice; hands-on haptics and screen-awake.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- BLOCKED on Cia: Xcode, Settings, Apple Accounts, open the account, Sign Out, then Sign In again with password and two-factor. Then the session reruns the upload command.
+- Uncommitted: SESSION_STATE.md, ios/ExportOptions_AppStore_Upload.plist. Canon repo: D-0708 committed locally, not pushed.
+
+### Operational notes
+- Do not rerun the upload until Cia has re-signed in to Xcode; six failures, the last four identical.
+- The xcdistributionlogs bundle named in the xcodebuild output holds the real reason; read IDEDistribution.standard.log.
+
+### Durable thought
+none, reason: cause inferred, not confirmed.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-09T15:52:11-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `be97e61 Record the verified App Store export; fix the IPA check's archive path` (committed 2026-10-09)
+- tree: **21 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+STOP condition 1: upload failed repeatedly at the account step; blocked on Cia re-signing in to Xcode.
+
+---
+
+## 2026-10-09 EXIT - app record created in App Store Connect; upload paused on Cia's icon question (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "go, create the record and upload" the record was created; the upload has not gone through; Cia then wrote "we need an icon".
+
+### Done
+- [observed] App Store Connect, New App, created by the session in Cia's signed-in Chrome: platform iOS, name Ciamac's Optical Illusions (accepted, so the name was free), primary language English (U.S.), bundle id com.ciamac.illusions, SKU illusions-ios-001, Full Access. Apps list after reload shows "Ciamac's Optical Illusions, iOS 1.0, Prepare for Submission".
+- [observed] Upload attempt after that (claude-final-3/upload-5.log, 15:44) failed: 'Failed to Use Accounts. App Store Connect access for "3AUT8DTWP3" is required.' Nothing uploaded; build 1 unused.
+- [observed] Xcode Organizer at 15:48: "An error occurred preventing Xcode from downloading version information from App Store Connect for account ... Couldn't communicate with a helper application." Xcode quit by menu click at 15:48 to clear the helper. Not yet retried.
+- [observed] The build's icon is candidate A, the Kanizsa triangle: ios/Photon/Assets.xcassets/AppIcon.appiconset/AppIcon.png is byte-identical to ios/icon_candidates/icon_A_kanizsa.png (1024 square, no alpha). Candidates B (spiral) and C (Ponzo) exist. The icon pick was never signed off (open since 2026-10-04).
+- [observed] While clicking Xcode's menu bar the Settings window changed pane twice (to Navigation, then Notifications) without a click aimed at it. No toggle was aimed at or seen changed; cause unknown.
+
+### Previous pending
+- done: App Store Connect app record.
+- carried: upload of build 1.0 (1), now waiting on the icon answer and a retry after the Xcode restart.
+- carried: Cia listens to the Heart voice; hands-on haptics and screen-awake.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- Cia: which icon (A as built, B, C, or a new one). A different icon means a new archive and export before upload.
+- Then retry the upload; if "Failed to Use Accounts" persists, Cia re-enters his password via Xcode, Settings, Apple Accounts, Sign In.
+- Uncommitted: SESSION_STATE.md, ios/ExportOptions_AppStore_Upload.plist.
+
+### Operational notes
+- App Store Connect's React selects ignore form_input; click the select, type the option's visible text, press Return.
+- The first click on Xcode's menu bar after another app was frontmost only activates Xcode; the menu opens on the second.
+
+### Durable thought
+none, reason: nothing new that generalises beyond the notes above.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-09T15:49:21-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `be97e61 Record the verified App Store export; fix the IPA check's archive path` (committed 2026-10-09)
+- tree: **21 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+Cia raised the icon mid-upload; waiting on his pick.
+
+---
+
+## IN FLIGHT 2026-10-09 - about to create the App Store Connect app record and upload build 1.0 (1)
+
+### Done
+- [observed] App Store Connect Apps list read in Chrome: four other apps of Cia's (details withheld from this public file). No record for com.ciamac.illusions; that is why every upload was refused.
+- [observed] Cia, in chat: "go, create the record and upload", after being shown the values: platform iOS; name Ciamac's Optical Illusions; primary language English (U.S.); bundle id com.ciamac.illusions; SKU illusions-ios-001; full access. Told that a record cannot be truly deleted and a SKU cannot be reused.
+- [proposed] Next: New App form in App Store Connect with exactly those values, Create; stop if the name is taken. Then the upload command of the earlier in-flight block.
+
+### Previous pending
+- carried: all items of the 2026-10-09 STOP block below.
+
+### Pending / open
+- Outcome of the record creation and the upload.
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
+## 2026-10-09 EXIT - upload still refused; error changed to "App Store Connect access required" (OPEN, STOP 1)
+
+Snapshot before this block: none (append only).
+Four upload attempts today, none sent anything. STOP condition 1: the same step failed twice in a row with the same error.
+
+### Done
+- [observed] upload-2.log (after Cia reported the record created): 'App record with bundle identifier "com.ciamac.illusions" not found on App Store Connect.'
+- [observed] upload-3.log and upload-4.log (15:35): 'Failed to Use Accounts. App Store Connect access for "3AUT8DTWP3" is required. Ensure that your Apple Account usernames and passwords are correct in Accounts settings.'
+- [observed] Xcode, Settings, Apple Accounts at 15:35: the account is listed, team "ciamac parhizi", role Admin; teams load.
+- [observed] Chrome (the session's tab group): appstoreconnect.apple.com/apps redirects to the login page with authResult=FAILED on three visits, including two after Cia reported signing in. The session never saw the Apps list, so the app record is unverified.
+- [observed] Nothing uploaded; build 1.0 (1) unused. IPA unchanged at ios/release-audit-2026-10-06/claude-final-3/export/Photon.ipa.
+
+### Previous pending
+- carried: BLOCKED on Cia, App Store Connect app record (unverified).
+- carried: Cia listens to the Heart voice; hands-on haptics and screen-awake.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- BLOCKED on Cia: get into App Store Connect in a browser and read what it shows on arrival (a terms or agreement banner, a setup step, or an error), then confirm the Apps list holds a record with bundle id com.ciamac.illusions.
+- [inferred] Likely cause: this Apple ID cannot currently reach App Store Connect for the team (pending agreement, or the session needs re-authentication), from the changed xcodebuild error plus the repeated authResult=FAILED in Chrome. Not confirmed.
+- Uncommitted: SESSION_STATE.md, ios/ExportOptions_AppStore_Upload.plist.
+
+### Operational notes
+- Do not rerun the upload until Cia reports what App Store Connect shows; two identical failures.
+
+### Durable thought
+none, reason: cause not yet established.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-09T15:35:43-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `be97e61 Record the verified App Store export; fix the IPA check's archive path` (committed 2026-10-09)
+- tree: **20 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+STOP condition 1: the upload failed twice in a row with the same error; blocked on Cia's App Store Connect access.
+
+---
+
+## 2026-10-09 EXIT - upload refused: no app record in App Store Connect yet (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "go, upload the IPA to App Store Connect" the upload was attempted once and refused by Apple before anything was sent.
+
+### Done
+- [observed] xcodebuild -exportArchive with ios/ExportOptions_AppStore_Upload.plist (destination upload) failed: 'App record with bundle identifier "com.ciamac.illusions" not found on App Store Connect. Create an app record on App Store Connect, or distribute the app from Xcode, and then try again.' Log: ios/release-audit-2026-10-06/claude-final-3/upload.log. Nothing was uploaded; build number 1 is unused.
+- [observed] The verified IPA is unchanged: ios/release-audit-2026-10-06/claude-final-3/export/Photon.ipa.
+
+### Previous pending
+- carried: Cia listens to the Heart voice; hands-on haptics and screen-awake.
+- carried: the other session's shorts work stays uncommitted.
+- done: upload attempted on Cia's go (refused, see above).
+
+### Pending / open
+- BLOCKED on Cia: create the app record in App Store Connect (his login): Apps, plus, New App; platform iOS; name Ciamac's Optical Illusions; primary language English (U.S.); bundle id com.ciamac.illusions (now in the list); SKU of his choice, for example illusions-ios-1. Then the same upload command is rerun.
+- If the name is taken, fallback Ciamac's Book of Illusions (D-0695).
+- Uncommitted: SESSION_STATE.md, ios/ExportOptions_AppStore_Upload.plist.
+
+### Operational notes
+- Xcode is granted at click tier, so the session cannot type the app name into the Organizer's create-record form; the record has to be made by Cia.
+
+### Durable thought
+none, reason: expected refusal, recorded here.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-09T10:23:50-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `be97e61 Record the verified App Store export; fix the IPA check's archive path` (committed 2026-10-09)
+- tree: **20 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+blocked on Cia: App Store Connect app record.
+
+---
+
+## IN FLIGHT 2026-10-09 - about to upload build 1.0 (1) to App Store Connect
+
+### Done
+- [observed] Cia, in chat: "go, upload the IPA to App Store Connect". The verified IPA is ios/release-audit-2026-10-06/claude-final-3/export/Photon.ipa (sha256 b561ebf5...).
+- [proposed] Next command, from ios/: xcodebuild -exportArchive -archivePath release-audit-2026-10-06/claude-final-3/Illusions.xcarchive -exportOptionsPlist ExportOptions_AppStore_Upload.plist -exportPath release-audit-2026-10-06/claude-final-3/upload -allowProvisioningUpdates. It re-exports the same archive and uploads it through the account signed in to Xcode. No credentials handled by the session. manageAppVersionAndBuildNumber is off so the build stays 1.0 (1).
+- [observed] An upload cannot be withdrawn; a build number can be used once. It does not submit for review and does not make anything public.
+- [inferred] It may fail if no app record exists in App Store Connect for com.ciamac.illusions; creating that record is Cia's step.
+
+### Previous pending
+- carried: all items of the 2026-10-09 export EXIT block below stand unchanged.
+
+### Pending / open
+- Outcome of the upload.
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
 ## 2026-10-09 EXIT - App Store IPA exported and verified (OPEN)
 
 Snapshot before this block: none (append only).
