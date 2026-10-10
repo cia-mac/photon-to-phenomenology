@@ -7,6 +7,71 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-10 EXIT - Ciamac's Optical Illusions 1.0 (1) submitted to App Review (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "go, submit for review" and "go, use the same contact". Submitted about 10:01 EDT. D-0719.
+
+### Done
+- [observed] App Review contact: first name, last name, phone and email copied from Cia's other app record in the same account, inside the browser, without the values entering this session's output; version page after reload shows the four fields filled (6, 7, 12 and 12 characters), notes 735 characters, sign-in required off, release MANUAL, build 1 attached.
+- [observed] Add for Review opened a draft submission listing "iOS App 1.0, 1.0 (1)". Submit for Review returned "1 Item Submitted. It can take up to 48 hours to be reviewed." The app's status reads "1.0 Waiting for Review". Screenshot: ios/release-audit-2026-10-06/asc_submitted_2026-10-10.jpg.
+- [observed] D-0719 appended via canon-append.
+
+### Previous pending
+- done: App Review contact; submit for review.
+- carried: Cia listens to the Heart voice; hands-on haptics and screen-awake. Now a risk on a submitted build, not a gate.
+- carried: decide whether to offer the app on Apple silicon Macs (default yes).
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- Apple's review, up to 48 hours; the result goes to Cia's email.
+- On approval: release is MANUAL, so releasing the app is a separate go from Cia.
+- If rejected or if the voice is wrong: build 2 (bump CFBundleVersion), new archive, upload with the API-key route, resubmit.
+- Uncommitted: SESSION_STATE.md, two App Store Connect screenshots. Canon repo: D-0719 committed locally, not pushed.
+
+### Operational notes
+- Contact details can be carried between app records with sessionStorage plus a native value setter and input event; the Save button enabling confirms React took the values.
+
+### Durable thought
+none, reason: milestone recorded in D-0719.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-10T10:02:44-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `c1dcf5b App Store Connect: record, upload, listing and forms for Ciamac's Optical Illusions` (committed 2026-10-10)
+- tree: **21 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished: submitted; waiting on Apple.
+
+---
+
+## IN FLIGHT 2026-10-10 - about to submit version 1.0 (build 1) for App Review
+
+### Done
+- [observed] Cia, in chat: "go, submit for review".
+- [observed] State before: build 1 attached, listing, screenshots, privacy (published), age rating 4+, price free, content rights set, release type MANUAL. App Review contact name, phone and email are empty and required.
+- [proposed] Next: check the contact fields; if still empty, they are Cia's personal data and need his values or his say-so before entry. Then Add for Review and Submit. With MANUAL release, approval does not put the app live.
+- [observed] Not verified by Cia before this go, as far as this session knows: how the Heart voice sounds, haptics, screen staying awake on the phone.
+
+### Previous pending
+- carried: all items of the 2026-10-10 build EXIT block below.
+
+### Pending / open
+- Outcome of the submission.
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
 ## 2026-10-10 EXIT - build 1 attached to version 1.0; content rights set (OPEN)
 
 Snapshot before this block: none (append only).
