@@ -7,6 +7,105 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-10 EXIT - build 2 prepared (not uploaded); promotional text fixed; Mac availability off; LANES row updated (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "do all", after the list of four things the session could start.
+
+### Done
+- [observed] ios/Photon/Pieces/ebbinghaus.html: the fit now allows for the right ring group at its widest (rings matched), which used to run off the right edge. Seen fitting in both states on the iPhone 17 (6.3 inch), iPhone 17e and iPad Pro 13 portrait simulators: ios/release-audit-2026-10-06/claude-verify/ebbfix/sheet.png. tools/verify_piece.mjs ebbinghaus: 0 findings.
+- [observed] Versions aligned: project.yml and Photon.xcodeproj now say MARKETING_VERSION 1.0 and CURRENT_PROJECT_VERSION 2; Info.plist CFBundleVersion 2.
+- [observed] Build 2 archived, not uploaded: ios/release-audit-2026-10-06/claude-final-4-build2/Illusions.xcarchive, 1.0 (2), 21 pages and 79 audio files identical to source, no debug hooks, codesign verify passes. Ignored by git.
+- [observed] App Store Connect, read back after reloads: promotional text now "...Narrated, with a mute button. Works offline." (161 characters; the suggested wording, applied under "do all"); Pricing and Availability: Apple silicon Mac "Make this app available" unticked. Status still Waiting for Review; release still MANUAL.
+- [observed] ~/Developer/LANES.md Photon row extended with the iOS app, its ids, release state, the API-key upload route and the public-repo caution; committed alone (other sessions' edits in that repo left untouched) and pushed.
+- [observed] ios/APP_STORE_LISTING_DRAFT_v9.md written.
+
+### Previous pending
+- done: promotional text; Mac availability; Ebbinghaus layout; version mismatch; LANES row.
+- carried: Apple's review; manual release on Cia's go.
+- carried: Cia's ear on the Heart voice; feel of haptics; screen staying lit.
+- carried: VoiceOver never run against the pieces; British spelling in the description.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- Apple Vision Pro availability is still on (Apple's default) and the app has never been run there; not in the approved list, left for Cia.
+- Build 2 goes up only if Apple rejects build 1 or Cia wants the Ebbinghaus fix shipped; the phone still carries build 1.
+- The two Ebbinghaus store screenshots show build 1's slightly larger figure; they match the build in review.
+- Uncommitted in this repo: SESSION_STATE.md, ebbinghaus.html, project.yml, Photon.xcodeproj/project.pbxproj, Info.plist, listing v9. Commit on Cia's word.
+
+### Operational notes
+- App Store Connect pages render below-the-fold controls lazily; scroll before querying checkboxes.
+- A click by element ref can miss a textarea's focus; click by coordinate and confirm document.activeElement before typing.
+
+### Durable thought
+none, reason: routine fixes.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-10T17:24:24-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `a2f1beb SESSION_STATE: Ciamac's Optical Illusions 1.0 (1) submitted to App Review` (committed 2026-10-10)
+- tree: **27 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished the four items; commit of this repo and anything further are Cia's go.
+
+---
+
+## 2026-10-10 EXIT - first on-device evidence for narration, haptics and screen-awake messages; list of what is still worth doing (OPEN)
+
+Snapshot before this block: none (append only).
+Cia asked "really? nothing to do?". The session had said nothing was left; that was too quick.
+
+### Done
+- [observed] iPhone 15, unlocked, debug build of the current source launched on Troxler fading with the silent flag (ios/release-audit-2026-10-06/claude-verify/device-console-troxler-2.txt): hold on at load; four lines each go say, file, done from the bundled recordings; a haptic message per step. This is the first run on hardware. It shows the messages arrive and the recordings play to completion on the device; it does not show that the haptic is felt, that the voice sounds right, or that the display stays lit.
+- [observed] The submitted Release build (claude-final-3) was reinstalled on the phone afterwards (devicectl "App installed").
+
+### Previous pending
+- carried: Apple's review; manual release on Cia's go.
+- carried: Cia's ear on the Heart voice; feel of haptics; screen staying lit.
+- carried: Apple silicon Mac availability default; the other session's shorts work.
+
+### Pending / open
+- Promotional text says "Narrated, and mutable": "mutable" means changeable, not "can be muted". Editable any time without review; wording is Cia's.
+- iPhone app offered on Apple silicon Macs by default and never run there.
+- Ebbinghaus ring group runs off the right edge in the guide's "equal" step on iPad portrait and iPhone 6.3 inch; fix belongs in build 2.
+- VoiceOver never run against the pieces; the pages are canvas drawings.
+- Description uses British spelling (colour) under an English (U.S.) listing.
+- LANES.md row for Photon does not mention the iOS app or its release state.
+- project.yml MARKETING_VERSION 0.1.0 disagrees with Info.plist 1.0.
+- Uncommitted: SESSION_STATE.md. Canon repo local copy is behind its remote.
+
+### Operational notes
+- devicectl process launch --console works when the phone is unlocked; launch arguments go after "--".
+
+### Durable thought
+none, reason: device evidence recorded above.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-10T17:12:29-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `a2f1beb SESSION_STATE: Ciamac's Optical Illusions 1.0 (1) submitted to App Review` (committed 2026-10-10)
+- tree: **20 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+reported the open list to Cia; next steps are his choice.
+
+---
+
 ## 2026-10-10 EXIT - Ciamac's Optical Illusions 1.0 (1) submitted to App Review (OPEN)
 
 Snapshot before this block: none (append only).

@@ -65,8 +65,10 @@
     cx=W/2; cy=H/2;
     r0=Math.min(W,H)*0.058; gap=Math.min(W*0.26, 360);
     // app: the big left ring reaches furthest and left the screen on a phone. Fit the widest
-    // state (surround fully on) inside the box and centre the figure by its extent.
-    const ext=()=>({ l:(r0+r0*2.3+Math.max(14,r0*0.5))+r0*2.3, r:(r0+r0*0.42+Math.max(14,r0*0.5))+r0*0.42 });
+    // reach on each side inside the box and centre the figure by it. The left side is widest with
+    // the surround fully on; the right side is widest with the rings matched (they grow back to r0),
+    // which is the state that used to run off the right edge.
+    const ext=()=>({ l:(r0+r0*2.3+Math.max(14,r0*0.5))+r0*2.3, r:(r0+r0+Math.max(14,r0*0.5))+r0 });
     for(let i=0;i<4;i++){
       const e=ext(), need=2*gap+e.l+e.r, k=Math.min((W-48)/need, (H-24)/(2*e.l));
       if(k>=1) break; r0*=k; gap*=k;
