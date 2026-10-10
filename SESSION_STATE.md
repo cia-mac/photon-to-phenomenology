@@ -7,6 +7,49 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-10 EXIT - Apple Vision Pro availability switched off (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "go, turn off Vision Pro", after he signed in to App Store Connect again (Chrome had been signed out).
+
+### Done
+- [observed] App Store Connect, Pricing and Availability, read after a reload: "Make this app available on Apple Vision Pro" unticked; Apple silicon Mac still unticked; page header still shows "1.0 Waiting for Review".
+
+### Previous pending
+- done: Apple Vision Pro availability.
+- carried: Apple's review; manual release on Cia's go.
+- carried: Cia's ear on the Heart voice; feel of haptics; screen staying lit.
+- carried: VoiceOver never run against the pieces; British spelling in the description.
+- carried: build 2 held locally; the other session's shorts work stays uncommitted.
+
+### Pending / open
+- ios/APP_STORE_LISTING_DRAFT_v9.md still says Vision Pro availability is on; this block supersedes that line.
+- Uncommitted: SESSION_STATE.md.
+
+### Operational notes
+- App Store Connect signed Chrome out twice within a day; expect a fresh sign-in each session.
+
+### Durable thought
+none, reason: single setting.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-10T17:38:22-04:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `136cd31 Build 2 prep: fix the Ebbinghaus layout, align version numbers` (committed 2026-10-10)
+- tree: **21 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished; waiting on Apple and on Cia.
+
+---
+
 ## 2026-10-10 EXIT - build 2 prepared (not uploaded); promotional text fixed; Mac availability off; LANES row updated (OPEN)
 
 Snapshot before this block: none (append only).
