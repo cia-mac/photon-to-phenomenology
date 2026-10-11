@@ -54,7 +54,8 @@ ACCEPT = {
     "motion-aftereffect-1": 'phonemes "ɹˈidz æz stˈɛdi" are correct; whisper merges "reads as steady" into "reads a steady"',
 }
 
-# Whisper writes American spellings and the pages are written in British ones. Same word, same sound.
+# Whisper writes American spellings. The pages were British until 2026-10-11 and are American now;
+# the map stays so a British spelling slipping back in is not misread as a bad take. Same word, same sound.
 SPELL = {"grey": "gray", "centre": "center", "centres": "centers", "colour": "color", "colours": "colors",
          "coloured": "colored", "neighbour": "neighbor", "neighbours": "neighbors", "neighbouring": "neighboring",
          "metre": "meter", "metres": "meters", "judgement": "judgment", "towards": "toward", "afterwards": "afterward",

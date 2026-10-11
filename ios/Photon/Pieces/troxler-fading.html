@@ -39,7 +39,7 @@
 <div class="chrome" id="readout">
   <div><span class="lab">eccentricity</span><span id="rEcc">·</span></div>
   <div><span class="lab">held still</span><span id="rTime">0.0 s</span></div>
-  <div id="hold">fixate the centre</div>
+  <div id="hold">fixate the center</div>
 </div>
 <div class="chrome" id="thesis">
   <span class="lead">The ring is still on the screen. Flick your eyes and it returns at full strength.</span>
@@ -106,7 +106,7 @@
     const s=stillMs/1000;
     rTime.textContent=s.toFixed(1)+' s';
     const gone=s>=8; if(gone!==wasGone){ wasGone=gone; if(gone && dt<250) PhotonApp.haptic('reveal'); }
-    hold.textContent = s<3 ? 'fixate the centre'
+    hold.textContent = s<3 ? 'fixate the center'
                      : s<8 ? 'keep holding…'
                      : 'is the ring still there?';
     requestAnimationFrame(draw);
@@ -135,7 +135,7 @@
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
-    {t:"A soft ring sits out in your periphery and a small cross marks the centre. <b>Fix your gaze on that cross</b> and do not let your eyes wander.", act(){ecc.tgt=Math.min(W,H)*0.32; lastMoveT=performance.now();}},
+    {t:"A soft ring sits out in your periphery and a small cross marks the center. <b>Fix your gaze on that cross</b> and do not let your eyes wander.", act(){ecc.tgt=Math.min(W,H)*0.32; lastMoveT=performance.now();}},
     {t:"Hold steady. Keep staring straight at the cross and let the ring stay at the corner of your vision. <b>Do not chase it.</b>", act(){lastMoveT=performance.now();}},
     {t:"Wait a few seconds without moving. The ring softens, thins, and <b>slips out of awareness</b>, even though it is still on the screen at full strength.", act(){lastMoveT=performance.now();}},
     {t:"Now flick your eyes and it snaps back. Steady, unchanging input stops being reported. <b>Vision is not recording, it is construction.</b>", act(){lastMoveT=performance.now();}},

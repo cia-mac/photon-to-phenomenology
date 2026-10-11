@@ -7,6 +7,57 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-11 EXIT - app text respelled to American; recordings kept; build 2 re-archived (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "go, fix the app's British spellings". The session restarted mid-task; the edits were on disk and the work was finished after the restart.
+
+### Done
+- [observed] Visible text only, 46 lines across 13 pages plus catalog.json and one accessibility hint in LibraryView.swift: grey to gray, centre(s) to center(s), colour(s) to color(s), neighbours to neighbors, centimetres to centimeters. Code identifiers and comments were left (grey(), greyOf(), Catalog.neighbour(of:)). A scan of the diff found no changed identifier.
+- [observed] 26 of the 79 narration lines changed text. For each, the voice's phoneme string for the old spelling and for the new spelling is identical (26 of 26; ios/release-audit-2026-10-06/claude-verify/phoneme_check.json), so the existing recordings are the correct audio and were kept. No line was re-recorded. Pieces/audio differs from build 1's audio in 0 files.
+- [observed] ios/tools/narration_manifest.json: the 26 entries now carry the new text, the recorded text and a note. Manifest text equals page text for all 79 lines (narration_lines_v2.json).
+- [observed] tools/verify_all.sh at four sizes after the change: failures 0 of 21 (claude-verify/verify-spelling.txt).
+- [observed] Simulator, iPhone 17: "Two halves, one gray", "Two centers, the same size", "left center", "neighbors", "A color with no light behind it", "rendered as color" on screen; afterimage log shows all five lines say, file, done (claude-verify/spell/).
+- [observed] Build 2 re-archived with these changes: ios/release-audit-2026-10-06/claude-final-5-build2/Illusions.xcarchive, 1.0 (2), 21 pages and 79 audio files identical to source, no debug hooks, codesign verify passes. Not uploaded. The earlier claude-final-4-build2 (layout fix only) is kept.
+
+### Previous pending
+- done: the app's own British spellings (in source and in build 2; build 1 in review still has them).
+- carried: Apple's review; manual release on Cia's go.
+- carried: Cia's ear on the Heart voice; haptics; screen staying lit.
+- carried: VoiceOver never run against the pieces.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- Build 1, the build in review, still shows British spellings in the app. They ship only if build 2 is uploaded and resubmitted, which is Cia's go and restarts review.
+- The store screenshots show build 1's British text in a few frames ("one grey", "Two centres"); consistent with build 1, inconsistent with build 2.
+- The web pieces on photon.ciamac.com are separate files and still British; not in scope.
+- Uncommitted: 13 pages, catalog.json, LibraryView.swift, narrate_heart.py, narration_manifest.json, phoneme_check.json, narration_lines_v2.json, SESSION_STATE.md.
+
+### Operational notes
+- A spelling-only change needs no new audio when the phonemes match; check with the voice's own phoneme output before re-rendering.
+- Kokoro venv is in the session scratchpad again; rebuild recipe as in the 2026-10-08 block.
+
+### Durable thought
+none, reason: the phoneme check is recorded in Operational notes and the script comment.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-11T10:17:32-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `e4e363f SESSION_STATE: store description spelling changed to American` (committed 2026-10-10)
+- tree: **43 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished; uploading build 2 and committing are Cia's go.
+
+---
+
 ## 2026-10-10 EXIT - description spelling fixed in App Store Connect (OPEN)
 
 Snapshot before this block: none (append only).

@@ -177,7 +177,7 @@ struct LibraryView: View {
                 .accessibilityIdentifier("triangle-reveal")
                 .accessibilityLabel("Is there a triangle?")
                 .accessibilityValue(turned ? "Notches turned away. Three separate discs." : "Notches aligned. An implied triangle.")
-                .accessibilityHint(turned ? "Double-tap to align the notches." : "Double-tap to turn the notches away from the centre.")
+                .accessibilityHint(turned ? "Double-tap to align the notches." : "Double-tap to turn the notches away from the center.")
             }
             Rectangle().fill(LibraryStyle.paper.opacity(0.12)).frame(height: 1)
                 .accessibilityHidden(true)

@@ -35,14 +35,14 @@
 <canvas id="c"></canvas>
 
 <div class="chrome" id="chapter">Gallery · the negative afterimage</div>
-<div class="chrome" id="title">A colour with no light behind it</div>
+<div class="chrome" id="title">A color with no light behind it</div>
 <div class="chrome" id="readout">
   <div><span class="lab">adapting</span><span id="rAd">0.0 s</span></div>
   <div id="state">fixate the dot on the teal disc</div>
 </div>
 <div class="chrome" id="thesis">
-  <span class="lead">On the empty grey, a soft rose disc appears where the teal one was. Nothing rose is on the screen.</span>
-  The cones that drank the teal are tired, so the grey now tips toward teal's opposite. You are seeing fatigue, rendered as colour. Vision is not recording, it is construction.
+  <span class="lead">On the empty gray, a soft rose disc appears where the teal one was. Nothing rose is on the screen.</span>
+  The cones that drank the teal are tired, so the gray now tips toward teal's opposite. You are seeing fatigue, rendered as color. Vision is not recording, it is construction.
 </div>
 
 <script src="chrome_app.js"></script>
@@ -110,11 +110,11 @@
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
-    {t:"A saturated teal disc sits on a neutral grey field, with a small dark dot at its centre. The ring around it <b>counts out the hold time</b>.", act(){setMode('adapt',true);}},
-    {t:"Lock your gaze on the centre dot. Do not let your eyes wander. Hold for about fifteen seconds while the cones that drink teal <b>slowly tire</b>.", act(){setMode('adapt',true);}},
-    {t:"Now the teal is gone and only the empty grey remains. <b>Keep your eyes pinned to where the dot was</b>, and do not blink hard.", act(){setMode('reveal');}},
-    {t:"A soft rose disc blooms where the teal used to be. <b>Nothing rose is on the screen.</b> The tired cones tip the grey toward teal's opposite.", act(){setMode('reveal');}},
-    {t:"You are seeing fatigue, rendered as colour. <b>Vision is not recording, it is construction.</b>", act(){setMode('reveal');}},
+    {t:"A saturated teal disc sits on a neutral gray field, with a small dark dot at its center. The ring around it <b>counts out the hold time</b>.", act(){setMode('adapt',true);}},
+    {t:"Lock your gaze on the center dot. Do not let your eyes wander. Hold for about fifteen seconds while the cones that drink teal <b>slowly tire</b>.", act(){setMode('adapt',true);}},
+    {t:"Now the teal is gone and only the empty gray remains. <b>Keep your eyes pinned to where the dot was</b>, and do not blink hard.", act(){setMode('reveal');}},
+    {t:"A soft rose disc blooms where the teal used to be. <b>Nothing rose is on the screen.</b> The tired cones tip the gray toward teal's opposite.", act(){setMode('reveal');}},
+    {t:"You are seeing fatigue, rendered as color. <b>Vision is not recording, it is construction.</b>", act(){setMode('reveal');}},
   ];
   PhotonChrome.init({here:'afterimage', walk:WALK});
 

@@ -35,14 +35,14 @@
 <canvas id="c"></canvas>
 
 <div class="chrome" id="chapter">Gallery · the Cornsweet edge</div>
-<div class="chrome" id="title">Two halves, one grey</div>
+<div class="chrome" id="title">Two halves, one gray</div>
 <div class="chrome" id="readout">
   <div><span class="lab">left</span><span id="rL">·</span></div>
   <div><span class="lab">right</span><span id="rR">·</span></div>
   <div id="verdict">the left looks lighter</div>
 </div>
 <div class="chrome" id="thesis">
-  <span class="lead">The two halves are the same grey everywhere except at the seam. Cover the seam and they fuse into one flat field.</span>
+  <span class="lead">The two halves are the same gray everywhere except at the seam. Cover the seam and they fuse into one flat field.</span>
   Your visual system read the little cusp at the edge and painted the whole surface to match. The difference was never in the light. Vision is not recording, it is construction.
 </div>
 
@@ -92,7 +92,7 @@
     rL.textContent=Math.round(BASE*100); rR.textContent=Math.round(BASE*100);
     const covered=occ.cur>=cw*0.96;
     if(covered!==wasCovered){ wasCovered=covered; if(covered) PhotonApp.haptic('reveal'); }
-    verdict.textContent = covered ? 'now: one flat grey' : 'the left looks lighter';
+    verdict.textContent = covered ? 'now: one flat gray' : 'the left looks lighter';
     verdict.style.color = covered ? 'var(--cream)' : 'var(--cream)';
     requestAnimationFrame(draw);
   }
@@ -117,7 +117,7 @@
     {t:"One field, split down the middle. The left half <b>plainly looks a touch lighter</b> than the right. Trust your eyes for a moment.", act(){occ.tgt=0;}},
     {t:"There is nothing between the two halves but a thin seam. Watch only that seam: a soft cusp <b>ramps light on the left and dark on the right</b>.", act(){occ.tgt=0;}},
     {t:"Now slide an ink bar across the seam to hide the cusp. <b>The far surfaces never changed.</b>", act(){occ.tgt=cw*1.1;}},
-    {t:"Covered, the two halves snap into one flat grey. They were always the same. You read the little edge and repainted the whole surface to match. <b>Vision is construction, not a recording.</b>", act(){occ.tgt=cw*1.1;}},
+    {t:"Covered, the two halves snap into one flat gray. They were always the same. You read the little edge and repainted the whole surface to match. <b>Vision is construction, not a recording.</b>", act(){occ.tgt=cw*1.1;}},
   ];
   PhotonChrome.init({here:'cornsweet', walk:WALK});
 
