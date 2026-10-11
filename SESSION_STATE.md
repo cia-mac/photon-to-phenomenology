@@ -7,6 +7,113 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-11 EXIT - respelled web pieces live; committed and pushed (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "go, deploy and commit and push".
+
+### Done
+- [observed] vercel deploy --prod --yes; production is now photon-to-phenomenology-bo95n5wds-ciamacparhizi-9083s-projects.vercel.app (vercel ls --prod).
+- [observed] Live https://photon.ciamac.com: /photon/cornsweet serves "one gray"; the gallery index, 9 gallery pieces, the book index and 7 book pieces, /shorts and /privacy answer 200; / answers 307.
+- [observed] ROLLBACK: vercel rollback photon-to-phenomenology-mx366xfo2-ciamacparhizi-9083s-projects.vercel.app (production read just before this deploy).
+- [proposed] Commit and push of the 12 site files and this file follow this block in the same step; the commit hash is in git log, not typed here.
+
+### Previous pending
+- done: deploy of the respelled web pieces; live check.
+- carried: Apple's review of build 1; manual release on Cia's go; build 2 held.
+- carried: Cia's ear on the Heart voice; haptics; screen staying lit; VoiceOver.
+- carried: public/shorts/index.html keeps British spellings (mirrors the videos); the other session's shorts work stays uncommitted.
+
+### Pending / open
+- none new
+
+### Operational notes
+- none new
+
+### Durable thought
+none, reason: routine deploy.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-11T15:37:09-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `50da6f2 App text in American spelling; recordings unchanged` (committed 2026-10-11)
+- tree: **37 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished; waiting on Apple and on Cia.
+
+---
+
+## IN FLIGHT 2026-10-11 - about to deploy the respelled web pieces to production
+
+### Done
+- [observed] Cia, in chat: "go, deploy and commit and push". Inside public/ only the 12 respelled files differ from HEAD (git status). .vercelignore keeps ios/, /shorts/, scripts, tools and *.md out of the upload.
+- [proposed] Next: vercel deploy --prod --yes from the repo root, live check, then commit and push.
+- [observed] Production before the deploy: https://photon-to-phenomenology-mx366xfo2-ciamacparhizi-9083s-projects.vercel.app. ROLLBACK: vercel rollback <that URL>.
+
+### Previous pending
+- carried: all items of the 2026-10-11 web EXIT block below.
+
+### Pending / open
+- Live check after the deploy.
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
+## 2026-10-11 EXIT - web pieces respelled to American, local only; not deployed (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "go, fix the web pieces' British spellings too".
+
+### Done
+- [observed] public/photon and public/photon/book: 46 lines of visible text in 12 files (11 piece pages and the gallery index hooks) changed: gray, center(s), color, neighbors. Code identifiers (grey()) and comments left. git diff --stat: 12 files, 46 insertions, 46 deletions.
+- [observed] All 18 gallery and book pages served locally and loaded headless: status 200, no page errors, no failed requests, a canvas on every piece, zero British spellings left in rendered text; titles read "Two halves, one gray", "Two centers, the same size", "A color with no light behind it", "Two squares, one gray".
+- [observed] Not deployed. The live site still shows the British spellings.
+
+### Previous pending
+- carried: Apple's review of build 1; manual release on Cia's go; build 2 held.
+- carried: Cia's ear on the Heart voice; haptics; screen staying lit; VoiceOver.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- Deploy of public/ needs Cia's go (vercel deploy --prod --yes); rollback target is the current production, to be read just before deploying.
+- public/shorts/index.html still has British spellings in 12 lines. Left alone on purpose: it is the shorts lane's review sheet and its text mirrors wording burnt into the rendered videos and their voice-over; changing the sheet alone would make it disagree with the videos.
+- Uncommitted: the 12 public files, SESSION_STATE.md.
+
+### Operational notes
+- Port 8765 on this Mac is held by another Python process; use another port for a local check. Site-absolute paths mean the pages need a server rooted at public/, not file://.
+- zsh: split a variable into arguments with ${=VAR}.
+
+### Durable thought
+none, reason: routine text change.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-11T10:57:50-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `50da6f2 App text in American spelling; recordings unchanged` (committed 2026-10-11)
+- tree: **36 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished the edit and the check; deploy and commit are Cia's go.
+
+---
+
 ## 2026-10-11 EXIT - app text respelled to American; recordings kept; build 2 re-archived (OPEN)
 
 Snapshot before this block: none (append only).

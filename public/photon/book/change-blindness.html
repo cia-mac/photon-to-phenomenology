@@ -145,7 +145,7 @@
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
-    {t:"Fifteen warm-grey tiles flash on, then off, then on again. One of them is <b>silently switching shades every cycle</b>. Study the grid and try to catch which tile it is.", act(){ found=false; guess=-1; blank.tgt=150; }},
+    {t:"Fifteen warm-gray tiles flash on, then off, then on again. One of them is <b>silently switching shades every cycle</b>. Study the grid and try to catch which tile it is.", act(){ found=false; guess=-1; blank.tgt=150; }},
     {t:"A blank flash sits between every frame. That gap wipes the transient that would normally yank your eye to the change. The switch is large, yet with the blank in the way you <b>probably cannot find it</b>.", act(){ found=false; blank.tgt=150; }},
     {t:"Now close the blank. With the two frames butting straight together, the changing tile <b>flickers and pops out at once</b>. Same change, no gap to hide it.", act(){ blank.tgt=0; }},
     {t:"There it is, marked. You never stored the scene to compare. Without a transient to point your attention, even a whole tile changing in plain sight goes unseen. <b>Vision is construction, not a recording.</b>", act(){ found=true; blank.tgt=0; }},
