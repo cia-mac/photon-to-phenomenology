@@ -120,24 +120,9 @@ private struct DiscLabel: View {
 /// The picture a person shares: one illusion on its module, in the library's look, 1080 by 1350.
 /// It shows the piece's still from the library, not a stimulus: a still cannot carry the effect,
 /// so the card asks the question and the app answers it.
-enum ShareStyle: String {
-    case standard, question, poster, dark
-    /// Debug only: -shareStyle <name> picks a layout to compare. The shipped default is `standard`.
-    static var current: ShareStyle {
-        #if DEBUG
-        if let name = UserDefaults.standard.string(forKey: "shareStyle"), let s = ShareStyle(rawValue: name) { return s }
-        #endif
-        return .standard
-    }
-}
-
 struct ShareCard: View {
     let piece: Piece
-    var style: ShareStyle = .current
     private var field: Poster.Field? { Poster.fields[piece.slug] }
-    private var dark: Bool { style == .dark }
-    private var ground: Color { dark ? Poster.ink : Poster.paper }
-    private var text: Color { dark ? Poster.cream : Poster.ink }
 
     @MainActor static func render(_ piece: Piece) -> Image? {
         let renderer = ImageRenderer(content: ShareCard(piece: piece))
@@ -145,7 +130,7 @@ struct ShareCard: View {
         guard let ui = renderer.uiImage else { return nil }
         #if DEBUG
         if UserDefaults.standard.bool(forKey: "dumpShare"), let png = ui.pngData() {
-            let url = FileManager.default.temporaryDirectory.appendingPathComponent("share-\(piece.slug)-\(ShareStyle.current.rawValue).png")
+            let url = FileManager.default.temporaryDirectory.appendingPathComponent("share-\(piece.slug).png")
             try? png.write(to: url)
             NSLog("PHOTON-SHARE %@", url.path)
         }
@@ -154,94 +139,49 @@ struct ShareCard: View {
     }
 
     private func mono(_ size: CGFloat) -> Font { .system(size: size, weight: .semibold, design: .monospaced) }
-    private func bold(_ size: CGFloat) -> Font { .custom("HelveticaNeue-Bold", fixedSize: size) }
-    private func plain(_ size: CGFloat) -> Font { .custom("HelveticaNeue", fixedSize: size) }
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            switch style {
-            case .poster: posterLayout
-            case .question: questionLayout
-            default: standardLayout
-            }
-        }
-        .padding(style == .poster ? 0 : 64)
-        .frame(width: 1080, height: 1350, alignment: .topLeading)
-        .background(ground)
-    }
-
-    private var header: some View {
-        HStack {
-            Text("CIAMAC’S OPTICAL ILLUSIONS").font(mono(26)).tracking(5)
-            Spacer()
-            Text(piece.number).font(mono(26)).tracking(3)
-        }
-        .foregroundStyle(text.opacity(0.62))
-    }
-
-    private var footer: some View {
-        Text("VISION IS CONSTRUCTION, NOT RECORDING.")
-            .font(mono(24)).tracking(4)
-            .foregroundStyle(text.opacity(0.62))
-    }
-
-    private func module(height: CGFloat, corner: Bool = true, pad: CGFloat = 70) -> some View {
-        ZStack {
-            (field?.ground ?? Poster.ink)
-            figure
-                .aspectRatio(1.5, contentMode: .fit)
-                .padding(.horizontal, pad)
-                .padding(.vertical, 56)
-        }
-        .frame(height: height)
-        .clipShape(corner ? AnyShape(Poster.module) : AnyShape(Rectangle()))
-    }
-
-    /// v1, as shipped in build 5.
-    private var standardLayout: some View {
-        Group {
-            header.padding(.bottom, 40)
-            module(height: 800)
-            Text(piece.shortTitle).font(bold(104)).tracking(-4).lineLimit(2).minimumScaleFactor(0.6)
-                .foregroundStyle(text).padding(.top, 52)
-            Text(piece.line).font(plain(46)).foregroundStyle(text.opacity(0.66)).padding(.top, 14)
-            Spacer(minLength: 0)
-            footer
-        }
-    }
 
     /// The hook leads: the one-line claim is the headline, the name of the effect sits small above it.
-    private var questionLayout: some View {
-        Group {
-            header.padding(.bottom, 40)
-            module(height: 700)
-            Text(piece.shortTitle.uppercased()).font(mono(30)).tracking(6)
-                .foregroundStyle(text.opacity(0.62)).padding(.top, 52)
-            Text(piece.line).font(bold(110)).tracking(-4.4).lineSpacing(-6).lineLimit(3).minimumScaleFactor(0.6)
-                .foregroundStyle(text).padding(.top, 18)
-            Spacer(minLength: 0)
-            footer
-        }
-    }
-
-    /// The module runs edge to edge; the type sits on a strip below it.
-    private var posterLayout: some View {
-        Group {
-            module(height: 920, corner: false, pad: 130)
-            VStack(alignment: .leading, spacing: 0) {
-                Text(piece.shortTitle).font(bold(112)).tracking(-4.4).lineLimit(2).minimumScaleFactor(0.6)
-                    .foregroundStyle(text)
-                Text(piece.line).font(plain(46)).foregroundStyle(text.opacity(0.66)).padding(.top, 12)
-                Spacer(minLength: 0)
-                HStack {
-                    Text("CIAMAC’S OPTICAL ILLUSIONS").font(mono(24)).tracking(5)
-                    Spacer()
-                    Text(piece.number).font(mono(24)).tracking(3)
-                }
-                .foregroundStyle(text.opacity(0.62))
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                Text("CIAMAC’S OPTICAL ILLUSIONS").font(mono(26)).tracking(5)
+                Spacer()
+                Text(piece.number).font(mono(26)).tracking(3)
             }
-            .padding(.horizontal, 64).padding(.top, 52).padding(.bottom, 56)
+            .foregroundStyle(Poster.ink.opacity(0.62))
+            .padding(.bottom, 40)
+
+            ZStack {
+                (field?.ground ?? Poster.ink)
+                figure
+                    .aspectRatio(1.5, contentMode: .fit)
+                    .padding(.horizontal, 70)
+                    .padding(.vertical, 56)
+            }
+            .frame(height: 700)
+            .clipShape(Poster.module)
+
+            Text(piece.shortTitle.uppercased())
+                .font(mono(30)).tracking(6)
+                .foregroundStyle(Poster.ink.opacity(0.62))
+                .padding(.top, 52)
+            Text(piece.line)
+                .font(.custom("HelveticaNeue-Bold", fixedSize: 110))
+                .tracking(-4.4)
+                .lineSpacing(-6)
+                .lineLimit(3)
+                .minimumScaleFactor(0.6)
+                .foregroundStyle(Poster.ink)
+                .padding(.top, 18)
+
+            Spacer(minLength: 0)
+            Text("VISION IS CONSTRUCTION, NOT RECORDING.")
+                .font(mono(24)).tracking(4)
+                .foregroundStyle(Poster.ink.opacity(0.62))
         }
+        .padding(64)
+        .frame(width: 1080, height: 1350, alignment: .topLeading)
+        .background(Poster.paper)
     }
 
     @ViewBuilder private var figure: some View {
