@@ -7,6 +7,42 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-14 EXIT - main pushed to origin through ed5d8df on Cia's "push"; build 5 source is on GitHub (CLOSED)
+
+Snapshot before this block: none (append only).
+On Cia's "push".
+
+### Done
+- [observed] `git push origin main`: "9816c22..ed5d8df  main -> main"; afterwards `git status -sb` read "main...origin/main" with no ahead count. A push does not deploy the site; none was run. This note goes up in one more commit.
+
+### Previous pending
+- done: push of main.
+- carried: Apple's answer on build 4 (Cia reported Waiting for Review); then the ChatGPT review of build 5, the upload (Cia's per-upload okay for the API key) and the swap (Cia's clicks in his Chrome); untested: real VoiceOver on the share button, largest text, landscape; the other session's shorts work uncommitted.
+
+### Pending / open
+- none from this block.
+
+### Durable thought
+none, reason: nothing new passes the bar.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-14T10:59:46-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `ed5d8df SESSION_STATE: build 5 branch merged into main locally, not pushed` (committed 2026-10-14)
+- tree: **43 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: `photon-build5`, `photon-look-build4`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+pushed; nothing owed on the repo.
+
+---
+
 ## 2026-10-14 EXIT - photon-build5 merged into main locally (fast-forward); NOT pushed (OPEN)
 
 Snapshot before this block: none (append only).
