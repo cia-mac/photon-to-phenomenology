@@ -9,6 +9,8 @@ struct PieceScreen: View {
     @Binding var path: [Piece]
     @ObservedObject private var narrator = Narrator.shared
     private var look: PieceLook.Look { PieceLook.of(piece.slug) }
+    @State private var card: Image?
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -34,6 +36,14 @@ struct PieceScreen: View {
             HStack(spacing: 8) {
                 ShellButton(symbol: "chevron.left", label: "All experiments", look: look) { path.removeAll() }
                 Spacer()
+                if let card {
+                    ShareLink(item: card, preview: SharePreview(piece.shortTitle, image: card)) {
+                        DiscLabel(symbol: "square.and.arrow.up", look: look)
+                    }
+                    .buttonStyle(DiscPress(reduceMotion: reduceMotion))
+                    .accessibilityLabel("Share this illusion")
+                    .accessibilityIdentifier("share-card")
+                }
                 ShellButton(symbol: narrator.muted ? "speaker.slash" : "speaker.wave.2",
                             label: narrator.muted ? "Turn narration on" : "Mute narration", look: look) { narrator.toggleMute() }
                 if let prev = Catalog.neighbour(of: piece, offset: -1), prev != piece {
@@ -50,6 +60,7 @@ struct PieceScreen: View {
         .statusBarHidden(true)
         .persistentSystemOverlays(.hidden)
         .onDisappear { UIApplication.shared.isIdleTimerDisabled = false }
+        .task(id: piece.slug) { card = ShareCard.render(piece) }
     }
 }
 
@@ -86,16 +97,99 @@ private struct ShellButton: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
-        Button(action: action) {
-            Image(systemName: symbol)
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundStyle(look.glyph)
-                .frame(width: 44, height: 44)
-                .background(look.fill, in: Circle())
-                .contentShape(Circle())
+        Button(action: action) { DiscLabel(symbol: symbol, look: look) }
+            .buttonStyle(DiscPress(reduceMotion: reduceMotion))
+            .accessibilityLabel(label)
+    }
+}
+
+private struct DiscLabel: View {
+    let symbol: String
+    let look: PieceLook.Look
+
+    var body: some View {
+        Image(systemName: symbol)
+            .font(.system(size: 16, weight: .semibold))
+            .foregroundStyle(look.glyph)
+            .frame(width: 44, height: 44)
+            .background(look.fill, in: Circle())
+            .contentShape(Circle())
+    }
+}
+
+/// The picture a person shares: one illusion on its module, in the library's look, 1080 by 1350.
+/// It shows the piece's still from the library, not a stimulus: a still cannot carry the effect,
+/// so the card asks the question and the app answers it.
+struct ShareCard: View {
+    let piece: Piece
+    private var field: Poster.Field? { Poster.fields[piece.slug] }
+
+    @MainActor static func render(_ piece: Piece) -> Image? {
+        let renderer = ImageRenderer(content: ShareCard(piece: piece))
+        renderer.scale = 1
+        guard let ui = renderer.uiImage else { return nil }
+        #if DEBUG
+        if UserDefaults.standard.bool(forKey: "dumpShare"), let png = ui.pngData() {
+            let url = FileManager.default.temporaryDirectory.appendingPathComponent("share-\(piece.slug).png")
+            try? png.write(to: url)
+            NSLog("PHOTON-SHARE %@", url.path)
         }
-        .buttonStyle(DiscPress(reduceMotion: reduceMotion))
-        .accessibilityLabel(label)
+        #endif
+        return Image(uiImage: ui)
+    }
+
+    private func mono(_ size: CGFloat) -> Font { .system(size: size, weight: .semibold, design: .monospaced) }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                Text("CIAMAC’S OPTICAL ILLUSIONS").font(mono(26)).tracking(5)
+                Spacer()
+                Text(piece.number).font(mono(26)).tracking(3)
+            }
+            .foregroundStyle(Poster.ink.opacity(0.62))
+            .padding(.bottom, 40)
+
+            ZStack {
+                (field?.ground ?? Poster.ink)
+                figure
+                    .aspectRatio(1.5, contentMode: .fit)
+                    .padding(.horizontal, 70)
+                    .padding(.vertical, 56)
+            }
+            .frame(height: 800)
+            .clipShape(Poster.module)
+
+            Text(piece.shortTitle)
+                .font(.custom("HelveticaNeue-Bold", fixedSize: 104))
+                .tracking(-4)
+                .lineLimit(2)
+                .minimumScaleFactor(0.6)
+                .foregroundStyle(Poster.ink)
+                .padding(.top, 52)
+            Text(piece.line)
+                .font(.custom("HelveticaNeue", fixedSize: 46))
+                .foregroundStyle(Poster.ink.opacity(0.66))
+                .padding(.top, 14)
+
+            Spacer(minLength: 0)
+            Text("VISION IS CONSTRUCTION, NOT RECORDING.")
+                .font(mono(24)).tracking(4)
+                .foregroundStyle(Poster.ink.opacity(0.62))
+        }
+        .padding(64)
+        .frame(width: 1080, height: 1350, alignment: .topLeading)
+        .background(Poster.paper)
+    }
+
+    @ViewBuilder private var figure: some View {
+        let image = Image("preview-" + piece.slug).resizable()
+        if let field {
+            // As on the library tile: the still prints in one color on the module.
+            field.mark.mask { ZStack { ForEach(0..<3, id: \.self) { _ in image.grayscale(1).brightness(-0.07).luminanceToAlpha() } } }
+        } else {
+            image.clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+        }
     }
 }
 

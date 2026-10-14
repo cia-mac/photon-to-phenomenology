@@ -8,6 +8,15 @@ struct Piece: Identifiable, Hashable, Decodable {
     var id: String { slug }
     /// The lab pages are long documents that scroll under the native buttons.
     var scrolls: Bool { section == "The Lab" }
+
+    /// "The café wall" reads as "Café wall" on a card.
+    var shortTitle: String {
+        guard title.hasPrefix("The ") else { return title }
+        let short = String(title.dropFirst(4))
+        return short.prefix(1).uppercased() + short.dropFirst()
+    }
+    /// Its place in the library, "01" to "21".
+    var number: String { String(format: "%02d", (Catalog.pieces.firstIndex(of: self) ?? 0) + 1) }
 }
 
 enum Catalog {
