@@ -77,8 +77,17 @@
         wdots=document.getElementById('wdots'), wnext=document.getElementById('wnext'),
         replay=document.getElementById('replay');
 
-  let WALK=[], onEnd=null, wstep=-1, autoT=null, introDone=false, voiceOn=false, userDriven=false;
+  let WALK=[], onEnd=null, wstep=-1, autoT=null, introDone=false, voiceOn=false, userDriven=false, assistive=false;
   const HERE=location.pathname.split('/').pop().replace(/\.html.*$/,'');
+  /* The look keys off the slug (chrome_app.css: per-piece accent), and the three header blocks
+     stack in one fixed column, so a larger title can never run into the readout under it. */
+  document.documentElement.dataset.piece=HERE;
+  (function(){
+    const hd=['chapter','title','readout'].map(id=>document.getElementById(id));
+    if(!hd.every(Boolean)) return;
+    const w=document.createElement('div'); w.className='photon-head';
+    hd[0].parentNode.insertBefore(w,hd[0]); hd.forEach(e=>w.appendChild(e));
+  })();
 
   /* Narration. The page says what the guide card says; the native shell speaks it unless muted and
      tells the page when a line has finished. The guide waits for the voice, then moves on. */
@@ -99,7 +108,7 @@
   function clearAuto(){ if(autoT){ clearTimeout(autoT); autoT=null; } }
   function scheduleAuto(){
     clearAuto();
-    if(reduceMotion) return;
+    if(reduceMotion||assistive) return;      // a screen reader sets its own pace: the card changes only when the person presses next
     if(wstep >= WALK.length-1) return;
     // with a voice, the voice sets the pace (see _done); this only rescues a stalled one
     autoT=setTimeout(()=>{ showStep(wstep+1); scheduleAuto(); }, voiceOn ? 45000 : 5400);
@@ -131,8 +140,11 @@
     else if(!WALK.length){ if(voiceOn) speakIntro(); else stopSay(); }       // a page with no guide reads its introduction
     else if(!voiceOn) stopSay();
   };
+  window.PhotonApp._assistive=function(on){        // native: VoiceOver or another screen reader is running (also sent once the page has loaded)
+    assistive=!!on; if(assistive){ clearAuto(); } else if(walk.classList.contains('on') && !userDriven) scheduleAuto();
+  };
   window.PhotonApp._done=function(id){           // native: the line for this step has been spoken
-    if(!voiceOn||userDriven||reduceMotion||!walk.classList.contains('on')||id!==stepId(wstep)||wstep>=WALK.length-1) return;
+    if(!voiceOn||userDriven||reduceMotion||assistive||!walk.classList.contains('on')||id!==stepId(wstep)||wstep>=WALK.length-1) return;
     clearAuto(); autoT=setTimeout(()=>{ showStep(wstep+1); scheduleAuto(); },700);
   };
   window.addEventListener('pagehide',stopSay);
@@ -151,7 +163,41 @@
         cv.addEventListener('pointerdown',()=>{ if(walk.classList.contains('on')){ userDriven=true; clearAuto(); } },{passive:true});
         cv.addEventListener('touchstart',()=>{ if(walk.classList.contains('on')){ userDriven=true; clearAuto(); } },{passive:true});
       }
+      label(cv);
       setTimeout(startIntro, 1100);
     }
   };
+
+  /* Accessibility labels. The figures are canvases, which a screen reader cannot see; give each a
+     plain description (role img) and make the piece's title a heading and the guide a named region.
+     The readout and the guide card stay ordinary text and live regions. */
+  const DESC={
+    "kanizsa": "Three notched discs. When the notches line up, a bright triangle seems to float between them, though none is drawn. Dragging turns the notches away and the triangle goes.",
+    "motion-aftereffect": "A spiral of cream arms on a dark field. It turns, then stops, and the stopped spiral seems to drift the other way.",
+    "afterimage": "A teal disc on a gray field with a small dark dot at its center. After you stare at the dot, the disc is replaced by empty gray, where a rose afterimage appears.",
+    "scintillating-grid": "A lattice of gray bars with a pale disc at every crossing. Dark dots seem to flicker at crossings you are not looking at, though none are drawn.",
+    "ebbinghaus": "Two identical center discs, one ringed by large circles and one by small circles. The left disc looks smaller. Dragging evens out the rings.",
+    "cornsweet": "A flat gray field with a soft light-to-dark edge at its center. The left half looks lighter than the right, though both are the same gray away from the edge.",
+    "cafe-wall": "Rows of light and dark tiles, each row shifted against the one above, with thin gray lines between them. The level lines look tilted. Dragging changes the shift.",
+    "ponzo": "Two pale horizontal bars of equal length inside a pair of rails that converge toward the top like a road. The upper bar looks longer. Dragging straightens the rails.",
+    "muller-lyer": "Two horizontal lines of equal length, one above the other, with fins at their ends. The top line looks longer. Dragging folds the fins flat.",
+    "inverse-problem": "A wireframe cube made of eight points and twelve edges, seen square on. The points hang at unrelated depths and only line up from this one viewpoint. Dragging changes the viewpoint.",
+    "checker-shadow": "A checkerboard with a soft shadow across it and two marked squares, A and B. They are the same shade of gray but look different. Dragging moves the shadow.",
+    "aperture-problem": "A small round window onto a field of slanted bars drifting across it. Through the window every direction of motion looks the same. Dragging changes the motion.",
+    "apparent-motion": "Two pale dots side by side with a dark gap between them, lighting in turn. At the right rhythm one dot seems to cross the gap.",
+    "troxler-fading": "A small cross at the center and a soft ring of blurred discs around it. If you fixate the cross without moving your eyes, the ring fades away.",
+    "motion-induced-blindness": "A rotating lattice of small crosses with three amber dots and a center cross. If you fixate the center, the amber dots disappear.",
+    "change-blindness": "A grid of fifteen warm gray tiles that flash on and off. One tile switches shade each cycle. The goal is to find which.",
+    "contrast-sensitivity": "A chart of vertical bars. Contrast falls from top to bottom and bar width shrinks from left to right, so the bars fade into flat gray along a curve that is your own contrast sensitivity."
+  };
+  function label(cv){
+    const t=document.getElementById('title'); if(t && !t.getAttribute('role')){ t.setAttribute('role','heading'); t.setAttribute('aria-level','1'); }
+    walk.setAttribute('role','region'); walk.setAttribute('aria-label','Guided walk-through');
+    document.querySelectorAll('canvas').forEach((c,i)=>{
+      if(c.getAttribute('aria-label')||c.getAttribute('aria-hidden')==='true') return;
+      const d=DESC[HERE];
+      if(d && i===0){ c.setAttribute('role','img'); c.setAttribute('aria-label',d); }
+      else { c.setAttribute('aria-hidden','true'); }          // an overlay on the same figure: the first canvas speaks for it
+    });
+  }
 })();

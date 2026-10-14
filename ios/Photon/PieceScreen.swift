@@ -8,6 +8,7 @@ struct PieceScreen: View {
     let piece: Piece
     @Binding var path: [Piece]
     @ObservedObject private var narrator = Narrator.shared
+    private var look: PieceLook.Look { PieceLook.of(piece.slug) }
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -30,19 +31,19 @@ struct PieceScreen: View {
                 .ignoresSafeArea()
                 .allowsHitTesting(false)
             }
-            HStack(spacing: 10) {
-                ShellButton(symbol: "chevron.left", label: "All experiments") { path.removeAll() }
+            HStack(spacing: 8) {
+                ShellButton(symbol: "chevron.left", label: "All experiments", look: look) { path.removeAll() }
                 Spacer()
                 ShellButton(symbol: narrator.muted ? "speaker.slash" : "speaker.wave.2",
-                            label: narrator.muted ? "Turn narration on" : "Mute narration") { narrator.toggleMute() }
+                            label: narrator.muted ? "Turn narration on" : "Mute narration", look: look) { narrator.toggleMute() }
                 if let prev = Catalog.neighbour(of: piece, offset: -1), prev != piece {
-                    ShellButton(symbol: "arrow.left", label: "Previous: \(prev.title)") { path = [prev] }
+                    ShellButton(symbol: "arrow.left", label: "Previous: \(prev.title)", look: look) { path = [prev] }
                 }
                 if let next = Catalog.neighbour(of: piece, offset: 1), next != piece {
-                    ShellButton(symbol: "arrow.right", label: "Next: \(next.title)") { path = [next] }
+                    ShellButton(symbol: "arrow.right", label: "Next: \(next.title)", look: look) { path = [next] }
                 }
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 22)   // the discs sit on the same margin as the page text
             .padding(.top, 6)
         }
         .toolbar(.hidden, for: .navigationBar)
@@ -58,21 +59,54 @@ extension PieceScreen {
     }
 }
 
+/// The accent of a piece's chrome, mirrored in chrome_app.css. Pieces where color, lightness or
+/// adaptation is the subject keep a neutral charcoal, so nothing saturated sits beside them.
+enum PieceLook {
+    struct Look { let fill: Color; let glyph: Color }
+    static let neutral = Look(fill: Color(red: 0x26 / 255.0, green: 0x23 / 255.0, blue: 0x1f / 255.0), glyph: Color(red: 0xf4 / 255.0, green: 0xef / 255.0, blue: 0xe4 / 255.0))
+
+    static func of(_ slug: String) -> Look {
+        switch slug {
+        case "kanizsa", "gestalt-grouping": return Look(fill: Poster.blue, glyph: Poster.paper)
+        case "scintillating-grid", "ponzo": return Look(fill: Poster.red, glyph: Poster.ink)
+        case "cafe-wall", "apparent-motion": return Look(fill: Poster.green, glyph: Poster.paper)
+        case "muller-lyer", "receptive-field": return Look(fill: Poster.pink, glyph: Poster.ink)
+        case "aperture-problem": return Look(fill: Poster.purple, glyph: Poster.paper)
+        case "ebbinghaus", "inverse-problem": return Look(fill: Poster.gray, glyph: Poster.ink)
+        default: return neutral
+        }
+    }
+}
+
 private struct ShellButton: View {
     let symbol: String
     let label: String
+    let look: PieceLook.Look
     let action: () -> Void
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         Button(action: action) {
             Image(systemName: symbol)
-                .font(.system(size: 15, weight: .regular))
-                .foregroundStyle(Register.cream.opacity(0.8))
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(look.glyph)
                 .frame(width: 44, height: 44)
-                .background(Circle().fill(Color(red: 18 / 255, green: 16 / 255, blue: 13 / 255).opacity(0.62)))
-                .overlay(Circle().stroke(Register.cream.opacity(0.18), lineWidth: 1))
+                .background(look.fill, in: Circle())
+                .contentShape(Circle())
         }
+        .buttonStyle(DiscPress(reduceMotion: reduceMotion))
         .accessibilityLabel(label)
+    }
+}
+
+/// A disc gives under the finger, as the library's modules do.
+private struct DiscPress: ButtonStyle {
+    let reduceMotion: Bool
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed && !reduceMotion ? 0.9 : 1)
+            .opacity(configuration.isPressed && reduceMotion ? 0.7 : 1)
+            .animation(reduceMotion ? nil : .spring(response: 0.25, dampingFraction: 0.55), value: configuration.isPressed)
     }
 }
 

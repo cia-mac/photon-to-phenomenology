@@ -8,8 +8,8 @@
 html,body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:none}
 #walk{position:fixed;left:50%;bottom:var(--shell-bottom);z-index:40;width:min(760px,calc(100vw - 2*var(--shell-side) + 20px));
   transform:translateX(-50%) translateY(16px);
-  background:rgba(18,16,13,0.66);backdrop-filter:blur(26px) saturate(1.4);-webkit-backdrop-filter:blur(26px) saturate(1.4);
-  border:1px solid rgba(232,224,208,0.18);border-radius:24px;
+  background:rgba(12,11,9,0.86);backdrop-filter:blur(26px);-webkit-backdrop-filter:blur(26px);
+  border:1px solid rgba(232,224,208,0.22);border-radius:3px;
   padding:26px 30px 20px;text-align:left;opacity:0;pointer-events:none;transition:opacity .45s ease,transform .45s ease}
 #walk.on{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
 #walk .wk{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(232,224,208,0.38);margin-bottom:12px;font-weight:500}
@@ -17,16 +17,16 @@ html,body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-
 #walk .wt b{font-weight:700;color:#fff}
 #walk .wb{margin-top:18px;display:flex;align-items:center;gap:14px;
   font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:0.06em}
-#walk .dots{display:flex;gap:9px;flex:1}
-#walk .dot{width:8px;height:8px;border-radius:50%;background:rgba(232,224,208,0.26);transition:.3s}
-#walk .dot.on{background:#e8e0d0;transform:scale(1.3)}
+#walk .dots{display:flex;gap:5px;flex:1;min-width:0;align-items:center}
+#walk .dot{flex:1 1 0;max-width:18px;min-width:4px;height:2px;background:rgba(232,224,208,0.26);transition:.3s}
+#walk .dot.on{background:#e8e0d0}
 #walk .wskip{min-height:44px;color:rgba(232,224,208,0.46);text-transform:uppercase;letter-spacing:0.09em;white-space:nowrap}
-#walk .wnext{min-height:44px;padding:0 23px;border-radius:999px;border:1px solid rgba(232,224,208,0.26);background:rgba(232,224,208,0.1);
-  color:#f0ebde;text-transform:uppercase;letter-spacing:0.09em;white-space:nowrap}
+#walk .wnext{min-height:44px;padding:0 23px;border-radius:2px;border:1px solid #e8e0d0;background:#e8e0d0;
+  color:#0c0b09;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;white-space:nowrap}
 #walk .wclose{position:absolute;top:2px;right:4px;width:44px;height:44px;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:13px;color:rgba(232,224,208,0.4)}
 #replay{position:fixed;left:50%;bottom:var(--shell-bottom);transform:translateX(-50%);z-index:30;
-  display:none;align-items:center;gap:9px;min-height:44px;padding:0 22px;border-radius:999px;
-  background:rgba(18,16,13,0.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  display:none;align-items:center;gap:9px;min-height:44px;padding:0 22px;border-radius:2px;
+  background:rgba(12,11,9,0.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border:1px solid rgba(232,224,208,0.18);
   font-size:12px;letter-spacing:0.13em;text-transform:uppercase;color:rgba(232,224,208,0.62);pointer-events:auto}
 #replay.on{display:inline-flex}
@@ -36,3 +36,54 @@ body.guiding #thesis{opacity:0 !important}
 :where(#walk .wnext,#walk .wskip,#walk .wclose,#replay):focus-visible{outline:2px solid #78b4ff;outline-offset:3px}
 button{font:inherit;background:none;border:none;color:inherit;letter-spacing:inherit;text-transform:inherit}
 @media (prefers-reduced-motion: reduce){ #walk,#replay{transition:none} }
+
+/* ===== Modules look (2026-10-13): the library's language on the piece screens =====
+   Chrome only. The figure, its ground and its colors are untouched. Color cards stay off
+   the pieces where color, lightness or adaptation is the subject (they get charcoal).
+   The mapping is mirrored in PieceScreen.swift (PieceLook). */
+html{--accent:#26231f;--on:#f4efe4;--btn:#f4efe4;--btn-on:#0c0b09}
+html[data-piece="kanizsa"],html[data-piece="gestalt-grouping"]{--accent:#2b18f2;--on:#f6f5f1;--btn:#f6f5f1;--btn-on:#0c0b09}
+html[data-piece="scintillating-grid"],html[data-piece="ponzo"]{--accent:#ec362c;--on:#0c0b09;--btn:#0c0b09;--btn-on:#f6f5f1}
+html[data-piece="cafe-wall"],html[data-piece="apparent-motion"]{--accent:#256d3d;--on:#f6f5f1;--btn:#f6f5f1;--btn-on:#0c0b09}
+html[data-piece="muller-lyer"],html[data-piece="receptive-field"]{--accent:#f26f9e;--on:#0c0b09;--btn:#0c0b09;--btn-on:#f6f5f1}
+html[data-piece="aperture-problem"]{--accent:#6a1cc4;--on:#f6f5f1;--btn:#f6f5f1;--btn-on:#0c0b09}
+html[data-piece="ebbinghaus"],html[data-piece="inverse-problem"]{--accent:#dfded9;--on:#0c0b09;--btn:#0c0b09;--btn-on:#f6f5f1}
+
+html[data-piece] .photon-head{position:fixed;top:var(--shell-top);left:var(--shell-side);right:var(--shell-side);display:flex;flex-direction:column;align-items:flex-start;pointer-events:none}
+html[data-piece] .photon-head>.chrome{position:static}
+html[data-piece] #chapter,html[data-piece] .eyebrow{display:inline-block;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-weight:600;font-size:10.5px;line-height:1.4;letter-spacing:.16em;
+  background:var(--accent);color:var(--on);opacity:1;padding:5px 12px 5px;border-radius:16px}
+html[data-piece] #title{margin-top:12px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:700;font-size:29px;line-height:1.04;letter-spacing:-.035em}
+html[data-piece] #readout{margin-top:12px;text-align:left;font-size:12px;line-height:1.65;color:var(--cream)}
+html[data-piece] #readout .lab{color:var(--cream);opacity:.55;font-size:10px;letter-spacing:.14em}
+
+html[data-piece] #thesis{left:var(--shell-side);right:var(--shell-side);max-width:680px;text-align:left;
+  background:var(--accent);color:var(--on);border-radius:28px;padding:18px 22px 20px;
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:500;font-size:15px;line-height:1.5;letter-spacing:-.005em}
+html[data-piece] #thesis .lead{color:var(--on);font-size:13px;margin-bottom:.5em}   /* full strength: small text must hold 4.5:1 on every accent */
+
+html[data-piece] #walk{background:var(--accent);color:var(--on);border:0;border-radius:32px;box-shadow:none;
+  backdrop-filter:none;-webkit-backdrop-filter:none;padding:24px 26px 18px}
+html[data-piece] #walk .wk{color:var(--on);font-family:"SF Mono",ui-monospace,Menlo,monospace;font-weight:600;font-size:10px}
+html[data-piece] #walk .wt{color:var(--on);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:500;font-size:20px;line-height:1.42;letter-spacing:-.012em}
+html[data-piece] #walk .wt b{color:var(--on);font-weight:700}
+html[data-piece] #walk .dot{background:var(--on);opacity:.28}
+html[data-piece] #walk .dot.on{background:var(--on);opacity:1;transform:none}
+html[data-piece] #walk .wskip{color:var(--on);font-weight:600}
+html[data-piece] #walk .wclose{color:var(--on)}
+html[data-piece] #walk .wnext{background:var(--btn);color:var(--btn-on);border:0;border-radius:999px;font-weight:700;padding:0 26px}
+html[data-piece] #replay{background:var(--accent);color:var(--on);border:0;border-radius:999px;box-shadow:none;
+  backdrop-filter:none;-webkit-backdrop-filter:none;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:700;font-size:12px;letter-spacing:.1em;padding:0 24px}
+@media (max-width:680px){
+  html[data-piece] #walk{padding:20px 22px 14px} html[data-piece] #walk .wt{font-size:18px}
+  html[data-piece] #title{font-size:27px} }
+@media (max-height:760px){
+  html[data-piece] #walk{padding:14px 20px 10px} html[data-piece] #walk .wt{font-size:15px;line-height:1.45}
+  html[data-piece] #title{font-size:24px} html[data-piece] #readout{margin-top:8px} }
+@media (prefers-reduced-motion: reduce){ html[data-piece] #walk .dot{transition:none} }
+
+/* Lab pages keep their own layouts; they take the type and the kicker pill. */
+html[data-piece] .eyebrow{margin:0 0 16px}
+html[data-piece] .instruction{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:500;font-size:clamp(17px,2.2vw,21px);line-height:1.38;letter-spacing:-.012em}
+html[data-piece] h1{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:700!important;font-size:clamp(26px,7.2vw,40px)!important;line-height:1.04!important;letter-spacing:-.035em!important;margin-bottom:14px!important}
+html[data-piece="afterimage"] #readout .lab{opacity:.92}   /* this page draws dark text on a mid-gray ground */

@@ -23,12 +23,32 @@ final class Narrator: NSObject, ObservableObject, AVSpeechSynthesizerDelegate, A
     override init() {
         // First launch: if VoiceOver is already reading the screen aloud, start muted so two voices never talk over each other.
         if UserDefaults.standard.object(forKey: Narrator.key) == nil {
-            muted = UIAccessibility.isVoiceOverRunning
+            muted = Narrator.screenReaderRunning
         } else {
             muted = UserDefaults.standard.bool(forKey: Narrator.key)
         }
         super.init()
         synth.delegate = self
+        // VoiceOver can be switched on or off while the app is open: tell the page, so its guide stops
+        // changing under the screen reader's feet, and start muted if the person never chose.
+        NotificationCenter.default.addObserver(forName: UIAccessibility.voiceOverStatusDidChangeNotification,
+                                               object: nil, queue: .main) { [weak self] _ in
+            Task { @MainActor in
+                guard let self else { return }
+                if UserDefaults.standard.object(forKey: Narrator.key) == nil, UIAccessibility.isVoiceOverRunning {
+                    self.stop(); self.muted = true
+                }
+                self.pushState()
+            }
+        }
+    }
+
+    /// True while VoiceOver or another screen reader is reading the screen.
+    static var screenReaderRunning: Bool {
+        #if DEBUG
+        if UserDefaults.standard.bool(forKey: "forceVoiceOver") { return true }   // test hook: -forceVoiceOver YES
+        #endif
+        return UIAccessibility.isVoiceOverRunning
     }
 
     func say(id: String, text: String) {
@@ -77,6 +97,7 @@ final class Narrator: NSObject, ObservableObject, AVSpeechSynthesizerDelegate, A
     /// Tell the page whether narration is on. Called after the page loads and whenever the button is pressed.
     func pushState() {
         web?.evaluateJavaScript("window.PhotonApp && PhotonApp._voice && PhotonApp._voice(\(muted ? "false" : "true"))")
+        web?.evaluateJavaScript("window.PhotonApp && PhotonApp._assistive && PhotonApp._assistive(\(Narrator.screenReaderRunning ? "true" : "false"))")
     }
 
     // MARK: finished

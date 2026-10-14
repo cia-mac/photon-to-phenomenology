@@ -5,7 +5,7 @@ struct PhotonApp: App {
     var body: some Scene {
         WindowGroup {
             LibraryView()
-                .preferredColorScheme(.dark)
+                .preferredColorScheme(.light)   // dark clock on the paper library; the experiments hide the status bar
         }
     }
 }
