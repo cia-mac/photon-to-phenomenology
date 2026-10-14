@@ -7,6 +7,43 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-13 EXIT - photon-look-build4 merged into main locally (fast-forward); NOT pushed (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "merge to main".
+
+### Done
+- [observed] git merge --ff-only photon-look-build4 on main: main moved from edd8281 to b6acc21 (3 commits: 83febef app source, 651355d evidence, b6acc21 session state). `git status -sb` read "main...origin/main [ahead 3]". The branch photon-look-build4 was kept (merged; deleting it was not asked).
+- [observed] Not done: push. Cia said "merge", not "push"; the repo is public, so a push stays his separate go. No deploy.
+
+### Previous pending
+- done: merge of the look branch into main.
+- carried: push of main (Cia's go); Apple's review of build 4 (Cia reports Waiting for Review); Cia's hardware checks; release is a separate go with a ChatGPT review first; optional build 5 items after Apple answers; the other session's shorts work uncommitted.
+
+### Pending / open
+- Push of main to origin: Cia's go.
+
+### Durable thought
+none, reason: nothing new passes the bar.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-13T22:40:31-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `b6acc21 SESSION_STATE: build 4 swapped into review, look work committed on photon-look-build4` (committed 2026-10-13)
+- tree: **38 uncommitted change(s)**
+- upstream: origin/main (ahead 3, behind 0)
+- merged into HEAD: `photon-look-build4`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+merged locally; a push waits for Cia.
+
+---
+
 ## 2026-10-13 EXIT - Look work committed locally on branch photon-look-build4 (3 commits, not pushed, not merged to main), on Cia's "yes" (OPEN)
 
 Snapshot before this block: none (append only).
