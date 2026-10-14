@@ -7,6 +7,46 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-14 EXIT - Share card finalized as the hook-as-headline layout; build 5 re-archived and on Cia's phone; NOT uploaded or swapped; branch photon-build5 local (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "share button works, tweak the card" then "2, the hook as headline".
+
+### Done
+- [observed] Cia chose layout 2 of four rendered takes (sheets ios/redesign-v8/SHEET_card_variants_*.png). Decision detail already in D-0774; the layout choice is Cia's, recorded here.
+- [observed] ios/Photon/PieceScreen.swift: ShareCard is now one layout: the piece's one-line hook as a 110 pt Helvetica Neue Bold headline, the effect name small in mono above it, the figure on its module (700 pt high), header and footer unchanged. The other three trial layouts and the DEBUG -shareStyle argument were removed; their source is at ios/redesign-v8/before/PieceScreen.share-4-layouts.swift (a first slice edit deleted the DiscPress button style and the compiler caught it; restored and rebuilt).
+- [observed] All 21 cards rendered through the DEBUG -dumpShare argument and viewed on ios/redesign-v8/SHEET_all_21_cards.png: every hook fits on at most two lines; no overflow seen.
+- [observed] Archive ios/release-audit-2026-10-06/claude-final-9-build5/Illusions.xcarchive re-made: "ARCHIVE SUCCEEDED", 1.0 (5), 79 narration files; installed on "iPhone Ciamac" ("App installed"). The earlier build 5 archive is in claude-final-9-build5-a-superseded. Build 5 was never uploaded, so the number is unchanged.
+- [observed] Committed on branch photon-build5 (0d48dc7 and earlier). Not merged, not pushed.
+
+### Previous pending
+- carried: Cia's critique of the card (done: layout 2); ChatGPT review of build 5 before any upload or swap (D-0738), not yet run; upload needs Cia's per-upload okay for the API key; the swap is Cia's, in his Chrome, after Apple answers on build 4 (he reported Waiting for Review); real VoiceOver on the share button, largest text, landscape and the share sheet on the phone are untested; the other session's shorts work uncommitted.
+
+### Pending / open
+- Apple's answer on build 4; then, in order: ChatGPT review of build 5, upload (Cia's okay), swap (Cia's clicks).
+- Merge or push of photon-build5: Cia's go.
+
+### Durable thought
+none, reason: nothing new passes the bar.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-14T10:44:29-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `photon-build5`
+- HEAD: `0d48dc7 Share card: the hook is the headline, the one layout` (committed 2026-10-14)
+- tree: **44 uncommitted change(s)**
+- upstream: no upstream configured
+- merged into HEAD: `main`, `photon-look-build4`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+card finalized and on the phone; the next move is Apple's answer on build 4.
+
+---
+
 ## IN FLIGHT 2026-10-14 - Cia: "share button works, tweak the card" (no specifics); four layouts rendered for him to choose from
 
 ### Done
