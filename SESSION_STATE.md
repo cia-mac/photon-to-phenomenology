@@ -7,6 +7,23 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## IN FLIGHT 2026-10-14 - Cia: "share button works, tweak the card" (no specifics); four layouts rendered for him to choose from
+
+### Done
+- [observed] Cia, in chat: "share button works, tweak the card". He gave no specifics, so four layouts were rendered from the real ShareCard on kanizsa and checker-shadow: standard (the build 5 layout), question (the hook as headline), poster (module edge to edge), dark (ink ground). Sheets: ios/redesign-v8/SHEET_card_variants_kanizsa.png and _checker-shadow.png, sent to him. Only `standard` is reachable in a release build; the others sit behind a DEBUG -shareStyle argument. Committed on branch photon-build5.
+- [observed] My own mistake caught by the compiler: a slice edit removed the DiscPress button style; restored and rebuilt ("BUILD SUCCEEDED") before rendering.
+
+### Previous pending
+- carried: all items of the 2026-10-14 EXIT block below.
+
+### Pending / open
+- Cia picks a layout or names the tweak; then the chosen layout becomes the default, the build number stays 5 only if build 5 has not been uploaded (it has not), and the archive is redone.
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
 ## 2026-10-14 EXIT - Build 5 (1.0 (5)) with a share card built, archived and on Cia's phone; NOT uploaded or swapped; branch photon-build5 local (OPEN)
 
 Snapshot before this block: none (append only).
