@@ -7,6 +7,609 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-13 EXIT - Look work committed locally on branch photon-look-build4 (3 commits, not pushed, not merged to main), on Cia's "yes" (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "yes" to "do you want me to commit now?".
+
+### Done
+- [observed] Branch photon-look-build4 created from main (edd8281) because the session may not commit on the default branch. Commit 83febef: app source (library modules look, piece chrome, blue icon, VoiceOver edits that the shipped build contains, build number 4, project files). Commit 651355d: design iterations v3 to v6, icon candidates, store-v6-rgb screenshots, spelling and VoiceOver evidence. The third commit holds SESSION_STATE.md, including this block.
+- [observed] Left out on purpose: build output (ios/build-redesign-*), archives, DerivedData, the other session's shorts work, .claude/settings.json, SESSION_STATE.md.lock, asc_apps_list_icon_2026-10-10.png (an App Store Connect screenshot that may show Cia's other apps; the repo is public), superseded screenshot sets (store-v4, v4-rgb, v5, v5-rgb, v6, v6-upload, v6-a-superseded), a 215 KB device log (spell/afterimage-log.txt), scratch images.
+- [observed] Staged text was scanned for key ids (AuthKey_ names), issuer-style UUIDs, email addresses; the only hit was UIKit scene identifiers in a device log, which was then left out. Nothing was pushed; main is untouched.
+
+### Previous pending
+- done: commit the look work (local only).
+- carried: Apple's review of build 4 (Cia reports Waiting for Review); Cia's hardware checks on build 4; release is a separate go; optional later items (headings on two Lab pages, animated previews, share card) go into a build 5 only after Apple answers.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- Merge or push of photon-look-build4: Cia's go (a push puts nothing live here, but the repo is public and the rule is no push without his go). Deploy of the site is separate and was not touched.
+- Untracked and still uncommitted: the superseded screenshot sets and build output on disk, shorts work, .claude/settings.json.
+
+### Operational notes
+- git checkout of main would not revert the working files from this branch's commits; the shipped build 4 source is exactly this branch's tip (83febef).
+
+### Durable thought
+none, reason: nothing new passes the bar.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-13T22:30:36-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `photon-look-build4`
+- HEAD: `651355d Photon iOS: design iterations v3 to v6, icon candidates, store-v6 screenshots, spelling and VoiceOver evidence` (committed 2026-10-13)
+- tree: **39 uncommitted change(s)**
+- upstream: no upstream configured
+- merged into HEAD: `main`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+looks committed locally; the next move is Apple's review, then Cia's call on merging or pushing the branch.
+
+---
+
+## 2026-10-13 EXIT - Build 1.0 (4) is in App Review in place of build 1, per Cia; manual release kept; Cia reports "Waiting for Review" (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "submitted, status waiting for review".
+
+### Done
+- [observed] Decision recorded: D-0770 (build 4 replaces build 1 in review; looks are D-0755 and D-0768).
+- [observed] Cia, in chat: "submitted, status waiting for review". This is Cia's report. The session never saw App Store Connect: its Chrome shows a blank login (authResult=FAILED) before and after Cia signed in. The session closed its Chrome tabs.
+- [observed] What the session did on the way: archived build 4 (ios/release-audit-2026-10-06/claude-final-8-build4, 1.0 (4)); uploaded it with the API-key route on "use the key" ("Upload succeeded" 19:31 PDT, log scrubbed, id occurrences 0); prepared ios/release-audit-2026-10-06/store-v6-upload (8 iPhone, 8 iPad, home screen first) and the checklist ios/redesign-v6/SWAP_CHECKLIST_build4.md; obtained the mandatory ChatGPT review at 20:07 (agent-notes/consults/20261013_200714.md): no demonstrated blocker, hardware smoke test advised before removing build 1.
+- [observed] Not stated and not known to the session: whether Cia ran the hardware smoke test (real VoiceOver, narration and mute, largest text, landscape) before the swap; whether the replaced screenshots, build 4 and manual release were verified after saving, beyond his "waiting for review".
+- [observed] Agent memory saved: reference_asc_chrome_signin_blank.
+
+### Previous pending
+- done: ChatGPT review; the swap and resubmission (Cia's report).
+- carried: Cia's hardware checks on build 4 (installed on his phone); uncommitted work; the other session's shorts work.
+
+### Pending / open
+- Apple's review of build 4. Approval does not release it: release is manual and a separate go from Cia (it will need its own ChatGPT review under D-0738 if the trial still runs: it is an irreversible, outward-facing action).
+- Optional, not done: headings for gestalt-grouping and receptive-field; largest text and landscape checks; animated previews, share card.
+- Nothing committed in the app repo: all look changes, icon, build number 4, redesign-v3 to v6, store-v5, store-v6, store-v6-upload, archives. Build output ios/build-redesign-* must not be committed. Committing needs Cia's go.
+
+### Operational notes
+- ChatGPT consult has a usage limit (it reset at 19:57 PDT 2026-10-13 after a morning of heavy use); keep reviews compact.
+- Never print the key id or issuer: they sit in pointfield-ios/SESSION_STATE.md; the line number changes as that file grows.
+
+### Durable thought
+none, reason: the one lasting fact is saved as agent memory; the rest is in D-0770.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-13T20:43:46-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `edd8281 Web pieces in American spelling` (committed 2026-10-11)
+- tree: **61 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+build 4 is in Apple's hands; the next move is Apple's review, then Cia's release go.
+
+---
+
+## IN FLIGHT 2026-10-13 - Cia: "swap go"; he is doing the App Store Connect swap himself in his Chrome from the checklist
+
+### Done
+- [observed] Cia, in chat: "swap go", after the ChatGPT review (20261013_200714, no blocker, smoke test advised) and the checklist ios/redesign-v6/SWAP_CHECKLIST_build4.md. Whether he ran the hardware smoke test first was not stated.
+- [observed] The swap itself is Cia's: this session's Chrome cannot sign in to App Store Connect (blank login, authResult=FAILED). The session made no change in App Store Connect.
+
+### Previous pending
+- carried: all items of the previous in-flight block.
+
+### Pending / open
+- Cia reports the status line after Submit. Expected: "Waiting for Review" on version 1.0 with build 4, release type manual. Then a closing exit block for the day.
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
+## IN FLIGHT 2026-10-13 - Mandatory ChatGPT review of build 4 obtained (20:07 PDT); verdict: no demonstrated blocker, do a short hardware smoke test before removing build 1 from review; App Store Connect swap not done
+
+### Done
+- [observed] Cia, in chat: "1, give me the checklist" (he will do the App Store Connect clicks in his own Chrome; the session's Chrome shows a blank sign-in with authResult=FAILED even after he signed in), then "review done?". Checklist: ios/redesign-v6/SWAP_CHECKLIST_build4.md; upload-ordered screenshots, home screen first: ios/release-audit-2026-10-06/store-v6-upload (iPhone-6.9 and iPad-13, 01 to 08), revealed in Finder.
+- [observed] Review: ~/Developer/agent-notes/consults/20261013_200714.md, run on the final build 3 to build 4 diff with the measured contrast numbers. Its points: no demonstrated fatal regression; worth minutes of delay first because a restarted review costs a cycle: real VoiceOver (library, piece, guide, replay, back and next), narration finishing, mute, interruption when changing pieces, largest accessibility text for clipping, landscape, one long-title piece and one Lab page; haptics alone do not justify delay. "Chrome only" understates one effect: a taller header gives the figure a smaller box, so figures render smaller when the title wraps (colors and drawing code unchanged). The two pages without a heading are a quality issue, not a standalone rejection blocker. Library first is acceptable; 16 shots across sets is fine (max ten per set). Safest order: smoke checks, build 4 processed, remove submission, attach 1.0 (4), screenshots, keep manual release, save, reload and verify, submit, confirm Waiting for Review on build 4.
+- [observed] ChatGPT limit cleared at 19:58 PDT (the ping answered "ok" at 19:58:36).
+
+### Previous pending
+- carried: all items of the 2026-10-13 EXIT block below; the ChatGPT review item is now done.
+
+### Pending / open
+- Cia's hardware smoke test of build 4 on his iPhone (it is installed), then his go on the swap. The swap is Cia's, in his Chrome, per the checklist; the session does not touch App Store Connect.
+- Not tested: landscape, largest text, real VoiceOver on the new chrome.
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
+## IN FLIGHT 2026-10-13 - Cia: "go swap build 4 into review"; App Store Connect in Chrome is signed out; nothing changed in App Store Connect
+
+### Done
+- [observed] Cia, in chat: "go swap build 4 into review". Read as the explicit go for: remove 1.0 from review, attach build 4, replace the 16 screenshots from store-v6-rgb, update review notes, keep MANUAL release, resubmit.
+- [observed] ChatGPT consult retried 19:32-19:34 PDT: usage limit until 7:57 PM. Plan: run the mandatory review (D-0738) at 7:57 PM, before the removal step, which restarts Apple's review.
+- [observed] Claude in Chrome: appstoreconnect.apple.com/apps/6821128475/... redirects to the login page with authResult=FAILED and a blank page (same as the 2026-10-11 session). Chrome is not signed in; signing in needs Cia's Apple ID password and code, which the session does not enter. No change was made in App Store Connect.
+
+### Previous pending
+- carried: all items of the 2026-10-13 EXIT block below (upload done; review owed; Cia's device checks).
+
+### Pending / open
+- Cia signs in to App Store Connect in Chrome and says so. Then: (1) ChatGPT review (after 7:57 PM), (2) confirm build 4 shows as processed on the version page, (3) the swap in the order above.
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
+## 2026-10-13 EXIT - Build 1.0 (4) UPLOADED to App Store Connect, processing; nothing attached or resubmitted; ChatGPT review still owed before the next step (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "use the key" after I reported: build 4 archived, review blocked by ChatGPT's usage limit, upload route unresolved.
+
+### Done
+- [observed] Cia, in chat: "use the key". Used the recorded API-key route once: key id and issuer id read from the Pointfield lane's notes into shell variables, key file in ~/.appstoreconnect/private_keys; no key, id or issuer printed to chat or written to a file by me. The route is not a standing permission.
+- [observed] xcodebuild -exportArchive of ios/release-audit-2026-10-06/claude-final-8-build4/Illusions.xcarchive (CFBundleVersion 4, checked in the archive before the command) with ExportOptions_AppStore_Upload.plist: "Uploading Photon.ipa is complete", "Uploaded package is processing", "Upload succeeded", "EXPORT SUCCEEDED" at 19:31 PDT 2026-10-13 (log ios/release-audit-2026-10-06/claude-final-8-build4/upload.log; key id and issuer id replaced, occurrence count 0 after).
+- [observed] Not done by me, by design: no removal of 1.0 from review, no attaching of build 4, no screenshot replacement, no release-type change, no resubmission. Build 1 is still the build in review. Whether App Store Connect finished processing was not checked.
+- [observed] ChatGPT pre-upload review (D-0738) was NOT obtained: usage limit until 7:57 PM, retried 19:26. I proceeded on Cia's explicit go because an unattached upload changes nothing in review; the review is now a gate on the next, consequential steps.
+- [observed] Earlier work this day unchanged: D-0768 (piece screens look), contrast fixes, store-v6 and store-v6-rgb, build 4 archive.
+
+### Previous pending
+- done: upload route choice (the key, once); upload of build 4.
+- carried: ChatGPT review of build 4 (owed, after 7:57 PM).
+- carried: Cia's on-device checks on build 4; build 4 is on his phone.
+- carried: builds 2 and 3: build 2 sits unattached; build 3 was never uploaded and is superseded by 4.
+- carried: the other session's shorts work uncommitted.
+
+### Pending / open
+- Rerun the ChatGPT review after 7:57 PM PDT 2026-10-13: the build 3 to 4 chrome diff (redesign-v6/before copies against current files), contrast numbers, the neutral-class rule, the two Lab pages without a heading.
+- Wait for processing; then, each on Cia's word and after that review: remove 1.0 from review (restarts review), attach build 4, replace the 16 screenshots from store-v6-rgb (library shot first suggested), update review notes, keep MANUAL release, resubmit.
+- Cia's device checks on build 4: real VoiceOver, voice, haptics, screen lit, largest text, Reduce Motion, landscape.
+- Nothing committed in the app repo; uncommitted list as in the earlier 2026-10-13 exit block.
+
+### Durable thought
+none, reason: the key-route facts are already in this lane's earlier blocks; nothing new passes the bar.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-13T19:31:39-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `edd8281 Web pieces in American spelling` (committed 2026-10-11)
+- tree: **60 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+build 4 is uploaded and processing; the next steps need the ChatGPT review (after 7:57 PM) and Cia's word.
+
+---
+
+## IN FLIGHT 2026-10-13 - Cia: "use the key". About to upload build 1.0 (4) with the App Store Connect API-key route; ChatGPT pre-upload review still blocked
+
+### Done
+- [observed] Cia, in chat: "use the key". Read as: lift the no-credentials rule for THIS upload, using the recorded API-key route (key file in ~/.appstoreconnect/private_keys, key id and issuer id taken from pointfield-ios/SESSION_STATE.md into shell variables, never printed). Not a standing permission.
+- [observed] ChatGPT consult retried at 19:26 PDT: still "usage limit ... try again at 7:57 PM". The review (D-0738) is therefore outstanding. Decision: upload now on Cia's explicit go (an unattached build changes nothing in review and releases nothing); the ChatGPT review becomes a gate on removing 1.0 from review, attaching build 4 and resubmitting.
+- [proposed] Command: xcodebuild -exportArchive -archivePath release-audit-2026-10-06/claude-final-8-build4/Illusions.xcarchive -exportOptionsPlist ExportOptions_AppStore_Upload.plist -exportPath release-audit-2026-10-06/claude-final-8-build4/upload -allowProvisioningUpdates plus the three authentication arguments. Log scrubbed of key id and issuer id afterward (grep count 0).
+
+### Previous pending
+- carried: all items of the 2026-10-13 EXIT block below.
+
+### Pending / open
+- Outcome of the upload; then the ChatGPT review before any App Store Connect change.
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
+## 2026-10-13 EXIT - Piece screens redesigned; build 4 (1.0 (4)) archived locally and on Cia's phone; NOT uploaded; ChatGPT pre-upload review blocked by its usage limit; upload route unresolved (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "now you need to redesign each module once we click on it" and "go build 4". My read of "go build 4": bump, archive, screenshots. Not an upload go; the upload route is also still unresolved.
+
+### Done
+- [observed] Decision recorded: D-0768 (piece screens look; the neutral-charcoal rule for ten pieces is the session's judgment, not Cia's).
+- [observed] Piece chrome in ios/Photon/Pieces/chrome_app.js, chrome_app.css and ios/Photon/PieceScreen.swift (details in the IN FLIGHT 2026-10-13 block below); Poster made internal in LibraryView.swift. Earlier versions kept in ios/redesign-v6/before.
+- [observed] Contrast computed with a script: first version failed 4.5:1 for small text on red (3.58 for the thesis lead, 3.06 for the guide label) and green (3.84, 3.26), and pill vs card 2.36 on blue; all fixed (full-strength small text; paper pill on blue and green; afterimage label at .92) and the build rebuilt.
+- [observed] Build number 3 to 4 in ios/project.yml, ios/Photon/Info.plist, ios/Photon.xcodeproj/project.pbxproj. Final archive ios/release-audit-2026-10-06/claude-final-8-build4/Illusions.xcarchive: "ARCHIVE SUCCEEDED", 1.0 (4), 79 narration files, 21 pages, bundle chrome_app.css identical to source. The first build 4 archive (before the contrast fixes) was moved to claude-final-8-build4-a-superseded. Final archive installed on "iPhone Ciamac" ("App installed").
+- [observed] tools/verify_all.sh on this chrome: failures 0 of 21 (ios/redesign-v6/verify_all_b4.txt). DOM audit ios/redesign-v6/a11y_audit.mjs: 19 of 21 pass; gestalt-grouping and receptive-field have no heading (not caused by this change, not fixed).
+- [observed] Store screenshots from the final build: ios/release-audit-2026-10-06/store-v6 (16) and flattened store-v6-rgb (16); phone and iPad contact sheets ios/redesign-v6/STORE_v6_iphone63.png and STORE_v6_ipad13.png, phone sheet viewed. The superseded set is in store-v6-a-superseded.
+- [observed] ChatGPT review attempt: consult exit 1, "You've hit your usage limit ... try again at 7:57 PM". No review exists for build 4.
+- [observed] Xcode question: Cia sent a screenshot of Xcode's welcome window; answered that Xcode is fine and the account lacks App Store Connect access for team 3AUT8DTWP3.
+
+### Previous pending
+- carried: upload route choice (a: allow the API-key route for one upload, b: Cia uploads from Xcode Organizer or Transporter, c: re-sign the Apple Account in Xcode Settings). Now applies to build 4, not build 3.
+- carried: Cia's on-device checks, now on build 4: real VoiceOver (home, a piece's header order and heading, the guide card, the discs), narration voice, haptics, screen lit, largest text, Reduce Motion, landscape.
+- carried: build 1 in review; builds 2 and 3 unattached or never uploaded; build 3 was never uploaded.
+- carried: the other session's shorts work uncommitted.
+
+### Pending / open
+- ChatGPT pre-upload review of build 4: rerun after 7:57 PM (diff is at the scratchpad build4.diff recipe: redesign-v6/before vs current files). Mandatory before any upload (D-0738).
+- Cia's explicit upload go, and a working route.
+- After an upload processes, each on Cia's word: remove 1.0 from review, attach build 4, replace the 16 screenshots from store-v6-rgb, update notes, keep manual release, resubmit.
+- Not tested: real VoiceOver, largest text and landscape on piece screens; two Lab pages lack a heading.
+- Nothing committed: all look changes, icon, build number, redesign-v3 to v6, store-v5, store-v6 and their rgb copies, archives. Build output folders ios/build-redesign-* should not be committed.
+
+### Operational notes
+- ChatGPT consult has a usage limit that resets at a stated time; Gemini is available as an additional read but does not satisfy the mandatory ChatGPT review.
+- verify_all.sh takes about 18 minutes alone.
+- The store script's first piece shot lands on the last guide step or the finished state depending on timing.
+
+### Durable thought
+none, reason: nothing here passes the bar beyond what D-0768 and the memory note carry.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-13T19:16:39-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `edd8281 Web pieces in American spelling` (committed 2026-10-11)
+- tree: **60 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+blocked on the ChatGPT review (limit resets 7:57 PM) and on Cia: the upload route and an explicit upload go.
+
+---
+
+## IN FLIGHT 2026-10-13 - Piece screens redesigned in the modules look on Cia's "now you need to redesign each module once we click on it"; on his phone; verifier running
+
+### Done
+- [observed] Cia, in chat: "the app looks good outside, now you need to redesign each module once we click on it with the fresh look". Earlier in this turn he asked "problem with xcode?" with a screenshot of Xcode's welcome window; answered: not a fault, the earlier failure is the signed-in account lacking App Store Connect access for team 3AUT8DTWP3; gave the open command for the build 3 archive. The build 3 upload is STILL not done.
+- [observed] Chrome only; figures, grounds and colors untouched. ios/Photon/Pieces/chrome_app.js: tags html with data-piece (slug) and groups #chapter, #title, #readout into one fixed column (.photon-head) so a larger title cannot hit the readout; ios/Photon/Pieces/chrome_app.css: per-piece accent, kicker as a pill, 29 px Helvetica Neue Bold title, thesis as a rounded accent card, guide card as a solid accent module with an ink Next pill, replay pill, Lab pages get the kicker pill, heading and instruction type; ios/Photon/PieceScreen.swift: the four buttons are filled discs in the piece's accent (PieceLook, mirrors the CSS), press feedback respects Reduce Motion; ios/Photon/LibraryView.swift: Poster made internal so both screens share colors.
+- [observed] Rule applied: pieces where color, lightness or adaptation is the subject (afterimage, opponent-afterimage, motion-aftereffect, troxler-fading, motion-induced-blindness, checker-shadow, cornsweet, change-blindness, contrast-sensitivity, trichromatic-mixing) keep a neutral charcoal card and discs, so no saturated block sits beside them. Colored accents: kanizsa and gestalt blue, scintillating-grid and ponzo red, cafe-wall and apparent-motion green, muller-lyer and receptive-field pink, aperture-problem purple, ebbinghaus and inverse-problem gray. Library tiles keep their colors (motion-aftereffect pink there, charcoal inside).
+- [observed] Simulator iPhone 17 and iPad Pro 13: guide card, finished state, Lab pages viewed (ios/redesign-v6/after, sheets SHEET_pieces_new_A/B.png; old look ios/redesign-v6/before). Release build installed on "iPhone Ciamac" ("App installed").
+- [observed] DOM audit redesign-v6/a11y_audit.mjs over all 21 pages: 19 pass (every control named, every canvas labeled, heading present, header order chapter>title>readout, no page errors). gestalt-grouping and receptive-field have no heading (no #title, no h1); not caused by this change, not fixed.
+- [proposed] tools/verify_all.sh started in the background, output redesign-v6/verify_all.txt; result not yet read.
+
+### Previous pending
+- carried: all items of the 2026-10-11 exit block and the 2026-10-12 in-flight block (upload route choice; device checks).
+
+### Pending / open
+- Cia's critique of the piece screens. Read the verifier result. Build 3 is now behind the source: this is build 4 material; nothing built or archived for it.
+- Not done: largest text and landscape on piece screens; real VoiceOver; the two Lab pages' missing heading; screenshots from the new piece look (store-v5 piece shots show the old look).
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
+## IN FLIGHT 2026-10-12 - Cia gave "pload go" (read as: upload go) for build 1.0 (3); the Xcode-account route failed; the API-key route not used because of his standing no-credentials rule
+
+### Done
+- [observed] Cia, in chat: "pload go". Read as the explicit go for uploading 1.0 (3) from ios/release-audit-2026-10-06/claude-final-7-build3 (Info.plist CFBundleVersion 3).
+- [observed] xcodebuild -exportArchive with ExportOptions_AppStore_Upload.plist, no key arguments: "Failed to Use Accounts ... App Store Connect access for 3AUT8DTWP3 is required", EXPORT FAILED; nothing uploaded (ios/release-audit-2026-10-06/claude-final-7-build3/upload-xcodeaccount.log).
+- [observed] Not done: the API-key route (reads a key file and ids from another lane's notes). Cia's brief for this session said not to access credentials or Keychain, and that rule was not lifted by "upload go".
+
+### Previous pending
+- carried: all items of the build 3 EXIT block below.
+
+### Pending / open
+- Cia's choice: (a) allow the API-key route for this upload, (b) upload from Xcode Organizer or Transporter himself, or (c) re-sign the Apple Account in Xcode Settings so the account route works.
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
+## 2026-10-11 EXIT - Build 3 (1.0 (3)) archived locally with the new look and blue icon, on Cia's phone; NOT uploaded; waiting on his device checks and an explicit upload go (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "go, go" and "autopilot" after I listed: icon choice; build 3 bump and archive; upload needs a separate go.
+
+### Done
+- [observed] App icon replaced with the electric blue one (ios/Photon/Assets.xcassets/AppIcon.appiconset/AppIcon.png, 1024 RGB); previous icon kept at ios/icon_candidates/AppIcon_build1-2_black.png. My read of "go, go": go on both items I had listed. It was NOT taken as an upload go.
+- [observed] Build number 2 to 3 in ios/project.yml, ios/Photon/Info.plist and the two pbxproj entries.
+- [observed] Mandatory ChatGPT review before an irreversible step (D-0738): ~/Developer/agent-notes/consults/20261011_183319.md. Blockers it named, all fixed in ios/Photon/LibraryView.swift: press and opener animation now off under Reduce Motion (a pressed module dims instead); green module darkened to #256d3d so cream small text passes (its figure 3.84:1 before; mine 4.8:1 after, computed by hand, not measured); "Explore" heading restored above the filters; the count disc now always shows the total. It also said: check real VoiceOver, landscape and narrow iPad split view; changing icon and screenshots within an unreleased 1.0 is not a review problem; order is fix, Cia checks on his phone, upload, then remove 1.0 from review, select the new build, update screenshots and notes, keep manual release, resubmit.
+- [observed] Archive: ios/release-audit-2026-10-06/claude-final-7-build3/Illusions.xcarchive, "ARCHIVE SUCCEEDED", Info.plist 1.0 (3), 79 narration files. The first archive of the day (before the review fixes) was moved to claude-final-7-build3-a-superseded. The final archive's app is installed on "iPhone Ciamac" ("App installed").
+- [observed] tools/verify_all.sh on the final piece chrome: failures 0 of 21.
+- [observed] ios/release-audit-2026-10-06/store-v5 (16) and flattened store-v5-rgb (16); all 16 viewed on contact sheets ios/redesign-v5/STORE_v5_iphone63.png and STORE_v5_ipad13.png. Library shots are from the final Debug simulator build; the 14 piece shots show the current piece chrome.
+
+### Previous pending
+- done: icon; build 3 archive; verifier result read; all 16 store shots viewed; flattened copies.
+- carried: Cia's on-device checks, now on build 3: real VoiceOver (home order, the Explore heading, filters, the opener's value, a module, back, next), narration voice, haptics, screen staying lit, largest text, Reduce Motion, landscape.
+- carried: build 1 is still the build in review; build 2 sits unattached in App Store Connect.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- Cia's explicit go for the upload of 1.0 (3). Command route is the recorded API-key export (see the 2026-10-10 blocks); key ids must be scrubbed from the log.
+- After processing, each on Cia's word: remove 1.0 from review, attach build 3, replace the 16 screenshots from store-v5-rgb, update review notes, resubmit. Suggest putting the library screenshot first; it is the only one that shows the new look.
+- Not tested: landscape, narrow iPad split view, real VoiceOver.
+- Not built: animated previews in the modules, share card, piece-screen typography.
+- Nothing committed. Uncommitted: all look changes, icon, build number, redesign-v3..v5, store-v5, store-v5-rgb, both build 3 archive folders. Build output folders ios/build-redesign-* should not be committed.
+
+### Operational notes
+- verify_all.sh takes 40 minutes or more when builds run beside it; alone about 10.
+- zsh: use ${=var} to split a "udid name" pair.
+
+### Durable thought
+none, reason: decision is D-0755; nothing new passes the bar.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-11T18:39:38-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `edd8281 Web pieces in American spelling` (committed 2026-10-11)
+- tree: **54 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+blocked on Cia: device checks on build 3 and an explicit go for the upload.
+
+---
+
+## 2026-10-11 EXIT - New home screen look chosen by Cia on his phone ("modules on paper", after Studio Feixen); in source, uncommitted; build 3 not started (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "sick love it".
+
+### Done
+- [observed] Decision recorded: D-0755. Sequence of the day and the evidence for each step are in the four IN FLIGHT blocks below.
+- [observed] Final state of the source: ios/Photon/LibraryView.swift (modules on paper), ios/Photon/PhotonApp.swift (light color scheme for a dark clock on paper), ios/Photon/PieceScreen.swift (bare glyph buttons), ios/Photon/Pieces/chrome_app.css (flat guide card, solid Next, step marks that shrink to fit). Earlier versions kept: ios/redesign-v3/before (original), ios/redesign-v4/before (monograph), ios/redesign-v5/before (poster).
+- [observed] After "sick love it": thin-line figures moved to lighter modules and printed solid (mask darkened to drop the ink ground, stacked three deep); viewed in ios/redesign-v5/after/library-wall.png. Simulator, iPhone 17 Pro: largest text size, open a module, back, The Lab filter all work on this version (ios/redesign-v5/after). iPad library viewed.
+- [observed] Release build installed on "iPhone Ciamac" with devicectl ("App installed"); this is the version with the fixes.
+- [observed] ios/release-audit-2026-10-06/store-v5: 16 files, 1206x2622 and 2064x2752. The 14 piece shots were taken from the poster-era build (piece screens are the same in both); the 2 library shots were retaken from the modules build; the poster library shots were moved to ios/redesign-v4/after/store-library-poster. Files are RGBA; flattened upload copies not made. Only 4 of 16 opened and checked for size; the iPad library one viewed.
+- [observed] tools/verify_all.sh after the Next button change: failures 0 of 21. The run after the step-mark fix was started with the store job; its summary line had not appeared when this block was written.
+- [observed] Icon candidate ios/icon_candidates/icon_F_modules_blue.png (preview icons_preview_v3.png); AppIcon not changed.
+- [observed] Agent memory saved: feedback_design_bold_swiss_not_restrained.
+
+### Previous pending
+- done: Cia's reaction to the look (rejected monograph, approved poster, chose modules).
+- carried: Cia's on-device VoiceOver, voice, haptics and screen-lit checks; note the phone now holds this development build, not the uploaded build 2 (reinstall from ios/release-audit-2026-10-06/claude-final-6-build2 for the exact binary).
+- carried: on Cia's word only, anything in App Store Connect; build 1 is still the build in review.
+- carried: uncommitted VoiceOver edits, store-v4, store-v4-rgb; the other session's shorts work.
+
+### Pending / open
+- Cia: icon (keep, or the electric blue candidate).
+- Read the last verifier result; view all 16 store-v5 shots; make flattened copies.
+- Not done: real VoiceOver on the new home; animated previews in the modules; share card; piece-screen typography.
+- Build 3: bump the build number, archive into claude-final-7-build3. Upload and every App Store Connect step need Cia's separate go, and a ChatGPT review first (D-0738).
+- Uncommitted: the four source files above, redesign-v3, redesign-v4, redesign-v5, store-v5, icon candidates. Build output folders ios/build-redesign-v3, build-redesign-v5, build-redesign-v4-device should not be committed.
+
+### Operational notes
+- The debug -piece argument re-opens the piece on back; test navigation from a plain launch.
+- store-v4 phone shots were taken on the iPhone 17 (iOS 27) simulator; iPhone 17 Pro (iOS 26.5) lays pieces out a few pixels differently.
+- A SwiftUI multiply blend did not take inside the grid tiles; a luminance mask does.
+- Gemini's research consult never returned (fell back to a smaller model and hung); its first consult worked.
+
+### Durable thought
+none, reason: the taste finding is saved as agent memory and the decision as D-0755; nothing further passes the bar.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-11T18:30:07-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `edd8281 Web pieces in American spelling` (committed 2026-10-11)
+- tree: **48 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+look chosen; the next steps (icon, build 3) wait on Cia.
+
+---
+
+## IN FLIGHT 2026-10-11 - Studio Feixen inspired home ("modules on paper") built on Cia's word and installed on his phone; waiting for his verdict against the approved poster version
+
+### Done
+- [observed] Cia, in chat: "i really like https://www.studiofeixen.ch get inspired by them". Viewed the site's home and about pages in the browser: off-white ground, a kit of pills and circles in pink, purple, electric blue, red, green and black, stripe and halftone patterns, shapes in motion, a proprietary rounded grotesque.
+- [observed] ios/Photon/LibraryView.swift reworked in that spirit (their typeface and compositions not used): paper ground #f6f5f1, title in ink, soft modules (38 pt continuous corners) in pink, purple, electric blue, red, green, gray and ink; opener is an electric blue module with paper discs; black capsule for "Explore illusory contours"; capsule filters; count on a striped disc beside the label; modules drop in with a spring once and lean when pressed (off with Reduce Motion). ios/Photon/PhotonApp.swift: preferred color scheme light, so the clock is dark on paper. Approved poster version kept at ios/redesign-v5/before/LibraryView.poster.swift with PhotonApp.before.swift.
+- [observed] Simulator build succeeded (iPhone 17 Pro); home and scrolled wall viewed; comparison ios/redesign-v5/SHEET_poster_vs_modules.png sent. Release build installed on "iPhone Ciamac" ("App installed"), replacing the poster version there.
+- [observed] tools/verify_all.sh rerun after the Next button change: failures 0 of 21. The run after the step-mark fix is still going with the store-v5 job.
+- [inferred] ios/release-audit-2026-10-06/store-v5 (14 of 16 written so far) shows the POSTER version, since those simulators still hold that build; if the modules version is chosen its library shots must be redone.
+
+### Previous pending
+- carried: all earlier items.
+
+### Pending / open
+- Cia: poster or modules. Not tested on the modules version: tile open, back, filters, large text, iPad, VoiceOver.
+- Icon choice still open.
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
+## IN FLIGHT 2026-10-11 - Cia approved the poster-wall look on his phone ("looks very good, very swiss"); fixes made, store-v5 shots and verifier running
+
+### Done
+- [observed] Cia, in chat, after the build was installed on his iPhone 15: "looks very good very swiss".
+- [observed] Installed on "iPhone Ciamac" twice with devicectl ("App installed"), Release build from ios/build-redesign-v4-device. This REPLACED the build 2 archive copy that was on the phone for his VoiceOver and voice checks; the exact uploaded binary is no longer on the phone (reinstall from ios/release-audit-2026-10-06/claude-final-6-build2 if he wants it).
+- [observed] Two defects found by testing and fixed: at the largest text size the opener's text overlapped the figure and the title broke mid-word (opener is now a vertical stack, title lines never wrap; ios/redesign-v4/after/library-large-text.png); on five-step pieces the guide's Next button overflowed the card after the step marks were widened (marks now shrink to fit; ios/redesign-v4/after/motion-aftereffect-guide.png).
+- [observed] Simulator, iPhone 17: opening a tile, back, and The Lab filter (5) work on this version.
+- [observed] Icon candidates rendered, not swapped in: ios/icon_candidates/icon_D_poster_blue.png, icon_E_poster_red.png, preview icons_preview_v2.png.
+- [proposed] Running in the background: 16 screenshots into ios/release-audit-2026-10-06/store-v5 (from the Debug simulator build), then tools/verify_all.sh. Results not yet read.
+
+### Previous pending
+- carried: all earlier items. Cia's critique item: answered, approved.
+
+### Pending / open
+- Read the store-v5 shots and the verifier result. Cia: icon choice. Not done: real VoiceOver on the new home, animated tile previews, share card, piece-screen typography, build 3 archive (needs version bump; upload needs its own go).
+
+### Durable thought
+none, reason: in-flight checkpoint; the taste finding is saved as agent memory feedback_design_bold_swiss_not_restrained.
+
+---
+
+## IN FLIGHT 2026-10-11 - Poster-wall home screen built in source on Cia's "yes go"; shown to him, waiting for his critique
+
+### Done
+- [observed] Cia, in chat, after the research summary and my recommendation (color-field posters plus a live opener; behavior changes on the home screen): "yes go, let me see when its done, then i critic".
+- [observed] ios/Photon/LibraryView.swift rewritten: 70 pt Helvetica Neue Bold title; a blue field with the Kanizsa discs that turn with a spring and a haptic on tap; 2-column wall (3 on iPad) of flat color tiles (blue, red, ochre, cream) with the figure printed in ink through a luminance mask; pieces whose color or gray is the subject keep their own preview on ink; the featured piece is no longer repeated in the wall; bold text tabs. Identifiers, labels and the filter behavior kept. chrome_app.css: the guide's Next button is solid cream.
+- [observed] Simulator build succeeded; tapped the opener (turns, text changes) and scrolled the wall on iPhone 17; iPad library viewed. Shots: ios/redesign-v4/after, sheets ios/redesign-v4/SHEET_*.png. Previous monograph source kept at ios/redesign-v4/before.
+- [inferred] Geometry of the pieces unchanged since the last 0-of-21 run, from the CSS diff being color and weight only; verifier rerun started, result not yet read.
+
+### Previous pending
+- carried: all earlier items; the direction question is answered by "yes go".
+
+### Pending / open
+- Cia's critique. Not done: large-text and VoiceOver runs of the new home, animated previews in the tiles, share card, piece-screen typography, icon, store-v5, build 3.
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
+## IN FLIGHT 2026-10-11 - Cia rejected the monograph restyle ("still too lame") and asked for research on what is current and draws younger people
+
+### Done
+- [observed] Cia, in chat, on seeing the before/after: "this looks still too lame", then "step back and rethink this, research with codex and gemini and find out what is hip and what would attract younger people, deep research". The monograph restyle stays uncommitted in the tree and is NOT accepted.
+- [observed] Three bolder library mockups rendered from the real previews (not in the app): ios/redesign-v4/mock/CONCEPTS_A_B_C.png, generator make.mjs.
+- [observed] Research written to ios/redesign-v4/RESEARCH_youth_design_v1.md from the ChatGPT consult 20261011_173947.md and a cited helper sweep. Gemini's research consult had not returned.
+
+### Previous pending
+- carried: everything in the EXIT block below; its "react to the new look" item is answered: rejected.
+
+### Pending / open
+- Cia to choose a direction and say whether behavior changes on the home screen (live opener, hold to reveal, share card) are allowed; the task was scoped visual only.
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
+## 2026-10-11 EXIT - New look ("corrected monograph") built in source and run in the simulator; waiting on Cia's reaction before icon, store-v5 screenshots or any build 3 (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "work on the look of the app. It still looks lame. We need to colab with gemini and codex."
+
+### Done
+- [observed] Consults: Gemini proposed three directions (agent-notes/consults/20261011_162934_gemini.md); ChatGPT critiqued them against the code (20261011_163037.md) and reviewed the diff (20261011_165149.md). Chosen: a corrected Swiss monograph. Kept ink #0c0b09 and cream #e8e0d0 because the stimuli and the 21 preview images are drawn on them. Rejected: the lab-instrument look (invented telemetry, a gimmick) and the hidden-controls look (accessibility).
+- [observed] ios/Photon/LibraryView.swift: Helvetica Neue plus SF Mono only, no serif; rounded panels, card borders and capsule filters removed in favor of hairlines; filters are text tabs with a Caspian underline; each piece carries its index number 01 to 21; privacy link moved to the footer; lime accent gone. Identifiers, labels, traits, the triangle toggle and the grid columns are unchanged.
+- [observed] ios/Photon/PieceScreen.swift: the four native buttons are bare glyphs in 44 pt frames. ios/Photon/Pieces/chrome_app.css: guide card and replay button flattened (radius, border, fill, bar-shaped step marks); no size or position changed.
+- [observed] Simulator Debug build succeeded (ios/redesign-v3/build.log). tools/verify_all.sh: failures 0 of 21. Element positions on the kanizsa piece are pixel-identical to store-v4 on the same simulator (iPhone 17, iOS 27); the iPhone 17 Pro on iOS 26.5 lays the same page out a few pixels differently, before and after alike. Tapped in the simulator: The Lab filter (5 experiments), open Gestalt grouping, back with the filter kept. iPad library viewed.
+- [observed] ChatGPT's review found one real defect, fixed: the "All" tab target was 28 pt wide, now 44. Its second finding (index numbers read by VoiceOver) does not apply: the card ignores children and sets its own label.
+- [observed] Before and after images sent to Cia: ios/redesign-v3/COMPARE_*.png; originals in ios/redesign-v3/before, new shots in ios/redesign-v3/after.
+
+### Previous pending
+- carried: Cia's on-device VoiceOver, voice, haptics and screen-lit checks on build 2.
+- carried: on Cia's word only, withdraw 1.0, attach build 2, replace screenshots, resubmit.
+- carried: uncommitted VoiceOver edits, store-v4, store-v4-rgb; the other session's shorts work.
+
+### Pending / open
+- Cia: react to the new look. Open choices: keep the "TRY THIS" feature above the index although piece 01 repeats it; whether to go further on the piece screens.
+- Not done: large-text run of the new library; real VoiceOver; the first tap test left the phone simulator on its home screen once, not reproduced, cause unknown.
+- Not started, waiting on the look being accepted: app icon (current one already fits the look), 16 screenshots into store-v5, archive into claude-final-7-build3. A build 3 needs its own go.
+- ChatGPT's next three: thumbnails with gray grounds sit differently from those on black; piece readouts are too faint; the iPad feature block's text floats.
+- Uncommitted: LibraryView.swift, PieceScreen.swift, chrome_app.css, ios/redesign-v3, ios/build-redesign-v3 (build output, should not be committed).
+
+### Operational notes
+- store-v4 phone shots were taken on the iPhone 17 (iOS 27) simulator; compare like with like.
+- With the debug -piece argument the back button re-opens the piece (the library re-pushes it on appear); test navigation from a plain launch.
+- simctl and consult both need the Bash sandbox off.
+
+### Durable thought
+none, reason: nothing here changes a future action beyond the notes above.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-11T16:52:05-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `edd8281 Web pieces in American spelling` (committed 2026-10-11)
+- tree: **37 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+waiting on Cia: his reaction to the new look decides the icon, the screenshots and build 3.
+
+---
+
+## 2026-10-11 EXIT - VoiceOver support built; build 2 uploaded and processed beside build 1; waiting on Cia's on-device checks before replacing build 1 (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "release go", "replaces build 1", "yes voice over".
+
+### Done
+- [observed] VoiceOver support, all in source: ios/Photon/Pieces/chrome_app.js (canvas role img with a plain description per piece, #title as a level-1 heading, the guide as a named region, and the guide no longer auto-advances while a screen reader runs); ios/Photon/Narrator.swift (screen-reader state sent after every page load and on status change; first-launch mute follows it; debug-only -forceVoiceOver); contrast-sensitivity.html chart canvases labelled. A DOM audit before the change found 0 unnamed controls and 18 unlabelled canvases; after, 0 of 21 pieces lack a label. Simulator with the override: guide held at step 1 at 20 s and 30 s while the normal run reached the last step. tools/verify_all.sh at four sizes: failures 0 of 21. Real VoiceOver was NOT run.
+- [observed] Mandatory ChatGPT review (D-0738) before an irreversible action: agent-notes/consults/20261011_160254.md. It advised: upload build 2 without withdrawing build 1; test the processed build on a device with real VoiceOver and Cia's ears; then withdraw, attach, replace screenshots, resubmit; keep manual release until those pass; named failure modes (startup race, timers running, frozen guide, flattened controls, static descriptions). Followed in order.
+- [observed] Build 2 (1.0 (2)) archived (ios/release-audit-2026-10-06/claude-final-6-build2) and uploaded with the API-key route at 16:12 (log scrubbed: key id count 0). App Store Connect TestFlight lists build 2 "Ready to Submit" and build 1 "Ready to Submit"; the version page's release type is still MANUAL. Build 1 is still the build in review; nothing withdrawn, no screenshot replaced, release type unchanged, nothing resubmitted.
+- [observed] The same archive was installed on Cia's iPhone 15 (devicectl "App installed"), so his VoiceOver and voice checks run on the build that would ship.
+- [observed] New store screenshots from build 2: ios/release-audit-2026-10-06/store-v4 (16 files, 1206x2622 and 2064x2752, each viewed) and flattened upload copies in store-v4-rgb. Not uploaded.
+
+### Previous pending
+- done: VoiceOver work; build 2 uploaded.
+- carried: Apple's review of build 1; Cia's listen to the voice; haptics; screen staying lit.
+- carried: the other session's shorts work stays uncommitted.
+
+### Pending / open
+- Cia, on the phone: (1) Settings, Accessibility, VoiceOver on; open a piece; swipe through the title, the figure description, the readout and the guide; press Next; check the guide does not change by itself; (2) turn VoiceOver off and listen to the voice on three or four pieces; (3) haptics and screen staying lit on a stare piece. Report what is wrong.
+- Then, on Cia's word and not before: withdraw 1.0 from review, attach build 2, replace the 16 screenshots from store-v4-rgb, update review notes, set release (Cia said "release go": automatic after approval; the ChatGPT review advised manual until the checks pass; to put back to Cia), resubmit.
+- Uncommitted: the VoiceOver edits, store-v4 and store-v4-rgb, SESSION_STATE.md.
+
+### Operational notes
+- App Store Connect accepts a second build for the same version while the first is in review; withdrawal is only needed to change the attached build.
+- zsh: "$2" does not word-split; use ${=2} when forwarding several launch arguments.
+
+### Durable thought
+none, reason: recorded in the review log and the notes above.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-11T16:15:04-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `edd8281 Web pieces in American spelling` (committed 2026-10-11)
+- tree: **32 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+blocked on Cia: on-device VoiceOver and voice check before build 1 is replaced.
+
+---
+
+## IN FLIGHT 2026-10-11 - about to upload build 2 (1.0 (2)) to App Store Connect; build 1 stays in review for now
+
+### Done
+- [observed] Cia, in chat: "release go", "replaces build 1", "yes voice over".
+- [observed] VoiceOver work done and checked: chrome_app.js (canvas role img + description, title heading, guide region, no auto-advance while a screen reader runs), Narrator.swift (screen-reader state pushed after load and on change, debug -forceVoiceOver), contrast-sensitivity canvas labels. Label check passes on all pieces; simulator with the override: guide holds at step 1 after 30 s while the normal run reaches the last step. Piece verifier 0 of 21. Real VoiceOver NOT run.
+- [observed] ChatGPT review (mandatory, D-0738): ~/Developer/agent-notes/consults/20261011_160254.md. Its advice: upload build 2 and let it process without withdrawing build 1; test the processed build on a device with real VoiceOver and Cia's ears; only then withdraw, attach build 2, replace screenshots, resubmit; keep manual release until those checks pass.
+- [proposed] Next: upload build 2 now (claude-final-6-build2 archive, API-key route, key ids scrubbed from the log); install the same archive on Cia's iPhone for his VoiceOver and voice check. Do NOT withdraw build 1, replace screenshots, change release type or resubmit until Cia reports.
+
+### Previous pending
+- carried: all items of the 2026-10-11 deploy EXIT block below.
+
+### Pending / open
+- Outcome of the upload.
+
+### Durable thought
+none, reason: in-flight checkpoint.
+
+---
+
 ## 2026-10-11 EXIT - respelled web pieces live; committed and pushed (OPEN)
 
 Snapshot before this block: none (append only).
