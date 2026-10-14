@@ -7,6 +7,43 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-14 EXIT - photon-build5 merged into main locally (fast-forward); NOT pushed (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "merge to main".
+
+### Done
+- [observed] The first checkout of main was refused because ios/redesign-v7/verify_all_b5.txt (committed empty earlier, finished since) was modified; it was committed on the branch (079e79e, "failures 0 of 21"), then `git merge --ff-only photon-build5` on main succeeded. `git status -sb` reads "main...origin/main [ahead 9]". Branch photon-build5 kept. Nothing pushed; no deploy.
+- [observed] Source of record: main now holds the build 5 source (share card, hidden Lab headings, build number 5). Build 4 (the one in Apple's review) is at origin/main through 9816c22; the archive for build 5 is claude-final-9-build5, not uploaded.
+
+### Previous pending
+- done: merge of photon-build5.
+- carried: push of main (Cia's go; the repo is public); Apple's answer on build 4; then the ChatGPT review of build 5, the upload (Cia's per-upload okay for the key) and the swap (Cia's clicks); untested: real VoiceOver on the share button, largest text, landscape; the other session's shorts work uncommitted.
+
+### Pending / open
+- Push of main: Cia's go. Note: a push publishes build 5 source that is not yet in review.
+
+### Durable thought
+none, reason: nothing new passes the bar.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-14T10:56:33-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `079e79e Verifier output for build 5: failures 0 of 21` (committed 2026-10-14)
+- tree: **43 uncommitted change(s)**
+- upstream: origin/main (ahead 9, behind 0)
+- merged into HEAD: `photon-build5`, `photon-look-build4`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+merged locally; a push waits for Cia.
+
+---
+
 ## 2026-10-14 EXIT - Share card finalized as the hook-as-headline layout; build 5 re-archived and on Cia's phone; NOT uploaded or swapped; branch photon-build5 local (OPEN)
 
 Snapshot before this block: none (append only).
