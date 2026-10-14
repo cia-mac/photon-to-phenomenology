@@ -7,6 +7,54 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-14 EXIT - Build 5 (1.0 (5)) with a share card built, archived and on Cia's phone; NOT uploaded or swapped; branch photon-build5 local (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "build 5" then "1, share card".
+
+### Done
+- [observed] Decision recorded: D-0774 (build 5 adds the share card; swap held until Apple answers on build 4).
+- [observed] Branch photon-build5 from main (9816c22), 3 commits: dd4620d and 1dbb5e3 (hidden page heading for gestalt-grouping and receptive-field; the first version sat at y=-1 and the verifier flagged it, moved below the button row), a641d6b (share card, build number 5). Design iterations and card renders are in ios/redesign-v7.
+- [observed] Share card: ios/Photon/PieceScreen.swift (ShareCard view rendered with ImageRenderer at 1080 by 1350, ShareLink in the top row, DiscLabel shared with the other discs), ios/Photon/Catalog.swift (Piece.shortTitle, Piece.number). Cards rendered for kanizsa, ponzo, checker-shadow, receptive-field, cafe-wall, afterimage, muller-lyer through a DEBUG-only -dumpShare launch argument; the first layout left dead space above the footer, module height raised from 640 to 800 and the two final cards viewed. The system share sheet opened in the simulator on a piece and showed the card as the preview titled "Müller-Lyer lines" with Copy, Print and Preview.
+- [observed] tools/verify_all.sh: failures 0 of 21 (ios/redesign-v7/verify_all_b5.txt). DOM audit ios/redesign-v6/a11y_audit.mjs: 21 of 21 pass, run after the heading change and before the share button was added; the share button was not audited.
+- [observed] Archive ios/release-audit-2026-10-06/claude-final-9-build5/Illusions.xcarchive: "ARCHIVE SUCCEEDED", 1.0 (5), 79 narration files; installed on "iPhone Ciamac" ("App installed"), replacing build 4 there.
+- [observed] Not done, by design: no upload, no App Store Connect change, no ChatGPT review of build 5 (needed before any upload or swap, D-0738), no merge, no push.
+
+### Previous pending
+- carried: Apple's review of build 4 (Cia reports Waiting for Review); Cia's hardware checks; release of any build is a separate go with a ChatGPT review first; the other session's shorts work uncommitted; build 4 source is on main and origin/main.
+- done: the optional build 5 items: Lab headings (done); share card (done); animated tiles (not chosen).
+
+### Pending / open
+- Cia: try the share button on his phone (build 5) and critique the card.
+- ChatGPT review of build 5, then upload (API key needs his per-upload okay) and the App Store Connect swap, which he does himself from a checklist; only after Apple answers on build 4, unless he wants to restart the queue.
+- Not tested: real VoiceOver on the share button, largest text, landscape, the share sheet on hardware; a card for the pieces that are only stills.
+- Uncommitted on disk: superseded screenshot sets, build output, shorts work, .claude/settings.json.
+
+### Operational notes
+- The iPhone 17 simulator had shut down between sessions; boot it with xcrun simctl boot before shooting.
+- The share card is a still of the library preview, not the stimulus; for gray and color pieces it keeps the preview's own ground on an ink module.
+
+### Durable thought
+none, reason: nothing new passes the bar beyond D-0774.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-14T10:37:51-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `photon-build5`
+- HEAD: `a641d6b App 1.0 (5): share card on every piece` (committed 2026-10-14)
+- tree: **42 uncommitted change(s)**
+- upstream: no upstream configured
+- merged into HEAD: `main`, `photon-look-build4`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+build 5 is built and on the phone; the next move is Cia's critique and, later, Apple's answer on build 4.
+
+---
+
 ## 2026-10-13 EXIT - main pushed to origin through 6005f83 on Cia's "push"; look work is on GitHub (CLOSED)
 
 Snapshot before this block: none (append only).
