@@ -82,6 +82,14 @@
   /* The look keys off the slug (chrome_app.css: per-piece accent), and the three header blocks
      stack in one fixed column, so a larger title can never run into the readout under it. */
   document.documentElement.dataset.piece=HERE;
+  /* A page with neither a #title nor an h1 (two Lab pages) still needs a heading for a screen reader:
+     a visually hidden h1 taken from the page title. Nothing on screen changes. */
+  (function(){
+    if(document.getElementById('title')||document.querySelector('h1')) return;
+    const h=document.createElement('h1'); h.className='sr-only';
+    h.textContent=document.title.replace(/\s*·\s*Photon to Phenomenology\s*$/,'');
+    document.body.insertBefore(h,document.body.firstChild);
+  })();
   (function(){
     const hd=['chapter','title','readout'].map(id=>document.getElementById(id));
     if(!hd.every(Boolean)) return;
