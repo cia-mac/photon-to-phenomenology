@@ -7,6 +7,47 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-14 EXIT - Apple approved 1.0 (4) (Cia's report); exact build 4 reinstalled on his phone for hardware checks; release steps written; the Release click is Cia's and has not happened (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "apple approved", then two bare "go" messages.
+
+### Done
+- [observed] Decision recorded: D-0780 (approval, the review's hold advice, and why a bare "go" was not read as the release go).
+- [observed] Mandatory ChatGPT review: ~/Developer/agent-notes/consults/20261014_112136.md: hold release until Cia has checked the exact build 4 on hardware (real VoiceOver, largest text, landscape, narration, haptics, 21 pieces offline); Apple's approval does not establish those; no rollback after release; build 5 ships as 1.0.1 after 1.0 is Ready for Distribution.
+- [observed] Cia's second bare "go" answered my either/or ("release go" or "reinstall build 4"). Read as proceeding with the reversible part: the archive ios/release-audit-2026-10-06/claude-final-8-build4 (Info.plist 1.0 (4)) installed on "iPhone Ciamac" ("App installed"), replacing build 5 there; and ios/redesign-v6/RELEASE_STEPS_build4.md written. Not read as authority for the irreversible part: the session cannot press Release (App Store Connect signs it out) and Cia does that click himself.
+- [observed] Release type is manual (set by Cia in App Store Connect before submission); the app is not live as far as the session knows; the approval itself was never seen by the session.
+
+### Previous pending
+- done: Apple's answer on build 4 (approved, per Cia).
+- carried: ChatGPT review of build 5 (needed before its upload and swap); build 5 needs the version string 1.0.1 once 1.0 is Ready for Distribution; real VoiceOver on the share button, largest text and landscape on build 5; the other session's shorts work uncommitted.
+
+### Pending / open
+- Cia's hardware checks on build 4 (now on his phone), then his own click on "Release This Version" in his Chrome, then he reports the status.
+- Then: build 5 as 1.0.1 (version string, What's New, ChatGPT review, upload with his per-upload okay for the key, his clicks in App Store Connect).
+- RELEASE_STEPS_build4.md is staged on main, not committed or pushed.
+
+### Durable thought
+none, reason: nothing new passes the bar beyond D-0780.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-14T11:22:53-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `c1e8a7e SESSION_STATE: main pushed through ed5d8df` (committed 2026-10-14)
+- tree: **44 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: `photon-build5`, `photon-look-build4`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+build 4 is on the phone for the checks; the Release click is Cia's.
+
+---
+
 ## 2026-10-14 EXIT - main pushed to origin through ed5d8df on Cia's "push"; build 5 source is on GitHub (CLOSED)
 
 Snapshot before this block: none (append only).
