@@ -151,7 +151,7 @@
     {t:"One tile switches shades every cycle. Study the grid. Can you find it?", act(){ found=false; guess=-1; blank.tgt=150; }},
     {t:"Keep looking. <b>Can you find the tile that changes?</b>", act(){ found=false; blank.tgt=150; }},
     {t:"Now close the blank, and watch the grid.", act(){ blank.tgt=0; }},
-    {t:"There it is, marked. The blank wiped the signal that would have pulled your eye to it, and you never stored the scene to compare. Even a whole tile changing in plain sight can go unseen. <b>Vision is construction, not a recording.</b>", act(){ found=true; blank.tgt=0; }},
+    {t:"There it is, marked. The blank wiped the signal that would have pulled your eye to it. Even a whole tile changing in plain sight can go unseen. <b>Vision is construction, not a recording.</b>", act(){ found=true; blank.tgt=0; }},
   ];
   PhotonChrome.init({here:'change-blindness', walk:WALK});
 

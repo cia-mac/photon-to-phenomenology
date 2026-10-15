@@ -126,10 +126,12 @@
     document.body.classList.add('guiding');
     replay.classList.remove('on'); walk.classList.add('on');
     userDriven=false; showStep(0); scheduleAuto();
+    if(assistive){ walk.setAttribute('tabindex','-1'); try{ walk.focus({preventScroll:true}); }catch(e){} }   // a screen reader lands on the guide it just opened
   }
   function endIntro(){
     stopSay(); clearAuto(); document.body.classList.remove('guiding');
     walk.classList.remove('on'); replay.innerHTML='&#8635; guide me again'; replay.setAttribute('aria-label','Guide me again'); replay.classList.add('on');
+    if(assistive){ try{ replay.focus({preventScroll:true}); }catch(e){} }
     if(!introDone){
       introDone=true; document.body.classList.add('explained');
       const th=document.getElementById('thesis');

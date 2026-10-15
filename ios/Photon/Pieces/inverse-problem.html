@@ -157,7 +157,7 @@
     {t:"Now turn it, and watch what happens to the shape.", act(){walking=true; yaw.tgt=0.85; pitch.tgt=0.55;}},
     {t:"From here the points hang at unrelated depths. This loose cloud is one scene that fits the flat image, and endless other arrangements fit it just as well. The picture alone cannot tell them apart.", act(){walking=true; yaw.tgt=-0.7; pitch.tgt=-0.45;}},
     {t:"Return to the one viewpoint where the points align. <b>What do you see?</b>", act(){walking=true; yaw.tgt=0; pitch.tgt=0;}},
-    {t:"A cube, at once: your visual system commits to the simplest cause. But there was never a cube. The flat image fit endless scenes, and you saw the simplest. <b>Vision is not recording, it is construction.</b>", act(){walking=false; yaw.tgt=0; pitch.tgt=0;}},
+    {t:"A cube, at once: your visual system settles on one reading. But there was never a cube. The flat image fit endless scenes, and you saw just one of them. <b>Vision is not recording, it is construction.</b>", act(){walking=false; yaw.tgt=0; pitch.tgt=0;}},
   ];
   PhotonChrome.init({here:'inverse-problem', walk:WALK, onEnd(){ walking=false; }});   // early close: release the pose so the cube eases home
 
