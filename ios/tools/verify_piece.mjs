@@ -165,6 +165,7 @@ for (const size of SIZES) {
     const nar = await page.evaluate(async () => {
       const wait = ms => new Promise(r => setTimeout(r, ms));
       window.__photonLog = []; PhotonApp._voice(true);
+      const rp = document.getElementById('replay'); if (rp && rp.classList.contains('on')) rp.click();   // the guide waits for a tap on "guide me"
       await wait(1700);
       const dots = document.querySelectorAll('#wdots .dot').length, seen = [];
       const say = () => (window.__photonLog || []).filter(m => m.t === 'say');
