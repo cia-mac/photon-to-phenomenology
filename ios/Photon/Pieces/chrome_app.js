@@ -70,7 +70,7 @@
       '<div class="wt" id="wt" aria-live="polite"></div>'+
       '<div class="wb"><button class="wskip" id="wskip">explore freely</button><div class="dots" id="wdots"></div><button class="wnext" id="wnext">next &#8594;</button></div>'+
     '</div>'+
-    '<button id="replay">&#8635; guide me</button>';
+    '<button id="replay" aria-label="Guide me">&#8635; guide me</button>';
   while(host.firstChild) document.body.appendChild(host.firstChild);
 
   const walk=document.getElementById('walk'), wt=document.getElementById('wt'),
@@ -129,7 +129,7 @@
   }
   function endIntro(){
     stopSay(); clearAuto(); document.body.classList.remove('guiding');
-    walk.classList.remove('on'); replay.innerHTML='&#8635; guide me again'; replay.classList.add('on');
+    walk.classList.remove('on'); replay.innerHTML='&#8635; guide me again'; replay.setAttribute('aria-label','Guide me again'); replay.classList.add('on');
     if(!introDone){
       introDone=true; document.body.classList.add('explained');
       const th=document.getElementById('thesis');

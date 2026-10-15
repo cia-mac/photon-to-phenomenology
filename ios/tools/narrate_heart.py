@@ -27,6 +27,7 @@ import vo_gate
 
 VOICE = os.environ.get("VO_VOICE", "af_heart")
 SPEED = float(os.environ.get("VO_SPEED", "0.88"))
+LEVEL = float(os.environ.get("VO_LEVEL_LUFS", "-21"))   # integrated loudness every line is brought to
 OUT = os.path.join(IOS, "Photon", "Pieces", "audio")
 WAV = os.environ.get("NARRATE_WAV_DIR") or tempfile.mkdtemp(prefix="heart_wav_")
 os.makedirs(OUT, exist_ok=True); os.makedirs(WAV, exist_ok=True)
@@ -105,7 +106,13 @@ for n, (key, text) in enumerate(jobs, 1):
     if ok is False:
         bad.append(key)
     dst = os.path.join(OUT, f"{key}.m4a")
-    subprocess.run(["afconvert", "-f", "m4af", "-d", "aac", "-b", "56000", "-c", "1", wav, dst], check=True)
+    # Level step: bring every line to one integrated loudness, so no line is louder or quieter than its neighbors.
+    meas = re.findall(r"I:\s+(-?[\d.]+) LUFS", subprocess.run(["ffmpeg", "-nostats", "-i", wav, "-af", "ebur128=framelog=quiet", "-f", "null", "-"], capture_output=True, text=True).stderr)
+    src = wav
+    if meas:
+        src = wav + ".lvl.wav"
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", wav, "-af", f"volume={LEVEL - float(meas[-1]):.2f}dB,alimiter=limit=0.8:level=false", "-ar", str(SR), src], check=True)
+    subprocess.run(["afconvert", "-f", "m4af", "-d", "aac", "-b", "56000", "-c", "1", src, dst], check=True)
     manifest[key] = {"text": text, "spoken": spoken, "dur": round(len(x) / SR, 2), "gate": why, "phonemes": phon,
                      "heard": heard if ok is False else "", "voice": VOICE, "speed": round(sp, 2)}
     print(f"[{n:>2}/{len(jobs)}] {manifest[key]['dur']:6.2f}s  {key:30s} {why:16s} {text[:46]}", file=sys.stderr, flush=True)

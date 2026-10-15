@@ -30,7 +30,7 @@
   "voice": "af_heart"
  },
  "afterimage-3": {
-  "dur": 4.8,
+  "dur": 4.81,
   "gate": "base.en exact",
   "heard": "",
   "phonemes": "ɐ sˈɔft ɹˈOz dˈɪsk, wˌɛɹ ðə tˈil jˈust tə bˈi. nˈʌθɪŋ ɹˈOz ɪz ˌɔn ðə skɹˈin.",
@@ -40,7 +40,7 @@
   "voice": "af_heart"
  },
  "afterimage-4": {
-  "dur": 11.34,
+  "dur": 11.35,
   "gate": "base.en exact",
   "heard": "",
   "phonemes": "ðə kˈOnz ðæt dɹˈæŋk ðə tˈil ɑɹ tˈIəɹd, sˌO ðə ɡɹˈA tˈɪps tˈɔɹd tˈilz ˈɑpəzət. jˌu ɑɹ sˈiɪŋ fətˈiɡ, ɹˈɛndəɹd æz kˈʌləɹ. vˈɪʒən ɪz nˌɑt ɹəkˈɔɹdɪŋ, ɪt ɪz kənstɹˈʌkʃən.",
@@ -180,7 +180,7 @@
   "voice": "af_heart"
  },
  "cafe-wall-4": {
-  "dur": 10.39,
+  "dur": 10.4,
   "gate": "base.en exact",
   "heard": "",
   "phonemes": "ðˌA wɜɹ dˈɛd lˈɛvᵊl ænd pˈɛɹəlˌɛl ðə hˈOl tˈIm. ˈɔfsˌɛt tˈIlz ænd ɡɹˈA mˈɔɹTəɹ mˌAd ju bˈɛnd ðˌɛm: ðə slˈOp wʌz jˈɔɹz. vˈɪʒən ɪz kənstɹˈʌkʃən, nˌɑt ɐ ɹəkˈɔɹdɪŋ.",
@@ -230,7 +230,7 @@
   "voice": "af_heart"
  },
  "checker-shadow-0": {
-  "dur": 1.54,
+  "dur": 1.52,
   "gate": "base.en exact",
   "heard": "",
   "phonemes": "lˈʊk æt skwˈɛɹz ˈA ænd bˈi",
@@ -283,15 +283,14 @@
   "dur": 22.04,
   "gate": "large-v3-turbo exact",
   "heard": "",
-  "note": "2026-10-11: page text respelled to American; phonemes identical to the recorded take, audio kept",
+  "phonemes": "ˈɛvəɹi bˈɑɹ ɪn ɐ ɡˈɪvən ɹˈO hæz ðə sˈAm kˈɑntɹˌæst, ænd ˈɛvəɹi bˈɑɹ ɪn ɐ kˈɑləm ðə sˈAm wˈɪdθ. hˈOld ɐ ɹəlˈækst ɡˈAz: ði ˈɑɹk wˌɛɹ ðə bˈɑɹz mˈɛlt ˈɪntu flˈæt ɡɹˈA ɪz nˌɑt pɹˈɪntᵻd ˌɔn ðə skɹˈin, ɪt ɪz jʊɹ ˈOn kˈɑntɹˌæst sˌɛnsətˈɪvəTi. dɹˈɑp ði ˈOvəɹˌɔl kˈɑntɹˌæst ænd wˈɑʧ ði ˈɑɹk ʃɹˈɪŋk; stˈɛp bˈæk ænd ðə fˈIn ɹˈIt ˈɛʤ wˈɔʃᵻz ˈWt fˈɜɹst.",
   "speed": 0.88,
-  "spoken": "Every bar in a given row has the same contrast, and every bar in a column the same width. Hold a relaxed gaze: the arc where the bars melt into flat grey is not printed on the screen, it is your own contrast sensitivity. Drop the overall contrast and watch the arc shrink; step back and the fine right edge washes out first.",
+  "spoken": "Every bar in a given row has the same contrast, and every bar in a column the same width. Hold a relaxed gaze: the arc where the bars melt into flat gray is not printed on the screen, it is your own contrast sensitivity. Drop the overall contrast and watch the arc shrink; step back and the fine right edge washes out first.",
   "text": "Every bar in a given row has the same contrast, and every bar in a column the same width. Hold a relaxed gaze: the arc where the bars melt into flat gray is not printed on the screen, it is your own contrast sensitivity. Drop the overall contrast and watch the arc shrink; step back and the fine right edge washes out first.",
-  "text_recorded": "Every bar in a given row has the same contrast, and every bar in a column the same width. Hold a relaxed gaze: the arc where the bars melt into flat grey is not printed on the screen, it is your own contrast sensitivity. Drop the overall contrast and watch the arc shrink; step back and the fine right edge washes out first.",
   "voice": "af_heart"
  },
  "cornsweet-0": {
-  "dur": 3.16,
+  "dur": 3.15,
   "gate": "base.en exact",
   "heard": "",
   "phonemes": "kəmpˈɛɹ ðə lˈɛft hˈæf wɪð ðə ɹˈIt. ˌɪz wˈʌn ʌv ðˌɛm lˈITəɹ?",
@@ -311,7 +310,7 @@
   "voice": "af_heart"
  },
  "cornsweet-2": {
-  "dur": 4.04,
+  "dur": 4.03,
   "gate": "base.en exact",
   "heard": "",
   "phonemes": "slˈId ði ˈɪŋk bˈɑɹ əkɹˈɔs ðə sˈim tə hˈId ɪt. wˈɑʧ ðə tˈu hˈævz.",
@@ -321,7 +320,7 @@
   "voice": "af_heart"
  },
  "cornsweet-3": {
-  "dur": 10.88,
+  "dur": 10.86,
   "gate": "base.en exact",
   "heard": "",
   "phonemes": "kˈʌvəɹd, ðə tˈu hˈævz mˈæʧ: wˈʌn flˈæt ɡɹˈA. ðˌA ˈɔlwˌAz wɜɹ. jˌu ɹˈɛd ðə lˈɪTᵊl ˈɛʤ ænd ɹipˈAntᵻd ðə hˈOl sˈɜɹfəs tə mˈæʧ. vˈɪʒən ɪz kənstɹˈʌkʃən, nˌɑt ɐ ɹəkˈɔɹdɪŋ.",
@@ -371,7 +370,7 @@
   "voice": "af_heart"
  },
  "ebbinghaus-4": {
-  "dur": 14.42,
+  "dur": 14.44,
   "gate": "base.en exact",
   "heard": "",
   "phonemes": "ðˌA wɜɹ ðə sˈAm sˈIz ˈɔl əlˈɔŋ, ænd ðə ɹˈidˌWt sˈɛd sˌO. sˈIz ɪz ʤˈʌʤd əɡˈɛnst ðə nˈAbəɹz, nˌɑt mˈɛʒəɹd: ðə sˈAm dˈɪsk ʃɹˈɪŋks bəsˈId ʤˈIənts ænd swˈɛlz bəsˈId dwˈɔɹvz. vˈɪʒən ɪz kənstɹˈʌkʃən, nˌɑt ɐ ɹəkˈɔɹdɪŋ.",
@@ -381,9 +380,10 @@
   "voice": "af_heart"
  },
  "gestalt-grouping-intro": {
-  "dur": 7.88,
+  "dur": 7.87,
   "gate": "base.en exact",
   "heard": "",
+  "phonemes": "dɹˈæɡ ðə slˈIdəɹz. ðə dˈɑts nˈɛvəɹ ʧˈAnʤ wˌɪʧ dˈɑt ðA ɑɹ; jʊɹ vˈɪʒəwəl sˈɪstəm dəsˈIdz wˈɛðəɹ ðA ɑɹ ɹˈOz ɔɹ kˈɑləmz.",
   "speed": 0.88,
   "spoken": "Drag the sliders. The dots never change which dot they are; your visual system decides whether they are rows or columns.",
   "text": "Drag the sliders. The dots never change which dot they are; your visual system decides whether they are rows or columns.",
@@ -450,7 +450,7 @@
   "voice": "af_heart"
  },
  "kanizsa-1": {
-  "dur": 2.07,
+  "dur": 2.06,
   "gate": "base.en exact",
   "heard": "",
   "phonemes": "kˈip wˈɑʧɪŋ ðə mˈɪdᵊl æz ðA tˈɜɹn.",
@@ -470,7 +470,7 @@
   "voice": "af_heart"
  },
  "kanizsa-3": {
-  "dur": 12.86,
+  "dur": 12.85,
   "gate": "large-v3-turbo exact",
   "heard": "",
   "phonemes": "ɐ bɹˈIt tɹˈIˌæŋɡᵊl wɪð kɹˈɪsp ˈɛʤᵻz, ænd nˈʌn ʌv ɪt ɪz dɹˈɔn. ˈOnli θɹˈi nˈɑʧt dˈɪsks ɪɡzˈɪst. ðə sˈɜɹfəs, ðə bɹˈItnəs, ði ˈɛʤᵻz: ju səplˈId ðˌɛm ˈɔl. vˈɪʒən ɪz kənstɹˈʌkʃən, nˌɑt ɐ ɹəkˈɔɹdɪŋ.",
@@ -633,6 +633,7 @@
   "dur": 18.88,
   "gate": "base.en exact",
   "heard": "",
+  "phonemes": "pˈɪk ɐn ədˈæptɪŋ kˈʌləɹ ænd pɹˈɛs stˈɑɹt. kˈip jʊɹ ˈIz lˈɑkt ˌɔn ðə smˈɔl kɹˈɔs, dˈu nˌɑt mˈuv ðˌɛm, ˌʌntˈɪl ðə fˈild ɡˈOz nˈutɹᵊl ɡɹˈA, ðˈɛn kˈip stˈɛɹɪŋ: ju wɪl sˈi ðə ʃˈAp ɹətˈɜɹn æz ɐ ɡˈOst ɪn ɪts ˈɑpəzət kˈʌləɹ, pˈAntᵻd bI jʊɹ ˈOn vˈɪʒəwəl sˈɪstəm ɪn ɐ fˈild wˌɛɹ nˈO sˈʌʧ kˈʌləɹ ɪɡzˈɪsts.",
   "speed": 0.88,
   "spoken": "Pick an adapting color and press Start. Keep your eyes locked on the small cross, do not move them, until the field goes neutral gray, then keep staring: you will see the shape return as a ghost in its opposite color, painted by your own visual system in a field where no such color exists.",
   "text": "Pick an adapting color and press Start. Keep your eyes locked on the small cross, do not move them, until the field goes neutral gray, then keep staring: you will see the shape return as a ghost in its opposite color, painted by your own visual system in a field where no such color exists.",
@@ -682,6 +683,7 @@
   "dur": 11.62,
   "gate": "base.en exact",
   "heard": "",
+  "phonemes": "ðə kənvˈɜɹʤɪŋ lˈInz ɹˈɛd æz dˈɛpθ, sˌO ði ˈʌpəɹ bˈɑɹ mˈʌst bi fˈɑɹðəɹ, sˌO jʊɹ vˈɪʒəwəl sˈɪstəm ɪnlˈɑɹʤd ɪt tə kˈip ðə wˈɜɹld kˈɑnstᵊnt. vˈɪʒən ɪz kənstɹˈʌkʃən, nˌɑt ɐ ɹəkˈɔɹdɪŋ.",
   "speed": 0.88,
   "spoken": "The converging lines read as depth, so the upper bar must be farther, so your visual system enlarged it to keep the world constant. Vision is construction, not a recording.",
   "text": "The converging lines read as depth, so the upper bar must be farther, so your visual system enlarged it to keep the world constant. Vision is construction, not a recording.",
@@ -691,13 +693,14 @@
   "dur": 13.24,
   "gate": "base.en exact",
   "heard": "",
+  "phonemes": "dɹˈæɡ ðə lˈIt əkɹˈɔs ðə sˈɛlz fˈild: ɪt fˈIəɹz əbˈʌv bˈAslˌIn ˈOvəɹ ðə sˈɛntəɹ, dɹˈɑps bəlˈO ˈOvəɹ ðə səɹˈWnd, ænd ɡˈOz sˈIlənt ˈʌndəɹ fˌʊlfˈild lˈIt. ðə sˈɛl ɹəpˈɔɹts kˈɑntɹˌæst, nˌɑt bɹˈItnəs.",
   "speed": 0.88,
   "spoken": "Drag the light across the cell's field: it fires above baseline over the center, drops below over the surround, and goes silent under full-field light. The cell reports contrast, not brightness.",
   "text": "Drag the light across the cell's field: it fires above baseline over the center, drops below over the surround, and goes silent under full-field light. The cell reports contrast, not brightness.",
   "voice": "af_heart"
  },
  "scintillating-grid-0": {
-  "dur": 2.22,
+  "dur": 2.24,
   "gate": "base.en exact",
   "heard": "",
   "phonemes": "hˈOld stˈɪl ænd tˈAk ˈɪn ðə hˈOl ɡɹˈɪd.",
@@ -740,6 +743,7 @@
   "dur": 8.02,
   "gate": "base.en exact",
   "heard": "",
+  "phonemes": "ɹˈAz ˈiʧ lˈIt. wˌɛɹ tˈu ˈOvəɹlˌæp, ɐ nˈu kˈʌləɹ əpˈɪɹz; wˌɛɹ ˈɔl θɹˈi mˈit, wˈIt. nˈʌn ʌv ɪt ɪz ɪn ðə lˈIt. jˌʊɹ ˈI mˌAks ɪt.",
   "speed": 0.88,
   "spoken": "Raise each light. Where two overlap, a new color appears; where all three meet, white. None of it is in the light. Your eye makes it.",
   "text": "Raise each light. Where two overlap, a new color appears; where all three meet, white. None of it is in the light. Your eye makes it.",

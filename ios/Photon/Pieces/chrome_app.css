@@ -89,4 +89,4 @@ html[data-piece] h1{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font
 html[data-piece="afterimage"] #readout .lab{opacity:.92}   /* this page draws dark text on a mid-gray ground */
 .sr-only{position:absolute!important;top:var(--shell-top);left:var(--shell-side);width:1px;height:1px;margin:0;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 /* See first: the readout line that names the percept (#fig, #verdict, #regime, #count) waits, like the explanation card, until the guide has run. */
-html[data-piece] body:not(.explained) :is(#fig,#verdict,#regime,#count){opacity:0}
+html[data-piece] body:not(.explained) :is(#fig,#verdict,#regime,#count){visibility:hidden}   /* hidden from a screen reader too */

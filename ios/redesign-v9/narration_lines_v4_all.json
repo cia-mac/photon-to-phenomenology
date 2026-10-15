@@ -1,0 +1,318 @@
+[
+ {
+  "id": "afterimage-0",
+  "text": "Look at the dot in the center. The ring counts out the hold time."
+ },
+ {
+  "id": "afterimage-1",
+  "text": "Do not let your eyes wander. Hold for about fifteen seconds."
+ },
+ {
+  "id": "afterimage-2",
+  "text": "The teal is gone. Keep your eyes where the dot was, and do not blink hard. What do you see on the gray?"
+ },
+ {
+  "id": "afterimage-3",
+  "text": "A soft rose disc, where the teal used to be. Nothing rose is on the screen."
+ },
+ {
+  "id": "afterimage-4",
+  "text": "The cones that drank the teal are tired, so the gray tips toward teal's opposite. You are seeing fatigue, rendered as color. Vision is not recording, it is construction."
+ },
+ {
+  "id": "aperture-problem-0",
+  "text": "Watch the bars drift through the porthole."
+ },
+ {
+  "id": "aperture-problem-1",
+  "text": "Which way does the motion seem to go? The dim arrow marks the direction you most likely see."
+ },
+ {
+  "id": "aperture-problem-2",
+  "text": "Is that the true direction? Through a slot, countless different motions would look exactly like this."
+ },
+ {
+  "id": "aperture-problem-3",
+  "text": "Now pull the rim wide, and watch the bright arrow."
+ },
+ {
+  "id": "aperture-problem-4",
+  "text": "It swings to the real heading. It was moving that way all along. Through the slot, every direction looked the same. Vision is not recording, it is construction."
+ },
+ {
+  "id": "apparent-motion-0",
+  "text": "Watch the two dots at this slow rhythm."
+ },
+ {
+  "id": "apparent-motion-1",
+  "text": "Now speed the rhythm up. Watch the gap between the dots."
+ },
+ {
+  "id": "apparent-motion-2",
+  "text": "Is anything moving across the gap?"
+ },
+ {
+  "id": "apparent-motion-3",
+  "text": "One object slides across the gap and back, yet nothing ever travels that space. Both dots only switch on and off in place. Two lamps, two still flashes, and a gap nothing crosses. The motion was yours, built from stillness. Vision is not recording, it is construction."
+ },
+ {
+  "id": "cafe-wall-0",
+  "text": "Look at the thin gray lines between the rows."
+ },
+ {
+  "id": "cafe-wall-1",
+  "text": "Push the shift further, and keep watching the gray lines."
+ },
+ {
+  "id": "cafe-wall-2",
+  "text": "Now slide the offset back toward zero."
+ },
+ {
+  "id": "cafe-wall-3",
+  "text": "Zero shift. Look at the gray lines now."
+ },
+ {
+  "id": "cafe-wall-4",
+  "text": "They were dead level and parallel the whole time. Offset tiles and gray mortar made you bend them: the slope was yours. Vision is construction, not a recording."
+ },
+ {
+  "id": "change-blindness-0",
+  "text": "One tile switches shades every cycle. Study the grid. Can you find it?"
+ },
+ {
+  "id": "change-blindness-1",
+  "text": "Keep looking. Can you find the tile that changes?"
+ },
+ {
+  "id": "change-blindness-2",
+  "text": "Now close the blank, and watch the grid."
+ },
+ {
+  "id": "change-blindness-3",
+  "text": "There it is, marked. The blank wiped the signal that would have pulled your eye to it, and you never stored the scene to compare. Even a whole tile changing in plain sight can go unseen. Vision is construction, not a recording."
+ },
+ {
+  "id": "checker-shadow-0",
+  "text": "Look at squares A and B."
+ },
+ {
+  "id": "checker-shadow-1",
+  "text": "Which looks lighter?"
+ },
+ {
+  "id": "checker-shadow-2",
+  "text": "Now the readout. It measures the light each square sends to your eye: the same for both."
+ },
+ {
+  "id": "checker-shadow-3",
+  "text": "Drag the shadow off B. Watch the two squares, and the readout."
+ },
+ {
+  "id": "checker-shadow-4",
+  "text": "The illusion drops. They were always the same gray. Your visual system discounted the shadow and reported the surface, not the light. Vision is construction, not a recording."
+ },
+ {
+  "id": "cornsweet-0",
+  "text": "Compare the left half with the right. Is one of them lighter?"
+ },
+ {
+  "id": "cornsweet-1",
+  "text": "Now look only at the seam in the middle."
+ },
+ {
+  "id": "cornsweet-2",
+  "text": "Slide the ink bar across the seam to hide it. Watch the two halves."
+ },
+ {
+  "id": "cornsweet-3",
+  "text": "Covered, the two halves match: one flat gray. They always were. You read the little edge and repainted the whole surface to match. Vision is construction, not a recording."
+ },
+ {
+  "id": "ebbinghaus-0",
+  "text": "Compare the two center discs. Do they match?"
+ },
+ {
+  "id": "ebbinghaus-1",
+  "text": "Now look at the circles around them."
+ },
+ {
+  "id": "ebbinghaus-2",
+  "text": "Watch the centers as the rings even out. Only their surroundings are changing."
+ },
+ {
+  "id": "ebbinghaus-3",
+  "text": "Rings matched. Compare the two centers again."
+ },
+ {
+  "id": "ebbinghaus-4",
+  "text": "They were the same size all along, and the readout said so. Size is judged against the neighbors, not measured: the same disc shrinks beside giants and swells beside dwarves. Vision is construction, not a recording."
+ },
+ {
+  "id": "inverse-problem-0",
+  "text": "Hold this view for a moment."
+ },
+ {
+  "id": "inverse-problem-1",
+  "text": "Now turn it, and watch what happens to the shape."
+ },
+ {
+  "id": "inverse-problem-2",
+  "text": "From here the points hang at unrelated depths. This loose cloud is one scene that fits the flat image, and endless other arrangements fit it just as well. The picture alone cannot tell them apart."
+ },
+ {
+  "id": "inverse-problem-3",
+  "text": "Return to the one viewpoint where the points align. What do you see?"
+ },
+ {
+  "id": "inverse-problem-4",
+  "text": "A cube, at once: your visual system commits to the simplest cause. But there was never a cube. The flat image fit endless scenes, and you saw the simplest. Vision is not recording, it is construction."
+ },
+ {
+  "id": "kanizsa-0",
+  "text": "Look at the space in the middle."
+ },
+ {
+  "id": "kanizsa-1",
+  "text": "Keep watching the middle as they turn."
+ },
+ {
+  "id": "kanizsa-2",
+  "text": "Stay on the middle. What do you see there?"
+ },
+ {
+  "id": "kanizsa-3",
+  "text": "A bright triangle with crisp edges, and none of it is drawn. Only three notched discs exist. The surface, the brightness, the edges: you supplied them all. Vision is construction, not a recording."
+ },
+ {
+  "id": "motion-aftereffect-0",
+  "text": "Keep your eyes on the dot at the center for the whole walk."
+ },
+ {
+  "id": "motion-aftereffect-1",
+  "text": "Hold your gaze on the dot and let it run."
+ },
+ {
+  "id": "motion-aftereffect-2",
+  "text": "Stay on the dot. Give it a slow count of twenty."
+ },
+ {
+  "id": "motion-aftereffect-3",
+  "text": "It stops. Keep your eyes on the dot. What does the spiral do?"
+ },
+ {
+  "id": "motion-aftereffect-4",
+  "text": "It drifts the other way, drawing inward, though nothing on the screen is moving. The spinning tired your outward-motion detectors, and their silence reads as motion. Vision is not recording, it is construction."
+ },
+ {
+  "id": "motion-induced-blindness-0",
+  "text": "Keep your eyes on the center cross."
+ },
+ {
+  "id": "motion-induced-blindness-1",
+  "text": "Hold your gaze on the cross. Do not chase the dots."
+ },
+ {
+  "id": "motion-induced-blindness-2",
+  "text": "Stay on the cross. Do not look at the dots."
+ },
+ {
+  "id": "motion-induced-blindness-3",
+  "text": "The mask stops. Keep watching the dots."
+ },
+ {
+  "id": "motion-induced-blindness-4",
+  "text": "The dots dropped out, and they return all at once, exactly where they always were. They never dimmed and never moved. Salience is no guarantee of being seen. Motion captured the system and the rest dropped out. Vision is not a recording, it is construction."
+ },
+ {
+  "id": "muller-lyer-0",
+  "text": "Which shaft is longer, the top or the bottom?"
+ },
+ {
+  "id": "muller-lyer-1",
+  "text": "Now check the readout. It gives each shaft's length in pixels."
+ },
+ {
+  "id": "muller-lyer-2",
+  "text": "Drag the fins flat, and watch the two shafts."
+ },
+ {
+  "id": "muller-lyer-3",
+  "text": "Flat. The shafts line up exactly, because they were always the same length. The fins were never measuring anything. Your visual system was."
+ },
+ {
+  "id": "muller-lyer-4",
+  "text": "Outward fins read as a near corner and stretch a line; inward fins read as a far corner and shrink it. Nothing on the screen changed length. Only the corners you inferred. Vision is construction, not a recording."
+ },
+ {
+  "id": "ponzo-0",
+  "text": "Look at the two bars between the rails."
+ },
+ {
+  "id": "ponzo-1",
+  "text": "Which looks longer, the upper or the lower?"
+ },
+ {
+  "id": "ponzo-2",
+  "text": "Now watch the bars as the rails straighten out."
+ },
+ {
+  "id": "ponzo-3",
+  "text": "Rails gone. Look at the bars again, and at the readout: both have measured the same width the entire time."
+ },
+ {
+  "id": "ponzo-4",
+  "text": "The converging lines read as depth, so the upper bar must be farther, so your visual system enlarged it to keep the world constant. Vision is construction, not a recording."
+ },
+ {
+  "id": "scintillating-grid-0",
+  "text": "Hold still and take in the whole grid."
+ },
+ {
+  "id": "scintillating-grid-1",
+  "text": "Now let your eyes drift around it. Watch the crossings."
+ },
+ {
+  "id": "scintillating-grid-2",
+  "text": "Fix on one single crossing and stare at it."
+ },
+ {
+  "id": "scintillating-grid-3",
+  "text": "Dark dots shimmered at the crossings you were not looking at, and vanished where you stared. They are not on the page. Your retina overshoots into phantom darkness where bright neighbors crowd a crossing. Vision is construction, not a recording."
+ },
+ {
+  "id": "troxler-fading-0",
+  "text": "Fix your gaze on the small cross in the center, and do not let your eyes wander."
+ },
+ {
+  "id": "troxler-fading-1",
+  "text": "Hold steady. Do not chase the ring at the edge of your vision."
+ },
+ {
+  "id": "troxler-fading-2",
+  "text": "Keep waiting, without moving your eyes. What happens to the ring?"
+ },
+ {
+  "id": "troxler-fading-3",
+  "text": "Now flick your eyes. The ring is back at full strength: it never left the screen. Steady, unchanging input stops being reported. Vision is not recording, it is construction."
+ },
+ {
+  "id": "contrast-sensitivity-intro",
+  "text": "Every bar in a given row has the same contrast, and every bar in a column the same width. Hold a relaxed gaze: the arc where the bars melt into flat gray is not printed on the screen, it is your own contrast sensitivity. Drop the overall contrast and watch the arc shrink; step back and the fine right edge washes out first."
+ },
+ {
+  "id": "gestalt-grouping-intro",
+  "text": "Drag the sliders. The dots never change which dot they are; your visual system decides whether they are rows or columns."
+ },
+ {
+  "id": "opponent-afterimage-intro",
+  "text": "Pick an adapting color and press Start. Keep your eyes locked on the small cross, do not move them, until the field goes neutral gray, then keep staring: you will see the shape return as a ghost in its opposite color, painted by your own visual system in a field where no such color exists."
+ },
+ {
+  "id": "receptive-field-intro",
+  "text": "Drag the light across the cell's field: it fires above baseline over the center, drops below over the surround, and goes silent under full-field light. The cell reports contrast, not brightness."
+ },
+ {
+  "id": "trichromatic-mixing-intro",
+  "text": "Raise each light. Where two overlap, a new color appears; where all three meet, white. None of it is in the light. Your eye makes it."
+ }
+]
