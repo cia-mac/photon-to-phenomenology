@@ -97,15 +97,17 @@ html[data-piece] #walk.on{visibility:visible;transition-delay:0s}
 html[data-piece] body:not(.explained) #thesis{visibility:hidden}
 
 /* Shorter stages on the Lab pages whose controls are the interaction, so the sliders rise into thumb reach on a phone.
-   Only the displayed size changes; the canvases keep their drawing resolution. */
-html[data-piece="trichromatic-mixing"] canvas{width:min(440px,60vw);height:min(440px,60vw)}
-html[data-piece="trichromatic-mixing"] .stage{padding-bottom:12px}
-html[data-piece="trichromatic-mixing"] .controls{gap:10px;margin-bottom:22px}
-html[data-piece="contrast-sensitivity"] .canvaswrap{aspect-ratio:3/1}
-html[data-piece="contrast-sensitivity"] .instruction{font-weight:400;margin-bottom:16px}
-html[data-piece="contrast-sensitivity"] .rail{gap:12px}
-html[data-piece="contrast-sensitivity"] .ctl{gap:6px}
-html[data-piece="contrast-sensitivity"] .stage{gap:16px}
+   Phone width only (the iPad has the room). Only the displayed size changes; canvases keep their drawing resolution. */
+@media (max-width:720px){
+  html[data-piece="trichromatic-mixing"] canvas{width:min(440px,60vw);height:min(440px,60vw)}
+  html[data-piece="trichromatic-mixing"] .stage{padding-bottom:12px}
+  html[data-piece="trichromatic-mixing"] .controls{gap:10px;margin-bottom:22px}
+  html[data-piece="contrast-sensitivity"] .canvaswrap{aspect-ratio:3/1}
+  html[data-piece="contrast-sensitivity"] .instruction{font-weight:400;margin-bottom:16px}
+  html[data-piece="contrast-sensitivity"] .rail{gap:12px}
+  html[data-piece="contrast-sensitivity"] .ctl{gap:6px}
+  html[data-piece="contrast-sensitivity"] .stage{gap:16px}
+}
 
 /* Receptive field and Opponent afterimage, phone width: the controls come right after the picture, so the sliders
    sit in thumb reach instead of at the end of a long page. The wide (iPad) layout is untouched. */
