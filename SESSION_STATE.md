@@ -7,6 +7,45 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-14 EXIT - 1.0.1 work done on branch photon-1-0-1: approved guide copy, see-first, local voice; verifier 0 of 21; waiting for Cia's ears and two decisions (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "approved, after the guide finishes".
+
+### Done
+- [observed] Everything in the IN FLIGHT block below (copy v4 approved; 73 narration files rendered locally, all word-gate exact; guide opens on a tap; percept-naming readout lines and the explanation card wait for the first guide run; Muller-Lyer, cafe-wall and Kanizsa checked in the simulator).
+- [observed] The first full verifier run failed 13 pieces with "narration: 0 of N guide steps were spoken": the verifier's own narration check expected the guide to start by itself. Fixed in tools/verify_piece.mjs (it now presses Guide me, as the opening check already did); kanizsa, motion-aftereffect and receptive-field passed; then tools/verify_all.sh: failures 0 of 21 (ios/redesign-v9/verify_all_101.txt). The killed first run was stopped by its own pids.
+- [observed] Committed on branch photon-1-0-1 (not merged, not pushed); main and origin/main are unchanged by this branch.
+
+### Previous pending
+- carried: Cia's Release click of 1.0 (4) (he has not said he pressed it); the voice samples awaiting his ears; build 4 on his phone.
+- done: copy approval; local voice setup and render; see-first; verifier updated.
+
+### Pending / open
+- Cia: listen to the six samples and approve the voice. Decide: (1) the piece titles state the answer ("Every row is level", "Two shafts, the same length", "A triangle that isn't there"): keep them as hooks or change; (2) overwrite build 4 on his new phone with the 1.0.1 candidate to try it (build 4 can be put back from its archive).
+- Then: audio level check against the old files, real VoiceOver on the new flow (Guide me button), ChatGPT review (mandatory before any upload), CFBundleShortVersionString 1.0.1, archive, upload only after 1.0 is Ready for Distribution and with Cia's okay for the key.
+
+### Durable thought
+none, reason: the one lasting fact (zsh does not split "$IDS"; use ${=IDS}) is already in agent memory and this lane's notes.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-14T22:22:01-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `photon-1-0-1`
+- HEAD: `3b8a7bf Verifier: the narration check presses Guide me; failures 0 of 21 on the 1.0.1 work` (committed 2026-10-14)
+- tree: **43 uncommitted change(s)**
+- upstream: no upstream configured
+- merged into HEAD: `main`, `photon-build5`, `photon-look-build4`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+copy, behavior and voice are built; the next move is Cia's listening and his two decisions.
+
+---
+
 ## IN FLIGHT 2026-10-14 - 1.0.1 work on branch photon-1-0-1: copy v4 approved by Cia, "see first" built, 73 narration files re-rendered locally; verifier running; nothing installed on the new phone
 
 ### Done
