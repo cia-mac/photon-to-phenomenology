@@ -82,11 +82,11 @@ html[data-piece] #replay{background:var(--accent);color:var(--on);border:0;borde
   html[data-piece] #title{font-size:24px} html[data-piece] #readout{margin-top:8px} }
 @media (prefers-reduced-motion: reduce){ html[data-piece] #walk .dot{transition:none} }
 
-/* Lab pages keep their own layouts; they take the type and the kicker pill. */
-html[data-piece] .eyebrow{margin:0 0 16px}
-html[data-piece] .instruction{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:500;font-size:clamp(17px,2.2vw,21px);line-height:1.38;letter-spacing:-.012em}
-html[data-piece] h1{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:700!important;font-size:clamp(26px,7.2vw,40px)!important;line-height:1.04!important;letter-spacing:-.035em!important;margin-bottom:14px!important}
-html[data-piece="afterimage"] #readout .lab{opacity:.92}   /* this page draws dark text on a mid-gray ground */
+/* Lab pages keep their own layouts; they take the type and the kicker pill. Sizes are left as each page set
+   them so no control moves down: the sliders on these pages sit close to the bottom edge already. */
+html[data-piece] .eyebrow{margin:0 0 8px;padding:2px 10px}
+html[data-piece] .instruction{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:500;letter-spacing:-.012em}
+html[data-piece] h1{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:700!important;letter-spacing:-.035em!important;line-height:1.04!important;margin-bottom:8px!important}
 .sr-only{position:absolute!important;top:var(--shell-top);left:var(--shell-side);width:1px;height:1px;margin:0;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 /* See first: the readout line that names the percept (#fig, #verdict, #regime, #count) waits, like the explanation card, until the guide has run. */
 html[data-piece] body:not(.explained) :is(#fig,#verdict,#regime,#count){visibility:hidden}   /* hidden from a screen reader too */
