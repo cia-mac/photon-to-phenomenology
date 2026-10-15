@@ -7,6 +7,42 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-15 EXIT - main pushed to origin through 2c603f2 on Cia's "push"; the 1.0.1 source is on GitHub (CLOSED)
+
+Snapshot before this block: none (append only).
+On Cia's "push".
+
+### Done
+- [observed] `git push origin main`: "cc30247..2c603f2  main -> main"; afterwards `git status -sb` read "main...origin/main" with no ahead count. A push does not deploy the site; none was run. This note goes up in one more commit.
+
+### Previous pending
+- done: push of main.
+- carried: a full tools/verify_all.sh on the final source and a ChatGPT review (including the Lab reading-order caveat) before the 1.0.1 upload; the upload needs Cia's okay for the key and 1.0 Ready for Distribution; 1.0 (4) Release status unknown to the session; real VoiceOver on 1.0.1 untested; the other session's shorts work uncommitted.
+
+### Pending / open
+- none from this block.
+
+### Durable thought
+none, reason: nothing new passes the bar.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-15T12:29:00-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `2c603f2 SESSION_STATE: 1.0.1 branch merged into main locally, not pushed` (committed 2026-10-15)
+- tree: **34 uncommitted change(s)**
+- upstream: origin/main (ahead 0, behind 0)
+- merged into HEAD: `photon-1-0-1`, `photon-build5`, `photon-look-build4`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+pushed; nothing owed on the repo.
+
+---
+
 ## 2026-10-15 EXIT - photon-1-0-1 merged into main locally (fast-forward); NOT pushed (OPEN)
 
 Snapshot before this block: none (append only).
