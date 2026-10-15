@@ -7,6 +7,27 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## IN FLIGHT 2026-10-14 - Cia reviewing build 4 on the new phone; asked for "see first, explain after" and a rewritten guide; copy drafted for approval, no voice made
+
+### Done
+- [observed] Cia, in chat, from the phone: "the audio and the copy explain what we see first, why is that?"; answered: the guided walk-through was inherited from the website pieces and starts by itself about 1.1 s after load (chrome_app.js setTimeout(startIntro, 1100)); CONSTITUTION_APP_v10 rule 4 says keep the guided walk and rule 3 says every piece has a voice; the copy names the percept before it appears (Kanizsa step 3 "A triangle snaps into view"). Cia chose option 2: rewrite the guide as well (new wording; about 79 recordings to redo), after seeing "see first" (figure alone, a Guide me button).
+- [observed] Cia, in chat: "let me approve of the copy before you generate voice; first round use local app to generate VO for free". Local voice = the existing ios/tools/narrate_heart.py (Kokoro af_heart, local); it needs a Kokoro venv that is not on disk (the session scratchpad one is gone; rebuild recipe in the 2026-10-08 block of this file). No voice has been generated.
+- [observed] Cia's screenshot of the motion aftereffect piece showed a charcoal guide card and a cream Next pill ("looks like what we had before, beige"): my rule gave fixation pieces charcoal while the library tile is pink. Fixed on branch photon-1-0-1: motion-aftereffect now takes the pink accent in chrome_app.css and PieceScreen.swift; checked in the simulator (ios/redesign-v9/motion-aftereffect-pink.png). The spiral and its ground are untouched.
+- [observed] Draft copy for 16 guided pieces, 74 lines, 0 count mismatches against the 79 existing line ids, 0 dashes: ios/redesign-v9/GUIDE_COPY_v2_DRAFT.md (now vs new per line) and guide_copy_v2_draft.json (id and text, ready for narrate_heart.py). The five Lab pages' one-line introductions are unchanged (5 of the 79). Sent to Cia for approval.
+- [observed] Not installed on the new phone: it holds build 4 for the release checks; overwriting it would spoil them.
+
+### Previous pending
+- carried: Cia's hardware checks on build 4 and his own Release click; build 5 and this work ship as 1.0.1 after 1.0 is Ready for Distribution.
+
+### Pending / open
+- Cia approves or edits the copy; he also answers: (1) the Guide me behavior and when the explanation card (thesis) appears; (2) Lab intros stay as they are.
+- Then: set up the Kokoro venv, render the changed lines locally, listen, wire "see first" into chrome_app.js, verify, ChatGPT review, 1.0.1.
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
 ## IN FLIGHT 2026-10-14 - Cia has a NEW iPhone (16 Pro); build 4 installed on it with the API key (second one-time use) for the hardware checks; release not pressed
 
 ### Done
