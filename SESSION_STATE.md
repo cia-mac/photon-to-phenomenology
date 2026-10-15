@@ -7,6 +7,43 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-15 EXIT - photon-1-0-1 merged into main locally (fast-forward); NOT pushed (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "merge to main".
+
+### Done
+- [observed] The first checkout of main was refused because a scratch screenshot (ios/redesign-v9/_c.png, committed by mistake earlier through a *.png add) had been overwritten; I restored it, then `git merge --ff-only photon-1-0-1` on main succeeded, and a cleanup commit (157c126) removed that scratch file. `git status -sb` reads "main...origin/main [ahead 23]". Branch photon-1-0-1 kept. Nothing pushed; no deploy.
+- [observed] Source of record: main now holds the 1.0.1 (5) source: see-first guide, copy v5 corrections, local narration at one level, share card, Lab slider fixes, version string 1.0.1. The archive is claude-final-10-v101, not uploaded.
+
+### Previous pending
+- done: merge of photon-1-0-1.
+- carried: push of main (Cia's go; the repo is public; a push publishes 1.0.1 source before 1.0.1 is submitted); 1.0 (4) Release status unknown to the session; a full verify_all.sh on the final source and a ChatGPT review (incl. the Lab reading-order caveat) before the 1.0.1 upload; upload needs Cia's okay for the key and 1.0 Ready for Distribution; real VoiceOver on 1.0.1 untested; the other session's shorts work uncommitted.
+
+### Pending / open
+- Push of main: Cia's go.
+
+### Durable thought
+none, reason: nothing new passes the bar.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-15T11:34:09-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `157c126 Remove a scratch screenshot that slipped into redesign-v9` (committed 2026-10-15)
+- tree: **34 uncommitted change(s)**
+- upstream: origin/main (ahead 23, behind 0)
+- merged into HEAD: `photon-1-0-1`, `photon-build5`, `photon-look-build4`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+merged locally; a push waits for Cia.
+
+---
+
 ## 2026-10-15 EXIT - All five Lab pages have their sliders in thumb reach; 1.0.1 (5) re-archived and on Cia's phone; NOT uploaded (OPEN)
 
 Snapshot before this block: none (append only).
