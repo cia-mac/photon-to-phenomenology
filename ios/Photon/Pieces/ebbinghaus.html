@@ -121,11 +121,11 @@
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
-    {t:"Two pale discs, one on the left, one on the right. The left looks <b>distinctly smaller</b>. Trust your eyes for a moment: they are clearly different sizes.", act(){s.tgt=1;}},
-    {t:"Now look at their neighbors. The left disc sits inside a ring of giants; the right one inside a ring of dwarves. <b>Your eye sized each center against its company.</b>", act(){s.tgt=1;}},
-    {t:"Watch the centers as the surrounding rings even out. Nothing about the two discs is changing. <b>Only their context is.</b>", act(){s.tgt=0.5;}},
-    {t:"Rings matched. The two centers are <b>plainly, undeniably the same size</b>. They always were. The readout said so the whole time.", act(){s.tgt=0;}},
-    {t:"Size is judged against the neighbors, not measured. The same disc shrinks beside giants and swells beside dwarves. <b>Vision is construction, not a recording.</b>", act(){s.tgt=0;}},
+    {t:"Compare the two center discs. <b>Do they match?</b>", act(){s.tgt=1;}},
+    {t:"Now look at the circles around them.", act(){s.tgt=1;}},
+    {t:"Watch the centers as the rings even out. Only their surroundings are changing.", act(){s.tgt=0.5;}},
+    {t:"Rings matched. Compare the two centers again.", act(){s.tgt=0;}},
+    {t:"They were the same size all along, and the readout said so. Size is judged against the neighbors, not measured: the same disc shrinks beside giants and swells beside dwarves. <b>Vision is construction, not a recording.</b>", act(){s.tgt=0;}},
   ];
   PhotonChrome.init({here:'ebbinghaus', walk:WALK});
 

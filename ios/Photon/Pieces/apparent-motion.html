@@ -149,10 +149,10 @@
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
-    {t:"Two pale dots, side by side, with a dark gap between them. Slow first. One lights, then the other, then back. At this rhythm you see exactly what is there: <b>two lamps blinking in turn</b>.", act(){period.tgt=1100;}},
-    {t:"Now speed the rhythm up. <b>Watch the gap, not the dots.</b>", act(){period.tgt=460;}},
-    {t:"There. The two blinks have <b>fused into one object sliding across the gap</b> and back. But look closely: nothing ever travels the space between. Both sites only ever switch on and off in place.", act(){period.tgt=300;}},
-    {t:"Two lamps, two still flashes, and a gap nothing crosses. The motion was yours, built from stillness. <b>Vision is not recording, it is construction.</b>", act(){period.tgt=320;}},
+    {t:"Watch the two dots at this slow rhythm.", act(){period.tgt=1100;}},
+    {t:"Now speed the rhythm up. Watch the gap between the dots.", act(){period.tgt=460;}},
+    {t:"<b>Is anything moving across the gap?</b>", act(){period.tgt=300;}},
+    {t:"One object slides across the gap and back, yet nothing ever travels that space. Both dots only switch on and off in place. Two lamps, two still flashes, and a gap nothing crosses. The motion was yours, built from stillness. <b>Vision is not recording, it is construction.</b>", act(){period.tgt=320;}},
   ];
   PhotonChrome.init({here:'apparent-motion', walk:WALK});
 

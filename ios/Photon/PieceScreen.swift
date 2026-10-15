@@ -272,6 +272,10 @@ struct PieceWebView: UIViewRepresentable {
             #if DEBUG
             guard UserDefaults.standard.bool(forKey: "skipGuide") else { return }   // test hook: -skipGuide YES
             let after = UserDefaults.standard.double(forKey: "skipGuideAfter")      // test hook: let the guide play out first
+            // the guide waits for a tap on "guide me": press it, then skip it after the delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                webView.evaluateJavaScript("var r=document.getElementById('replay'); if(r && r.classList.contains('on')) r.click();")
+            }
             DispatchQueue.main.asyncAfter(deadline: .now() + (after > 0 ? after : 3.5)) {
                 webView.evaluateJavaScript("var w=document.getElementById('walk'), b=document.getElementById('wskip'); if(w && b && w.classList.contains('on')) b.click();")
             }

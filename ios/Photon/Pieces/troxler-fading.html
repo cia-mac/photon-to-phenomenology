@@ -135,10 +135,10 @@
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
-    {t:"A soft ring sits out in your periphery and a small cross marks the center. <b>Fix your gaze on that cross</b> and do not let your eyes wander.", act(){ecc.tgt=Math.min(W,H)*0.32; lastMoveT=performance.now();}},
-    {t:"Hold steady. Keep staring straight at the cross and let the ring stay at the corner of your vision. <b>Do not chase it.</b>", act(){lastMoveT=performance.now();}},
-    {t:"Wait a few seconds without moving. The ring softens, thins, and <b>slips out of awareness</b>, even though it is still on the screen at full strength.", act(){lastMoveT=performance.now();}},
-    {t:"Now flick your eyes and it snaps back. Steady, unchanging input stops being reported. <b>Vision is not recording, it is construction.</b>", act(){lastMoveT=performance.now();}},
+    {t:"Fix your gaze on the small cross in the center, and do not let your eyes wander.", act(){ecc.tgt=Math.min(W,H)*0.32; lastMoveT=performance.now();}},
+    {t:"Hold steady. Do not chase the ring at the edge of your vision.", act(){lastMoveT=performance.now();}},
+    {t:"Keep waiting, without moving your eyes. <b>What happens to the ring?</b>", act(){lastMoveT=performance.now();}},
+    {t:"Now flick your eyes. The ring is back at full strength: it never left the screen. Steady, unchanging input stops being reported. <b>Vision is not recording, it is construction.</b>", act(){lastMoveT=performance.now();}},
   ];
   PhotonChrome.init({here:'troxler-fading', walk:WALK});
 

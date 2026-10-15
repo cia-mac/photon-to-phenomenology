@@ -113,11 +113,11 @@
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
-    {t:"Two horizontal shafts, one above the other. The fins are splayed out. The top shaft <b>looks plainly longer</b> than the bottom one.", act(){fin.tgt=1;}},
-    {t:"Same line, same pixels. The outward fins read as a near corner and stretch the line; the inward fins read as a far corner and <b>shrink it</b>.", act(){fin.tgt=1;}},
-    {t:"Now <b>drag the fins flat</b>. Watch the two shafts.", act(){fin.tgt=0.5;}},
-    {t:"Flat. The shafts line up exactly, because they were always the same length. The fins were never measuring anything, <b>your visual system was</b>.", act(){fin.tgt=0;}},
-    {t:"Nothing on the screen changed length. Only the corners you inferred. <b>Vision is construction, not a recording.</b>", act(){fin.tgt=0;}},
+    {t:"<b>Which shaft is longer, the top or the bottom?</b>", act(){fin.tgt=1;}},
+    {t:"Now check the readout. It gives each shaft's length in pixels.", act(){fin.tgt=1;}},
+    {t:"Drag the fins flat, and watch the two shafts.", act(){fin.tgt=0.5;}},
+    {t:"Flat. The shafts line up exactly, because they were always the same length. The fins were never measuring anything. Your visual system was.", act(){fin.tgt=0;}},
+    {t:"Outward fins read as a near corner and stretch a line; inward fins read as a far corner and shrink it. Nothing on the screen changed length. Only the corners you inferred. <b>Vision is construction, not a recording.</b>", act(){fin.tgt=0;}},
   ];
   PhotonChrome.init({here:'muller-lyer', walk:WALK});
 

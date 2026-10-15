@@ -110,10 +110,10 @@
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
-    {t:"Two pale horizontal bars, upper and lower, framed by a pair of rails that converge toward the top <b>like a road running into the distance</b>.", act(){conv.tgt=1;}},
-    {t:"Look at the upper bar. It sits where the rails pinch together, and it <b>reads as plainly longer</b> than the lower one. Trust your eyes for a moment.", act(){conv.tgt=1;}},
-    {t:"Now watch the bars as the rails straighten out. <b>The depth cue drains away.</b>", act(){conv.tgt=0;}},
-    {t:"Rails gone, the two bars are <b>flatly, obviously equal</b>. Check the readout: both have measured the same width the entire time.", act(){conv.tgt=0;}},
+    {t:"Look at the two bars between the rails.", act(){conv.tgt=1;}},
+    {t:"<b>Which looks longer, the upper or the lower?</b>", act(){conv.tgt=1;}},
+    {t:"Now watch the bars as the rails straighten out.", act(){conv.tgt=0;}},
+    {t:"Rails gone. Look at the bars again, and at the readout: both have measured the same width the entire time.", act(){conv.tgt=0;}},
     {t:"The converging lines read as depth, so the upper bar must be farther, so your visual system enlarged it to keep the world constant. <b>Vision is construction, not a recording.</b>", act(){conv.tgt=0;}},
   ];
   PhotonChrome.init({here:'ponzo', walk:WALK});

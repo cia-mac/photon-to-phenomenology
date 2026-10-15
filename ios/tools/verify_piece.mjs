@@ -54,6 +54,8 @@ for (const size of SIZES) {
   page.on('pageerror', e => errors.push(String(e)));
   page.on('request', r => { if (!r.url().startsWith('file:') && !r.url().startsWith('data:') && !r.url().startsWith('blob:')) net.push(r.url()); });
   await page.goto(pathToFileURL(file).href);
+  await page.waitForTimeout(400);
+  if (await page.$('#replay.on')) await page.tap('#replay');   // the guide waits for a tap on "guide me"
   await page.waitForTimeout(1800);                      // guide is open by now
   const measure = (state) => page.evaluate((state) => {
     const out = [];

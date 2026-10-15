@@ -114,10 +114,10 @@
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
-    {t:"One field, split down the middle. The left half <b>plainly looks a touch lighter</b> than the right. Trust your eyes for a moment.", act(){occ.tgt=0;}},
-    {t:"There is nothing between the two halves but a thin seam. Watch only that seam: a soft cusp <b>ramps light on the left and dark on the right</b>.", act(){occ.tgt=0;}},
-    {t:"Now slide an ink bar across the seam to hide the cusp. <b>The far surfaces never changed.</b>", act(){occ.tgt=cw*1.1;}},
-    {t:"Covered, the two halves snap into one flat gray. They were always the same. You read the little edge and repainted the whole surface to match. <b>Vision is construction, not a recording.</b>", act(){occ.tgt=cw*1.1;}},
+    {t:"Compare the left half with the right. <b>Is one of them lighter?</b>", act(){occ.tgt=0;}},
+    {t:"Now look only at the seam in the middle.", act(){occ.tgt=0;}},
+    {t:"Slide the ink bar across the seam to hide it. Watch the two halves.", act(){occ.tgt=cw*1.1;}},
+    {t:"Covered, the two halves match: one flat gray. They always were. You read the little edge and repainted the whole surface to match. <b>Vision is construction, not a recording.</b>", act(){occ.tgt=cw*1.1;}},
   ];
   PhotonChrome.init({here:'cornsweet', walk:WALK});
 

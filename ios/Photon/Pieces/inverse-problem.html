@@ -153,11 +153,11 @@
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
-    {t:"Right now you are looking at a cube, square on. Eight points, twelve edges, <b>one solid box</b>. Hold that reading for a moment.", act(){walking=true; yaw.tgt=0; pitch.tgt=0;}},
-    {t:"Now turn it. The box comes apart. The eight points were never a cube. They hang at unrelated depths and <b>only lined up from where you stood</b>.", act(){walking=true; yaw.tgt=0.85; pitch.tgt=0.55;}},
-    {t:"This loose cloud of points is one scene that fits the flat image. Endless other arrangements fit it just as well. <b>The picture alone cannot tell them apart.</b>", act(){walking=true; yaw.tgt=-0.7; pitch.tgt=-0.45;}},
-    {t:"Return to the one viewpoint where they align, and your visual system <b>commits instantly to the simplest cause</b>: a cube.", act(){walking=true; yaw.tgt=0; pitch.tgt=0;}},
-    {t:"There was never a cube. The flat image fit endless scenes; you saw the simplest. <b>Vision is not recording, it is construction.</b>", act(){walking=false; yaw.tgt=0; pitch.tgt=0;}},
+    {t:"Hold this view for a moment.", act(){walking=true; yaw.tgt=0; pitch.tgt=0;}},
+    {t:"Now turn it, and watch what happens to the shape.", act(){walking=true; yaw.tgt=0.85; pitch.tgt=0.55;}},
+    {t:"From here the points hang at unrelated depths. This loose cloud is one scene that fits the flat image, and endless other arrangements fit it just as well. The picture alone cannot tell them apart.", act(){walking=true; yaw.tgt=-0.7; pitch.tgt=-0.45;}},
+    {t:"Return to the one viewpoint where the points align. <b>What do you see?</b>", act(){walking=true; yaw.tgt=0; pitch.tgt=0;}},
+    {t:"A cube, at once: your visual system commits to the simplest cause. But there was never a cube. The flat image fit endless scenes, and you saw the simplest. <b>Vision is not recording, it is construction.</b>", act(){walking=false; yaw.tgt=0; pitch.tgt=0;}},
   ];
   PhotonChrome.init({here:'inverse-problem', walk:WALK, onEnd(){ walking=false; }});   // early close: release the pose so the cube eases home
 

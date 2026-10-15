@@ -109,11 +109,11 @@
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
-    {t:"Rows of light and dark tiles, stacked with thin gray mortar between them. The rows are shifted, each one nudged against the one above. The lines look like they <b>slope and pinch into wedges</b>.", act(){off.tgt=0.30;}},
-    {t:"Push the shift further. The slopes steepen, the rows seem to taper and tilt even harder. <b>Every gray line looks bent.</b>", act(){off.tgt=0.50;}},
-    {t:"Now slide the offset back toward zero. Watch the mortar lines as the <b>tiles line up</b>.", act(){off.tgt=0.12;}},
-    {t:"Zero shift. Every row snaps flat. The lines were <b>dead level and parallel</b> the whole time.", act(){off.tgt=0;}},
-    {t:"Nothing tilted but your read of it. Offset tiles and gray mortar made you bend straight lines. The slope was added by you. <b>Vision is construction, not a recording.</b>", act(){off.tgt=0;}},
+    {t:"Look at the thin gray lines between the rows.", act(){off.tgt=0.30;}},
+    {t:"Push the shift further, and keep watching the gray lines.", act(){off.tgt=0.50;}},
+    {t:"Now slide the offset back toward zero.", act(){off.tgt=0.12;}},
+    {t:"Zero shift. Look at the gray lines now.", act(){off.tgt=0;}},
+    {t:"They were dead level and parallel the whole time. Offset tiles and gray mortar made you bend them: the slope was yours. <b>Vision is construction, not a recording.</b>", act(){off.tgt=0;}},
   ];
   PhotonChrome.init({here:'cafe-wall', walk:WALK});
 

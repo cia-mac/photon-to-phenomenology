@@ -112,10 +112,10 @@
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
-    {t:"A regular lattice of gray bars with a pale disc at every crossing. Every disc is <b>the same flat gray</b>. Hold still and let the whole field sit in front of you.", act(){sp.tgt=Math.min(W,H)*0.11;}},
-    {t:"Now let your eyes drift around the grid. <b>Dark dots shimmer at the crossings</b>, blinking on and off, always just off to the side of wherever you look.", act(){sp.tgt=Math.min(W,H)*0.085;}},
-    {t:"Fix on one single crossing and stare. The dot there vanishes. The darkness <b>only lives in your periphery</b>, never on the spot you aim at.", act(){sp.tgt=Math.min(W,H)*0.07;}},
-    {t:"The dots are not on the page. Your retina overshoots into phantom darkness where bright neighbors crowd a crossing. <b>Vision is construction, not a recording.</b>", act(){sp.tgt=Math.min(W,H)*0.11;}},
+    {t:"Hold still and take in the whole grid.", act(){sp.tgt=Math.min(W,H)*0.11;}},
+    {t:"Now let your eyes drift around it. Watch the crossings.", act(){sp.tgt=Math.min(W,H)*0.085;}},
+    {t:"Fix on one single crossing and stare at it.", act(){sp.tgt=Math.min(W,H)*0.07;}},
+    {t:"Dark dots shimmered at the crossings you were not looking at, and vanished where you stared. They are not on the page. Your retina overshoots into phantom darkness where bright neighbors crowd a crossing. <b>Vision is construction, not a recording.</b>", act(){sp.tgt=Math.min(W,H)*0.11;}},
   ];
   PhotonChrome.init({here:'scintillating-grid', walk:WALK});
 

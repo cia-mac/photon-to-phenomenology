@@ -125,11 +125,11 @@
 
   // ---- guided walkthrough (per-instrument script) ----
   const WALK=[
-    {t:"A spiral of cream arms on a dark field, with a small dot at the center. <b>Keep your eyes locked on that dot</b> for the whole walk.", act(){omega.tgt=0;}},
-    {t:"Now it spins. The turning spiral reads as steady flow, <b>drawn outward, expanding</b>. Hold your gaze on the center and let it run.", act(){omega.tgt=2.6;}},
-    {t:"Stay fixed. The longer it turns, the more your outward-motion detectors <b>adapt and tire</b>. Give it a slow count of twenty.", act(){omega.tgt=2.6;}},
-    {t:"Stopped. The spiral is dead still, yet it appears to <b>drift the other way</b>, contracting inward. Nothing on screen is moving.", act(){omega.tgt=0;}},
-    {t:"The page is frozen. The reverse drift is your tired detectors falling silent, and <b>that silence reads as motion</b>. Vision is not recording, it is construction.", act(){omega.tgt=0;}},
+    {t:"Keep your eyes on the dot at the center for the whole walk.", act(){omega.tgt=0;}},
+    {t:"Hold your gaze on the dot and let it run.", act(){omega.tgt=2.6;}},
+    {t:"Stay on the dot. Give it a slow count of twenty.", act(){omega.tgt=2.6;}},
+    {t:"It stops. Keep your eyes on the dot. <b>What does the spiral do?</b>", act(){omega.tgt=0;}},
+    {t:"It drifts the other way, drawing inward, though nothing on the screen is moving. The spinning tired your outward-motion detectors, and their silence reads as motion. <b>Vision is not recording, it is construction.</b>", act(){omega.tgt=0;}},
   ];
   PhotonChrome.init({here:'motion-aftereffect', walk:WALK});
 
