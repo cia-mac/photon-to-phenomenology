@@ -45,7 +45,7 @@ html{--accent:#26231f;--on:#f4efe4;--btn:#f4efe4;--btn-on:#0c0b09}
 html[data-piece="kanizsa"],html[data-piece="gestalt-grouping"]{--accent:#2b18f2;--on:#f6f5f1;--btn:#f6f5f1;--btn-on:#0c0b09}
 html[data-piece="scintillating-grid"],html[data-piece="ponzo"]{--accent:#ec362c;--on:#0c0b09;--btn:#0c0b09;--btn-on:#f6f5f1}
 html[data-piece="cafe-wall"],html[data-piece="apparent-motion"]{--accent:#256d3d;--on:#f6f5f1;--btn:#f6f5f1;--btn-on:#0c0b09}
-html[data-piece="muller-lyer"],html[data-piece="receptive-field"]{--accent:#f26f9e;--on:#0c0b09;--btn:#0c0b09;--btn-on:#f6f5f1}
+html[data-piece="muller-lyer"],html[data-piece="receptive-field"],html[data-piece="motion-aftereffect"]{--accent:#f26f9e;--on:#0c0b09;--btn:#0c0b09;--btn-on:#f6f5f1}
 html[data-piece="aperture-problem"]{--accent:#6a1cc4;--on:#f6f5f1;--btn:#f6f5f1;--btn-on:#0c0b09}
 html[data-piece="ebbinghaus"],html[data-piece="inverse-problem"]{--accent:#dfded9;--on:#0c0b09;--btn:#0c0b09;--btn-on:#f6f5f1}
 

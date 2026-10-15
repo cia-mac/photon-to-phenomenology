@@ -81,7 +81,7 @@ enum PieceLook {
         case "kanizsa", "gestalt-grouping": return Look(fill: Poster.blue, glyph: Poster.paper)
         case "scintillating-grid", "ponzo": return Look(fill: Poster.red, glyph: Poster.ink)
         case "cafe-wall", "apparent-motion": return Look(fill: Poster.green, glyph: Poster.paper)
-        case "muller-lyer", "receptive-field": return Look(fill: Poster.pink, glyph: Poster.ink)
+        case "muller-lyer", "receptive-field", "motion-aftereffect": return Look(fill: Poster.pink, glyph: Poster.ink)
         case "aperture-problem": return Look(fill: Poster.purple, glyph: Poster.paper)
         case "ebbinghaus", "inverse-problem": return Look(fill: Poster.gray, glyph: Poster.ink)
         default: return neutral
