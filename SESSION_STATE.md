@@ -7,6 +7,99 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-15 EXIT - Audit fixes F1 to F4 applied in source; not committed, not built, not deployed (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "do the fixes" (after REA_ILLUSIONS_AUDIT_v1.md). Four fixes applied; the two that are decisions (F5, F6) left for Cia.
+
+### Done
+- [observed] F1: ios/Photon/Pieces/trichromatic-mixing.html:274 aria-valuetext "0 percent" changed to "100 percent" to match value="100". tools/verify_piece.mjs trichromatic-mixing: exit 0, pass, 0 findings.
+- [observed] F3: credit line "After Edward H. Adelson's checker-shadow illusion (1995)." as a #thesis .credit span (11px, --dim) in ios/Photon/Pieces/checker-shadow.html and public/photon/book/checker-shadow.html. verify_piece.mjs checker-shadow: exit 0, pass, 0 findings. Web page layout not browser-checked.
+- [observed] F2: public/privacy.html:51 address wrapped in <!--email_off--> markers so Cloudflare stops replacing it with "[email protected]". Not live until a deploy.
+- [observed] F4: BOOK_OF_ILLUSIONS_TOC_v2.md written from v1 (v1 unchanged); records D-0615 (trichromatic and opponent-afterimage ship) and per-piece APP/WEB status; spine and order untouched (D-0742 open).
+- [observed] Audit file gained section 11 (fix status). verify_piece needed the sandbox off to launch Chromium.
+
+### Previous pending
+- carried: decide on F1 to F6 (F1 to F4 now done; F5 and F6 carried below).
+- carried: commit of the audit file (still uncommitted, with the fixes).
+- carried: Cia's clicks after 1.0 reads Ready for Distribution (create 1.0.1, attach 1.0.1 (5), enter v10 text, manual release, submit).
+- carried: a hands-on VoiceOver pass before the attach.
+
+### Pending / open
+- Cia: F5 (iPad magnification of aperture, Troxler, MIB) and F6 (trichromatic red start 100 vs 0).
+- Cia's go: commit these changes; site deploy for F2 and the web half of F3; F1 and the app half of F3 reach users only in a new build (1.0.1 (5) is already uploaded without them).
+- Cia's 1.0.1 submission steps and the VoiceOver pass, as before.
+
+### Operational notes
+- tools/verify_piece.mjs cannot launch Chromium inside the Bash sandbox ("Target page, context or browser has been closed"); run it with the sandbox off.
+
+### Durable thought
+none, reason: nothing new passes the bar.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-15T13:33:16-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `6c60a6d Checklist for submitting 1.0.1` (committed 2026-10-15)
+- tree: **45 uncommitted change(s)**
+- upstream: origin/main (ahead 1, behind 0)
+- merged into HEAD: `photon-1-0-1`, `photon-build5`, `photon-look-build4`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+fixes applied; commit, build and deploy wait for Cia.
+
+---
+
+## 2026-10-15 EXIT - REA audit of the shipped Illusions app vs web vs source: REA_ILLUSIONS_AUDIT_v1.md written; no source changed (CLOSED)
+
+Snapshot before this block: none (append only).
+Read-only REA audit run as a side session for the parent session; the only repo write is REA_ILLUSIONS_AUDIT_v1.md (uncommitted) plus this block.
+
+### Done
+- [observed] Audited archive claude-final-10-v101/Illusions.xcarchive (1.0.1 (5), the one uploaded at 12:56; executable sha256 a66e3bd7... re-hashed after the upload, unchanged). Its Pieces folder is byte-identical to ios/Photon/Pieces at HEAD 0cf826f (diff -rq empty, 103 files). REA evidence: inspect_artifact ev_2b16e02f, inspect_plist ev_caa07cab, privacy manifest ev_2ab5ff28, inspect_macho ev_a8b63d36, inspect_signature ev_f7619f06, analyze_javascript_application ev_14f637ea.
+- [observed] Live photon.ciamac.com: all 18 pages plus chrome.js and chrome.css byte-identical to public/photon (sha256 per file); REA browser capture ev_1f219ba3 of the index. Lab pages 404 on the web (scope per D-0742).
+- [observed] Stimulus constants match web (16 pieces) and the gallery-stage sandbox (5 Lab pieces). Drift found: checker-shadow board sizing (app :114 vs web :112); 402 pt scale K on aperture, Troxler, MIB (iPad only); Ebbinghaus auto-fit; trichromatic red starts at 100 in the app vs 0 in the sandbox, static aria-valuetext "0 percent" (:274, fixed at boot by :472).
+- [observed] Narration: 79 files = 74 steps + 5 Lab intros, no orphans, all texts equal the manifest and the pages.
+- [observed] App order equals web order; both differ from BOOK_OF_ILLUSIONS_TOC_v1 (a proposal; order undecided per D-0742). TOC CUT of trichromatic and DEDUP of opponent-afterimage are superseded by D-0615 (21 pages).
+- [inferred] App Store risk ranked low: 4.2 web wrapper (same architecture Apple approved in 1.0 (4), D-0780); /privacy contact obfuscated by Cloudflare so it reads "[email protected]" without JS; checker-shadow has no Adelson credit (original staging). Privacy manifest consistent with imports; debug hooks gated by #if DEBUG.
+- [proposed] Fixes F1 to F6 in the audit file (aria text, Cloudflare email setting, Adelson credit, TOC v2, iPad K scale decision, trichromatic start state). None applied.
+
+### Previous pending
+- carried: Cia's clicks after 1.0 reads Ready for Distribution (create 1.0.1, attach 1.0.1 (5), enter v10 text, manual release, submit).
+- carried: a hands-on VoiceOver pass before the attach.
+
+### Pending / open
+- Owner of the Illusions work (the active session or Cia): decide on F1 to F6 in REA_ILLUSIONS_AUDIT_v1.md; commit the audit file if wanted (left uncommitted on purpose).
+
+### Operational notes
+- REA analyze_javascript_application skips inline <script> bodies in HTML (it lists each as "not analyzed"); per-piece parameters needed a static extractor. Swift string literals of 15 bytes or fewer do not show in `strings`, so a missing short string in the binary proves nothing; the DEBUG gating was confirmed in source.
+- SESSION_STATE.md has no frontmatter, so none was updated. Session Log row and Open Brain capture skipped: the brief limited this session's writes to the audit file and this block.
+
+### Durable thought
+none, reason: the one reusable fact (REA skips inline HTML scripts) is tool behaviour already visible in REA's own limitations output; the brief also limited writes.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-15T13:03:39-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `0cf826f SESSION_STATE: 1.0.1 (5) uploaded to App Store Connect, unattached` (committed 2026-10-15)
+- tree: **39 uncommitted change(s)**
+- upstream: origin/main (ahead 4, behind 0)
+- merged into HEAD: `photon-1-0-1`, `photon-build5`, `photon-look-build4`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+finished.
+
+---
+
 ## 2026-10-15 EXIT - 1.0.1 (5) UPLOADED to App Store Connect (unattached, processing); nothing attached or submitted (OPEN)
 
 Snapshot before this block: none (append only).
