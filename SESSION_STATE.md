@@ -7,6 +7,25 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## IN FLIGHT 2026-10-15 - Cia: "use the key"; about to upload 1.0.1 (5) with the API-key route (third one-time use); unattached
+
+### Done
+- [observed] Cia, in chat: "use the key" (after my list of what the 1.0.1 upload needs: his okay for the key). Read as the explicit go for uploading 1.0.1 (5) from ios/release-audit-2026-10-06/claude-final-10-v101 with the recorded API-key route, key and ids read into variables and never printed, log scrubbed. One-time use, not a standing permission.
+- [observed] Preconditions met: ChatGPT main review 20261014_225419 (its fixes applied) and a delta review 20261015_123515 (no upload blocker; it caught that two Lab rules were not phone-only: fixed and re-archived); tools/verify_all.sh failures 0 of 21 on the final source (ios/redesign-v9/verify_all_101d.txt); DOM audit 21 of 21; archive 1.0.1 (5), 79 narration files, chrome_app.css, chrome_app.js and three pages identical to source; main holds the source (commit 158dc00 on main after merge).
+- [observed] Not established: whether 1.0 (4) was released (Cia has not said); creating 1.0.1 in App Store Connect needs 1.0 Ready for Distribution. The upload only stores an unattached build and changes nothing in review or release. Real VoiceOver and iPad landscape on 1.0.1 are untested.
+- [proposed] Command: xcodebuild -exportArchive -archivePath release-audit-2026-10-06/claude-final-10-v101/Illusions.xcarchive -exportOptionsPlist ExportOptions_AppStore_Upload.plist -exportPath release-audit-2026-10-06/claude-final-10-v101/upload plus the three authentication arguments; log scrubbed of key id and issuer id.
+
+### Previous pending
+- carried: all items of the previous 2026-10-15 EXIT blocks.
+
+### Pending / open
+- Outcome of the upload.
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
 ## 2026-10-15 EXIT - main pushed to origin through 2c603f2 on Cia's "push"; the 1.0.1 source is on GitHub (CLOSED)
 
 Snapshot before this block: none (append only).
