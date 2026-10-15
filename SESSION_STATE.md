@@ -7,6 +7,28 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## IN FLIGHT 2026-10-14 - 1.0.1 work on branch photon-1-0-1: copy v4 approved by Cia, "see first" built, 73 narration files re-rendered locally; verifier running; nothing installed on the new phone
+
+### Done
+- [observed] Cia, in chat: on Kanizsa step 1 "why say that?", then "you dont have to describe what the viewer sees, they have eyes", then "approved, after the guide finishes". Approved: ios/redesign-v9/GUIDE_COPY_v4_DRAFT.md (74 lines, 16 pieces; v1 to v4 kept). The explanation card appears after the guide finishes. Not answered, taken as default: the five Lab intros stay unchanged.
+- [observed] ios/Photon/Pieces: the 16 guided pages carry the v4 text (73 changed steps, ponzo-4 unchanged); chrome_app.js no longer starts the guide by itself (setTimeout(startIntro,1100) removed); the pill reads "guide me" at first and "guide me again" afterwards; chrome_app.css holds back the readout lines that name the percept (#fig, #verdict, #regime, #count) until the first guide run ends (body.explained). tools/verify_piece.mjs and the DEBUG hook in PieceScreen.swift press Guide me first. Simulator: Kanizsa opens silent with the pill and the guide starts on a tap; Muller-Lyer and cafe-wall open without the verdict line; after the guide the verdict line and card appear (redesign-v9/SHEET_open_states.png).
+- [observed] Local voice: Kokoro af_heart through ios/tools/narrate_heart.py, venv rebuilt in the scratchpad (uv, kokoro, transformers, tokenizers, soundfile, numpy, espeakng_loader; HF_HUB_DISABLE_XET=1, sandbox off). My first full run rendered nothing because zsh passed the 73 ids as one string; rerun with ${=IDS}. 73 of 73 lines rendered, "gate failures this run: none", every checked line "exact"; 73 audio files and the manifest changed under ios/Photon/Pieces/audio. Six samples sent to Cia (redesign-v9/listen). No level step was run; the earlier build's recipe had one.
+- [observed] DOM audit 21 of 21 pass after the changes; tools/verify_all.sh started in the background (redesign-v9/verify_all_101.txt), result not yet read.
+- [observed] Not done: nothing installed on the new phone (it holds the build 4 rebuild); ChatGPT review; version string 1.0.1 not set yet; real VoiceOver on the new flow (the guide now needs a tap, which VoiceOver users can reach through the "guide me" button; not tested).
+
+### Previous pending
+- carried: Cia's hardware checks on build 4 and his own Release click of 1.0 (4); then 1.0.1 (these changes plus the share card) as a new version.
+
+### Pending / open
+- Cia listens to the six samples and approves the voice (or asks for another voice: ElevenLabs is the paid fallback, local first by his rule).
+- Cia decides: the piece titles themselves state the answer ("Every row is level"); keep or change. Whether to overwrite build 4 on his phone with the 1.0.1 candidate.
+- Then: level check of the new audio against the old, ChatGPT review, set CFBundleShortVersionString 1.0.1, archive; upload after 1.0 is Ready for Distribution.
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
 ## IN FLIGHT 2026-10-14 - Cia reviewing build 4 on the new phone; asked for "see first, explain after" and a rewritten guide; copy drafted for approval, no voice made
 
 ### Done
