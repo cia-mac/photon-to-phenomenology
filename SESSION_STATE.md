@@ -7,6 +7,48 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-14 EXIT - 1.0.1 (build 5) archived and on Cia's phone, all checks green, ChatGPT review obtained and its fixes applied; NOT uploaded; waiting on 1.0 being Ready for Distribution and Cia's okay (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "voice is good, go".
+
+### Done
+- [observed] Cia approved the voice ("voice is good") and the copy earlier (v4; titles kept); "go" read as: run my checks and prepare 1.0.1. Not an upload go.
+- [observed] Audio level: new files measured 1.3 LU louder than the old on average (-19.7 against -21.0 LUFS) with three lines 3 to 4 LU quieter. narrate_heart.py gained a level step (VO_LEVEL_LUFS default -21, volume then alimiter limit 0.8 with level=false; my first version left the limiter's auto-level on and cancelled the gain); all 79 lines re-rendered: mean -21.06 LUFS, min -21.2, max -21.0, true peak max -1.8 dBFS, every line "exact" in the word check.
+- [observed] Mandatory ChatGPT review: ~/Developer/agent-notes/consults/20261014_225419.md. Taken: closed guide buttons and the held-back card were still reachable by VoiceOver, now visibility:hidden (guide transitions with a delayed visibility), focus moves to the guide on open and back to the pill on close for assistive tech; nine guide lines corrected (aperture "many different motions look the same", checker-shadow "With B in the shadow the squares sent your eye the same light", change-blindness drops "never stored the scene", scintillating-grid "your visual system produces them", afterimage "adapted ... adaptation", motion-aftereffect "adapted to the outward spin", inverse-problem "settles on one reading", apparent-motion "It can look like", MIB "may have dropped out of awareness" and no mechanism claim) and re-rendered. Not taken: its Afterimage point (the page already calls PhotonApp.hold(true) at load). Not done: an independent "Explanation" control for people who never tap Guide me (Cia chose "after the guide finishes").
+- [observed] Version 1.0.1, build 5 (project.yml, pbxproj, Info.plist). Archive ios/release-audit-2026-10-06/claude-final-10-v101/Illusions.xcarchive: "ARCHIVE SUCCEEDED", 1.0.1 (5), 79 narration files, chrome_app.js identical to source. A Release build of the same source installed on "iPhone Ciamac" (16 Pro), "App installed", no key used.
+- [observed] tools/verify_all.sh: failures 0 of 21 (ios/redesign-v9/verify_all_101c.txt, run on the final source); DOM audit 21 of 21. Listing draft v10 holds the changed description sentence and a suggested What's New.
+- [observed] All committed on branch photon-1-0-1; main and origin/main untouched; nothing uploaded.
+
+### Previous pending
+- done: voice approval; level check; ChatGPT review; version 1.0.1; archive.
+- carried: 1.0 (4) Release (Cia has not said whether he pressed it); the upload of 1.0.1 needs 1.0 Ready for Distribution and Cia's per-upload okay for the key; real VoiceOver, largest text and landscape on 1.0.1 not tested by anyone; merge or push of the branch (Cia's go; a push publishes source that is not yet released).
+
+### Pending / open
+- Cia: tells me 1.0's status; tries 1.0.1 on the phone (with VoiceOver on once).
+- Then: upload 1.0.1 (his okay for the key), create 1.0.1 in App Store Connect, enter the v10 sentence and What's New, attach, submit: his clicks.
+
+### Durable thought
+none, reason: the lasting facts (limiter auto-level cancels gain; zsh ${=IDS}) are in this block.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-14T23:18:48-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `photon-1-0-1`
+- HEAD: `916cabc Verifier output for 1.0.1: failures 0 of 21` (committed 2026-10-14)
+- tree: **34 uncommitted change(s)**
+- upstream: no upstream configured
+- merged into HEAD: `main`, `photon-build5`, `photon-look-build4`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+1.0.1 is built and checked; the next steps wait on 1.0 going live and Cia's okay.
+
+---
+
 ## IN FLIGHT 2026-10-14 - Cia: "keep the titles" (piece titles stay as they are in 1.0.1)
 
 ### Done
