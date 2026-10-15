@@ -7,6 +7,22 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## IN FLIGHT 2026-10-14 - Cia: "keep the titles" (piece titles stay as they are in 1.0.1)
+
+### Done
+- [observed] Cia, in chat: "keep the titles". The piece titles that state the answer ("Every row is level", "Two shafts, the same length", "A triangle that isn't there") stay unchanged in 1.0.1; they remain the share card hooks. No code change.
+
+### Previous pending
+- carried: all items of the previous block; the title decision is closed.
+
+### Pending / open
+- Cia's test of the 1.0.1 candidate on the phone and his voice approval; then audio level check, real VoiceOver on the Guide me flow, ChatGPT review, version 1.0.1, archive; upload only after 1.0 is Ready for Distribution and with his okay for the key.
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
 ## IN FLIGHT 2026-10-14 - Cia: "install it on my phone"; the 1.0.1 candidate is on the new iPhone, replacing the build 4 rebuild there
 
 ### Done
