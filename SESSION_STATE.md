@@ -7,6 +7,45 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-15 EXIT - Lab stages shortened so the sliders sit in thumb reach; 1.0.1 (5) re-archived and on Cia's phone; NOT uploaded (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "make the lab stages shorter".
+
+### Done
+- [observed] Measured every slider on a 402 by 874 phone with ios/redesign-v9/slider_audit.mjs and block_audit.mjs. Trichromatic mixing: the disc is 60 vw instead of 86 vw and gaps are tighter (all three sliders at least 108 px above the bottom edge; before: 103, 10, below the screen). Contrast sensitivity: chart 3 to 1 instead of 3 to 2, tighter rail gaps, intro weight 400 (all four sliders on screen, the last 55 px above the edge; before the fix the last two were below the fold). Gestalt grouping already fit (both sliders at least 185 px above). Canvases keep their drawing resolution; only displayed size changed (css only, chrome_app.css).
+- [observed] Not changed, by judgment: receptive-field (three sliders at y 1519 to 1718, far below the fold: the page is a long document of field, meter and cross-section before its controls) and opponent-afterimage (one duration slider at y 1073). Making those fit would mean reordering their layouts, not shortening a stage. Their sliders need a scroll, as in build 2.
+- [observed] verify_piece.mjs exit 0 on all five Lab pages; DOM audit 21 of 21; simulator screenshots of both pages (ios/redesign-v9/lab-*.png, SHEET_lab_shorter.png). The full 21-piece verifier was last run before the Lab CSS changes (failures 0 of 21 on 2026-10-14); only the five Lab pages were re-run since.
+- [observed] Archive claude-final-10-v101 re-made (1.0.1 (5), chrome_app.css identical to source; older archives kept as -a-superseded and -b-superseded) and the same source installed on the iPhone 16 Pro ("App installed", no key). Commit 92aed3b on branch photon-1-0-1; main and origin/main untouched.
+
+### Previous pending
+- carried: all items of the previous 2026-10-14 EXIT block and the 2026-10-15 in-flight block; Cia's answer on which sliders are still hard to reach.
+
+### Pending / open
+- Cia: tries the Lab pages; says whether receptive-field and opponent-afterimage need work too (reordering their controls above the long content).
+- 1.0 (4) Release status unknown to the session; 1.0.1 upload only after 1.0 is Ready for Distribution and with Cia's okay for the key; real VoiceOver on 1.0.1 untested.
+
+### Durable thought
+none, reason: nothing new passes the bar.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-15T09:44:48-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `photon-1-0-1`
+- HEAD: `92aed3b Lab pages: shorter stages so the sliders sit in thumb reach` (committed 2026-10-15)
+- tree: **35 uncommitted change(s)**
+- upstream: no upstream configured
+- merged into HEAD: `main`, `photon-build5`, `photon-look-build4`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+the Lab sliders are in reach where a stage shorten could do it; the rest waits on Cia.
+
+---
+
 ## IN FLIGHT 2026-10-15 - Cia tried 1.0.1 on his phone: "looks better"; sliders hard to reach on some pieces; cause found and fixed
 
 ### Done
