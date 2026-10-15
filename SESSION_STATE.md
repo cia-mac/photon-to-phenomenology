@@ -7,6 +7,23 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## IN FLIGHT 2026-10-14 - Cia has a NEW iPhone (16 Pro); build 4 installed on it with the API key (second one-time use) for the hardware checks; release not pressed
+
+### Done
+- [observed] Cia, in chat: "dont find it on the new iphone"; the earlier installs went to the old iPhone 15 (now "unavailable" to devicectl). devicectl lists the new phone as an iPhone 16 Pro, paired and available. Installing the exact build 4 archive failed: "This provisioning profile cannot be installed on this device" (the new phone was not in the profile); a plain rebuild failed: "No Accounts" (Xcode here is signed out) and the wildcard profile lacked the device.
+- [observed] Cia, in chat, after I listed three options and recommended the key: "codex is a good solution ? lets do it". Read as option 1 (the key); the "codex" question was answered in chat (Codex only reviews, it cannot install). The key was used ONCE: xcodebuild with -allowProvisioningUpdates -allowProvisioningDeviceRegistration and the three key arguments, from a temporary worktree of commit 83febef (the build 4 source, Info.plist CFBundleVersion 4), key and ids read into variables and never printed, log scrubbed (occurrences 0). BUILD SUCCEEDED; devicectl "App installed" and launched on the new phone; the app is 1.0 (4) with 79 narration files. This is a rebuild of build 4's source, not the uploaded binary byte for byte. The new phone is now registered in the developer team. The temporary worktree was removed.
+
+### Previous pending
+- carried: Cia's hardware checks on build 4 (now possible on the new phone), then his own Release click; then build 5 as 1.0.1.
+
+### Pending / open
+- Cia's report of the phone test, then the Release click in his Chrome.
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
 ## 2026-10-14 EXIT - Apple approved 1.0 (4) (Cia's report); exact build 4 reinstalled on his phone for hardware checks; release steps written; the Release click is Cia's and has not happened (OPEN)
 
 Snapshot before this block: none (append only).
