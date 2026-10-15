@@ -7,6 +7,46 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-15 EXIT - 1.0.1 (5) UPLOADED to App Store Connect (unattached, processing); nothing attached or submitted (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "use the key".
+
+### Done
+- [observed] Cia, in chat: "use the key". Used the recorded API-key route once more: key id and issuer id read into variables from the Pointfield lane's notes (the line that holds both is found by pattern, its number changes), key file in ~/.appstoreconnect/private_keys matched the id; nothing printed to chat or written to a file by me; log scrubbed (occurrences 0; no AuthKey file name in the log or this file). Not a standing permission.
+- [observed] xcodebuild -exportArchive of ios/release-audit-2026-10-06/claude-final-10-v101/Illusions.xcarchive (Info.plist 1.0.1, CFBundleVersion 5, checked in the archive before the command) with ExportOptions_AppStore_Upload.plist: "Uploading Photon.ipa is complete", "Upload succeeded", "EXPORT SUCCEEDED" at 12:56 PDT 2026-10-15 (log claude-final-10-v101/upload.log).
+- [observed] Before the upload: ChatGPT delta review 20261015_123515 (no blocker; it found two Lab rules not scoped to phone width: fixed, archive rebuilt, bundle identical to source for chrome_app.css, chrome_app.js, kanizsa, ponzo, receptive-field); tools/verify_all.sh failures 0 of 21 on that source (redesign-v9/verify_all_101d.txt); iPad screenshots of the four Lab pages show the wide layouts intact (SHEET_ipad_lab.png).
+- [observed] Not done by me, by design: no App Store Connect change; 1.0.1 is not created, attached or submitted. Whether processing has finished was not checked (App Store Connect is signed out in this session's Chrome).
+
+### Previous pending
+- done: the upload of 1.0.1 (5).
+- carried: 1.0 (4) Release status unknown to the session (Cia has not said); creating 1.0.1 in App Store Connect needs 1.0 Ready for Distribution; real VoiceOver, the Lab reading-order caveat and iPad landscape on 1.0.1 untested; the other session's shorts work uncommitted.
+
+### Pending / open
+- Cia's clicks, after 1.0 reads Ready for Distribution: create version 1.0.1; attach build 1.0.1 (5); enter the description sentence and What's New from APP_STORE_LISTING_DRAFT_v10.md; keep manual release; submit. I will write the checklist when he is ready.
+- Before the attach: a hands-on VoiceOver pass on his phone (he has the build) is the one test nobody has done.
+
+### Durable thought
+none, reason: nothing new passes the bar.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-15T12:57:05-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `main`
+- HEAD: `8e960ae SESSION_STATE: about to upload 1.0.1 (5)` (committed 2026-10-15)
+- tree: **38 uncommitted change(s)**
+- upstream: origin/main (ahead 3, behind 0)
+- merged into HEAD: `photon-1-0-1`, `photon-build5`, `photon-look-build4`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+1.0.1 is uploaded and processing; the rest is Cia's clicks once 1.0 is live.
+
+---
+
 ## IN FLIGHT 2026-10-15 - Cia: "use the key"; about to upload 1.0.1 (5) with the API-key route (third one-time use); unattached
 
 ### Done
