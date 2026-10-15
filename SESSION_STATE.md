@@ -7,6 +7,44 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## 2026-10-15 EXIT - All five Lab pages have their sliders in thumb reach; 1.0.1 (5) re-archived and on Cia's phone; NOT uploaded (OPEN)
+
+Snapshot before this block: none (append only).
+On Cia's "fix receptive field and opponent too".
+
+### Done
+- [observed] ios/Photon/Pieces/chrome_app.css, phone width only (max-width 720): Receptive field: body is a flex column, the controls come right after the field (field panel capped at 290 px), Size, Intensity and Orientation first (order), then Cell type, Stimulus, Uniform light, Auto sweep; the meter and cross-section follow. Opponent afterimage: .wrap is a flex column ordered header, stage, controls, readout, footer; stage aspect 2 to 1 (the disc stays 40 percent of the width, so its size is unchanged). Measured with ios/redesign-v9/slider_audit.mjs: receptive-field sliders at y 539, 631 and 722 (gaps to the bottom edge 291, 199, 108; before 1519, 1618, 1718, off screen); opponent duration slider at y 690 (gap 140; before 1073) with the Start, Switch now and Restart buttons on screen. The wide (iPad) layout is untouched.
+- [observed] verify_piece.mjs exit 0 on all five Lab pages; DOM audit 21 of 21; simulator screenshots of both pages (ios/redesign-v9/lab-*.png, SHEET_lab_rf_opp.png). The full 21-piece verifier was last run before the Lab CSS changes of 2026-10-15.
+- [observed] Archive claude-final-10-v101 re-made (1.0.1 (5), chrome_app.css identical to source; earlier ones kept as -a, -b and -c superseded); the same source installed on the iPhone 16 Pro ("App installed", no key). Commit 29da3af on branch photon-1-0-1.
+- [inferred] A reading-order caveat: the reorder is CSS only (flex order, display:contents), so a screen reader still reads the DOM order (field, meter, cross-section, then controls) while a sighted user sees the controls earlier. Not tested with VoiceOver. To put to ChatGPT in the pre-upload review.
+
+### Previous pending
+- carried: all items of the 2026-10-15 EXIT block below (Cia's answer on the Lab pages; the upload path); the earlier 2026-10-14 items (1.0 Release status, VoiceOver on 1.0.1, upload only after 1.0 is Ready for Distribution with Cia's okay for the key, ChatGPT review of the final source).
+
+### Pending / open
+- Cia tries the Lab pages. Before any upload: a full tools/verify_all.sh on the final source and a ChatGPT review of the Lab CSS changes (reading order).
+
+### Durable thought
+none, reason: nothing new passes the bar.
+
+### Repo state
+
+Computed by `exit-stamp` at 2026-10-15T09:56:33-07:00. Do not edit by hand; re-run it.
+
+- repo: `~/Developer/photon-to-phenomenology`
+- branch: `photon-1-0-1`
+- HEAD: `29da3af Receptive field and Opponent afterimage: controls come right after the picture on a phone` (committed 2026-10-15)
+- tree: **35 uncommitted change(s)**
+- upstream: no upstream configured
+- merged into HEAD: `main`, `photon-build5`, `photon-look-build4`, 1 auto-named claude/* branch
+- NOT merged into HEAD: `claude/quizzical-meitner-afa864 (+2)`
+- extra worktrees: 1
+
+### Why we stopped
+the Lab sliders are all in reach; the rest waits on Cia and 1.0.
+
+---
+
 ## 2026-10-15 EXIT - Lab stages shortened so the sliders sit in thumb reach; 1.0.1 (5) re-archived and on Cia's phone; NOT uploaded (OPEN)
 
 Snapshot before this block: none (append only).
