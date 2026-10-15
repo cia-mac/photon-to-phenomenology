@@ -7,6 +7,23 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## IN FLIGHT 2026-10-14 - Cia: "install it on my phone"; the 1.0.1 candidate is on the new iPhone, replacing the build 4 rebuild there
+
+### Done
+- [observed] Cia, in chat: "install it on my phone" (the 1.0.1 candidate, in answer to my question 3). Built Release from branch photon-1-0-1 for the iPhone 16 Pro WITHOUT the API key (the device was registered earlier): BUILD SUCCEEDED; Info.plist 1.0 (5), 79 audio files, chrome_app.js carries "guide me". First devicectl install failed once with "Connection interrupted / LaunchServicesDataMismatch"; the retry printed "App installed". Launch was refused because the phone was locked ("Locked"); Cia opens it himself.
+- [observed] This replaces the build 4 rebuild on that phone. Build 4 can be put back from ios/release-audit-2026-10-06/claude-final-8-build4 only by rebuilding from commit 83febef (the archive's profile does not include the new phone). Apple's approved 1.0 (4) is unaffected.
+
+### Previous pending
+- carried: all items of the previous 2026-10-14 EXIT block (voice approval, the title decision, ChatGPT review, version 1.0.1, Cia's Release click).
+
+### Pending / open
+- Cia tries the 1.0.1 candidate on the phone and reports.
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
 ## 2026-10-14 EXIT - 1.0.1 work done on branch photon-1-0-1: approved guide copy, see-first, local voice; verifier 0 of 21; waiting for Cia's ears and two decisions (OPEN)
 
 Snapshot before this block: none (append only).
