@@ -7,6 +7,25 @@ to Phenomenology* (MIT Press, 1999). Repo: `~/Developer/photon-to-phenomenology`
 
 ---
 
+## IN FLIGHT 2026-10-15 - Cia tried 1.0.1 on his phone: "looks better"; sliders hard to reach on some pieces; cause found and fixed
+
+### Done
+- [observed] Cia, in chat: "i checked it on my phone looks better; but with some i have an issue; the sliders are hard to reach". Slider pieces are the five Lab pages (contrast-sensitivity, gestalt-grouping, opponent-afterimage, receptive-field, trichromatic-mixing).
+- [observed] Cause: my own Lab type changes (a larger instruction size and a heavier, larger h1, a taller kicker pill) pushed the controls down. Measured with ios/redesign-v9/slider_audit.mjs (phone 402 by 874; the build 2 files vs the then-current files): trichromatic g slider 68 px from the bottom edge became 10 px (the home-indicator zone); contrast-sensitivity fmin and fmax went from 29 px above the bottom to 38 px below the fold; the others moved down 14 to 67 px.
+- [observed] Fix in chrome_app.css: Lab pages keep each page's own sizes (no size override on .instruction or h1), the kicker pill is tighter (padding 2px 10px, margin-bottom 8px). Re-measured: every slider within 5 px of its build 2 position (g 66, fmin 31, gain 190). verify_piece.mjs exit 0 on all five Lab pages; DOM audit 21 of 21; simulator screenshot of Trichromatic mixing (ios/redesign-v9/trichromatic-after-fix.png). Commit 6eb83bc on branch photon-1-0-1. Archive claude-final-10-v101 re-made (1.0.1 (5), chrome_app.css identical to source; the earlier archive is claude-final-10-v101-a-superseded); the same source installed on the iPhone ("App installed").
+- [observed] Not changed: slider placement relative to the screen edge as in build 2. On Trichromatic mixing the blue slider and on Contrast sensitivity the "dist" slider still sit below the visible screen at load (they need a scroll); receptive-field's three sliders and opponent-afterimage's duration slider are far below the fold. That predates this work.
+
+### Previous pending
+- carried: all items of the previous 2026-10-14 EXIT block.
+
+### Pending / open
+- Cia: tries the Lab pages again; says which sliders are still hard to reach. Option offered: make the Lab stages shorter so every slider fits above the bottom edge (a visual change to the stage size).
+
+### Durable thought
+none, reason: in-flight checkpoint
+
+---
+
 ## 2026-10-14 EXIT - 1.0.1 (build 5) archived and on Cia's phone, all checks green, ChatGPT review obtained and its fixes applied; NOT uploaded; waiting on 1.0 being Ready for Distribution and Cia's okay (OPEN)
 
 Snapshot before this block: none (append only).
